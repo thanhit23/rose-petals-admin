@@ -1,0 +1,12 @@
+{
+	"container.Register.create.account": "Create An Account",
+	"container.Register.messages.create.account.enjoy": "Create an account to enjoy all the services without any ads for free!",
+	"container.Register.button.create.account": "Create Account",
+	"container.Register.messages.create.account": "Already Have An Account?",
+	"container.Register.signIn": "Sign In",
+	"container.Login.title": "Sign In",
+	"container.Login.button.button.login": "Login",
+	"container.Login.messages.create.account": "Already Have An Account?",
+	"container.Login.signUp": "Sign up",
+	"container.Header.account": "Account"
+}
