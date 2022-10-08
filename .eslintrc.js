@@ -24,6 +24,7 @@ module.exports = {
     'arrow-parens': [2, 'as-needed'],
     'arrow-body-style': 0,
     'no-plusplus': 0,
+    'react/react-in-jsx-scope': 0,
     'jsx-a11y/anchor-is-valid': 0,
     'no-confusing-arrow': 0,
     'no-return-assign': 0,

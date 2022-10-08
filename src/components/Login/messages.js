@@ -5,20 +5,32 @@
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'components.Register';
+export const scope = 'components.Login';
 
 export default defineMessages({
   title: {
     id: `${scope}.title`,
-    defaultMessage: 'Login to continue',
+    defaultMessage: 'Sign in',
   },
   btn_login: {
     id: `${scope}.button.login`,
     defaultMessage: 'Login',
   },
-  message_login_account: {
-    id: `${scope}.messages.create.account`,
-    defaultMessage: 'Already Have An Account?',
+  placeholder_email: {
+    id: `${scope}.placeholder.email`,
+    defaultMessage: 'Email Address...',
+  },
+  placeholder_password: {
+    id: `${scope}.placeholder.password`,
+    defaultMessage: 'Password...',
+  },
+  forget_password: {
+    id: `${scope}.forgetPassword`,
+    defaultMessage: 'Forget Password?',
+  },
+  not_account: {
+    id: `${scope}.notAccount`,
+    defaultMessage: 'Dont have an account?',
   },
   sign_up: {
     id: `${scope}.signUp`,

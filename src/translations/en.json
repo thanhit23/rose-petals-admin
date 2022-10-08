@@ -4,9 +4,12 @@
 	"container.Register.button.create.account": "Create Account",
 	"container.Register.messages.create.account": "Already Have An Account?",
 	"container.Register.signIn": "Sign In",
-	"container.Login.title": "Sign In",
-	"container.Login.button.button.login": "Login",
-	"container.Login.messages.create.account": "Already Have An Account?",
-	"container.Login.signUp": "Sign up",
-	"container.Header.account": "Account"
+	"components.Login.title": "Sign In",
+	"components.Login.button.login": "Login",
+	"components.Login.placeholder.email": "Email Address...",
+	"components.Login.placeholder.password": "Password...",
+	"components.Login.notAccount": "Dont have an account?",
+	"components.Login.forgetPassword": "Forget Password?",
+	"components.Login.signUp": "Sign up",
+	"components.Header.account": "Account"
 }

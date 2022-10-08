@@ -1,13 +1,14 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 
 import { isAuthenticated } from '../../helpers/authenticated';
 
-// eslint-disable-next-line react/prop-types
-const RouteAuthenticated = ({ component: Component, path }) => {
-  if (!isAuthenticated()) return <Redirect to="/login" />;
+function RouteAuthenticated() {
+  if (isAuthenticated()) {
+    return <Outlet />;
+  }
 
-  return <Route component={Component} path={path} />;
-};
+  return <Navigate to="/login" replace />;
+}
 
 export default RouteAuthenticated;
