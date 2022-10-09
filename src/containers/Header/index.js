@@ -2,21 +2,22 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 
-import { filterProduct } from './actions';
+import { filterProduct, toggleSidebar } from './actions';
 import injectReducer from '../../utils/injectReducer';
 import injectSaga from '../../utils/injectSaga';
 import reducer from './reducers';
 import saga from './saga';
 import HeaderComponent from '../../components/Header';
 
-function Header() {
-  return <HeaderComponent />;
+function Header({ onHandleSidebar }) {
+  return <HeaderComponent handleSidebar={onHandleSidebar} />;
 }
 
 Header.propTypes = {};
 
 const mapDispatchToProps = dispatch => {
   return {
+    onHandleSidebar: bindActionCreators(toggleSidebar, dispatch),
     onChangeSearch: bindActionCreators(filterProduct, dispatch),
   };
 };

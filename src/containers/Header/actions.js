@@ -1,8 +1,13 @@
 import {
+  TOGGLE_SIDEBAR,
   FILTER_PRODUCT,
   FILTER_PRODUCT_FAILED,
   FILTER_PRODUCT_SUCCESS,
 } from './constants';
+
+export const toggleSidebar = () => ({
+  type: TOGGLE_SIDEBAR,
+});
 
 export const filterProduct = keyword => ({
   type: FILTER_PRODUCT,

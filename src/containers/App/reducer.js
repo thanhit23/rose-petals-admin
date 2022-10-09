@@ -1,8 +1,6 @@
 import produce from 'immer';
 
-export const initialState = {
-  isToggleMenu: false,
-};
+export const initialState = {};
 
 const appReducer = (state = initialState, action) =>
   produce(state, () => {
