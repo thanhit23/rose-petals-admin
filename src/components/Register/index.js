@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 
-import LoginPage from '../../containers/LoginPage';
 import messages from './messages';
 
 class Register extends Component {

@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import './css/index.css';
-import App from './App';
+import App from './containers/App';
 import reportWebVitals from './reportWebVitals';
 import viMessages from './translations/vi.json';
 import enMessages from './translations/en.json';

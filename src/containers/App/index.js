@@ -1,22 +1,14 @@
-import React, { Component } from 'react';
-import { Route, Routes } from 'react-router-dom';
+// eslint-disable-next-line no-unused-vars
+import React from 'react';
+import { useRoutes } from 'react-router-dom';
 
-import HomePage from '../HomePage';
-import LoginPage from '../LoginPage';
-import RegisterPage from '../RegisterPage';
+import routes from '../../routes';
+import { isAuthenticated } from '../../helpers/authenticated';
+
 import 'react-toastify/dist/ReactToastify.css';
 
-class App extends Component {
-  render() {
-    return (
-      <Routes>
-        <Route index exact path="/" element={<LoginPage />} />
-        <Route exact path="/home" element={<HomePage />} />
-        <Route exact path="/register" element={<RegisterPage />} />
-        <Route exact path="/login" element={<LoginPage />} />
-      </Routes>
-    );
-  }
+function App() {
+  return useRoutes(routes(isAuthenticated()));
 }
 
 export default App;
