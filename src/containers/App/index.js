@@ -1,14 +1,22 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import routes from '../../routes';
-import { isAuthenticated } from '../../helpers/authenticated';
+import LoadingIndicator from '../LoadingIndicator';
 
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  return useRoutes(routes(isAuthenticated()));
+  console.log(useRoutes(routes()), 'useRoutes');
+  return (
+    <>
+      <LoadingIndicator />
+      <ToastContainer />
+      {useRoutes(routes())}
+    </>
+  );
 }
 
 export default App;

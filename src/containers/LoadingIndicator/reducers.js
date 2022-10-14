@@ -1,6 +1,6 @@
 import produce from 'immer';
 
-import { _REQ, _FAILED, _SUCCESS } from './constants';
+import { _REQUEST, _FAILED, _SUCCESS } from './constants';
 
 const initialState = {
   showLoading: false,
@@ -14,7 +14,7 @@ const loadingReducer = (state = initialState, action) =>
         const text = action.type;
         const position = text.lastIndexOf('_');
         const result = text.substr(position);
-        if (result === _REQ) draft.showLoading = true;
+        if (result === _REQUEST) draft.showLoading = true;
         if (result === _FAILED) draft.showLoading = false;
         if (result === _SUCCESS) draft.showLoading = false;
         break;

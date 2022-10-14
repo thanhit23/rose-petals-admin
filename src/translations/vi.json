@@ -5,5 +5,7 @@
 	"components.Login.placeholder.password": "Mật khẩu...",
 	"components.Login.notAccount": "Không có tài khoản?",
 	"components.Login.forgetPassword": "Quên mật khẩu?",
-	"components.Login.signUp": "Đăng ký"
+	"components.Login.signUp": "Đăng ký",
+	"components.Search.default": "Tìm Kiếm...",
+	"components.Search.product": "Tìm Kiếm Sản Phẩm..."
 }

@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 
 import createReducer from './reducers';
-import middlewareLocalStorage from './middleware/middleware-storage';
+import middlewareStorage from './middleware/apiMiddleware';
 
 export default function configureStore(initialState = {}) {
   const reduxSagaMonitorOptions = {};
@@ -19,7 +19,7 @@ export default function configureStore(initialState = {}) {
   const middlewares = [sagaMiddleware];
 
   const enhancer = compose(
-    applyMiddleware(thunk, ...middlewares, middlewareLocalStorage),
+    applyMiddleware(thunk, ...middlewares, middlewareStorage),
     window.__REDUX_DEVTOOLS_EXTENSION__ &&
       window.__REDUX_DEVTOOLS_EXTENSION__(),
   );

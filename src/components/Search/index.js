@@ -1,6 +1,9 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
 
 function Search() {
   return (
@@ -10,11 +13,15 @@ function Search() {
           className="text-sm text-[#8e8e8e] translate-y-[-50%] left-2.5 top-[50%] absolute"
           icon={faMagnifyingGlass}
         />
-        <input
-          type="password"
-          className="outline-none border-[1px] border-solid border-[#eaeaea] py-2.5 pr-[15px] pl-8 rounded-[20px]"
-          placeholder="Search..."
-        />
+        <FormattedMessage {...messages.default}>
+          {messagePlaceholder => (
+            <input
+              type="password"
+              className="outline-none border-[1px] border-solid border-[#eaeaea] py-2.5 pr-[15px] pl-8 rounded-[20px]"
+              placeholder={messagePlaceholder}
+            />
+          )}
+        </FormattedMessage>
       </div>
     </div>
   );

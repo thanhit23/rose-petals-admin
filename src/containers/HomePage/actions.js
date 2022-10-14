@@ -1,53 +1,12 @@
-import {
-  OPEN_MODAL,
-  CLOSE_MODAL,
-  ADD_PRODUCT,
-  ADD_PRODUCT_FAILED,
-  ADD_PRODUCT_SUCCESS,
-  PRODUCT_EDIT,
-} from './constants';
-import { toastError } from '../../helpers/toast';
+import { AUTHENTICATION, SET_AUTHENTICATION } from './constants';
 
-export const openModal = title => ({
-  type: OPEN_MODAL,
-  title,
+export const checkAuth = () => ({
+  type: AUTHENTICATION,
 });
 
-export const closeModal = () => ({
-  type: CLOSE_MODAL,
-});
-
-export const addProduct = data => {
-  const { name, price } = data;
-  return {
-    type: ADD_PRODUCT,
-    payload: {
-      name,
-      price,
-    },
-  };
-};
-
-export const addProductSuccess = data => ({
-  type: ADD_PRODUCT_SUCCESS,
+export const setAuth = user => ({
+  type: SET_AUTHENTICATION,
   payload: {
-    data,
-  },
-});
-
-export const addProductFailed = error => {
-  toastError(error);
-  return {
-    type: ADD_PRODUCT_FAILED,
-    payload: {
-      error,
-    },
-  };
-};
-
-export const editProduct = data => ({
-  type: PRODUCT_EDIT,
-  payload: {
-    data,
+    user,
   },
 });

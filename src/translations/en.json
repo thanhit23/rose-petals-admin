@@ -1,9 +1,4 @@
 {
-	"container.Register.create.account": "Create An Account",
-	"container.Register.messages.create.account.enjoy": "Create an account to enjoy all the services without any ads for free!",
-	"container.Register.button.create.account": "Create Account",
-	"container.Register.messages.create.account": "Already Have An Account?",
-	"container.Register.signIn": "Sign In",
 	"components.Login.title": "Sign In",
 	"components.Login.button.login": "Login",
 	"components.Login.placeholder.email": "Email Address...",
@@ -11,5 +6,6 @@
 	"components.Login.notAccount": "Dont have an account?",
 	"components.Login.forgetPassword": "Forget Password?",
 	"components.Login.signUp": "Sign up",
-	"components.Header.account": "Account"
+	"components.Search.default": "Search...",
+	"components.Search.product": "Search Product..."
 }
