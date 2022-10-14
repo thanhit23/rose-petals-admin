@@ -4,18 +4,17 @@ import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-
 import { Navigate } from 'react-router-dom';
-import injectReducer from '../../utils/injectReducer';
-import reducer from './reducers';
-import saga from './saga';
-import { checkAuth } from './actions';
-import injectSaga from '../../utils/injectSaga';
-import Header from '../Header';
-import Dashboard from '../Dashboard';
-import UserPage from '../UserPage';
 
-function HomePage({ isSidebar, auth, onCheckAuth }) {
+import injectReducer from '../../utils/injectReducer';
+import reducer from '../../containers/HomePage/reducers';
+import saga from '../../containers/HomePage/saga';
+import { checkAuth } from '../../containers/HomePage/actions';
+import injectSaga from '../../utils/injectSaga';
+import Header from '../../containers/Header';
+import Dashboard from '../../containers/Dashboard';
+
+function AuthLayout({ children, title, isSidebar, auth, onCheckAuth }) {
   useEffect(() => {
     onCheckAuth();
     if (!auth) <Navigate to="/login" replace />;
@@ -24,11 +23,7 @@ function HomePage({ isSidebar, auth, onCheckAuth }) {
   return (
     <>
       <Helmet>
-        <title>Admin</title>
-        <meta
-          name="description"
-          content="A React.js Boilerplate application homepage"
-        />
+        <title>{title}</title>
       </Helmet>
       <section className="container">
         <div className="grid grid-cols-6">
@@ -45,9 +40,7 @@ function HomePage({ isSidebar, auth, onCheckAuth }) {
           >
             <Header />
             <div className="px-8 mt-[80px]">
-              <div className="py-8">
-                <UserPage />
-              </div>
+              <div className="py-8">{children}</div>
             </div>
           </div>
         </div>
@@ -56,10 +49,12 @@ function HomePage({ isSidebar, auth, onCheckAuth }) {
   );
 }
 
-HomePage.prototype = {
+AuthLayout.prototype = {
   isSidebar: PropTypes.bool,
   auth: PropTypes.object,
   onCheckAuth: PropTypes.func,
+  title: PropTypes.string,
+  children: PropTypes.element,
 };
 
 const mapStateToProps = state => {
@@ -83,4 +78,4 @@ const withConnect = connect(mapStateToProps, mapDispatchToProps);
 const withReducer = injectReducer({ key: 'home', reducer });
 const withSaga = injectSaga({ key: 'home', saga });
 
-export default compose(withReducer, withSaga, withConnect)(HomePage);
+export default compose(withReducer, withSaga, withConnect)(AuthLayout);
