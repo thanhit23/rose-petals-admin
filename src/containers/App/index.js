@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -9,7 +8,6 @@ import LoadingIndicator from '../LoadingIndicator';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  console.log(useRoutes(routes()), 'useRoutes');
   return (
     <>
       <LoadingIndicator />

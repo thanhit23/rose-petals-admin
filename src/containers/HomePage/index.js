@@ -3,7 +3,9 @@ import { Helmet } from 'react-helmet';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
+import { Navigate } from 'react-router-dom';
 import injectReducer from '../../utils/injectReducer';
 import reducer from './reducers';
 import saga from './saga';
@@ -11,16 +13,11 @@ import { checkAuth } from './actions';
 import injectSaga from '../../utils/injectSaga';
 import Header from '../Header';
 import Dashboard from '../Dashboard';
-import ProductPage from '../ProductPage';
 
 function HomePage({ isSidebar, auth, onCheckAuth }) {
   useEffect(() => {
-    console.log(auth, 'auth');
     onCheckAuth();
-
-    if (!auth) {
-      console.log('oi no');
-    }
+    if (!auth) <Navigate to="/login" replace />;
   }, []);
 
   return (
@@ -47,9 +44,7 @@ function HomePage({ isSidebar, auth, onCheckAuth }) {
           >
             <Header />
             <div className="px-8 mt-[80px]">
-              <div className="py-8">
-                <ProductPage />
-              </div>
+              <div className="py-8" />
             </div>
           </div>
         </div>
@@ -57,6 +52,12 @@ function HomePage({ isSidebar, auth, onCheckAuth }) {
     </>
   );
 }
+
+HomePage.prototype = {
+  isSidebar: PropTypes.bool,
+  auth: PropTypes.object,
+  onCheckAuth: PropTypes.func,
+};
 
 const mapStateToProps = state => {
   const {

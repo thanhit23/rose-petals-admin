@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import messages from './messages';
 import '../../css/login.css';
@@ -89,5 +90,9 @@ function Login({ onSubmit }) {
     </div>
   );
 }
+
+Login.prototype = {
+  onSubmit: PropTypes.func,
+};
 
 export default Login;

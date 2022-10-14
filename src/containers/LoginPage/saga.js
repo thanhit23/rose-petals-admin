@@ -1,4 +1,4 @@
-import { call, delay, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import { LOGIN_REQUEST, STATUS_SUCCESS } from './constants';

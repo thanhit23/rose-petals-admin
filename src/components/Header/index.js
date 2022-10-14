@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
+import PropTypes from 'prop-types';
 import DropdownAccount from './DropdowAccount';
 import Search from '../Search';
 
@@ -27,8 +28,8 @@ function HeaderComponent({ handleSidebar }) {
                     src="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png"
                     alt=""
                     className="w-[40px]"
-                    onFocus={() => console.log('onFocus')}
-                    onBlur={() => console.log('onBlur')}
+                    onFocus={() => true}
+                    onBlur={() => true}
                     onMouseOver={() => setDropdown(true)}
                     onMouseOut={() => setDropdown(false)}
                   />
@@ -42,5 +43,9 @@ function HeaderComponent({ handleSidebar }) {
     </header>
   );
 }
+
+HeaderComponent.prototype = {
+  handleSidebar: PropTypes.func,
+};
 
 export default HeaderComponent;

@@ -12,4 +12,12 @@ export default defineMessages({
     id: `${scope}.default`,
     defaultMessage: 'Search...',
   },
+  user: {
+    id: `${scope}.user`,
+    defaultMessage: 'Search User...',
+  },
+  product: {
+    id: `${scope}.product`,
+    defaultMessage: 'Search Product...',
+  },
 });

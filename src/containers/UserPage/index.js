@@ -1,8 +1,6 @@
 import HeaderList from '../../components/HeaderList';
 function ProductPage() {
-  return (
-    <HeaderList title="Products" messages="product" btnAdd="Add Product" />
-  );
+  return <HeaderList title="user" messages="user" btnAdd="Add User" />;
 }
 
 export default ProductPage;

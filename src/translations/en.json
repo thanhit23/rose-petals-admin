@@ -7,5 +7,6 @@
 	"components.Login.forgetPassword": "Forget Password?",
 	"components.Login.signUp": "Sign up",
 	"components.Search.default": "Search...",
-	"components.Search.product": "Search Product..."
+	"components.Search.product": "Search Product...",
+	"components.Search.user": "Search User..."
 }

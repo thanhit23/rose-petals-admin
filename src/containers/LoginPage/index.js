@@ -3,6 +3,7 @@ import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
+import { Helmet } from 'react-helmet';
 import Login from '../../components/Login';
 import injectReducer from '../../utils/injectReducer';
 import reducer from '../App/reducer';
@@ -18,9 +19,15 @@ function LoginPage({ onLogin, auth }) {
   if (auth) return <Navigate to="/admin" replace />;
 
   return (
-    <div className="min-h-screen bg-[rgb(249,249,249)] flex justify-center items-center">
-      <Login onSubmit={submit} />
-    </div>
+    <>
+      <Helmet>
+        <title>Login</title>
+        <meta name="description" content="A Login application" />
+      </Helmet>
+      <div className="min-h-screen bg-[rgb(249,249,249)] flex justify-center items-center">
+        <Login onSubmit={submit} />
+      </div>
+    </>
   );
 }
 

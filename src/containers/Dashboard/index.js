@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
+
 import {
   faChevronDown,
   faChevronRight,
@@ -109,6 +111,10 @@ function Dashboard({ isSidebar }) {
     </div>
   );
 }
+
+Dashboard.prototype = {
+  isSidebar: PropTypes.bool,
+};
 
 const mapStateToProps = state => {
   const {
