@@ -1,23 +1,14 @@
-import { Navigate, Outlet } from 'react-router-dom';
-import LoginPage from '../containers/LoginPage';
-import HomePage from '../containers/HomePage';
-import Register from '../components/Register';
+import Authenticated from '../containers/Authenticated';
+import publicRoutes from './publicRoutes';
+import authRoutes from './authRoutes';
 
-const routes = isAuthenticated => [
-  { path: '/login', element: <LoginPage /> },
-  { path: '/register', element: <Register /> },
-  {
-    path: '/',
-    element: isAuthenticated ? <HomePage /> : <Navigate to="/login" />,
-    children: [
-      { path: 'a', element: <Navigate to="/register" replace /> },
-      {
-        path: 'member',
-        element: <Outlet />,
-        children: [{ path: 'login', element: <LoginPage /> }],
-      },
-    ],
-  },
-];
+const publicRoute = publicRoutes.map(({ path, element }) => {
+  return { path, element };
+});
+const authRoute = authRoutes.map(({ path, component: Component }) => {
+  return { path, element: <Authenticated children={<Component />} /> };
+});
+
+const routes = () => publicRoute.concat(authRoute);
 
 export default routes;

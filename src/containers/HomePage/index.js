@@ -1,88 +1,55 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
+import classNames from 'classnames';
 
 import injectReducer from '../../utils/injectReducer';
 import reducer from './reducers';
 import saga from './saga';
-import { closeModal, openModal } from './actions';
+import { checkAuth } from './actions';
 import injectSaga from '../../utils/injectSaga';
 import Header from '../Header';
-import LoadingIndicator from '../LoadingIndicator';
+import Dashboard from '../Dashboard';
+import ProductPage from '../ProductPage';
 
-function HomePage() {
+function HomePage({ isSidebar, auth, onCheckAuth }) {
+  useEffect(() => {
+    console.log(auth, 'auth');
+    onCheckAuth();
+
+    if (!auth) {
+      console.log('oi no');
+    }
+  }, []);
+
   return (
     <>
-      <ToastContainer />
-      <Header />
-      <LoadingIndicator />
-      <section className="mt-[78px]">
-        <Helmet>
-          <title>Home Page</title>
-          <meta
-            name="description"
-            content="A React.js Boilerplate application homepage"
-          />
-        </Helmet>
-        <div>
-          <div className="w-60 h-full shadow-md bg-white absolute">
-            <div className="pt-4 pb-2 px-6">
-              <a href="#">
-                <div className="flex items-center">
-                  <div className="shrink-0">
-                    <img
-                      src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp"
-                      className="rounded-full w-10"
-                      alt="Avatar"
-                    />
-                  </div>
-                  <div className="grow ml-3">
-                    <p className="text-sm font-semibold text-blue-600">
-                      Jason McCoel
-                    </p>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <ul className="relative px-1">
-              <li className="relative">
-                <a className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out cursor-pointer">
-                  <FontAwesomeIcon className="w-3 h-3 mr-3" icon={faGlobe} />
-                  <span>Collapsible item 1</span>
-                  <FontAwesomeIcon
-                    className="w-3 h-3 ml-auto"
-                    icon={faChevronDown}
-                  />
-                </a>
-                <ul className="relative accordion-collapse collapse">
-                  <li className="relative">
-                    <a
-                      href="#!"
-                      className="flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out"
-                    >
-                      Link 1
-                    </a>
-                  </li>
-                  <li className="relative">
-                    <a
-                      href="#!"
-                      className="flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out"
-                    >
-                      Link 2
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <div className="text-center bottom-0 absolute w-full">
-              <hr className="m-0" />
-              <p className="py-2 text-sm text-gray-700">
-                tailwind-elements.com
-              </p>
+      <Helmet>
+        <title>Admin</title>
+        <meta
+          name="description"
+          content="A React.js Boilerplate application homepage"
+        />
+      </Helmet>
+      <section className="container">
+        <div className="grid grid-cols-6">
+          <Dashboard />
+          <div
+            className={classNames(
+              {
+                'ml-[260px]': isSidebar,
+                'ml-[64px]': !isSidebar,
+              },
+              'duration-300',
+              'col-span-6',
+            )}
+          >
+            <Header />
+            <div className="px-8 mt-[80px]">
+              <div className="py-8">
+                <ProductPage />
+              </div>
             </div>
           </div>
         </div>
@@ -93,17 +60,18 @@ function HomePage() {
 
 const mapStateToProps = state => {
   const {
-    home: { isModal },
+    home: { isSidebar },
+    global: { auth },
   } = state;
   return {
-    isModal,
+    auth,
+    isSidebar,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onCloseModal: bindActionCreators(closeModal, dispatch),
-    onOpenModal: bindActionCreators(openModal, dispatch),
+    onCheckAuth: bindActionCreators(checkAuth, dispatch),
   };
 };
 

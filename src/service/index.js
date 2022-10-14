@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { UNAUTHORIZED, LOGOUT } from './constants';
+import store from '../store';
 
 class Service {
   constructor() {
@@ -9,9 +11,20 @@ class Service {
     );
   }
 
+  setHeader = token => {
+    this.instance.defaults.headers.common.Authorization = `Bearer ${token}`;
+  };
+
   handleSuccess = res => res;
 
-  handleError = err => Promise.reject(err);
+  handleError = err => {
+    const {
+      response: { status },
+    } = err;
+    if (status === UNAUTHORIZED) {
+      store.dispatch({ type: LOGOUT });
+    }
+  };
 
   get = url => this.instance.get(url);
 

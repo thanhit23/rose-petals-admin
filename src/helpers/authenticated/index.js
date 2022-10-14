@@ -1,5 +1,11 @@
-// eslint-disable-next-line consistent-return
+import { useSelector } from 'react-redux';
+
 export const isAuthenticated = () => {
-  const user = localStorage.getItem('user');
-  return user !== 'null';
+  const isAuth = useSelector(({ global: { auth } }) => auth);
+  const token = sessionStorage.getItem('token');
+
+  if (!isAuth) {
+    return false;
+  }
+  return token;
 };
