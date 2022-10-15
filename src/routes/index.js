@@ -6,8 +6,8 @@ const publicRoute = publicRoutes.map(({ path, element }) => {
   return { path, element };
 });
 
-const authRoute = authRoutes.map(({ path, component: Component }) => {
-  return { path, element: <Authenticated children={<Component />} /> };
+const authRoute = authRoutes.map(({ path, index, component: Component }) => {
+  return { path, index, element: <Authenticated children={<Component />} /> };
 });
 
 const routes = () => [...publicRoute, ...authRoute];

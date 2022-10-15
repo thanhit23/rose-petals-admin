@@ -1,64 +1,54 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useTable } from 'react-table';
 
-function Tables() {
-  const [students] = useState([
-    { id: 1, name: 'Wasif', age: 21, email: 'wasif@email.com' },
-    { id: 2, name: 'Ali', age: 19, email: 'ali@email.com' },
-    { id: 3, name: 'Saad', age: 16, email: 'saad@email.com' },
-    { id: 4, name: 'Asad', age: 25, email: 'asad@email.com' },
-  ]);
-
-  const renderTableData = () => {
-    return students.map(student => {
-      const { id, name, age, email } = student;
-      return (
-        <tr className="border-b" key={id}>
-          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r">
-            {id}
-          </td>
-          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
-            {name}
-          </td>
-          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
-            {age}
-          </td>
-          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
-            {email}
-          </td>
-        </tr>
-      );
+export default function Table({ columns, data }) {
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({
+      columns,
+      data,
     });
-  };
-
-  const renderTableHeader = () => {
-    const header = Object.keys(students[0]);
-    return header.map((key, index) => (
-      <th
-        scope="col"
-        className="text-sm font-medium text-gray-900 px-6 py-4 border-r"
-        key={index}
-      >
-        {key.toUpperCase()}
-      </th>
-    ));
-  };
 
   return (
-    <div className="flex flex-col">
-      <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-          <div className="overflow-hidden">
-            <table className="min-w-full border text-center">
-              <thead className="border-b">
-                <tr>{renderTableHeader()}</tr>
-              </thead>
-              <tbody>{renderTableData()}</tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+    <div className="flex flex-col py-4 boxshadow">
+      <table {...getTableProps()} className="min-w-full text-center">
+        <thead>
+          {headerGroups.map((headerGroup, i) => (
+            <tr key={i} {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map(column => (
+                <th
+                  {...column.getHeaderProps()}
+                  className="text-sm font-medium text-gray-900 px-6 py-4 border-b"
+                >
+                  {column.render('Header')}
+                </th>
+              ))}
+              <th className="text-sm font-medium text-gray-900 px-6 py-4 border-b">
+                Action
+              </th>
+            </tr>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {rows.map((row, i) => {
+            prepareRow(row);
+            return (
+              <tr key={i} {...row.getRowProps()} className="border-b">
+                {row.cells.map(cell => {
+                  return (
+                    <td
+                      {...cell.getCellProps()}
+                      className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                    >
+                      {cell.render('Cell')}
+                    </td>
+                  );
+                })}
+                <td>action</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }
-
-export default Tables;

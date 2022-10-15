@@ -13,7 +13,6 @@ import { checkAuth } from './actions';
 import injectSaga from '../../utils/injectSaga';
 import Header from '../Header';
 import Dashboard from '../Dashboard';
-import UserPage from '../UserPage';
 
 function HomePage({ isSidebar, auth, onCheckAuth }) {
   useEffect(() => {
@@ -45,9 +44,7 @@ function HomePage({ isSidebar, auth, onCheckAuth }) {
           >
             <Header />
             <div className="px-8 mt-[80px]">
-              <div className="py-8">
-                <UserPage />
-              </div>
+              <div className="py-8" />
             </div>
           </div>
         </div>

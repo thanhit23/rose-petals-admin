@@ -6,6 +6,7 @@ export default [
     path: '/admin',
     component: HomePage,
     exact: true,
+    index: true,
   },
   {
     path: '/admin/user',
