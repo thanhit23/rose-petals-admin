@@ -3,6 +3,7 @@ import { LIST_USERS } from './constants';
 
 const initialState = {
   users: null,
+  meta: {},
 };
 
 const headerReducer = (state = initialState, action) =>
@@ -10,9 +11,10 @@ const headerReducer = (state = initialState, action) =>
     switch (action.type) {
       case LIST_USERS:
         const {
-          payload: { data },
+          payload: { data, meta },
         } = action;
         draft.users = data;
+        draft.meta = meta;
         break;
       default:
         break;

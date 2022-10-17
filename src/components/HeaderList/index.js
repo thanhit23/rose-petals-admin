@@ -5,26 +5,22 @@ import PropTypes from 'prop-types';
 
 import Search from '../Search';
 
-function HeaderList({ title, btnAdd, messages }) {
+function HeaderList({ btnAdd, messages }) {
   return (
-    <>
-      <h3 className="font-semibold text-xl py-8">{title}</h3>
-      <div className="flex justify-between">
-        <Search message={messages} />
-        <button
-          type="button"
-          className="bg-transparent hover:bg-[rgb(78,151,253)] text-[rgb(78,151,253)] font-semibold hover:text-white py-2 px-4 border border-[rgb(78,151,253)] hover:border-transparent rounded"
-        >
-          <FontAwesomeIcon className="mr-2" icon={faPlus} />
-          {btnAdd}
-        </button>
-      </div>
-    </>
+    <div className="flex justify-between">
+      <Search message={messages} />
+      <button
+        type="button"
+        className="bg-transparent hover:bg-[rgb(78,151,253)] text-[rgb(78,151,253)] font-semibold hover:text-white py-2 px-4 border border-[rgb(78,151,253)] hover:border-transparent rounded"
+      >
+        <FontAwesomeIcon className="mr-2" icon={faPlus} />
+        {btnAdd}
+      </button>
+    </div>
   );
 }
 
 HeaderList.propTypes = {
-  title: PropTypes.string,
   btnAdd: PropTypes.string,
   messages: PropTypes.string,
 };

@@ -7,9 +7,7 @@ import DropdownAccount from './DropdowAccount';
 import Search from '../Search';
 
 function HeaderComponent({ handleSidebar }) {
-  const [dropdown, setDropdown] = useState(false);
-  const elementDropdown = dropdown ? <DropdownAccount /> : null;
-
+  const [dropdown, setDropDown] = useState(false);
   return (
     <header className="relative z-[100]">
       <div className="shadow-md absolute inset-x-0 top-0 bg-white">
@@ -22,19 +20,15 @@ function HeaderComponent({ handleSidebar }) {
             </div>
             <nav className="space-x-10 md:flex">
               <Search />
-              <div>
-                <div className="relative">
+              <div className="relative">
+                <button type="button" onClick={() => setDropDown(!dropdown)}>
                   <img
                     src="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png"
                     alt=""
-                    className="w-[40px]"
-                    onFocus={() => true}
-                    onBlur={() => true}
-                    onMouseOver={() => setDropdown(true)}
-                    onMouseOut={() => setDropdown(false)}
+                    className="w-[40px] account-img cursor-pointer"
                   />
-                  {elementDropdown}
-                </div>
+                </button>
+                {dropdown && <DropdownAccount />}
               </div>
             </nav>
           </div>

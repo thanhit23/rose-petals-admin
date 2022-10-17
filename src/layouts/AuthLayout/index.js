@@ -39,7 +39,7 @@ function AuthLayout({ children, title, isSidebar, auth, onCheckAuth }) {
             )}
           >
             <Header />
-            <div className="px-8 mt-[80px]">
+            <div className="px-8 mt-[80px] bg-[#f8f8f8]">
               <div className="py-8">{children}</div>
             </div>
           </div>

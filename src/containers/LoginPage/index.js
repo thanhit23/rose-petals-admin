@@ -16,7 +16,7 @@ function LoginPage({ onLogin, auth }) {
     onLogin({ email, password });
   };
 
-  if (auth) return <Navigate to="/admin" replace />;
+  if (auth) return <Navigate to="/" replace />;
 
   return (
     <>
@@ -25,7 +25,7 @@ function LoginPage({ onLogin, auth }) {
         <meta name="description" content="A Login application" />
       </Helmet>
       <div className="min-h-screen bg-[rgb(249,249,249)] flex justify-center items-center">
-        <Login onSubmit={submit} />
+        <Login handleSubmit={submit} />
       </div>
     </>
   );

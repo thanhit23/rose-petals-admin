@@ -1,16 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function DropdownProducts({ childrenItem }) {
+  const styleActive = { background: 'red' };
   const element = childrenItem.map(({ path, name }, i) => {
     return (
       <li key={i} className="relative">
-        <Link
+        <NavLink
           to={path}
+          // eslint-disable-next-line no-undef
+          style={({ isActive }) => (isActive ? styleActive : undefined)}
           className="flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 duration-300"
         >
           {name}
-        </Link>
+        </NavLink>
       </li>
     );
   });

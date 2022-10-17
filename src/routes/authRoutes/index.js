@@ -3,13 +3,13 @@ import UserPage from '../../containers/UserPage';
 
 export default [
   {
-    path: '/admin',
+    path: '/',
     component: HomePage,
     exact: true,
     index: true,
   },
   {
-    path: '/admin/user',
+    path: '/admin/users',
     component: UserPage,
     exact: true,
   },

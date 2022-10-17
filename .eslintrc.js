@@ -59,6 +59,15 @@ module.exports = {
     'react/destructuring-assignment': 0,
     'jsx-a11y/control-has-associated-label': 0,
     'import/no-named-as-default-member': 0,
+    'no-shadow': [
+      'error',
+      {
+        builtinGlobals: false,
+        hoist: 'functions',
+        allow: [],
+        ignoreOnInitialization: false,
+      },
+    ],
     'jsx-a11y/no-static-element-interactions': [
       'error',
       {

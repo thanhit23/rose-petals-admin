@@ -17,7 +17,7 @@ function Search({ message = 'default' }) {
         {messagePlaceholder => (
           <input
             type="password"
-            className="outline-none border-[1px] border-solid border-[#eaeaea] py-2.5 pr-[15px] pl-8 rounded"
+            className="w-[356px] outline-none border-[1px] border-solid border-[#eaeaea] py-2.5 pr-[15px] pl-8 rounded"
             placeholder={messagePlaceholder}
           />
         )}
