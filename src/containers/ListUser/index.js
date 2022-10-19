@@ -14,7 +14,7 @@ import Search from '../../components/Search';
 import Button from './Button';
 import PaginationTable from '../Pagination';
 
-function UserPage({ getUser, users, meta, gotoPage }) {
+function ListUser({ getUser, users, meta, gotoPage }) {
   useEffect(() => getUser(), []);
   const handleGoToPage = page => {
     gotoPage(page);
@@ -41,28 +41,32 @@ function UserPage({ getUser, users, meta, gotoPage }) {
       accessor: 'gender',
     },
   ]);
-  const element = users && (
-    <>
-      <Breadcrumb title="User" />
-      <div className="flex justify-between">
-        <Search message="user" />
-        <Button />
-      </div>
-      <div className="flex flex-col py-4 shadow-lg bg-white rounded mt-4">
-        <PaginationTable
-          goToPage={handleGoToPage}
-          metaData={meta}
-          col={columns}
-          dataUser={users}
-        />
-      </div>
-    </>
+  const element = useMemo(
+    () =>
+      users && (
+        <>
+          <Breadcrumb title="User" />
+          <div className="flex justify-between">
+            <Search message="user" />
+            <Button />
+          </div>
+          <div className="flex flex-col py-4 shadow-lg bg-white rounded mt-4">
+            <PaginationTable
+              goToPage={handleGoToPage}
+              metaData={meta}
+              col={columns}
+              dataUser={users}
+            />
+          </div>
+        </>
+      ),
+    [users],
   );
 
   return <AuthLayout title="User" children={element} />;
 }
 
-UserPage.PropsType = {
+ListUser.PropsType = {
   getUser: propsTypes.func,
   users: propsTypes.array,
   meta: propsTypes.object,
@@ -89,4 +93,4 @@ const withConnect = connect(mapStateToProps, mapDispatchToProps);
 const withReducer = injectReducer({ key: 'user', reducer });
 const withSaga = injectSaga({ key: 'user', saga });
 
-export default compose(withReducer, withSaga, withConnect)(UserPage);
+export default compose(withReducer, withSaga, withConnect)(ListUser);

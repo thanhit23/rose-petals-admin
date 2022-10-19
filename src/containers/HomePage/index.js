@@ -12,7 +12,7 @@ import saga from './saga';
 import { checkAuth } from './actions';
 import injectSaga from '../../utils/injectSaga';
 import Header from '../Header';
-import Dashboard from '../Dashboard';
+import Dashboard from '../SideBar';
 
 function HomePage({ isSidebar, auth, onCheckAuth }) {
   useEffect(() => {

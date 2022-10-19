@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-
 import {
   faChevronDown,
   faChevronRight,
@@ -14,7 +13,8 @@ import {
 
 import DropdownProducts from './DropdownProducts';
 
-function Dashboard({ isSidebar }) {
+function SideBar({ isSidebar }) {
+  // const location = useLocation();
   const [openProduct, setOpenProduct] = useState(false);
   const [openUser, setOpenUser] = useState(false);
   const childProduct = [
@@ -29,10 +29,18 @@ function Dashboard({ isSidebar }) {
   ];
   const childUsers = [
     {
-      path: 'admin/users',
+      path: '/admin/users',
       name: 'List User',
     },
   ];
+
+  // const checkLocation = (paths, setOpen) => {
+  //   const { pathname } = location;
+  //   paths.map(({ path }) => {
+  //     // eslint-disable-next-line no-unused-expressions
+  //     pathname === path ? setOpen(true) : null;
+  //   });
+  // };
 
   return (
     <div
@@ -135,6 +143,31 @@ function Dashboard({ isSidebar }) {
             </button>
             {openUser ? <DropdownProducts childrenItem={childUsers} /> : null}
           </li>
+          <li className="relative">
+            <button
+              type="button"
+              className={classNames(
+                'rounded w-full px-[18px] flex items-center text-sm h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap hover:bg-[#007bff] duration-300 cursor-pointer',
+                { 'hover:pl-[25px]': isSidebar },
+              )}
+              onClick={() => isSidebar && setOpenUser(!openUser)}
+            >
+              <FontAwesomeIcon
+                className={classNames('w-5 h-5', { 'mr-3': isSidebar })}
+                icon={faUser}
+              />
+              {isSidebar && (
+                <>
+                  <span>User</span>
+                  <FontAwesomeIcon
+                    className="w-3 h-3 ml-auto"
+                    icon={openUser ? faChevronDown : faChevronRight}
+                  />
+                </>
+              )}
+            </button>
+            {openUser ? <DropdownProducts childrenItem={childUsers} /> : null}
+          </li>
         </ul>
         <div className="text-center bottom-0 absolute w-full">
           <hr className="m-0" />
@@ -145,7 +178,7 @@ function Dashboard({ isSidebar }) {
   );
 }
 
-Dashboard.prototype = {
+SideBar.prototype = {
   isSidebar: PropTypes.bool,
 };
 
@@ -160,4 +193,4 @@ const mapStateToProps = state => {
 
 const withConnect = connect(mapStateToProps, null);
 
-export default withConnect(Dashboard);
+export default withConnect(SideBar);

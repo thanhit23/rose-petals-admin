@@ -1,5 +1,5 @@
 import HomePage from '../../containers/HomePage';
-import UserPage from '../../containers/UserPage';
+import UserPage from '../../containers/ListUser';
 
 export default [
   {

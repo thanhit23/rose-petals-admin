@@ -12,7 +12,7 @@ import saga from '../../containers/HomePage/saga';
 import { checkAuth } from '../../containers/HomePage/actions';
 import injectSaga from '../../utils/injectSaga';
 import Header from '../../containers/Header';
-import Dashboard from '../../containers/Dashboard';
+import Dashboard from '../../containers/SideBar';
 
 function AuthLayout({ children, title, isSidebar, auth, onCheckAuth }) {
   useEffect(() => {
