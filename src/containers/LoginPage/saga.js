@@ -10,14 +10,14 @@ function* fetchLogin({ payload: { email, password } }) {
   const { data, status, message } = res;
   const {
     data: {
-      tokens: { access },
+      tokens: { access, refresh },
       user,
     },
   } = data;
   if (status === STATUS_SUCCESS) {
     const token = sessionStorage.getItem('token');
     yield call(setToken, token);
-    yield put(fetchLoginSuccess(access, user));
+    yield put(fetchLoginSuccess(access, refresh, user));
     toast.success('Login Successfully');
   } else {
     yield put(fetchLoginError(data));

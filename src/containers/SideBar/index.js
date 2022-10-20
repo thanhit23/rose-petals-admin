@@ -1,46 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import {
-  faChevronDown,
-  faChevronRight,
-  faGlobe,
-  faGauge,
-  faUser,
-} from '@fortawesome/free-solid-svg-icons';
+import { faGlobe, faGauge, faUser } from '@fortawesome/free-solid-svg-icons';
+import { bindActionCreators, compose } from 'redux';
 
-import DropdownProducts from './DropdownProducts';
+import Navigated from '../../components/Navigated';
+import { toggleSidebar } from '../Header/actions';
+import injectReducer from '../../utils/injectReducer';
+import reducer from '../HomePage/reducers';
 
-function SideBar({ isSidebar }) {
-  // const location = useLocation();
-  const [openProduct, setOpenProduct] = useState(false);
-  const [openUser, setOpenUser] = useState(false);
-  const childProduct = [
-    {
-      path: 'product',
-      name: 'Add Product',
-    },
-    {
-      path: 'category',
-      name: 'Category',
-    },
-  ];
-  const childUsers = [
-    {
-      path: '/admin/users',
-      name: 'List User',
-    },
-  ];
+function SideBar({ isSidebar, isActiveItem }) {
+  const location = useLocation();
 
-  // const checkLocation = (paths, setOpen) => {
-  //   const { pathname } = location;
-  //   paths.map(({ path }) => {
-  //     // eslint-disable-next-line no-unused-expressions
-  //     pathname === path ? setOpen(true) : null;
-  //   });
-  // };
+  const activeItemNavigate = active => {
+    useEffect(() => {
+      if (active) isActiveItem();
+    });
+  };
 
   return (
     <div
@@ -91,83 +70,32 @@ function SideBar({ isSidebar }) {
               {isSidebar && <span>Dashboard</span>}
             </a>
           </li>
-          <li className="relative">
-            <button
-              type="button"
-              className={classNames(
-                'rounded w-full px-[18px] flex items-center text-sm h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap hover:bg-[#007bff] duration-300 cursor-pointer',
-                { 'hover:pl-[25px]': isSidebar },
-              )}
-              onClick={() => isSidebar && setOpenProduct(!openProduct)}
-            >
-              <FontAwesomeIcon
-                className={classNames('w-5 h-5', { 'mr-3': isSidebar })}
-                icon={faGlobe}
-              />
-              {isSidebar && (
-                <>
-                  <span>Products</span>
-                  <FontAwesomeIcon
-                    className="w-3 h-3 ml-auto"
-                    icon={openProduct ? faChevronDown : faChevronRight}
-                  />
-                </>
-              )}
-            </button>
-            {openProduct ? (
-              <DropdownProducts childrenItem={childProduct} />
-            ) : null}
-          </li>
-          <li className="relative">
-            <button
-              type="button"
-              className={classNames(
-                'rounded w-full px-[18px] flex items-center text-sm h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap hover:bg-[#007bff] duration-300 cursor-pointer',
-                { 'hover:pl-[25px]': isSidebar },
-              )}
-              onClick={() => isSidebar && setOpenUser(!openUser)}
-            >
-              <FontAwesomeIcon
-                className={classNames('w-5 h-5', { 'mr-3': isSidebar })}
-                icon={faUser}
-              />
-              {isSidebar && (
-                <>
-                  <span>User</span>
-                  <FontAwesomeIcon
-                    className="w-3 h-3 ml-auto"
-                    icon={openUser ? faChevronDown : faChevronRight}
-                  />
-                </>
-              )}
-            </button>
-            {openUser ? <DropdownProducts childrenItem={childUsers} /> : null}
-          </li>
-          <li className="relative">
-            <button
-              type="button"
-              className={classNames(
-                'rounded w-full px-[18px] flex items-center text-sm h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap hover:bg-[#007bff] duration-300 cursor-pointer',
-                { 'hover:pl-[25px]': isSidebar },
-              )}
-              onClick={() => isSidebar && setOpenUser(!openUser)}
-            >
-              <FontAwesomeIcon
-                className={classNames('w-5 h-5', { 'mr-3': isSidebar })}
-                icon={faUser}
-              />
-              {isSidebar && (
-                <>
-                  <span>User</span>
-                  <FontAwesomeIcon
-                    className="w-3 h-3 ml-auto"
-                    icon={openUser ? faChevronDown : faChevronRight}
-                  />
-                </>
-              )}
-            </button>
-            {openUser ? <DropdownProducts childrenItem={childUsers} /> : null}
-          </li>
+          <Navigated
+            isSidebar={isSidebar}
+            isActives={activeItemNavigate}
+            babel="User"
+            iconAfter={faUser}
+            open={false}
+            iconBefore
+            pathname={location}
+            item={[
+              { path: '/admin/users', name: 'List Users' },
+              { path: '/admin/user', name: 'Add User' },
+            ]}
+          />
+          <Navigated
+            isSidebar={isSidebar}
+            isActives={activeItemNavigate}
+            babel="Product"
+            iconAfter={faGlobe}
+            open={false}
+            iconBefore
+            pathname={location}
+            item={[
+              { path: '/admin/products', name: 'List Products' },
+              { path: '/admin/product', name: 'Add Product' },
+            ]}
+          />
         </ul>
         <div className="text-center bottom-0 absolute w-full">
           <hr className="m-0" />
@@ -180,6 +108,7 @@ function SideBar({ isSidebar }) {
 
 SideBar.prototype = {
   isSidebar: PropTypes.bool,
+  isActiveItem: PropTypes.func,
 };
 
 const mapStateToProps = state => {
@@ -191,6 +120,13 @@ const mapStateToProps = state => {
   };
 };
 
-const withConnect = connect(mapStateToProps, null);
+const mapDispatchToProps = dispatch => {
+  return {
+    isActiveItem: bindActionCreators(toggleSidebar, dispatch),
+  };
+};
 
-export default withConnect(SideBar);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withReducer = injectReducer({ key: 'home', reducer });
+
+export default compose(withConnect, withReducer)(SideBar);

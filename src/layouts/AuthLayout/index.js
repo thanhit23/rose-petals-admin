@@ -12,7 +12,7 @@ import saga from '../../containers/HomePage/saga';
 import { checkAuth } from '../../containers/HomePage/actions';
 import injectSaga from '../../utils/injectSaga';
 import Header from '../../containers/Header';
-import Dashboard from '../../containers/SideBar';
+import SideBar from '../../containers/SideBar';
 
 function AuthLayout({ children, title, isSidebar, auth, onCheckAuth }) {
   useEffect(() => {
@@ -27,7 +27,7 @@ function AuthLayout({ children, title, isSidebar, auth, onCheckAuth }) {
       </Helmet>
       <section className="container">
         <div className="grid grid-cols-6">
-          <Dashboard />
+          <SideBar />
           <div
             className={classNames(
               {

@@ -4,7 +4,6 @@ import { FETCH_LOGIN_SUCCESS, SET_AUTHENTICATION } from './constants';
 export const initialState = {
   auth: null,
 };
-
 const appReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
@@ -12,10 +11,12 @@ const appReducer = (state = initialState, action) =>
         const {
           payload: {
             access: { token },
+            refresh: { token: refreshToken },
             user,
           },
         } = action;
         sessionStorage.setItem('token', token);
+        sessionStorage.setItem('refreshToken', refreshToken);
         draft.auth = user;
         break;
       }

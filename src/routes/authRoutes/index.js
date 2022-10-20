@@ -1,5 +1,6 @@
 import HomePage from '../../containers/HomePage';
-import UserPage from '../../containers/ListUser';
+import ListUser from '../../containers/ListUser';
+import AddUser from '../../containers/AddUser';
 
 export default [
   {
@@ -10,7 +11,12 @@ export default [
   },
   {
     path: '/admin/users',
-    component: UserPage,
+    component: ListUser,
+    exact: true,
+  },
+  {
+    path: '/admin/user',
+    component: AddUser,
     exact: true,
   },
 ];

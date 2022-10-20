@@ -13,10 +13,11 @@ export const fetchLogin = ({ email, password }) => ({
   },
 });
 
-export const fetchLoginSuccess = (access, user) => ({
+export const fetchLoginSuccess = (access, refresh, user) => ({
   type: FETCH_LOGIN_SUCCESS,
   payload: {
     access,
+    refresh,
     user,
   },
 });
