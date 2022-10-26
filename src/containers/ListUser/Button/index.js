@@ -13,7 +13,7 @@ function Button() {
       className="flex items-center bg-[#4E97FD] hover:opacity-70 text-white font-semibold hover:text-white py-2 px-4 border border-[rgb(78,151,253)] hover:border-transparent rounded"
     >
       <FontAwesomeIcon className="mr-2" icon={faPlus} />
-      <FormattedMessage {...messages.add} />
+      <FormattedMessage {...messages.btn_add} />
     </Link>
   );
 }

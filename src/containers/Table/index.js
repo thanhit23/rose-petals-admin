@@ -2,14 +2,16 @@ import React, { useMemo } from 'react';
 import { useTable, usePagination } from 'react-table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
+import { bindActionCreators, compose } from 'redux';
+import { connect } from 'react-redux';
 import {
   faChevronRight,
   faChevronLeft,
-  faTrash,
-  faPen,
 } from '@fortawesome/free-solid-svg-icons';
 
-function PaginationTable({ col, dataUser, metaData, goToPage }) {
+import { fetchUsers, fetchUsersForTable } from '../ListUser/actions';
+
+function Table({ col, dataUser, metaData, goToPage }) {
   const { page: pages, limit, totalPages } = metaData;
   const columns = useMemo(() => col, []);
   const handleGoToPage = indexPage => {
@@ -68,7 +70,6 @@ function PaginationTable({ col, dataUser, metaData, goToPage }) {
               {headerGroup.headers.map(column => (
                 <th {...column.getHeaderProps()}>{column.render('Header')}</th>
               ))}
-              <th>Action</th>
             </tr>
           ))}
         </thead>
@@ -90,23 +91,6 @@ function PaginationTable({ col, dataUser, metaData, goToPage }) {
                     </td>
                   );
                 })}
-                <td>
-                  <button
-                    type="button"
-                    className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
-                  >
-                    <FontAwesomeIcon className="text-[#7D879C]" icon={faPen} />
-                  </button>
-                  <button
-                    type="button"
-                    className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
-                  >
-                    <FontAwesomeIcon
-                      className="text-[#7D879C]"
-                      icon={faTrash}
-                    />
-                  </button>
-                </td>
               </tr>
             );
           })}
@@ -155,4 +139,22 @@ function PaginationTable({ col, dataUser, metaData, goToPage }) {
   );
 }
 
-export default PaginationTable;
+const mapStateToProps = state => {
+  const {
+    user: { users, meta },
+  } = state;
+  return {
+    meta,
+    users,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getUser: bindActionCreators(fetchUsers, dispatch),
+    gotoPage: bindActionCreators(fetchUsersForTable, dispatch),
+  };
+};
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+
+export default compose(withConnect)(Table);

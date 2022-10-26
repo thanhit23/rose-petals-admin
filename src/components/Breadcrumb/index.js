@@ -6,7 +6,7 @@ function Breadcrumb({ title }) {
 }
 
 Breadcrumb.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.element,
 };
 
 export default Breadcrumb;

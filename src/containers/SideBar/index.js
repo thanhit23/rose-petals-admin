@@ -1,25 +1,25 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
-import { useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { faGlobe, faGauge, faUser } from '@fortawesome/free-solid-svg-icons';
+import { FormattedMessage } from 'react-intl';
+import {
+  faGlobe,
+  faGauge,
+  faUser,
+  faChevronDown,
+} from '@fortawesome/free-solid-svg-icons';
 import { bindActionCreators, compose } from 'redux';
 
 import Navigated from '../../components/Navigated';
 import { toggleSidebar } from '../Header/actions';
 import injectReducer from '../../utils/injectReducer';
 import reducer from '../HomePage/reducers';
+import messages from './messages';
 
 function SideBar({ isSidebar, isActiveItem }) {
-  const location = useLocation();
-
-  const activeItemNavigate = active => {
-    useEffect(() => {
-      if (active) isActiveItem();
-    });
-  };
+  const checkChildrenActive = active => active && isActiveItem();
 
   return (
     <div
@@ -67,33 +67,41 @@ function SideBar({ isSidebar, isActiveItem }) {
                 className={classNames('w-5 h-5', { 'mr-3': isSidebar })}
                 icon={faGauge}
               />
-              {isSidebar && <span>Dashboard</span>}
+              {isSidebar && <FormattedMessage {...messages.dashboard} />}
             </a>
           </li>
           <Navigated
             isSidebar={isSidebar}
-            isActives={activeItemNavigate}
-            babel="User"
+            childrenActive={checkChildrenActive}
+            babel={<FormattedMessage {...messages.user} />}
             iconAfter={faUser}
-            open={false}
-            iconBefore
-            pathname={location}
+            iconBefore={faChevronDown}
             item={[
-              { path: '/admin/users', name: 'List Users' },
-              { path: '/admin/user', name: 'Add User' },
+              {
+                path: '/admin/users',
+                name: <FormattedMessage {...messages.user_list} />,
+              },
+              {
+                path: '/admin/user',
+                name: <FormattedMessage {...messages.user_add} />,
+              },
             ]}
           />
           <Navigated
             isSidebar={isSidebar}
-            isActives={activeItemNavigate}
-            babel="Product"
+            childrenActive={checkChildrenActive}
+            babel={<FormattedMessage {...messages.product} />}
             iconAfter={faGlobe}
-            open={false}
-            iconBefore
-            pathname={location}
+            iconBefore={faChevronDown}
             item={[
-              { path: '/admin/products', name: 'List Products' },
-              { path: '/admin/product', name: 'Add Product' },
+              {
+                path: '/admin/products',
+                name: <FormattedMessage {...messages.product_list} />,
+              },
+              {
+                path: '/admin/product',
+                name: <FormattedMessage {...messages.product_add} />,
+              },
             ]}
           />
         </ul>

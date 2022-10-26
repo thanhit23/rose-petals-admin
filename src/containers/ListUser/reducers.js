@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { LIST_USERS } from './constants';
+import { FETCH_USERS_SUCCESS } from './constants';
 
 const initialState = {
   users: null,
@@ -9,7 +9,7 @@ const initialState = {
 const headerReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case LIST_USERS:
+      case FETCH_USERS_SUCCESS:
         const {
           payload: { data, meta },
         } = action;

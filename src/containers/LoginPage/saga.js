@@ -1,5 +1,4 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { toast } from 'react-toastify';
 
 import { LOGIN_REQUEST, STATUS_SUCCESS } from './constants';
 import { login, setToken } from './service';
@@ -7,7 +6,7 @@ import { fetchLoginSuccess, fetchLoginError } from './actions';
 
 function* fetchLogin({ payload: { email, password } }) {
   const res = yield call(login, { email, password });
-  const { data, status, message } = res;
+  const { data, status } = res;
   const {
     data: {
       tokens: { access, refresh },
@@ -18,10 +17,8 @@ function* fetchLogin({ payload: { email, password } }) {
     const token = sessionStorage.getItem('token');
     yield call(setToken, token);
     yield put(fetchLoginSuccess(access, refresh, user));
-    toast.success('Login Successfully');
   } else {
     yield put(fetchLoginError(data));
-    toast.error(message);
   }
 }
 

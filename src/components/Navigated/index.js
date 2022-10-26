@@ -1,15 +1,16 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 function Navigated({
   babel,
   item,
-  open,
+  open = false,
   iconAfter = null,
   iconBefore = null,
+  childrenActive,
   isSidebar,
 }) {
   const location = useLocation();
@@ -21,37 +22,35 @@ function Navigated({
       if (path === pathname) {
         setOpen(true);
       }
+      if (path === pathname && !isSidebar) {
+        childrenActive(true);
+        setOpen(true);
+      }
     });
-    if (!isSidebar) {
-      setOpen(false);
-    }
-  }, [isSidebar]);
-  const element = item.map(({ path, name }, i) => {
-    return (
-      <div key={i}>
-        <NavLink
-          style={({ isActive }) => (isActive ? styleActive : undefined)}
-          className={classNames(
-            'active flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 duration-300',
-            {
-              block: openDropdown,
-              hidden: !openDropdown,
-            },
-          )}
-          to={path}
-        >
-          {name}
-        </NavLink>
-      </div>
-    );
-  });
-
+  }, []);
+  const element =
+    isSidebar &&
+    item.map(({ path, name }, i) => {
+      return (
+        <div key={i}>
+          <NavLink
+            style={({ isActive }) => (isActive ? styleActive : undefined)}
+            className={classNames(
+              'active flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 duration-300',
+            )}
+            to={path}
+          >
+            {name}
+          </NavLink>
+        </div>
+      );
+    });
   return (
     <li>
       <button
         className={classNames(
           'rounded w-full px-[18px] flex items-center text-sm h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap hover:bg-[#007bff] duration-300 cursor-pointer',
-          { 'hover:pl-[25px]': isSidebar },
+          { 'hover:pl-[25px]': openDropdown },
         )}
         type="button"
         onClick={() => setOpen(!openDropdown)}
@@ -75,9 +74,9 @@ function Navigated({
           />
         )}
       </button>
-      {element}
+      {openDropdown && element}
     </li>
   );
 }
 
-export default Navigated;
+export default memo(Navigated);

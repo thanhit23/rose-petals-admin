@@ -7,5 +7,22 @@
 	"components.Login.forgetPassword": "Quên mật khẩu?",
 	"components.Login.signUp": "Đăng ký",
 	"components.Search.default": "Tìm Kiếm...",
-	"components.Search.product": "Tìm Kiếm Sản Phẩm..."
+	"components.Search.product": "Tìm Kiếm Sản Phẩm...",
+	"components.Search.user": "Tìm Kiếm Người Dùng...",
+	"components.AddUser.label.name": "Tên",
+	"components.AddUser.label.phoneNumber": "Số điện thoại",
+	"components.AddUser.label.gender": "Giới tính",
+	"components.AddUser.label.email": "Email",
+	"components.AddUser.placeholder.name": "Tên người dùng...",
+	"components.AddUser.placeholder.phoneNumber": "+84 123-456-789",
+	"components.AddUser.placeholder.email": "abc@gmail.com",
+	"Containers.ListUser.button.add": "Thêm người dùng",
+	"Containers.ListUser.title": "Người dùng",
+	"Containers.Sidebar.dashboard": "Bảng điều khiển",
+	"Containers.Sidebar.user": "Người dùng",
+	"Containers.Sidebar.user.list": "Danh sách người dùng",
+	"Containers.Sidebar.user.add": "Thêm người dùng",
+	"Containers.Sidebar.product": "Sản phẩm",
+	"Containers.Sidebar.product.list": "Danh sách sản phẩm",
+	"Containers.Sidebar.product.add": "Thêm sản phẩm"
 }

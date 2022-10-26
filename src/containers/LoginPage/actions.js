@@ -3,7 +3,6 @@ import {
   FETCH_LOGIN_SUCCESS,
   FETCH_LOGIN_ERROR,
 } from './constants';
-import { toastError } from '../../helpers/toast';
 
 export const fetchLogin = ({ email, password }) => ({
   type: LOGIN_REQUEST,
@@ -22,12 +21,9 @@ export const fetchLoginSuccess = (access, refresh, user) => ({
   },
 });
 
-export const fetchLoginError = error => {
-  toastError(error);
-  return {
-    type: FETCH_LOGIN_ERROR,
-    payload: {
-      error,
-    },
-  };
-};
+export const fetchLoginError = error => ({
+  type: FETCH_LOGIN_ERROR,
+  payload: {
+    error,
+  },
+});

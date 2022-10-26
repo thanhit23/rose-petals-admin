@@ -1,10 +1,14 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'Container.user';
+export const scope = 'Containers.ListUser';
 
 export default defineMessages({
-  add: {
+  btn_add: {
     id: `${scope}.button.add`,
     defaultMessage: 'Sign in',
+  },
+  title: {
+    id: `${scope}.title`,
+    defaultMessage: 'User',
   },
 });
