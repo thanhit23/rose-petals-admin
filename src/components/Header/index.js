@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-import DropdownAccount from './DropdowAccount';
+import PropTypes from 'prop-types';
 import Search from '../Search';
 
-function HeaderComponent({ handleSidebar }) {
-  const [dropdown, setDropdown] = useState(false);
-  const elementDropdown = dropdown ? <DropdownAccount /> : null;
-
+function HeaderComponent({ handleSidebar, handleLogout }) {
+  const [dropdown, setDropDown] = useState(false);
   return (
     <header className="relative z-[100]">
       <div className="shadow-md absolute inset-x-0 top-0 bg-white">
@@ -21,19 +19,26 @@ function HeaderComponent({ handleSidebar }) {
             </div>
             <nav className="space-x-10 md:flex">
               <Search />
-              <div>
-                <div className="relative">
+              <div className="relative">
+                <button type="button" onClick={() => setDropDown(!dropdown)}>
                   <img
                     src="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png"
                     alt=""
-                    className="w-[40px]"
-                    onFocus={() => console.log('onFocus')}
-                    onBlur={() => console.log('onBlur')}
-                    onMouseOver={() => setDropdown(true)}
-                    onMouseOut={() => setDropdown(false)}
+                    className="w-[40px] account-img cursor-pointer"
                   />
-                  {elementDropdown}
-                </div>
+                </button>
+                {dropdown && (
+                  <ul
+                    aria-labelledby="dropdownDefault"
+                    className="dropdown-menu w-[120px] absolute bg-white right-[-5px] p-5 shadow-lg rounded-[5px]"
+                  >
+                    {/* eslint-disable-next-line max-len */}
+                    {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
+                    <li className="cursor-pointer" onClick={handleLogout}>
+                      logout
+                    </li>
+                  </ul>
+                )}
               </div>
             </nav>
           </div>
@@ -42,5 +47,9 @@ function HeaderComponent({ handleSidebar }) {
     </header>
   );
 }
+
+HeaderComponent.prototype = {
+  handleSidebar: PropTypes.func,
+};
 
 export default HeaderComponent;

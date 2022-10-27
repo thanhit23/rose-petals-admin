@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+/* eslint-disable react/jsx-curly-newline */
+import React, { useState, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import messages from './messages';
 import '../../css/login.css';
 
-function Login({ onSubmit }) {
+function Login({ handleSubmit }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const btnSubmit = useCallback(e => {
+    if (e) e.focus();
+  }, []);
   return (
     <div className="container">
       <div className="grid grid-cols-12 gap-2">
@@ -65,9 +70,13 @@ function Login({ onSubmit }) {
                 </a>
                 <div className="mt-6">
                   <button
+                    ref={btnSubmit}
                     type="button"
                     className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-[#19c7a9] rounded-md hover:opacity-70 focus:outline-none"
-                    onClick={() => onSubmit({ email, password })}
+                    onClick={() => handleSubmit({ email, password })}
+                    onKeyDown={({ keyCode }) =>
+                      keyCode === 13 && handleSubmit({ email, password })
+                    }
                   >
                     <FormattedMessage {...messages.btn_login} />
                   </button>
@@ -89,5 +98,9 @@ function Login({ onSubmit }) {
     </div>
   );
 }
+
+Login.prototype = {
+  onSubmit: PropTypes.func,
+};
 
 export default Login;

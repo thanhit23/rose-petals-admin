@@ -48,7 +48,7 @@ module.exports = {
     'import/newline-after-import': 0,
     'import/no-dynamic-require': 0,
     'import/no-extraneous-dependencies': 0,
-    'import/no-named-as-default': 0,
+    'import/no-named-as-default': 2,
     'import/no-unresolved': 2,
     'import/no-webpack-loader-syntax': 0,
     'import/prefer-default-export': 0,
@@ -59,6 +59,15 @@ module.exports = {
     'react/destructuring-assignment': 0,
     'jsx-a11y/control-has-associated-label': 0,
     'import/no-named-as-default-member': 0,
+    'no-shadow': [
+      'error',
+      {
+        builtinGlobals: false,
+        hoist: 'functions',
+        allow: [],
+        ignoreOnInitialization: false,
+      },
+    ],
     'jsx-a11y/no-static-element-interactions': [
       'error',
       {

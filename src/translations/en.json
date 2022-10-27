@@ -7,5 +7,22 @@
 	"components.Login.forgetPassword": "Forget Password?",
 	"components.Login.signUp": "Sign up",
 	"components.Search.default": "Search...",
-	"components.Search.product": "Search Product..."
+	"components.Search.product": "Search Product...",
+	"components.Search.user": "Search User...",
+	"components.AddUser.label.name": "Username",
+	"components.AddUser.label.phoneNumber": "Phone Number",
+	"components.AddUser.label.gender": "Gender",
+	"components.AddUser.label.email": "Email",
+	"components.AddUser.placeholder.name": "Username...",
+	"components.AddUser.placeholder.phoneNumber": "+84 123-456-789",
+	"components.AddUser.placeholder.email": "abc@gmail.com",
+	"Containers.ListUser.button.add": "Add User",
+	"Containers.ListUser.title": "User",
+	"Containers.Sidebar.dashboard": "Dashboard",
+	"Containers.Sidebar.user": "User",
+	"Containers.Sidebar.user.list": "List Users",
+	"Containers.Sidebar.user.add": "Add User",
+	"Containers.Sidebar.product": "Product",
+	"Containers.Sidebar.product.list": "List Products",
+	"Containers.Sidebar.product.add": "Add Product"
 }

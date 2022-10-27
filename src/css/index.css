@@ -3,11 +3,6 @@
 @tailwind utilities;
 
 @layer components {
-
-
-
-
-
     .lds-ring {
         display: inline-block;
         position: relative;

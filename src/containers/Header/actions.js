@@ -1,26 +1,11 @@
-import {
-  FILTER_PRODUCT,
-  FILTER_PRODUCT_FAILED,
-  FILTER_PRODUCT_SUCCESS,
-} from './constants';
+import { TOGGLE_SIDEBAR, LOGOUT_REQUEST, LOGOUT_SUCCESS } from './constants';
 
-export const filterProduct = keyword => ({
-  type: FILTER_PRODUCT,
-  payload: {
-    keyword,
-  },
+export const toggleSidebar = () => ({
+  type: TOGGLE_SIDEBAR,
 });
-
-export const filterProductSuccess = data => ({
-  type: FILTER_PRODUCT_SUCCESS,
-  payload: {
-    data,
-  },
+export const logout = () => ({
+  type: LOGOUT_REQUEST,
 });
-
-export const filterProductFailed = error => ({
-  type: FILTER_PRODUCT_FAILED,
-  payload: {
-    error,
-  },
+export const logoutSuccess = () => ({
+  type: LOGOUT_SUCCESS,
 });

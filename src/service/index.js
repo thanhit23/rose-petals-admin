@@ -1,10 +1,12 @@
 import axios from 'axios';
-import { UNAUTHORIZED, LOGOUT } from './constants';
+import { UNAUTHORIZED, LOGOUT, BASE_URL } from './constants';
 import store from '../store';
 
 class Service {
   constructor() {
-    this.instance = axios.create();
+    this.instance = axios.create({
+      baseURL: BASE_URL,
+    });
     this.instance.interceptors.response.use(
       this.handleSuccess,
       this.handleError,
@@ -26,7 +28,9 @@ class Service {
     }
   };
 
-  get = url => this.instance.get(url);
+  get = url => {
+    return this.instance.get(url);
+  };
 
   post = (url, body) => this.instance.post(url, body);
 
