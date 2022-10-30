@@ -1,8 +1,9 @@
 import { NavLink, useLocation } from 'react-router-dom';
-import classNames from 'classnames';
-import { memo, useEffect, useState } from 'react';
+import { memo, useLayoutEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 function Navigated({
   babel,
@@ -17,14 +18,13 @@ function Navigated({
   const { pathname } = location;
   const styleActive = { color: '#4E97FD' };
   const [openDropdown, setOpen] = useState(open);
-  useEffect(() => {
+  useLayoutEffect(() => {
     item.map(({ path }) => {
       if (path === pathname) {
         setOpen(true);
       }
       if (path === pathname && !isSidebar) {
         childrenActive(true);
-        setOpen(true);
       }
     });
   }, []);
@@ -78,5 +78,15 @@ function Navigated({
     </li>
   );
 }
+
+Navigated.prototype = {
+  babel: PropTypes.string,
+  isSidebar: PropTypes.bool,
+  item: PropTypes.array,
+  open: PropTypes.bool,
+  childrenActive: PropTypes.func,
+  iconAfter: PropTypes.elementType,
+  iconBefore: PropTypes.elementType,
+};
 
 export default memo(Navigated);

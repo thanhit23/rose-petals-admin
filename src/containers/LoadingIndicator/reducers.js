@@ -8,7 +8,6 @@ const initialState = {
 
 const loadingReducer = (state = initialState, action) =>
   produce(state, draft => {
-    // eslint-disable-next-line default-case
     switch (action.type) {
       default:
         const text = action.type;

@@ -2,7 +2,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 
 import { LOGIN_REQUEST, STATUS_SUCCESS } from './constants';
 import { login, setToken } from './service';
-import { fetchLoginSuccess, fetchLoginError } from './actions';
+import { logged, loginFailed } from './actions';
 
 function* fetchLogin({ payload: { email, password } }) {
   const res = yield call(login, { email, password });
@@ -16,9 +16,9 @@ function* fetchLogin({ payload: { email, password } }) {
   if (status === STATUS_SUCCESS) {
     const token = sessionStorage.getItem('token');
     yield call(setToken, token);
-    yield put(fetchLoginSuccess(access, refresh, user));
+    yield put(logged(access, refresh, user));
   } else {
-    yield put(fetchLoginError(data));
+    yield put(loginFailed(data));
   }
 }
 

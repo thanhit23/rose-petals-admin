@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Helmet } from 'react-helmet';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
@@ -13,6 +12,7 @@ import { checkAuth } from '../../containers/HomePage/actions';
 import injectSaga from '../../utils/injectSaga';
 import Header from '../../containers/Header';
 import SideBar from '../../containers/SideBar';
+import Helmet from '../../components/Helmet';
 
 function AuthLayout({ children, title, isSidebar, auth, onCheckAuth }) {
   useEffect(() => {
@@ -22,9 +22,7 @@ function AuthLayout({ children, title, isSidebar, auth, onCheckAuth }) {
 
   return (
     <>
-      <Helmet>
-        <title>{title}</title>
-      </Helmet>
+      <Helmet title={title} />
       <section className="container">
         <div className="grid grid-cols-6">
           <SideBar />

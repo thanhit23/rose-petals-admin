@@ -4,7 +4,7 @@ import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
-import './css/index.css';
+import './containers/App/style/index.css';
 import App from './containers/App';
 import reportWebVitals from './reportWebVitals';
 import viMessages from './translations/vi.json';

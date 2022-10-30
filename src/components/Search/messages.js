@@ -5,7 +5,7 @@
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'components.Search';
+export const scope = 'Components.Search';
 
 export default defineMessages({
   default: {

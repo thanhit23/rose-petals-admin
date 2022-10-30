@@ -3,7 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import Search from '../Search';
+import messages from './messages';
 
 function HeaderComponent({ handleSidebar, handleLogout }) {
   const [dropdown, setDropDown] = useState(false);
@@ -35,7 +37,7 @@ function HeaderComponent({ handleSidebar, handleLogout }) {
                     {/* eslint-disable-next-line max-len */}
                     {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
                     <li className="cursor-pointer" onClick={handleLogout}>
-                      logout
+                      <FormattedMessage {...messages.logout} />
                     </li>
                   </ul>
                 )}
@@ -50,6 +52,7 @@ function HeaderComponent({ handleSidebar, handleLogout }) {
 
 HeaderComponent.prototype = {
   handleSidebar: PropTypes.func,
+  handleLogout: PropTypes.func,
 };
 
 export default HeaderComponent;

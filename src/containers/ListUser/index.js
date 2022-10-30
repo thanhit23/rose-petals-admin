@@ -6,10 +6,11 @@ import { FormattedMessage } from 'react-intl';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 import AuthLayout from '../../layouts/AuthLayout';
 import injectSaga from '../../utils/injectSaga';
 import saga from './saga';
-import { fetchUsers, fetchUsersForTable, deleteUsers } from './actions';
+import { getUsers, getUsersForTable, deleteUsers } from './actions';
 import injectReducer from '../../utils/injectReducer';
 import reducer from './reducers';
 import Breadcrumb from '../../components/Breadcrumb';
@@ -23,13 +24,7 @@ function ListUser({ getUser, users, meta, gotoPage, deleteUser }) {
   const handleGoToPage = page => {
     gotoPage(page);
   };
-  const handleDeleteUser = ({
-    cell: {
-      row: {
-        values: { id },
-      },
-    },
-  }) => {
+  const handleDeleteUser = id => {
     deleteUser(id);
   };
   const columns = useMemo(() => [
@@ -57,23 +52,32 @@ function ListUser({ getUser, users, meta, gotoPage, deleteUser }) {
       Header: 'Action',
       accessor: 'action',
       // eslint-disable-next-line react/no-unstable-nested-components
-      Cell: props => (
-        <>
-          <button
-            type="button"
-            className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
-          >
-            <FontAwesomeIcon className="text-[#7D879C]" icon={faPen} />
-          </button>
-          <button
-            type="button"
-            className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
-            onClick={() => handleDeleteUser(props)}
-          >
-            <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
-          </button>
-        </>
-      ),
+      Cell: props => {
+        const {
+          cell: {
+            row: {
+              values: { id },
+            },
+          },
+        } = props;
+        return (
+          <>
+            <Link
+              className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
+              to={`/admin/user/edit/${id}`}
+            >
+              <FontAwesomeIcon className="text-[#7D879C]" icon={faPen} />
+            </Link>
+            <button
+              type="button"
+              className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
+              onClick={() => handleDeleteUser(id)}
+            >
+              <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
+            </button>
+          </>
+        );
+      },
     },
   ]);
   const element = useMemo(
@@ -98,7 +102,7 @@ function ListUser({ getUser, users, meta, gotoPage, deleteUser }) {
     [users],
   );
 
-  return <AuthLayout title="User" children={element} />;
+  return <AuthLayout title="user" children={element} />;
 }
 
 ListUser.PropsType = {
@@ -122,8 +126,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     deleteUser: bindActionCreators(deleteUsers, dispatch),
-    getUser: bindActionCreators(fetchUsers, dispatch),
-    gotoPage: bindActionCreators(fetchUsersForTable, dispatch),
+    getUser: bindActionCreators(getUsers, dispatch),
+    gotoPage: bindActionCreators(getUsersForTable, dispatch),
   };
 };
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

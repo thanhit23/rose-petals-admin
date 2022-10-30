@@ -2,6 +2,7 @@ import React from 'react';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { Helmet } from 'react-helmet';
 import Login from '../../components/Login';
@@ -9,13 +10,10 @@ import injectReducer from '../../utils/injectReducer';
 import reducer from '../App/reducer';
 import injectSaga from '../../utils/injectSaga';
 import saga from './saga';
-import { fetchLogin } from './actions';
+import { accountLogin } from './actions';
 
 function LoginPage({ onLogin, auth }) {
-  const submit = ({ email, password }) => {
-    onLogin({ email, password });
-  };
-
+  const submit = data => onLogin(data);
   if (auth) return <Navigate to="/" replace />;
 
   return (
@@ -25,11 +23,16 @@ function LoginPage({ onLogin, auth }) {
         <meta name="description" content="A Login application" />
       </Helmet>
       <div className="min-h-screen bg-[rgb(249,249,249)] flex justify-center items-center">
-        <Login handleSubmit={submit} />
+        <Login handleOnSubmit={submit} />
       </div>
     </>
   );
 }
+
+LoginPage.prototype = {
+  onLogin: PropTypes.func,
+  auth: PropTypes.object,
+};
 
 const mapStateToProps = state => {
   const {
@@ -42,7 +45,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogin: bindActionCreators(fetchLogin, dispatch),
+    onLogin: bindActionCreators(accountLogin, dispatch),
   };
 };
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

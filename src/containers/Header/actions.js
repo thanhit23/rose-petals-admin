@@ -6,6 +6,6 @@ export const toggleSidebar = () => ({
 export const logout = () => ({
   type: LOGOUT_REQUEST,
 });
-export const logoutSuccess = () => ({
+export const loggedOut = () => ({
   type: LOGOUT_SUCCESS,
 });

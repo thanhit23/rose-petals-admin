@@ -14,9 +14,9 @@ import injectSaga from '../../utils/injectSaga';
 import Header from '../Header';
 import Dashboard from '../SideBar';
 
-function HomePage({ isSidebar, auth, onCheckAuth }) {
+function HomePage({ isSidebar, auth, checkAuthenticate }) {
   useEffect(() => {
-    onCheckAuth();
+    checkAuthenticate();
     if (!auth) <Navigate to="/login" replace />;
   }, []);
 
@@ -24,10 +24,7 @@ function HomePage({ isSidebar, auth, onCheckAuth }) {
     <>
       <Helmet>
         <title>Admin</title>
-        <meta
-          name="description"
-          content="A React.js Boilerplate application homepage"
-        />
+        <meta name="description" />
       </Helmet>
       <section className="container">
         <div className="grid grid-cols-6">
@@ -56,7 +53,7 @@ function HomePage({ isSidebar, auth, onCheckAuth }) {
 HomePage.prototype = {
   isSidebar: PropTypes.bool,
   auth: PropTypes.object,
-  onCheckAuth: PropTypes.func,
+  checkAuth: PropTypes.func,
 };
 
 const mapStateToProps = state => {
@@ -72,7 +69,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onCheckAuth: bindActionCreators(checkAuth, dispatch),
+    checkAuthenticate: bindActionCreators(checkAuth, dispatch),
   };
 };
 
