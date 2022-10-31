@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { CHECK_TOKEN_REQUEST } from './constants';
 import { isMe, setHeader } from './service';
-import { setAuth, checkTokenSuccess } from './actions';
+import { setAuth, checkTokenSuccess, checkTokenFailed } from './actions';
 
 function* sendReqToken({ payload: { token } }) {
   yield call(setHeader, token);
@@ -12,6 +12,8 @@ function* sendReqToken({ payload: { token } }) {
   if (status) {
     yield put(setAuth(data));
     yield put(checkTokenSuccess());
+  } else {
+    yield put(checkTokenFailed());
   }
 }
 

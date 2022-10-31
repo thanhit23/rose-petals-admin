@@ -1,4 +1,8 @@
-import { CHECK_TOKEN_REQUEST, CHECK_TOKEN_SUCCESS } from './constants';
+import {
+  CHECK_TOKEN_REQUEST,
+  CHECK_TOKEN_SUCCESS,
+  CHECK_TOKEN_FAILED,
+} from './constants';
 import { SET_AUTHENTICATION } from '../HomePage/constants';
 
 export const sendRequestToken = token => {
@@ -19,4 +23,8 @@ export const setAuth = user => ({
 
 export const checkTokenSuccess = () => ({
   type: CHECK_TOKEN_SUCCESS,
+});
+
+export const checkTokenFailed = () => ({
+  type: CHECK_TOKEN_FAILED,
 });

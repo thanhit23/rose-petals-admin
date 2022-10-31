@@ -1,10 +1,7 @@
-import {
-  LOGIN_REQUEST,
-  FETCH_LOGIN_SUCCESS,
-  FETCH_LOGIN_ERROR,
-} from './constants';
+import { LOGIN_REQUEST, FETCH_LOGIN_SUCCESS } from './constants';
+import { TOAST_ERROR } from '../ToastMessage/constants';
 
-export const fetchLogin = ({ email, password }) => ({
+export const accountLogin = ({ email, password }) => ({
   type: LOGIN_REQUEST,
   payload: {
     email,
@@ -12,7 +9,7 @@ export const fetchLogin = ({ email, password }) => ({
   },
 });
 
-export const fetchLoginSuccess = (access, refresh, user) => ({
+export const logged = (access, refresh, user) => ({
   type: FETCH_LOGIN_SUCCESS,
   payload: {
     access,
@@ -21,8 +18,8 @@ export const fetchLoginSuccess = (access, refresh, user) => ({
   },
 });
 
-export const fetchLoginError = error => ({
-  type: FETCH_LOGIN_ERROR,
+export const loginFailed = error => ({
+  type: TOAST_ERROR,
   payload: {
     error,
   },

@@ -3,25 +3,27 @@ import {
   FETCH_USERS_SUCCESS,
   FETCH_USERS_TABLE_REQUEST,
   DELETE_USERS_REQUEST,
+  DELETE_USERS_SUCCESS,
+  DELETE_USERS_FAILED,
   FETCH_USERS_FAILED,
 } from './constants';
 
-export const fetchUsers = () => ({
+export const getUsers = () => ({
   type: FETCH_USERS_REQUEST,
 });
-export const getListUsers = ({ data, meta }) => ({
+export const getUsersSuccess = ({ data, meta }) => ({
   type: FETCH_USERS_SUCCESS,
   payload: {
     data,
     meta,
   },
 });
-export const getListUsersFailed = messages => ({
+export const getUsersListFailed = messages => ({
   type: FETCH_USERS_FAILED,
   payload: { messages },
 });
 
-export const fetchUsersForTable = index => ({
+export const getUsersForTable = index => ({
   type: FETCH_USERS_TABLE_REQUEST,
   payload: {
     index,
@@ -31,4 +33,12 @@ export const fetchUsersForTable = index => ({
 export const deleteUsers = id => ({
   type: DELETE_USERS_REQUEST,
   payload: { id },
+});
+
+export const deleteUserSuccess = () => ({
+  type: DELETE_USERS_SUCCESS,
+});
+
+export const deleteUserFailed = () => ({
+  type: DELETE_USERS_FAILED,
 });

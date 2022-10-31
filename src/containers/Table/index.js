@@ -2,14 +2,16 @@ import React, { useMemo } from 'react';
 import { useTable, usePagination } from 'react-table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { bindActionCreators, compose } from 'redux';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
+import PropTypes from 'prop-types';
 import {
   faChevronRight,
   faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { fetchUsers, fetchUsersForTable } from '../ListUser/actions';
+import messages from './messages';
 
 function Table({ col, dataUser, metaData, goToPage }) {
   const { page: pages, limit, totalPages } = metaData;
@@ -82,6 +84,20 @@ function Table({ col, dataUser, metaData, goToPage }) {
                 {...row.getRowProps()}
               >
                 {row.cells.map(cell => {
+                  if (cell.column.id === 'gender') {
+                    return (
+                      <td
+                        className="py-[10px] px-[16px]"
+                        {...cell.getCellProps()}
+                      >
+                        {cell.value === 1 ? (
+                          <FormattedMessage {...messages.gender_female} />
+                        ) : (
+                          <FormattedMessage {...messages.gender_male} />
+                        )}
+                      </td>
+                    );
+                  }
                   return (
                     <td
                       className="py-[10px] px-[16px]"
@@ -139,6 +155,13 @@ function Table({ col, dataUser, metaData, goToPage }) {
   );
 }
 
+Table.prototype = {
+  col: PropTypes.array,
+  dataUser: PropTypes.array,
+  metaData: PropTypes.object,
+  goToPage: PropTypes.func,
+};
+
 const mapStateToProps = state => {
   const {
     user: { users, meta },
@@ -149,12 +172,6 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getUser: bindActionCreators(fetchUsers, dispatch),
-    gotoPage: bindActionCreators(fetchUsersForTable, dispatch),
-  };
-};
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withConnect = connect(mapStateToProps, null);
 
 export default compose(withConnect)(Table);

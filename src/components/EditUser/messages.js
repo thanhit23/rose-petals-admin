@@ -51,9 +51,13 @@ export default defineMessages({
     id: `${scope}.message.error.required`,
     defaultMessage: 'This is required',
   },
-  message_error_length: {
-    id: `${scope}.message.error.length`,
-    defaultMessage: 'Length from 9 -15 characters',
+  message_error_maxLength: {
+    id: `${scope}.message.error.maxLength`,
+    defaultMessage: 'Max length exceeded',
+  },
+  message_error_minLength: {
+    id: `${scope}.message.error.minLength`,
+    defaultMessage: 'Min length not reached',
   },
   message_error_isNumber: {
     id: `${scope}.message.error.isNumber`,

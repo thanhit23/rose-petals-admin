@@ -5,7 +5,7 @@
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'components.Login';
+export const scope = 'Components.Login';
 
 export default defineMessages({
   title: {
@@ -35,5 +35,9 @@ export default defineMessages({
   sign_up: {
     id: `${scope}.signUp`,
     defaultMessage: 'Sign Up',
+  },
+  message_error_required: {
+    id: `${scope}.message.error.required`,
+    defaultMessage: 'This is required',
   },
 });

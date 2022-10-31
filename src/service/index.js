@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { UNAUTHORIZED, LOGOUT, BASE_URL } from './constants';
+import {
+  UNAUTHORIZED,
+  LOGOUT,
+  BASE_URL,
+  BAD_REQUEST_FAILED,
+  BAD_REQUEST,
+} from './constants';
 import store from '../store';
 
 class Service {
@@ -21,10 +27,12 @@ class Service {
 
   handleError = err => {
     const {
-      response: { status },
+      response: { status, data },
     } = err;
     if (status === UNAUTHORIZED) {
       store.dispatch({ type: LOGOUT });
+    } else if (status === BAD_REQUEST) {
+      store.dispatch({ type: BAD_REQUEST_FAILED, payload: { data } });
     }
   };
 
@@ -33,6 +41,8 @@ class Service {
   };
 
   post = (url, body) => this.instance.post(url, body);
+
+  patch = (url, body) => this.instance.patch(url, body);
 
   put = (url, body) => this.instance.put(url, body);
 
