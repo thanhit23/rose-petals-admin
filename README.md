@@ -1,13 +1,32 @@
-# Getting Started with my Project
+# Project Admin Multikart
 
-## Available Scripts
+## Quick Start
 
-In the project directory, you can run:
+Clone repo
+```
+git clone https://github.com/thanhit23/multikart.git
+cd multikart
+npm install
+```
 
-### `npm start`
+Set the environment variables:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+cp .env.example .env
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Project Structure
+
+```
+src\
+  |-component
+  |-container
+  |-helper
+  |-hook
+  |-layouts
+  |-middleware
+  |-routes
+  |-service
+  |-translate
+  |-utils
+```
