@@ -48,7 +48,7 @@ function SideBar({ isSidebar, isActiveItem }) {
               {isSidebar && (
                 <div className="grow ml-3">
                   <p className="text-sm font-semibold text-blue-600">
-                    Jason McCoel
+                    Nguyễn Duy Thành
                   </p>
                 </div>
               )}
@@ -101,6 +101,10 @@ function SideBar({ isSidebar, isActiveItem }) {
               {
                 path: '/admin/product',
                 name: <FormattedMessage {...messages.product_add} />,
+              },
+              {
+                path: '/admin/category',
+                name: <FormattedMessage {...messages.product_category} />,
               },
             ]}
           />

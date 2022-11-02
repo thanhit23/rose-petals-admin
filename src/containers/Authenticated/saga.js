@@ -17,8 +17,8 @@ function* sendReqToken({ payload: { token } }) {
   }
 }
 
-function* loginSaga() {
+function* authSaga() {
   yield takeLatest(CHECK_TOKEN_REQUEST, sendReqToken);
 }
 
-export default loginSaga;
+export default authSaga;

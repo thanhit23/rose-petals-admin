@@ -2,7 +2,6 @@ import React, { useEffect, useMemo } from 'react';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import propsTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -17,7 +16,6 @@ import Breadcrumb from '../../components/Breadcrumb';
 import Search from '../../components/Search';
 import Button from './Button';
 import Table from '../Table';
-import messages from './messages';
 
 function ListUser({ getUser, users, meta, gotoPage, deleteUser }) {
   useEffect(() => getUser(), []);
@@ -84,7 +82,7 @@ function ListUser({ getUser, users, meta, gotoPage, deleteUser }) {
     () =>
       users && (
         <>
-          <Breadcrumb title={<FormattedMessage {...messages.title} />} />
+          <Breadcrumb title="user" />
           <div className="flex justify-between">
             <Search message="user" />
             <Button />

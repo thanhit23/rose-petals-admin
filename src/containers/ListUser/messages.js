@@ -7,8 +7,4 @@ export default defineMessages({
     id: `${scope}.button.add`,
     defaultMessage: 'Sign in',
   },
-  title: {
-    id: `${scope}.title`,
-    defaultMessage: 'User',
-  },
 });
