@@ -3,6 +3,11 @@
 	"Components.Helmet.user": "Người Dùng",
 	"Components.Helmet.add_user": "Thêm người dùng",
 	"Components.Helmet.edit_user": "Chỉnh sửa người dùng",
+	"Components.Helmet.category": "Danh mục",
+	"Components.Breadcrumb.user": "Người dùng",
+	"Components.Breadcrumb.edit_user": "Chỉnh sửa người dùng",
+	"Components.Breadcrumb.list_user": "Danh sách người dùng",
+	"Components.Breadcrumb.category": "Danh mục",
 	"components.Login.title": "Đăng nhập",
 	"components.Login.button.login": "Đăng nhập",
 	"components.Login.placeholder.email": "Địa chỉ email...",
@@ -38,5 +43,6 @@
 	"Containers.Sidebar.user.add": "Thêm người dùng",
 	"Containers.Sidebar.product": "Sản phẩm",
 	"Containers.Sidebar.product.list": "Danh sách sản phẩm",
-	"Containers.Sidebar.product.add": "Thêm sản phẩm"
+	"Containers.Sidebar.product.add": "Thêm sản phẩm",
+	"Containers.Sidebar.product.category": "Danh mục"
 }

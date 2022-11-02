@@ -37,7 +37,7 @@ function AddUserComponent({ onSubmitAddUser }) {
   };
   return (
     <>
-      <Breadcrumb title="Add User" />
+      <Breadcrumb title="add_user" />
       <div>
         <form
           onSubmit={handleSubmit(onSubmit)}

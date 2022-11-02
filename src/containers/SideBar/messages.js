@@ -31,4 +31,8 @@ export default defineMessages({
     id: `${scope}.product.add`,
     defaultMessage: 'Add Product',
   },
+  product_category: {
+    id: `${scope}.product.category`,
+    defaultMessage: 'Category',
+  },
 });

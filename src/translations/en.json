@@ -3,6 +3,11 @@
 	"Components.Helmet.user": "User",
 	"Components.Helmet.add_user": "Add user",
 	"Components.Helmet.edit_user": "Edit user",
+	"Components.Helmet.category": "Category",
+	"Components.Breadcrumb.user": "User",
+	"Components.Breadcrumb.edit_user": "Edit user",
+	"Components.Breadcrumb.list_user": "List user",
+	"Components.Breadcrumb.category": "Category",
 	"Components.Login.title": "Sign In",
 	"Components.Login.button.login": "Login",
 	"Components.Login.placeholder.email": "Email Address...",
@@ -38,5 +43,6 @@
 	"Containers.Sidebar.user.add": "Add User",
 	"Containers.Sidebar.product": "Product",
 	"Containers.Sidebar.product.list": "List Products",
-	"Containers.Sidebar.product.add": "Add Product"
+	"Containers.Sidebar.product.add": "Add Product",
+	"Containers.Sidebar.product.category": "Category"
 }

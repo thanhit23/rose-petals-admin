@@ -15,4 +15,8 @@ export default defineMessages({
     id: `${scope}.edit_user`,
     defaultMessage: 'Edit user',
   },
+  category: {
+    id: `${scope}.category`,
+    defaultMessage: 'Category',
+  },
 });

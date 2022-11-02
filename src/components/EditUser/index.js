@@ -34,8 +34,8 @@ function EditUserComponent({ onSubmitForUpdateUser, users }) {
   return (
     <>
       <Breadcrumb
-        prevPage={{ path: '/admin/users', name: 'ListUser' }}
-        title="Edit User"
+        prevPage={{ path: '/admin/users', name: 'list_user' }}
+        title="edit_user"
       />
       <div>
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
