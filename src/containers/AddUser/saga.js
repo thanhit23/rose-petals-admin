@@ -10,7 +10,7 @@ function* createNewUser({ payload: { data }, navigate }) {
   } = res;
   if (status) {
     yield put(createUserSuccessfully());
-    navigate('/admin/users');
+    navigate();
   } else {
     yield put(createUserFailed());
   }

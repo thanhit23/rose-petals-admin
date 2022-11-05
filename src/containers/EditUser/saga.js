@@ -10,7 +10,7 @@ function* updateUserInformation({ payload: { id, data }, navigate }) {
   } = res;
   if (status) {
     yield put(updateUserSuccessfully());
-    navigate('/admin/users');
+    navigate();
   } else {
     yield put(updateUserFailed());
   }

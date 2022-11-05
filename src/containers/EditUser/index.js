@@ -10,7 +10,10 @@ import injectSaga from '../../utils/injectSaga';
 import saga from './saga';
 
 function EditUser({ updateUserInformation }) {
-  const navigate = useNavigate();
+  const redirect = useNavigate();
+  const navigate = () => {
+    redirect('/admin/users');
+  };
   const handleUpdateUser = (id, data) =>
     updateUserInformation(id, data, navigate);
   return (

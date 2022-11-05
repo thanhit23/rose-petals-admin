@@ -10,7 +10,10 @@ import injectSaga from '../../utils/injectSaga';
 import saga from './saga';
 
 function AddUser({ createNewUser }) {
-  const navigate = useNavigate();
+  const redirect = useNavigate();
+  const navigate = () => {
+    redirect('/admin/users');
+  };
   const handleCreateUser = data =>
     createNewUser({ ...data, role: 'user' }, navigate);
 

@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo } from 'react';
 import { bindActionCreators, compose } from 'redux';
-
+import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import CategoryComponent from '../../components/Category';
 import AuthLayout from '../../layouts/AuthLayout';
 import injectSaga from '../../utils/injectSaga';
@@ -11,8 +12,12 @@ import { getCategories, deleteCategory } from './actions';
 import injectReducer from '../../utils/injectReducer';
 
 function Category({ getCategory, data: dataCategory, onDeleteCategory }) {
+  const redirect = useNavigate();
+  const navigate = () => {
+    redirect('/admin/users');
+  };
   useEffect(() => getCategory(), []);
-  const handleDeleteCategory = id => onDeleteCategory(id);
+  const handleDeleteCategory = id => onDeleteCategory(id, navigate);
   const element = useMemo(() => {
     if (dataCategory) {
       const { data, meta } = dataCategory;

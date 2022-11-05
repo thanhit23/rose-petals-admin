@@ -10,7 +10,7 @@ function* createNewCategory({ payload: { data }, navigate }) {
   } = res;
   if (status) {
     yield put(createCategorySuccessfully());
-    navigate('/admin/categories');
+    navigate();
   } else {
     yield put(createCategoryFailed());
   }

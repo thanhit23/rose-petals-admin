@@ -10,7 +10,10 @@ import injectSaga from '../../utils/injectSaga';
 import saga from './saga';
 
 function EditCategory({ updateCategoryInformation }) {
-  const navigate = useNavigate();
+  const redirect = useNavigate();
+  const navigate = () => {
+    redirect('/admin/categories');
+  };
   const handleUpdateUser = (id, data) => {
     updateCategoryInformation(id, data, navigate);
   };

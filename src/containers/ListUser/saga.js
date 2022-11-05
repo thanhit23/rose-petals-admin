@@ -5,15 +5,15 @@ import {
   FETCH_USERS_TABLE_REQUEST,
   DELETE_USERS_REQUEST,
 } from './constants';
-import { get, getUsersByPage, deleteUser } from './service';
+import { getUsers, deleteUser } from './service';
 import {
   getUsersSuccess,
   getUsersListFailed,
   deleteUserSuccess,
 } from './actions';
 
-function* fetchUsers() {
-  const res = yield call(get);
+function* getListUsers() {
+  const res = yield call(getUsers);
   const { status, data } = res;
   if (status) {
     yield put(getUsersSuccess(data));
@@ -24,7 +24,7 @@ function* fetchUsers() {
 }
 
 function* fetchUsersForTable({ payload: { index } }) {
-  const res = yield call(getUsersByPage, index);
+  const res = yield call(getUsers, index);
   const { status, data } = res;
   if (status) {
     yield put(getUsersSuccess(data));
@@ -34,12 +34,12 @@ function* fetchUsersForTable({ payload: { index } }) {
   }
 }
 
-function* apiDeleteUser({ payload: { id } }) {
+function* apiDeleteUser({ payload: { id }, navigate }) {
   const res = yield call(deleteUser, id);
   const { status, data } = res;
   if (status) {
     yield put(deleteUserSuccess());
-    yield fetchUsers();
+    yield navigate();
   } else {
     const { message } = data;
     yield put(getUsersListFailed(message));
@@ -47,7 +47,7 @@ function* apiDeleteUser({ payload: { id } }) {
 }
 
 function* userSaga() {
-  yield takeEvery(FETCH_USERS_REQUEST, fetchUsers);
+  yield takeEvery(FETCH_USERS_REQUEST, getListUsers);
   yield takeEvery(DELETE_USERS_REQUEST, apiDeleteUser);
   yield takeLatest(FETCH_USERS_TABLE_REQUEST, fetchUsersForTable);
 }

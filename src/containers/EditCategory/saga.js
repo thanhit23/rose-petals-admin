@@ -10,7 +10,7 @@ function* updateCategoryInformation({ payload: { id, data }, navigate }) {
   } = res;
   if (status) {
     yield put(updateCategorySuccessfully());
-    navigate('/admin/categories');
+    navigate();
   } else {
     yield put(updateCategoryFailed());
   }

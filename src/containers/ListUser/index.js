@@ -5,7 +5,7 @@ import propsTypes from 'prop-types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthLayout from '../../layouts/AuthLayout';
 import injectSaga from '../../utils/injectSaga';
 import saga from './saga';
@@ -16,9 +16,11 @@ import ButtonRedirect from '../../components/ButtonRedirect';
 import MainWithTable from '../../components/MainWithTable';
 
 function ListUser({ getUser, users, meta, gotoPage, deleteUser }) {
+  const redirect = useNavigate();
+  const navigate = () => redirect('/admin/users');
   useEffect(() => getUser(), []);
   const handleGoToPage = page => gotoPage(page);
-  const handleDeleteUser = id => deleteUser(id);
+  const handleDeleteUser = id => deleteUser(id, navigate);
   const columns = useMemo(() => [
     {
       Header: 'Id',

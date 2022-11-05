@@ -19,14 +19,14 @@ function* getCategory() {
   }
 }
 
-function* deleteCategory({ payload: { id } }) {
+function* deleteCategory({ payload: { id }, navigate }) {
   const res = yield call(remove, id);
   const {
     data: { status, message },
   } = res;
   if (status) {
     yield put(deleteCategorySuccess());
-    yield getCategory();
+    navigate('/admin/categories');
   } else {
     yield put(deleteCategoryFailed(message));
   }
