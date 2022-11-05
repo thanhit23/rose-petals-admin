@@ -19,12 +19,8 @@ import Table from '../Table';
 
 function ListUser({ getUser, users, meta, gotoPage, deleteUser }) {
   useEffect(() => getUser(), []);
-  const handleGoToPage = page => {
-    gotoPage(page);
-  };
-  const handleDeleteUser = id => {
-    deleteUser(id);
-  };
+  const handleGoToPage = page => gotoPage(page);
+  const handleDeleteUser = id => deleteUser(id);
   const columns = useMemo(() => [
     {
       Header: 'Id',

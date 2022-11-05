@@ -7,6 +7,10 @@ export default defineMessages({
     id: `${scope}.list_user`,
     defaultMessage: 'List User',
   },
+  add_user: {
+    id: `${scope}.add_user`,
+    defaultMessage: 'Add User',
+  },
   edit_user: {
     id: `${scope}.edit_user`,
     defaultMessage: 'Edit User',

@@ -111,7 +111,7 @@ function SideBar({ isSidebar, isActiveItem }) {
         </ul>
         <div className="text-center bottom-0 absolute w-full">
           <hr className="m-0" />
-          <p className="py-2 text-sm text-gray-700">Multikart</p>
+          <p className="py-2 text-sm text-gray-700 bg-[#343a40]">Multikart</p>
         </div>
       </div>
     </div>

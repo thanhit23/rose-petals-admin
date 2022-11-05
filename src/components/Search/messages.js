@@ -1,7 +1,6 @@
 /*
- * Login Messages
+ * Search Messages
  *
- * This contains all the text for the HomePage component.
  */
 import { defineMessages } from 'react-intl';
 
@@ -19,5 +18,9 @@ export default defineMessages({
   product: {
     id: `${scope}.product`,
     defaultMessage: 'Search Product...',
+  },
+  category: {
+    id: `${scope}.category`,
+    defaultMessage: 'Search Category...',
   },
 });
