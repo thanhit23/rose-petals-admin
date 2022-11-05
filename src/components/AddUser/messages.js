@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'Components.AddUser';
+export const scope = 'Components.Add_user';
 
 export default defineMessages({
   label_name: {
@@ -8,7 +8,7 @@ export default defineMessages({
     defaultMessage: 'Username',
   },
   label_phoneNumber: {
-    id: `${scope}.label.phoneNumber`,
+    id: `${scope}.label.phone_number`,
     defaultMessage: 'Phone Number',
   },
   label_gender: {

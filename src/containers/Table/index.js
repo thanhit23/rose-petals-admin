@@ -112,7 +112,7 @@ function Table({ col, dataUser, metaData, goToPage }) {
           })}
         </tbody>
       </table>
-      <div className="mt-8 flex justify-center">
+      <div className="mt-4 flex justify-center">
         <div>
           <ul className="flex">
             <li
