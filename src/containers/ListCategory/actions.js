@@ -3,6 +3,8 @@ import {
   GET_CATEGORY_SUCCESS,
   GET_CATEGORY_FAILED,
   DELETE_CATEGORY_REQUEST,
+  DELETE_CATEGORY_FAILED,
+  DELETE_CATEGORY_SUCCESS,
 } from './constants';
 
 export const getCategories = () => ({
@@ -22,4 +24,13 @@ export const getCategoriesFailed = message => ({
 export const deleteCategory = id => ({
   type: DELETE_CATEGORY_REQUEST,
   payload: { id },
+});
+
+export const deleteCategoryFailed = message => ({
+  type: DELETE_CATEGORY_FAILED,
+  payload: { message },
+});
+
+export const deleteCategorySuccess = () => ({
+  type: DELETE_CATEGORY_SUCCESS,
 });

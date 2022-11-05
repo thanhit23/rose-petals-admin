@@ -5,7 +5,7 @@ import {
   FETCH_USERS_TABLE_REQUEST,
   DELETE_USERS_REQUEST,
 } from './constants';
-import { getUsers, getUsersByPage, deleteUser } from './service';
+import { get, getUsersByPage, deleteUser } from './service';
 import {
   getUsersSuccess,
   getUsersListFailed,
@@ -13,7 +13,7 @@ import {
 } from './actions';
 
 function* fetchUsers() {
-  const res = yield call(getUsers);
+  const res = yield call(get);
   const { status, data } = res;
   if (status) {
     yield put(getUsersSuccess(data));
@@ -39,6 +39,7 @@ function* apiDeleteUser({ payload: { id } }) {
   const { status, data } = res;
   if (status) {
     yield put(deleteUserSuccess());
+    yield fetchUsers();
   } else {
     const { message } = data;
     yield put(getUsersListFailed(message));

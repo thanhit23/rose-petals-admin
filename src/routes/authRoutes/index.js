@@ -2,7 +2,9 @@ import HomePage from '../../containers/HomePage';
 import ListUser from '../../containers/ListUser';
 import AddUser from '../../containers/AddUser';
 import EditUser from '../../containers/EditUser';
-import Category from '../../containers/Category';
+import ListCategory from '../../containers/ListCategory';
+import AddCategory from '../../containers/AddCategory';
+import EditCategory from '../../containers/EditCategory';
 
 export default [
   {
@@ -27,8 +29,18 @@ export default [
     exact: true,
   },
   {
+    path: '/admin/categories',
+    component: ListCategory,
+    exact: true,
+  },
+  {
     path: '/admin/category',
-    component: Category,
+    component: AddCategory,
+    exact: true,
+  },
+  {
+    path: '/admin/category/edit/:id',
+    component: EditCategory,
     exact: true,
   },
 ];

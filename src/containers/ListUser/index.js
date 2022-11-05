@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import propsTypes from 'prop-types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import AuthLayout from '../../layouts/AuthLayout';
 import injectSaga from '../../utils/injectSaga';
@@ -12,10 +12,8 @@ import saga from './saga';
 import { getUsers, getUsersForTable, deleteUsers } from './actions';
 import injectReducer from '../../utils/injectReducer';
 import reducer from './reducers';
-import Breadcrumb from '../../components/Breadcrumb';
-import Search from '../../components/Search';
-import Button from './Button';
-import Table from '../Table';
+import ButtonRedirect from '../../components/ButtonRedirect';
+import MainWithTable from '../../components/MainWithTable';
 
 function ListUser({ getUser, users, meta, gotoPage, deleteUser }) {
   useEffect(() => getUser(), []);
@@ -77,21 +75,16 @@ function ListUser({ getUser, users, meta, gotoPage, deleteUser }) {
   const element = useMemo(
     () =>
       users && (
-        <>
-          <Breadcrumb title="user" />
-          <div className="flex justify-between">
-            <Search message="user" />
-            <Button />
-          </div>
-          <div className="flex flex-col py-4 shadow-lg bg-white rounded mt-4">
-            <Table
-              goToPage={handleGoToPage}
-              metaData={meta}
-              col={columns}
-              dataUser={users}
-            />
-          </div>
-        </>
+        <MainWithTable
+          title="user"
+          button={
+            <ButtonRedirect to="/admin/user" title="add_user" icon={faPlus} />
+          }
+          columns={columns}
+          data={users}
+          meta={meta}
+          handleGoToPage={handleGoToPage}
+        />
       ),
     [users],
   );

@@ -1,6 +1,5 @@
 import produce from 'immer';
 import { FETCH_LOGIN_SUCCESS, SET_AUTHENTICATION } from './constants';
-import { DELETE_USERS_SUCCESS } from '../ListUser/constants';
 
 export const initialState = {
   auth: null,
@@ -19,10 +18,6 @@ const appReducer = (state = initialState, action) =>
         sessionStorage.setItem('token', token);
         sessionStorage.setItem('refreshToken', refreshToken);
         draft.auth = user;
-        break;
-      }
-      case DELETE_USERS_SUCCESS: {
-        window.location.href = '/admin/users';
         break;
       }
       case SET_AUTHENTICATION: {

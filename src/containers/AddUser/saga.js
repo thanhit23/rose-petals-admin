@@ -1,11 +1,9 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { useNavigate } from 'react-router';
 import { CREATE_USER_REQUEST } from './constants';
 import { createUsers } from './service';
 import { createUserSuccessfully, createUserFailed } from './actions';
 
-function* createNewUser({ payload: { data } }) {
-  const navigate = useNavigate();
+function* createNewUser({ payload: { data }, navigate }) {
   const res = yield call(createUsers, data);
   const {
     data: { status },
