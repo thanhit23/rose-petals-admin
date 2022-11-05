@@ -23,4 +23,12 @@ export default defineMessages({
     id: `${scope}.category`,
     defaultMessage: 'Category',
   },
+  add_category: {
+    id: `${scope}.add_category`,
+    defaultMessage: 'Add Category',
+  },
+  edit_category: {
+    id: `${scope}.edit_category`,
+    defaultMessage: 'Edit Category',
+  },
 });

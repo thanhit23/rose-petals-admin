@@ -30,9 +30,10 @@ export const getUsersForTable = index => ({
   },
 });
 
-export const deleteUsers = id => ({
+export const deleteUsers = (id, navigate) => ({
   type: DELETE_USERS_REQUEST,
   payload: { id },
+  navigate,
 });
 
 export const deleteUserSuccess = () => ({

@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 
 import Breadcrumb from '../Breadcrumb';
 import messages from './messages';
+import { GENDER } from './constants';
 
 function EditUserComponent({ onSubmitForUpdateUser, users }) {
   const { id } = useParams();
@@ -26,10 +27,14 @@ function EditUserComponent({ onSubmitForUpdateUser, users }) {
     phoneNumber: phoneNumberUser,
   } = userEdit;
   const onSubmit = () => onSubmitForUpdateUser(id, userEdit);
+  // eslint-disable-next-line consistent-return
   const changeValueInput = ({ target }) => {
-    // eslint-disable-next-line no-shadow
-    const { name, value } = target;
-    setUserEdit({ ...userEdit, [name]: [value] });
+    // eslint-disable-next-line no-shadow,prefer-const
+    let { name, value } = target;
+    if (name === GENDER) {
+      value = +value;
+    }
+    setUserEdit({ ...userEdit, [name]: value });
   };
   return (
     <>
@@ -53,6 +58,7 @@ function EditUserComponent({ onSubmitForUpdateUser, users }) {
                 <input
                   className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                   id="username"
+                  name="name"
                   type="text"
                   value={nameUser}
                   onChange={changeValueInput}
@@ -75,6 +81,7 @@ function EditUserComponent({ onSubmitForUpdateUser, users }) {
                 <input
                   className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                   id="email"
+                  name="email"
                   type="email"
                   value={emailUser}
                   onChange={changeValueInput}
@@ -97,6 +104,7 @@ function EditUserComponent({ onSubmitForUpdateUser, users }) {
                 <input
                   className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                   id="phoneNumber"
+                  name="phoneNumber"
                   type="number"
                   value={phoneNumberUser}
                   placeholder={msg}
@@ -115,24 +123,26 @@ function EditUserComponent({ onSubmitForUpdateUser, users }) {
               <span className="text-[#d1373a] text-base">*</span>
             </label>
             <div className="flex">
-              <label className="flex items-center mr-2" htmlFor="field-rain">
+              <label className="flex items-center mr-2" htmlFor="female">
                 <input
+                  id="female"
                   className="mr-1"
+                  name="gender"
                   type="radio"
                   value={1}
                   checked={genderUser === 1}
-                  id="female"
                   onChange={changeValueInput}
                 />
                 <FormattedMessage {...messages.gender_female} />
               </label>
-              <label className="flex items-center" htmlFor="field-wind">
+              <label className="flex items-center" htmlFor="male">
                 <input
+                  id="male"
                   className="mr-1"
+                  name="gender"
                   type="radio"
                   value={2}
                   checked={genderUser === 2}
-                  id="male"
                   onChange={changeValueInput}
                 />
                 <FormattedMessage {...messages.gender_male} />

@@ -1,7 +1,12 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { DELETE_CATEGORY_REQUEST, GET_CATEGORY_REQUEST } from './constants';
 import { get, deleteCategory as remove } from './service';
-import { getCategoriesSuccess, getCategoriesFailed } from './actions';
+import {
+  getCategoriesSuccess,
+  getCategoriesFailed,
+  deleteCategorySuccess,
+  deleteCategoryFailed,
+} from './actions';
 
 function* getCategory() {
   const res = yield call(get);
@@ -14,9 +19,17 @@ function* getCategory() {
   }
 }
 
-function* deleteCategory({ payload: { id } }) {
+function* deleteCategory({ payload: { id }, navigate }) {
   const res = yield call(remove, id);
-  console.log(res, 'res');
+  const {
+    data: { status, message },
+  } = res;
+  if (status) {
+    yield put(deleteCategorySuccess());
+    navigate('/admin/categories');
+  } else {
+    yield put(deleteCategoryFailed(message));
+  }
 }
 
 function* category() {

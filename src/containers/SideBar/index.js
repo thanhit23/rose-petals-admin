@@ -103,7 +103,7 @@ function SideBar({ isSidebar, isActiveItem }) {
                 name: <FormattedMessage {...messages.product_add} />,
               },
               {
-                path: '/admin/category',
+                path: '/admin/categories',
                 name: <FormattedMessage {...messages.product_category} />,
               },
             ]}

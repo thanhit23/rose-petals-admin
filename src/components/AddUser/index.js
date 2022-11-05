@@ -6,7 +6,7 @@ import Breadcrumb from '../Breadcrumb';
 import messages from './messages';
 import ErrorMessage from '../ErrorMessage';
 
-function AddUserComponent({ onSubmitAddUser }) {
+function AddUserComponent({ onSubmit }) {
   const intl = useIntl();
   const {
     register,
@@ -14,7 +14,6 @@ function AddUserComponent({ onSubmitAddUser }) {
     formState: { errors },
   } = useForm();
   const { phoneNumber, email, name, password, gender } = errors;
-  const onSubmit = data => onSubmitAddUser(data);
   const rulePhoneNumber = {
     required: {
       value: true,
@@ -40,7 +39,7 @@ function AddUserComponent({ onSubmitAddUser }) {
       <Breadcrumb title="add_user" />
       <div>
         <form
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(data => onSubmit(data))}
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         >
           <div className="mb-6">
@@ -54,10 +53,10 @@ function AddUserComponent({ onSubmitAddUser }) {
             </label>
             <input
               className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
-              type="email"
+              id="name"
+              type="name"
               placeholder={intl.formatMessage(messages.placeholder_name)}
-              {...register('email', ruleRequired)}
+              {...register('name', ruleRequired)}
             />
             <ErrorMessage name={name} />
           </div>
