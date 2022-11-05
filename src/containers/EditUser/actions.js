@@ -4,10 +4,9 @@ import {
   UPDATE_USER_FAILED,
 } from './constants';
 
-export const updateUser = (id, data, navigate) => ({
+export const updateUser = (id, data, callback) => ({
   type: UPDATE_USER_REQUEST,
-  payload: { id, data },
-  navigate,
+  payload: { id, data, callback },
 });
 export const updateUserSuccessfully = () => ({
   type: UPDATE_USER_SUCCESS,

@@ -21,9 +21,9 @@ export const getCategoriesFailed = message => ({
   payload: { message },
 });
 
-export const deleteCategory = id => ({
+export const deleteCategory = (id, callback) => ({
   type: DELETE_CATEGORY_REQUEST,
-  payload: { id },
+  payload: { id, callback },
 });
 
 export const deleteCategoryFailed = message => ({

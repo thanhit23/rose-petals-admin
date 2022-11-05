@@ -54,13 +54,13 @@ function Category({ data, meta, deleteCategory }) {
       },
     },
   ]);
-  const buttonElement = (
+  const renderButton = () => (
     <ButtonRedirect to="/admin/category" title="add_category" icon={faPlus} />
   );
   return (
     <MainWithTable
       title="category"
-      button={buttonElement}
+      button={renderButton()}
       columns={columns}
       data={data}
       meta={meta}

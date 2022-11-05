@@ -14,8 +14,8 @@ function EditCategoryComponent({ onSubmit, data }) {
   const result = findLodash(data, { id });
   const { name } = result;
   const [categoryEdit, setCategoryEdit] = useState({ name });
-  const { name: nameCategory } = categoryEdit;
-  const changeValueInput = ({ target: { value } }) => {
+  const { name: categoryName } = categoryEdit;
+  const handleChangeInput = ({ target: { value } }) => {
     setCategoryEdit({ name: value });
   };
   return (
@@ -41,8 +41,8 @@ function EditCategoryComponent({ onSubmit, data }) {
                   className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                   id="username"
                   type="text"
-                  value={nameCategory}
-                  onChange={changeValueInput}
+                  value={categoryName}
+                  onChange={handleChangeInput}
                   placeholder={msg}
                 />
               )}

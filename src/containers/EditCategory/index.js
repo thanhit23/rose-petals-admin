@@ -11,8 +11,9 @@ import saga from './saga';
 
 function EditCategory({ updateCategoryInformation }) {
   const navigate = useNavigate();
+  const callback = ({ status }) => status && navigate('/admin/categories');
   const handleUpdateUser = (id, data) => {
-    updateCategoryInformation(id, data, navigate);
+    updateCategoryInformation(id, data, callback);
   };
   return (
     <AuthLayout

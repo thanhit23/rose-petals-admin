@@ -3,14 +3,14 @@ import { UPDATE_CATEGORY_REQUEST } from './constants';
 import { update } from './service';
 import { updateCategorySuccessfully, updateCategoryFailed } from './actions';
 
-function* updateCategoryInformation({ payload: { id, data }, navigate }) {
+function* updateCategoryInformation({ payload: { id, data, callback } }) {
   const res = yield call(update, id, data);
   const {
     data: { status },
   } = res;
   if (status) {
     yield put(updateCategorySuccessfully());
-    navigate('/admin/categories');
+    callback({ status: true });
   } else {
     yield put(updateCategoryFailed());
   }

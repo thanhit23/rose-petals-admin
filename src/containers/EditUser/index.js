@@ -11,8 +11,9 @@ import saga from './saga';
 
 function EditUser({ updateUserInformation }) {
   const navigate = useNavigate();
+  const callback = ({ status }) => status && navigate('/admin/users');
   const handleUpdateUser = (id, data) =>
-    updateUserInformation(id, data, navigate);
+    updateUserInformation(id, data, callback);
   return (
     <AuthLayout
       title="edit_user"

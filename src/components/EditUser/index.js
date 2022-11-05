@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 
 import Breadcrumb from '../Breadcrumb';
 import messages from './messages';
+import { GENDER } from './constants';
 
 function EditUserComponent({ onSubmitForUpdateUser, users }) {
   const { id } = useParams();
@@ -28,10 +29,10 @@ function EditUserComponent({ onSubmitForUpdateUser, users }) {
   const onSubmit = () => onSubmitForUpdateUser(id, userEdit);
   // eslint-disable-next-line consistent-return
   const changeValueInput = ({ target }) => {
-    // eslint-disable-next-line no-shadow
-    const { name, value } = target;
-    if (name === 'gender') {
-      return setUserEdit({ ...userEdit, [name]: Number(value) });
+    // eslint-disable-next-line no-shadow,prefer-const
+    let { name, value } = target;
+    if (name === GENDER) {
+      value = +value;
     }
     setUserEdit({ ...userEdit, [name]: value });
   };

@@ -10,7 +10,10 @@ import injectSaga from '../../utils/injectSaga';
 import saga from './saga';
 
 function AddCategory({ createNewCategory }) {
-  const navigate = useNavigate();
+  const redirect = useNavigate();
+  const navigate = () => {
+    redirect('/admin/categories');
+  };
   const handleCreateCategory = data => createNewCategory(data, navigate);
 
   return (

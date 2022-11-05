@@ -11,8 +11,9 @@ import saga from './saga';
 
 function AddUser({ createNewUser }) {
   const navigate = useNavigate();
+  const callback = ({ status }) => status && navigate('/admin/users');
   const handleCreateUser = data =>
-    createNewUser({ ...data, role: 'user' }, navigate);
+    createNewUser({ ...data, role: 'user' }, callback);
 
   return (
     <AuthLayout

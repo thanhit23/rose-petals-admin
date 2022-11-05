@@ -4,10 +4,9 @@ import {
   UPDATE_CATEGORY_FAILED,
 } from './constants';
 
-export const updateCategory = (id, data, navigate) => ({
+export const updateCategory = (id, data, callback) => ({
   type: UPDATE_CATEGORY_REQUEST,
-  payload: { id, data },
-  navigate,
+  payload: { id, data, callback },
 });
 export const updateCategorySuccessfully = () => ({
   type: UPDATE_CATEGORY_SUCCESS,

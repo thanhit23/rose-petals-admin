@@ -3,14 +3,14 @@ import { CREATE_USER_REQUEST } from './constants';
 import { createUsers } from './service';
 import { createUserSuccessfully, createUserFailed } from './actions';
 
-function* createNewUser({ payload: { data }, navigate }) {
+function* createNewUser({ payload: { data, callback } }) {
   const res = yield call(createUsers, data);
   const {
     data: { status },
   } = res;
   if (status) {
     yield put(createUserSuccessfully());
-    navigate('/admin/users');
+    callback({ status: true });
   } else {
     yield put(createUserFailed());
   }

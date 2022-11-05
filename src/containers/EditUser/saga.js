@@ -3,14 +3,14 @@ import { UPDATE_USER_REQUEST } from './constants';
 import { updateUser } from './service';
 import { updateUserSuccessfully, updateUserFailed } from './actions';
 
-function* updateUserInformation({ payload: { id, data }, navigate }) {
+function* updateUserInformation({ payload: { id, data, callback } }) {
   const res = yield call(updateUser, id, data);
   const {
     data: { status },
   } = res;
   if (status) {
     yield put(updateUserSuccessfully());
-    navigate('/admin/users');
+    callback({ status: true });
   } else {
     yield put(updateUserFailed());
   }
