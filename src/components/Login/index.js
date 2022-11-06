@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 
 import messages from './messages';
 import ErrorMessage from '../ErrorMessage';
+import { required } from '../../utils/validation';
+import InputWithFormatMessage from '../InputWithFormatMessage';
 import '../../containers/App/style/login.css';
 
 function Login({ handleOnSubmit }) {
-  const intl = useIntl();
   const [showPass, setShowPass] = useState(false);
   const {
     register,
@@ -19,13 +20,8 @@ function Login({ handleOnSubmit }) {
     formState: { errors },
   } = useForm();
   const { email, password } = errors;
-  const ruleRequired = {
-    required: {
-      value: true,
-      message: <FormattedMessage {...messages.message_error_required} />,
-    },
-  };
   const onSubmit = data => handleOnSubmit(data);
+
   return (
     <div className="container">
       <div className="grid grid-cols-12 gap-2">
@@ -51,25 +47,29 @@ function Login({ handleOnSubmit }) {
               </div>
               <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
                 <div className="mb-4">
-                  <input
+                  <InputWithFormatMessage
                     id="email"
                     type="email"
                     className="border-[1px] border-solid border-[#eaeaea] block w-full px-4 py-2 mt-2 text-purple-700 bg-white border outline-none"
-                    placeholder={intl.formatMessage(messages.placeholder_email)}
-                    {...register('email', ruleRequired)}
+                    message={messages.placeholder.email}
+                    validate={register(
+                      'email',
+                      required(messages.message.required),
+                    )}
                   />
                   <ErrorMessage name={email} />
                 </div>
                 <div className="mb-2">
                   <div className="flex border-[1px] border-solid border-[#eaeaea] bg-white border relative">
-                    <input
-                      id="password"
+                    <InputWithFormatMessage
+                      id="email"
                       type={showPass ? 'text' : 'password'}
-                      className="block w-full pl-4 py-2 pr-9 text-purple-700 outline-none"
-                      placeholder={intl.formatMessage(
-                        messages.placeholder_password,
+                      className="border-[1px] border-solid border-[#eaeaea] block w-full px-4 py-2 mt-2 text-purple-700 bg-white border outline-none"
+                      message={messages.placeholder.password}
+                      validate={register(
+                        'password',
+                        required(messages.message.required),
                       )}
-                      {...register('password', ruleRequired)}
                     />
                     <div className="flex items-center absolute right-[5px] top-[50%] translate-y-[-50%]">
                       <button
@@ -95,7 +95,7 @@ function Login({ handleOnSubmit }) {
                     type="submit"
                     className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-[#19c7a9] rounded-md hover:opacity-70 focus:outline-none"
                   >
-                    <FormattedMessage {...messages.btn_login} />
+                    <FormattedMessage {...messages.btn.login} />
                   </button>
                 </div>
               </form>

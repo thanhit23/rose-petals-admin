@@ -1,10 +1,10 @@
 import HomePage from '../../containers/HomePage';
-import ListUser from '../../containers/ListUser';
-import AddUser from '../../containers/AddUser';
-import EditUser from '../../containers/EditUser';
-import ListCategory from '../../containers/ListCategory';
-import AddCategory from '../../containers/AddCategory';
-import EditCategory from '../../containers/EditCategory';
+import ListUser from '../../containers/Users/List';
+import AddUser from '../../containers/Users/Add';
+import EditUser from '../../containers/Users/Edit';
+import ListCategory from '../../containers/Categories/List';
+import AddCategory from '../../containers/Categories/Add';
+import EditCategory from '../../containers/Categories/Edit';
 
 export default [
   {

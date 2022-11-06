@@ -1,5 +1,4 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
@@ -56,20 +55,13 @@ function SideBar({ isSidebar, isActiveItem }) {
           </a>
         </div>
         <ul className="relative px-1">
-          <li className="relative">
-            <a
-              className={classNames(
-                'rounded px-[18px] flex items-center text-sm h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap hover:bg-[#007bff] duration-300 cursor-pointer',
-                { 'hover:pl-[25px]': isSidebar },
-              )}
-            >
-              <FontAwesomeIcon
-                className={classNames('w-5 h-5', { 'mr-3': isSidebar })}
-                icon={faGauge}
-              />
-              {isSidebar && <FormattedMessage {...messages.dashboard} />}
-            </a>
-          </li>
+          <Navigated
+            isSidebar={isSidebar}
+            pathRedirect="/"
+            childrenActive={checkChildrenActive}
+            babel={<FormattedMessage {...messages.dashboard} />}
+            iconAfter={faGauge}
+          />
           <Navigated
             isSidebar={isSidebar}
             childrenActive={checkChildrenActive}

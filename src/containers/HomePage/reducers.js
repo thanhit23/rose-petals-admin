@@ -2,7 +2,7 @@ import produce from 'immer';
 import { TOGGLE_SIDEBAR } from './constants';
 
 const initialState = {
-  isSidebar: false,
+  isSidebar: true,
 };
 
 const headerReducer = (state = initialState, action) =>

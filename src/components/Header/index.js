@@ -7,6 +7,19 @@ import { FormattedMessage } from 'react-intl';
 import Search from '../Search';
 import messages from './messages';
 
+const renderLogout = handleLogout => {
+  return (
+    <ul
+      aria-labelledby="dropdownDefault"
+      className="dropdown-menu w-[120px] absolute bg-white right-[-5px] p-5 shadow-lg rounded-[5px]"
+    >
+      <li className="cursor-pointer" onClick={handleLogout} aria-hidden>
+        <FormattedMessage {...messages.logout} />
+      </li>
+    </ul>
+  );
+};
+
 function HeaderComponent({ handleSidebar, handleLogout }) {
   const [dropdown, setDropDown] = useState(false);
   return (
@@ -29,18 +42,7 @@ function HeaderComponent({ handleSidebar, handleLogout }) {
                     className="w-[40px] account-img cursor-pointer"
                   />
                 </button>
-                {dropdown && (
-                  <ul
-                    aria-labelledby="dropdownDefault"
-                    className="dropdown-menu w-[120px] absolute bg-white right-[-5px] p-5 shadow-lg rounded-[5px]"
-                  >
-                    {/* eslint-disable-next-line max-len */}
-                    {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
-                    <li className="cursor-pointer" onClick={handleLogout}>
-                      <FormattedMessage {...messages.logout} />
-                    </li>
-                  </ul>
-                )}
+                {dropdown && renderLogout(handleLogout)}
               </div>
             </nav>
           </div>

@@ -15,6 +15,7 @@ function Toast({ toast: { message, type } }) {
     if (type === TOAST_ERROR) toast.error(message);
     if (type === TOAST_INFO) toast.info(message);
   }, [message]);
+
   return <ToastContainer />;
 }
 

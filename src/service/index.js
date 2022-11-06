@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
   UNAUTHORIZED,
-  LOGOUT,
+  LOGOUT_REQUEST,
   BASE_URL,
   BAD_REQUEST_FAILED,
   BAD_REQUEST,
@@ -30,7 +30,7 @@ class Service {
       response: { status, data },
     } = err;
     if (status === UNAUTHORIZED) {
-      store.dispatch({ type: LOGOUT });
+      store.dispatch({ type: LOGOUT_REQUEST });
     } else if (status === BAD_REQUEST) {
       store.dispatch({ type: BAD_REQUEST_FAILED, payload: { data } });
     }
