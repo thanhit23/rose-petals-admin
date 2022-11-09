@@ -43,11 +43,9 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onLogin: bindActionCreators(accountLogin, dispatch),
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  onLogin: bindActionCreators(accountLogin, dispatch),
+});
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 const withSaga = injectSaga({ key: 'login', saga });
 const withReducer = injectReducer({ key: 'global', reducer });

@@ -6,7 +6,7 @@ import ToastContainer from '../ToastMessage';
 import routes from '../../routes';
 import LoadingIndicator from '../LoadingIndicator';
 import injectReducer from '../../utils/injectReducer';
-import reducer from '../ListUser/reducers';
+import reducer from '../Users/List/reducers';
 
 function App() {
   return (

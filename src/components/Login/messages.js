@@ -12,17 +12,21 @@ export default defineMessages({
     id: `${scope}.title`,
     defaultMessage: 'Sign in',
   },
-  btn_login: {
-    id: `${scope}.button.login`,
-    defaultMessage: 'Login',
+  btn: {
+    login: {
+      id: `${scope}.button.login`,
+      defaultMessage: 'Login',
+    },
   },
-  placeholder_email: {
-    id: `${scope}.placeholder.email`,
-    defaultMessage: 'Email Address...',
-  },
-  placeholder_password: {
-    id: `${scope}.placeholder.password`,
-    defaultMessage: 'Password...',
+  placeholder: {
+    email: {
+      id: `${scope}.placeholder.email`,
+      defaultMessage: 'Email Address...',
+    },
+    password: {
+      id: `${scope}.placeholder.password`,
+      defaultMessage: 'Password...',
+    },
   },
   forget_password: {
     id: `${scope}.forgetPassword`,
@@ -36,8 +40,10 @@ export default defineMessages({
     id: `${scope}.signUp`,
     defaultMessage: 'Sign Up',
   },
-  message_error_required: {
-    id: `${scope}.message.error.required`,
-    defaultMessage: 'This is required',
+  message: {
+    required: {
+      id: `${scope}.message.error.required`,
+      defaultMessage: 'This field is required',
+    },
   },
 });

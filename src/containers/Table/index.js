@@ -2,8 +2,6 @@ import React, { useMemo } from 'react';
 import { useTable, usePagination } from 'react-table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import {
@@ -13,13 +11,12 @@ import {
 
 import messages from './messages';
 
-function Table({ col, dataUser, metaData, goToPage }) {
-  const { page: pages, limit, totalPages } = metaData;
+function Table({ col, data, meta, goToPage }) {
+  const { page: pages, limit, totalPages } = meta;
   const columns = useMemo(() => col, []);
   const handleGoToPage = indexPage => {
     goToPage(indexPage);
   };
-
   const {
     getTableProps,
     getTableBodyProps,
@@ -33,7 +30,7 @@ function Table({ col, dataUser, metaData, goToPage }) {
   } = useTable(
     {
       columns,
-      data: dataUser,
+      data,
       initialState: { pageIndex: 0, pageSize: limit },
     },
     usePagination,
@@ -157,21 +154,9 @@ function Table({ col, dataUser, metaData, goToPage }) {
 
 Table.prototype = {
   col: PropTypes.array,
-  dataUser: PropTypes.array,
-  metaData: PropTypes.object,
+  data: PropTypes.array,
+  meta: PropTypes.object,
   goToPage: PropTypes.func,
 };
 
-const mapStateToProps = state => {
-  const {
-    user: { users, meta },
-  } = state;
-  return {
-    meta,
-    users,
-  };
-};
-
-const withConnect = connect(mapStateToProps, null);
-
-export default compose(withConnect)(Table);
+export default Table;

@@ -1,11 +1,11 @@
-import { LOGOUT } from '../service/constants';
+import { LOGOUT_REQUEST } from '../containers/Header/constants';
 import { CHECK_TOKEN_FAILED } from '../containers/Authenticated/constants';
 
 const middlewareStorage = store => next => action => {
   next(action);
   store.getState();
   switch (action.type) {
-    case LOGOUT:
+    case LOGOUT_REQUEST:
       sessionStorage.removeItem('token');
       window.location.href = '/login';
       break;

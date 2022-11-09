@@ -7,6 +7,7 @@ import messages from './messages';
 
 function HelmetComponent({ title }) {
   const intl = useIntl();
+
   return (
     <Helmet>
       <title>{intl.formatMessage(messages[title])}</title>
