@@ -11,7 +11,9 @@ import Table from '../../../containers/Table';
 
 function ListCategoryComponent({ data, meta, deleteCategory, gotoPage }) {
   const handleDeleteCategory = id => deleteCategory(id);
+
   const handleGoToPage = page => gotoPage(page);
+
   const columns = useMemo(() => [
     {
       Header: 'Id',
@@ -59,6 +61,7 @@ function ListCategoryComponent({ data, meta, deleteCategory, gotoPage }) {
       },
     },
   ]);
+
   const renderButton = () => (
     <ButtonRedirect to="/admin/category" title="add_category" icon={faPlus} />
   );

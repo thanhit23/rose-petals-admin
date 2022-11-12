@@ -36,9 +36,7 @@ class Service {
     }
   };
 
-  get = url => {
-    return this.instance.get(url);
-  };
+  get = url => this.instance.get(url);
 
   post = (url, body) => this.instance.post(url, body);
 

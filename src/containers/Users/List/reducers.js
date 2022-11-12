@@ -1,13 +1,13 @@
 import produce from 'immer';
 import { FETCH_USERS_SUCCESS } from './constants';
-import { GET_USER_SUCCESS } from '../Edit/constants';
+import { GET_USER_SUCCESS, DELETE_USER_DATA_EDIT } from '../Edit/constants';
 
 const initialState = {
   list: {
     data: [],
     meta: {},
   },
-  edit: null,
+  edit: {},
 };
 
 const listUser = (state = initialState, action) =>
@@ -28,6 +28,10 @@ const listUser = (state = initialState, action) =>
           },
         } = action;
         draft.edit = data;
+        break;
+      }
+      case DELETE_USER_DATA_EDIT: {
+        draft.edit = {};
         break;
       }
       default:

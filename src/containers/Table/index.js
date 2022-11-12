@@ -13,10 +13,11 @@ import messages from './messages';
 
 function Table({ col, data, meta, goToPage }) {
   const { page: pages, limit, totalPages } = meta;
+
   const columns = useMemo(() => col, []);
-  const handleGoToPage = indexPage => {
-    goToPage(indexPage);
-  };
+
+  const handleGoToPage = page => goToPage(page);
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -35,7 +36,9 @@ function Table({ col, data, meta, goToPage }) {
     },
     usePagination,
   );
+
   const arr = Array.from(Array(totalPages), (x, index) => index);
+
   const elements = arr.map(item => {
     return (
       <li

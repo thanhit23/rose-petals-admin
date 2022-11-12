@@ -2,6 +2,7 @@ import {
   CHECK_TOKEN_REQUEST,
   CHECK_TOKEN_SUCCESS,
   CHECK_TOKEN_FAILED,
+  REDIRECT_LOGIN,
 } from './constants';
 import { SET_AUTHENTICATION } from '../HomePage/constants';
 
@@ -13,6 +14,10 @@ export const sendRequestToken = token => {
     },
   };
 };
+
+export const redirectLogin = () => ({
+  type: REDIRECT_LOGIN,
+});
 
 export const setAuth = user => ({
   type: SET_AUTHENTICATION,

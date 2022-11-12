@@ -8,22 +8,21 @@ import ErrorMessage from '../../ErrorMessage';
 import LabelWithFormatMessage from '../../LabelWithFormatMessage';
 import InputWithFormatMessage from '../../InputWithFormatMessage';
 import { required, minLength, maxLength } from '../../../utils/validation';
-import { FEMALE, MALE } from './constants';
 
-function AddUserComponent({ onSubmit }) {
+function AddProductComponent({ onSubmit }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  const { description, images, name, price, category } = errors;
+
   const phoneNumberValidation = {
     ...required(messages.message.required),
     ...minLength(messages.message.length),
     ...maxLength(messages.message.length),
   };
-
-  const { phoneNumber, email, name, password, gender } = errors;
 
   return (
     <>
@@ -51,7 +50,7 @@ function AddUserComponent({ onSubmit }) {
           </div>
           <div className="mb-6">
             <LabelWithFormatMessage
-              message={messages.label.email}
+              message={messages.label.price}
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="email"
               requiredField
@@ -60,14 +59,14 @@ function AddUserComponent({ onSubmit }) {
               className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="email"
               type="email"
-              message={messages.placeholder.email}
-              validate={register('email', required(messages.message.required))}
+              message={messages.placeholder.price}
+              validate={register('price', required(messages.message.required))}
             />
-            <ErrorMessage name={email} />
+            <ErrorMessage name={price} />
           </div>
           <div className="mb-6">
             <LabelWithFormatMessage
-              message={messages.label.password}
+              message={messages.label.description}
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="password"
               requiredField
@@ -76,17 +75,17 @@ function AddUserComponent({ onSubmit }) {
               className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="password"
               type="password"
-              message={messages.placeholder.password}
+              message={messages.placeholder.description}
               validate={register(
-                'password',
+                'description',
                 required(messages.message.required),
               )}
             />
-            <ErrorMessage name={password} />
+            <ErrorMessage name={description} />
           </div>
           <div className="mb-6">
             <LabelWithFormatMessage
-              message={messages.label.phone_number}
+              message={messages.label.images}
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="phoneNumber"
               requiredField
@@ -95,41 +94,19 @@ function AddUserComponent({ onSubmit }) {
               className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="phoneNumber"
               type="number"
-              message={messages.placeholder.phone_number}
-              validate={register('phoneNumber', phoneNumberValidation)}
+              message={messages.placeholder.images}
+              validate={register('images', phoneNumberValidation)}
             />
-            <ErrorMessage name={phoneNumber} />
+            <ErrorMessage name={images} />
           </div>
           <div className="mb-6">
             <LabelWithFormatMessage
-              message={messages.label.gender}
+              message={messages.label.category}
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="gender"
               requiredField
             />
-            <div className="flex">
-              <label className="flex items-center mr-2" htmlFor="female">
-                <input
-                  className="mr-1"
-                  type="radio"
-                  value={FEMALE}
-                  id="female"
-                  {...register('gender', required(messages.message.required))}
-                />
-                <FormattedMessage {...messages.gender.female} />
-              </label>
-              <label className="flex items-center" htmlFor="male">
-                <input
-                  className="mr-1"
-                  type="radio"
-                  value={MALE}
-                  id="male"
-                  {...register('gender', required(messages.message.required))}
-                />
-                <FormattedMessage {...messages.gender.male} />
-              </label>
-            </div>
-            <ErrorMessage name={gender} />
+            <ErrorMessage name={category} />
           </div>
           <div className="flex items-center justify-between">
             <button
@@ -145,8 +122,8 @@ function AddUserComponent({ onSubmit }) {
   );
 }
 
-AddUserComponent.prototype = {
+AddProductComponent.prototype = {
   onSubmitAddUser: PropTypes.func,
 };
 
-export default AddUserComponent;
+export default AddProductComponent;

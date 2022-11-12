@@ -11,6 +11,7 @@ import {
 function* getListUsers({ payload: { page } }) {
   const res = yield call(getUsers, page);
   const { status, data } = res;
+  console.log(res, 'res');
   if (status) {
     yield put(getUsersSuccess(data));
   } else {

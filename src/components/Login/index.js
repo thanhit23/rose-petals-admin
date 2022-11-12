@@ -14,12 +14,15 @@ import '../../containers/App/style/login.css';
 
 function Login({ handleOnSubmit }) {
   const [showPass, setShowPass] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const { email, password } = errors;
+
   const onSubmit = data => handleOnSubmit(data);
 
   return (

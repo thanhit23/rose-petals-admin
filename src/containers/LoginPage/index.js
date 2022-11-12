@@ -14,6 +14,7 @@ import { accountLogin } from './actions';
 
 function LoginPage({ onLogin, auth }) {
   const submit = data => onLogin(data);
+
   if (auth) return <Navigate to="/" replace />;
 
   return (

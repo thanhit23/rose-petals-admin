@@ -12,18 +12,23 @@ import injectReducer from '../../../utils/injectReducer';
 import reducer from './reducers';
 import ListUserComponent from '../../../components/Users/List';
 
-function ListUser({ getUser, data, meta, gotoPage, deleteUser }) {
-  const redirect = useNavigate();
-  const navigate = () => redirect('/admin/users');
+function ListUser({ getUser, data, meta, deleteUser }) {
   useEffect(() => getUser(), []);
-  const handleGoToPage = page => gotoPage(page);
-  const handleDeleteUser = id => deleteUser(id, navigate);
+
+  const redirect = useNavigate();
+
+  const callback = () => redirect('/admin/users');
+
+  const handleGoToPage = page => getUser(page);
+
+  const handleDeleteUser = id => deleteUser(id, callback);
+
   const element = useMemo(
     () => (
       <ListUserComponent
         meta={meta}
         data={data}
-        deleteCategory={handleDeleteUser}
+        handleDeleteUser={handleDeleteUser}
         gotoPage={handleGoToPage}
       />
     ),
@@ -57,7 +62,6 @@ const mapDispatchToProps = dispatch => {
   return {
     deleteUser: bindActionCreators(deleteUsers, dispatch),
     getUser: bindActionCreators(getUsers, dispatch),
-    gotoPage: bindActionCreators(getUsers, dispatch),
   };
 };
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

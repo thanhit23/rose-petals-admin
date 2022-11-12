@@ -23,6 +23,7 @@ function* updateUserInformation({ payload: { id, data, callback } }) {
 
 function* getListUsers({ payload: { id } }) {
   const res = yield call(getUsers, id);
+  console.log(res, 'res');
   const { status, data } = res;
   if (status) {
     yield put(getUserSuccessfully(data));

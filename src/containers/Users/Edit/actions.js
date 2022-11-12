@@ -5,12 +5,18 @@ import {
   GET_USER_REQUEST,
   GET_USER_FAILED,
   GET_USER_SUCCESS,
+  DELETE_USER_DATA_EDIT,
 } from './constants';
 
 export const getUser = id => ({
   type: GET_USER_REQUEST,
   payload: { id },
 });
+
+export const deleteUserEditOld = () => ({
+  type: DELETE_USER_DATA_EDIT,
+});
+
 export const getUserSuccessfully = data => ({
   type: GET_USER_SUCCESS,
   payload: {

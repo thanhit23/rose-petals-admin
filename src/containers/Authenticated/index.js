@@ -4,13 +4,19 @@ import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import injectSaga from '../../utils/injectSaga';
 import saga from './saga';
-import { sendRequestToken } from './actions';
+import { sendRequestToken, redirectLogin } from './actions';
 
-function Authenticated({ auth, children, onSendRequestToken }) {
+function Authenticated({ auth, children, onSendRequestToken, notToken }) {
   const token = sessionStorage.getItem('token');
+
   useEffect(() => {
-    onSendRequestToken(token);
+    if (token) {
+      onSendRequestToken(token);
+    } else {
+      notToken();
+    }
   }, []);
+
   if (token && auth) return children;
 }
 
@@ -32,6 +38,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onSendRequestToken: bindActionCreators(sendRequestToken, dispatch),
+    notToken: bindActionCreators(redirectLogin, dispatch),
   };
 };
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

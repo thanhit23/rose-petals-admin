@@ -15,6 +15,7 @@ function AddCategoryComponent({ onSubmit }) {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const { name } = errors;
 
   return (

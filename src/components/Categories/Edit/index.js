@@ -10,8 +10,11 @@ import InputWithFormatMessage from '../../InputWithFormatMessage';
 
 function EditCategoryComponent({ onSubmit, data }) {
   const { id } = useParams();
+
   const [categoryEdit, setCategoryEdit] = useState(data);
+
   const { name: categoryName } = categoryEdit;
+
   const handleChangeInput = ({ target: { value } }) => {
     setCategoryEdit({ name: value });
   };
