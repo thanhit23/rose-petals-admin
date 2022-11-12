@@ -1,5 +1,8 @@
 import { LOGOUT_REQUEST } from '../containers/Header/constants';
-import { CHECK_TOKEN_FAILED } from '../containers/Authenticated/constants';
+import {
+  CHECK_TOKEN_FAILED,
+  REDIRECT_LOGIN,
+} from '../containers/Authenticated/constants';
 
 const middlewareStorage = store => next => action => {
   next(action);
@@ -13,6 +16,10 @@ const middlewareStorage = store => next => action => {
       sessionStorage.removeItem('token');
       window.location.href = '/login';
       break;
+    case REDIRECT_LOGIN: {
+      window.location.href = '/login';
+      break;
+    }
     default:
       break;
   }

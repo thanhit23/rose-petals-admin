@@ -12,6 +12,7 @@ import HeaderComponent from '../../components/Header';
 
 function Header({ handleToggleSidebar, handleUserLogout }) {
   const handleSidebar = () => handleToggleSidebar();
+
   const handleLogout = () => handleUserLogout();
 
   return (

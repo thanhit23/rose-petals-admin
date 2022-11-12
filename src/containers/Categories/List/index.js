@@ -17,9 +17,13 @@ import injectReducer from '../../../utils/injectReducer';
 
 function ListCategory({ getCategory, data, meta, deleteCategory }) {
   useEffect(() => getCategory(), []);
+
   const redirect = useNavigate();
+
   const navigate = () => redirect('/admin/categories');
+
   const handleDeleteCategory = id => deleteCategory(id, navigate);
+
   const element = useMemo(
     () => (
       <CategoryComponent

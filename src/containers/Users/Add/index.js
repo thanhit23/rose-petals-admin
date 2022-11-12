@@ -11,9 +11,11 @@ import saga from './saga';
 
 function AddUser({ createNewUser }) {
   const redirect = useNavigate();
+
   const navigate = () => {
     redirect('/admin/users');
   };
+
   const handleCreateUser = data =>
     createNewUser({ ...data, role: 'user' }, navigate);
 

@@ -5,9 +5,11 @@ import { createUserSuccessfully, createUserFailed } from './actions';
 
 function* createNewUser({ payload: { data }, navigate }) {
   const res = yield call(createUsers, data);
+
   const {
     data: { status },
   } = res;
+
   if (status) {
     yield put(createUserSuccessfully());
     navigate();

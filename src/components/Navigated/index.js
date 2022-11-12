@@ -16,13 +16,18 @@ function Navigated({
   isSidebar,
 }) {
   const location = useLocation();
+
   const { pathname } = location;
+
   const styleActive = { color: '#4E97FD' };
+
   const [openDropdown, setOpen] = useState(open);
+
   const cls = [
     'rounded w-full px-[18px] flex items-center text-sm h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap hover:text-[#fff !important] hover:bg-[#007bff] duration-300 cursor-pointer',
     { 'hover:pl-[25px]': openDropdown },
   ];
+
   useLayoutEffect(() => {
     item.map(({ path }) => {
       if (path === pathname) {
@@ -33,6 +38,7 @@ function Navigated({
       }
     });
   }, []);
+
   const element =
     isSidebar &&
     item.map(({ path, name }, i) => {
@@ -50,6 +56,7 @@ function Navigated({
         </div>
       );
     });
+
   const renderElement = (
     <>
       {iconAfter && (
@@ -85,6 +92,7 @@ function Navigated({
         </button>
       );
     }
+
     return (
       <NavLink
         to={pathRedirect}

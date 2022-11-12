@@ -11,20 +11,25 @@ import InputWithFormatMessage from '../../InputWithFormatMessage';
 
 function EditUserComponent({ onSubmitForUpdateUser, users }) {
   const { id } = useParams();
+
   const { email, phoneNumber, name, gender } = users;
+
   const [userEdit, setUserEdit] = useState({
     email,
     phoneNumber,
     name,
     gender,
   });
+
   const {
     email: emailUser,
     name: nameUser,
     gender: genderUser,
     phoneNumber: phoneNumberUser,
   } = userEdit;
+
   const onSubmit = () => onSubmitForUpdateUser(id, userEdit);
+
   const changeValueInput = ({ target }) => {
     // eslint-disable-next-line no-shadow,prefer-const
     let { name, value } = target;

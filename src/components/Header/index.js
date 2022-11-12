@@ -7,18 +7,16 @@ import { FormattedMessage } from 'react-intl';
 import Search from '../Search';
 import messages from './messages';
 
-const renderLogout = handleLogout => {
-  return (
-    <ul
-      aria-labelledby="dropdownDefault"
-      className="dropdown-menu w-[120px] absolute bg-white right-[-5px] p-5 shadow-lg rounded-[5px]"
-    >
-      <li className="cursor-pointer" onClick={handleLogout} aria-hidden>
-        <FormattedMessage {...messages.logout} />
-      </li>
-    </ul>
-  );
-};
+const renderLogout = handleLogout => (
+  <ul
+    aria-labelledby="dropdownDefault"
+    className="dropdown-menu w-[120px] absolute bg-white right-[-5px] p-5 shadow-lg rounded-[5px]"
+  >
+    <li className="cursor-pointer" onClick={handleLogout} aria-hidden>
+      <FormattedMessage {...messages.logout} />
+    </li>
+  </ul>
+);
 
 function HeaderComponent({ handleSidebar, handleLogout }) {
   const [dropdown, setDropDown] = useState(false);

@@ -15,10 +15,15 @@ import saga from './saga';
 
 function EditCategory({ updateCategory, edit: category, getCategory }) {
   const redirect = useNavigate();
+
   const navigate = () => redirect('/admin/categories');
+
   const handleUpdateUser = (id, data) => updateCategory(id, data, navigate);
+
   const { id } = useParams();
+
   useEffect(() => getCategory(id), []);
+
   const renderEditCategory = category && (
     <EditCategoryComponent data={category} onSubmit={handleUpdateUser} />
   );
