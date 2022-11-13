@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 @layer components {
+    .text-table {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        line-height: 16px;
+    }
     .lds-ring {
         display: inline-block;
         position: relative;

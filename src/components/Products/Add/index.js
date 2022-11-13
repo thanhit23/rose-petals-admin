@@ -7,26 +7,22 @@ import messages from './messages';
 import ErrorMessage from '../../ErrorMessage';
 import LabelWithFormatMessage from '../../LabelWithFormatMessage';
 import InputWithFormatMessage from '../../InputWithFormatMessage';
-import { required, minLength, maxLength } from '../../../utils/validation';
+import { required } from '../../../utils/validation';
 
-function AddProductComponent({ onSubmit }) {
+function AddProductComponent({ onSubmit, dataCategory }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const { description, images, name, price, category } = errors;
+  console.log(dataCategory, 'category');
 
-  const phoneNumberValidation = {
-    ...required(messages.message.required),
-    ...minLength(messages.message.length),
-    ...maxLength(messages.message.length),
-  };
+  const { description, images, name, price, category } = errors;
 
   return (
     <>
-      <Breadcrumb title="add_user" />
+      <Breadcrumb title="add_product" />
       <div>
         <form
           onSubmit={handleSubmit(data => onSubmit(data))}
@@ -52,13 +48,13 @@ function AddProductComponent({ onSubmit }) {
             <LabelWithFormatMessage
               message={messages.label.price}
               className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="email"
+              htmlFor="price"
               requiredField
             />
             <InputWithFormatMessage
               className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
-              type="email"
+              id="price"
+              type="number"
               message={messages.placeholder.price}
               validate={register('price', required(messages.message.required))}
             />
@@ -68,13 +64,13 @@ function AddProductComponent({ onSubmit }) {
             <LabelWithFormatMessage
               message={messages.label.description}
               className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="password"
+              htmlFor="description"
               requiredField
             />
             <InputWithFormatMessage
               className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="password"
-              type="password"
+              id="description"
+              type="text"
               message={messages.placeholder.description}
               validate={register(
                 'description',
@@ -87,15 +83,15 @@ function AddProductComponent({ onSubmit }) {
             <LabelWithFormatMessage
               message={messages.label.images}
               className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="phoneNumber"
+              htmlFor="images"
               requiredField
             />
             <InputWithFormatMessage
               className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="phoneNumber"
-              type="number"
+              id="images"
+              type="text"
               message={messages.placeholder.images}
-              validate={register('images', phoneNumberValidation)}
+              validate={register('images', required(messages.message.required))}
             />
             <ErrorMessage name={images} />
           </div>
@@ -103,8 +99,18 @@ function AddProductComponent({ onSubmit }) {
             <LabelWithFormatMessage
               message={messages.label.category}
               className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="gender"
+              htmlFor="category"
               requiredField
+            />
+            <InputWithFormatMessage
+              className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="category"
+              type="text"
+              message={messages.placeholder.category}
+              validate={register(
+                'category',
+                required(messages.message.required),
+              )}
             />
             <ErrorMessage name={category} />
           </div>
@@ -123,7 +129,7 @@ function AddProductComponent({ onSubmit }) {
 }
 
 AddProductComponent.prototype = {
-  onSubmitAddUser: PropTypes.func,
+  onSubmit: PropTypes.func,
 };
 
 export default AddProductComponent;

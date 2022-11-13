@@ -23,15 +23,15 @@ export const getUsersSuccess = ({ data, meta }) => ({
     meta,
   },
 });
+
 export const getUsersListFailed = messages => ({
   type: FETCH_USERS_FAILED,
   payload: { messages },
 });
 
-export const deleteUsers = (id, navigate) => ({
+export const deleteUsers = (id, callback) => ({
   type: DELETE_USERS_REQUEST,
-  payload: { id },
-  navigate,
+  payload: { id, callback },
 });
 
 export const deleteUserSuccess = () => ({

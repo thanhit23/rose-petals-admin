@@ -7,7 +7,7 @@ import saga from './saga';
 import { sendRequestToken, redirectLogin } from './actions';
 
 function Authenticated({ auth, children, onSendRequestToken, notToken }) {
-  const token = sessionStorage.getItem('token');
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     if (token) {

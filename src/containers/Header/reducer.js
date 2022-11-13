@@ -6,8 +6,8 @@ const middlewareStorage = (state = {}, action) =>
   produce(state, () => {
     switch (action.type) {
       case LOGOUT_SUCCESS:
-        sessionStorage.removeItem('token');
-        sessionStorage.removeItem('refreshToken');
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
         window.location.href = '/login';
         break;
       default:

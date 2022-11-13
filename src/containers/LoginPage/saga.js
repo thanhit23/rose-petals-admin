@@ -14,7 +14,8 @@ function* fetchLogin({ payload: { email, password } }) {
     },
   } = data;
   if (status === STATUS_SUCCESS) {
-    const token = sessionStorage.getItem('token');
+    const token = localStorage.getItem('token');
+
     yield call(setToken, token);
     yield put(logged(access, refresh, user));
   } else {

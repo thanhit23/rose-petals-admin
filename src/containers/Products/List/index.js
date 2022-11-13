@@ -1,153 +1,53 @@
+import { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators, compose } from 'redux';
+
 import AuthLayout from '../../../layouts/AuthLayout';
-import ListComponent from '../../../components/Products/List';
+import ListProductComponent from '../../../components/Products/List';
+import injectReducer from '../../../utils/injectReducer';
+import injectSaga from '../../../utils/injectSaga';
+import reducer from './reducers';
+import saga from './saga';
+import {
+  getProduct as getProductAction,
+  deleteProduct as deleteProductAction,
+} from './actions';
 
-function ListProducts() {
-  const data = [
-    {
-      role: 'user',
-      isEmailVerified: false,
-      lastLoginAt: null,
-      gender: 2,
-      phoneNumber: '0969067361',
-      dob: null,
-      location: null,
-      social: null,
-      name: 'Tan nguyen',
-      email: 'tannguyen@example.com',
-      id: '63665e932617aa000872d7ee',
-    },
-    {
-      role: 'user',
-      isEmailVerified: false,
-      lastLoginAt: null,
-      gender: 1,
-      phoneNumber: '0969067361',
-      dob: null,
-      location: null,
-      social: null,
-      name: 'fake name11',
-      email: 'fake3@example.com',
-      id: '63665e9b2617aa000872d7f2',
-    },
-    {
-      role: 'user',
-      isEmailVerified: false,
-      lastLoginAt: null,
-      gender: 1,
-      phoneNumber: '0969067361',
-      dob: null,
-      location: null,
-      social: null,
-      name: 'fake name11000',
-      email: 'fake4@example.com',
-      id: '63665e9f2617aa000872d7f6',
-    },
-    {
-      role: 'user',
-      isEmailVerified: false,
-      lastLoginAt: null,
-      gender: 1,
-      phoneNumber: '0969067361',
-      dob: null,
-      location: null,
-      social: null,
-      name: 'fake name11',
-      email: 'fake5@example.com',
-      id: '636660f15b9e9e000829dc9b',
-    },
-    {
-      role: 'user',
-      isEmailVerified: false,
-      lastLoginAt: null,
-      gender: 1,
-      phoneNumber: '0969067361',
-      dob: null,
-      location: null,
-      social: null,
-      name: 'fake name11',
-      email: 'fake6@example.com',
-      id: '636660f75b9e9e000829dc9f',
-    },
-    {
-      role: 'user',
-      isEmailVerified: false,
-      lastLoginAt: null,
-      gender: 1,
-      phoneNumber: '0969067361',
-      dob: null,
-      location: null,
-      social: null,
-      name: 'fake name11',
-      email: 'fake7@example.com',
-      id: '636660fd5b9e9e000829dca3',
-    },
-    {
-      role: 'user',
-      isEmailVerified: false,
-      lastLoginAt: null,
-      gender: 1,
-      phoneNumber: '0969067361',
-      dob: null,
-      location: null,
-      social: null,
-      name: 'fake name11',
-      email: 'fake8@example.com',
-      id: '636661025b9e9e000829dca7',
-    },
-    {
-      role: 'user',
-      isEmailVerified: false,
-      lastLoginAt: null,
-      gender: 1,
-      phoneNumber: '0969067361',
-      dob: null,
-      location: null,
-      social: null,
-      name: 'fake name11',
-      email: 'fake9@example.com',
-      id: '636661075b9e9e000829dcab',
-    },
-    {
-      role: 'user',
-      isEmailVerified: false,
-      lastLoginAt: null,
-      gender: 1,
-      phoneNumber: '0969067361',
-      dob: null,
-      location: null,
-      social: null,
-      name: 'fake name11',
-      email: 'fake10@example.com',
-      id: '6366610c5b9e9e000829dcaf',
-    },
-    {
-      role: 'user',
-      isEmailVerified: false,
-      lastLoginAt: null,
-      gender: 2,
-      phoneNumber: '0969067361',
-      dob: null,
-      location: null,
-      social: null,
-      name: 'Nguyễn Duy Thành',
-      email: 'hacker@gmail.com',
-      id: '6366810195c1cb00085c813b',
-    },
-  ];
+function ListProducts({ getProducts, data, meta, deleteProduct }) {
+  useEffect(() => getProducts(), []);
 
-  const meta = {
-    page: 1,
-    limit: 10,
-    totalPages: 2,
-    totalResults: 11,
-  };
+  const handleDeleteProduct = id => deleteProduct(id);
 
   return (
-    <AuthLayout
-      title="list_product"
-      children={<ListComponent data={data} meta={meta} />}
-    />
+    <AuthLayout title="list_product">
+      <ListProductComponent
+        data={data}
+        meta={meta}
+        handleDeleteProduct={handleDeleteProduct}
+      />
+    </AuthLayout>
   );
 }
 
-export default ListProducts;
+const mapStateToProps = state => {
+  const {
+    product: {
+      list: { data, meta },
+    },
+  } = state;
+  return {
+    meta,
+    data,
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  getProducts: bindActionCreators(getProductAction, dispatch),
+  deleteProduct: bindActionCreators(deleteProductAction, dispatch),
+});
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withSaga = injectSaga({ key: 'product', saga });
+const withReducer = injectReducer({ key: 'product', reducer });
+
+export default compose(withSaga, withReducer, withConnect)(ListProducts);
