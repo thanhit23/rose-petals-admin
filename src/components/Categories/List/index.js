@@ -66,27 +66,22 @@ function ListCategoryComponent({ data, meta, deleteCategory, gotoPage }) {
     <ButtonRedirect to="/admin/category" title="add_category" icon={faPlus} />
   );
 
-  return useMemo(
-    () =>
-      data.length &&
-      Object.keys(meta).length && (
-        <>
-          <Breadcrumb title="category" />
-          <div className="flex justify-between">
-            <Search message="category" />
-            {renderButton()}
-          </div>
-          <div className="flex flex-col py-4 shadow-lg bg-white rounded mt-4">
-            <Table
-              goToPage={handleGoToPage}
-              meta={meta}
-              col={columns}
-              data={data}
-            />
-          </div>
-        </>
-      ),
-    [data],
+  return (
+    <>
+      <Breadcrumb title="category" />
+      <div className="flex justify-between">
+        <Search message="category" />
+        {renderButton()}
+      </div>
+      <div className="flex flex-col py-4 shadow-lg bg-white rounded mt-4">
+        <Table
+          goToPage={handleGoToPage}
+          meta={meta}
+          col={columns}
+          data={data}
+        />
+      </div>
+    </>
   );
 }
 

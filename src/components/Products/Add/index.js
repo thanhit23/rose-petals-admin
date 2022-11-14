@@ -7,16 +7,16 @@ import messages from './messages';
 import ErrorMessage from '../../ErrorMessage';
 import LabelWithFormatMessage from '../../LabelWithFormatMessage';
 import InputWithFormatMessage from '../../InputWithFormatMessage';
+import TextareaWithFormatMessage from '../../TextareaWithFormatMessage';
+import InputWithFormatMessage20 from '../../InputWithFormatMessage2.0';
 import { required } from '../../../utils/validation';
 
-function AddProductComponent({ onSubmit, dataCategory }) {
+function AddProductComponent({ onSubmit, listCategory = [] }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  console.log(dataCategory, 'category');
 
   const { description, images, name, price, category } = errors;
 
@@ -28,6 +28,23 @@ function AddProductComponent({ onSubmit, dataCategory }) {
           onSubmit={handleSubmit(data => onSubmit(data))}
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         >
+          <div className="mb-6">
+            <div className="relative">
+              <LabelWithFormatMessage
+                message={messages.label.name}
+                className="block text-[14px] text-gray-700 font-bold absolute label-input md:animate-spin"
+                htmlFor="name"
+              />
+              <InputWithFormatMessage20
+                className="input-focus h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 leading-tight "
+                id="name"
+                type="name"
+                message={messages.placeholder.name}
+                validate={register('name', required(messages.message.required))}
+              />
+              <ErrorMessage name={name} />
+            </div>
+          </div>
           <div className="mb-6">
             <LabelWithFormatMessage
               message={messages.label.name}
@@ -67,16 +84,18 @@ function AddProductComponent({ onSubmit, dataCategory }) {
               htmlFor="description"
               requiredField
             />
-            <InputWithFormatMessage
-              className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="description"
-              type="text"
-              message={messages.placeholder.description}
-              validate={register(
-                'description',
-                required(messages.message.required),
-              )}
-            />
+            <div className="shadow-md appearance-none py-[16px] px-3 border border-[#e2e8f0] mb-3">
+              <TextareaWithFormatMessage
+                className="rounded w-full text-[14px] text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="description"
+                rows={6}
+                message={messages.placeholder.description}
+                validate={register(
+                  'description',
+                  required(messages.message.required),
+                )}
+              />
+            </div>
             <ErrorMessage name={description} />
           </div>
           <div className="mb-6">
@@ -89,7 +108,7 @@ function AddProductComponent({ onSubmit, dataCategory }) {
             <InputWithFormatMessage
               className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="images"
-              type="text"
+              type="file"
               message={messages.placeholder.images}
               validate={register('images', required(messages.message.required))}
             />
@@ -102,16 +121,21 @@ function AddProductComponent({ onSubmit, dataCategory }) {
               htmlFor="category"
               requiredField
             />
-            <InputWithFormatMessage
-              className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            <select
               id="category"
-              type="text"
-              message={messages.placeholder.category}
-              validate={register(
-                'category',
-                required(messages.message.required),
-              )}
-            />
+              name="category"
+              className="w-[100px] h-9 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
+              {...register('category', {
+                required: true,
+              })}
+            >
+              <option value={0}>Select...</option>
+              {listCategory.map(({ name: nameCategory, id }, index) => (
+                <option key={index} value={id}>
+                  {nameCategory}
+                </option>
+              ))}
+            </select>
             <ErrorMessage name={category} />
           </div>
           <div className="flex items-center justify-between">

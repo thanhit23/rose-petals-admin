@@ -5,25 +5,28 @@ import { connect } from 'react-redux';
 
 import AuthLayout from '../../../layouts/AuthLayout';
 import AddProductComponent from '../../../components/Products/Add';
-import { addProduct as addProductAction } from './actions';
-import { getCategories as getCategoriesAction } from '../../Categories/List/actions';
+import {
+  addProduct as addProductAction,
+  getCategories as getCategoriesAction,
+} from './actions';
 import injectSaga from '../../../utils/injectSaga';
 import injectReducer from '../../../utils/injectReducer';
 import saga from './saga';
-import sagaCategory from '../../Categories/List/saga';
-import reducerCategory from '../../Categories/List/reducers';
+import reducer from '../List/reducers';
 
-function AddProduct({ addProduct, getCategories, list }) {
+function AddProduct({ addProduct, getCategories, listCategory }) {
   useEffect(() => getCategories(), []);
 
-  const onSubmit = data => addProduct(data);
+  const onSubmit = data => {
+    console.log(data, 'data');
+    console.log(addProduct);
+  };
 
-  return (
-    <AuthLayout
-      title="add_product"
-      children={<AddProductComponent dataCategory={list} onSubmit={onSubmit} />}
-    />
+  const component = (
+    <AddProductComponent listCategory={listCategory} onSubmit={onSubmit} />
   );
+
+  return <AuthLayout title="add_product" children={component} />;
 }
 
 AddProduct.prototype = {
@@ -32,10 +35,12 @@ AddProduct.prototype = {
 
 const mapStateToProps = state => {
   const {
-    category: { list },
+    product: {
+      add: { listCategory },
+    },
   } = state;
   return {
-    list,
+    listCategory,
   };
 };
 
@@ -46,15 +51,6 @@ const mapDispatchToProps = dispatch => ({
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 const withSaga = injectSaga({ key: 'addProduct', saga });
-const withSagaCategory = injectSaga({ key: 'category', saga: sagaCategory });
-const withReducerCategory = injectReducer({
-  key: 'category',
-  reducer: reducerCategory,
-});
+const withReducer = injectReducer({ key: 'product', reducer });
 
-export default compose(
-  withSaga,
-  withReducerCategory,
-  withSagaCategory,
-  withConnect,
-)(AddProduct);
+export default compose(withSaga, withReducer, withConnect)(AddProduct);

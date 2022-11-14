@@ -42,10 +42,6 @@ export default defineMessages({
       id: `${scope}.placeholder.images`,
       defaultMessage: 'Images.....',
     },
-    category: {
-      id: `${scope}.placeholder.category`,
-      defaultMessage: 'Category....',
-    },
   },
   gender: {
     female: {

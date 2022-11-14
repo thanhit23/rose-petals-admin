@@ -3,6 +3,14 @@
 @tailwind utilities;
 
 @layer components {
+    .label-input {
+        top: 50%;
+        transform: translateY(-50%);
+        left: 12px;
+        background: #fff;
+        color: #9ca3af;
+        transition: all 500ms;
+    }
     .text-table {
         display: -webkit-box;
         -webkit-box-orient: vertical;
