@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function LabelWithFormatMessage({ message, requiredField, htmlFor, ...props }) {
   const renderRequiredIcon = (
-    <span className="text-[#d1373a] text-base">*</span>
+    <span className="text-[14px] ml-1 text-[#d1373a]">*</span>
   );
 
   return (

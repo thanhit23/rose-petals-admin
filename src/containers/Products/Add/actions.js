@@ -7,13 +7,13 @@ import {
   GET_ALL_CATEGORY_FAILED,
 } from './constants';
 
-export const addProduct = () => ({
+export const addProduct = (data, callback) => ({
   type: ADD_PRODUCT_REQUEST,
+  payload: { data, callback },
 });
 
-export const addProductSuccess = (data, callback) => ({
+export const addProductSuccess = () => ({
   type: ADD_PRODUCT_SUCCESS,
-  payload: { data, callback },
 });
 
 export const addProductFailed = message => ({
@@ -21,16 +21,16 @@ export const addProductFailed = message => ({
   payload: { message },
 });
 
-export const getCategories = () => ({
+export const getAllCategories = () => ({
   type: GET_ALL_CATEGORY_REQUEST,
 });
 
-export const getCategoriesSuccess = data => ({
+export const getAllCategoriesSuccess = data => ({
   type: GET_ALL_CATEGORY_SUCCESS,
   payload: { data },
 });
 
-export const getCategoriesFailed = message => ({
+export const getAllCategoriesFailed = message => ({
   type: GET_ALL_CATEGORY_FAILED,
   payload: { message },
 });

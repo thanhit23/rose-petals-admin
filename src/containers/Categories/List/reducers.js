@@ -13,8 +13,13 @@ const categoryReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case GET_CATEGORY_SUCCESS: {
-        draft.list.data = [];
-        draft.list.meta = {};
+        const {
+          payload: {
+            data: { data, meta },
+          },
+        } = action;
+        draft.list.data = data;
+        draft.list.meta = meta;
         break;
       }
       default:

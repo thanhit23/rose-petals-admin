@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useTable, usePagination } from 'react-table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
@@ -11,24 +11,16 @@ import {
 
 import messages from './messages';
 
-function Table({ col, data, meta, goToPage, selectOption = 'gender' }) {
+function Table({
+  col: columns,
+  data,
+  meta,
+  goToPage,
+  selectOption = 'gender',
+}) {
   const { page: pages, limit, totalPages } = meta;
 
-  const columns = useMemo(() => col, []);
-
-  const handleGoToPage = page => goToPage(page);
-
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    nextPage,
-    previousPage,
-    canPreviousPage,
-    canNextPage,
-    prepareRow,
-  } = useTable(
+  const dataTable = useTable(
     {
       columns,
       data,
@@ -37,31 +29,48 @@ function Table({ col, data, meta, goToPage, selectOption = 'gender' }) {
     usePagination,
   );
 
-  const arr = Array.from(Array(totalPages), (x, index) => index);
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    nextPage,
+    previousPage,
+    canPreviousPage,
+    canNextPage,
+    prepareRow,
+  } = dataTable;
 
-  const elements = arr.map(item => {
-    return (
-      <li
-        key={item}
-        className={classNames(
-          'flex justify-center items-center w-8 h-8 m-2.5',
-          {
-            'rounded-full text-[#4E97FD] border border-[#4E97FD] border-solid':
-              pages === item + 1,
-          },
-        )}
-      >
-        <button
-          className="py-[5px] px-[10px]"
-          type="button"
-          onClick={() => handleGoToPage(item + 1)}
-          disabled={pages === item + 1}
+  const totalPagesArr = Array.from({ length: totalPages });
+
+  const handleClickPageButton = page => goToPage(page);
+
+  const renderPageNumber = () => {
+    return totalPagesArr.map((_, index) => {
+      const isCurrentPage = pages === index + 1;
+      return (
+        <li
+          key={index}
+          className={classNames(
+            'flex justify-center items-center w-8 h-8 m-2.5',
+            {
+              'rounded-full text-[#4E97FD] border border-[#4E97FD] border-solid':
+                isCurrentPage,
+            },
+          )}
         >
-          {item + 1}
-        </button>
-      </li>
-    );
-  });
+          <button
+            className="py-[5px] px-[10px]"
+            type="button"
+            onClick={() => handleClickPageButton(index + 1)}
+            disabled={isCurrentPage}
+          >
+            {index + 1}
+          </button>
+        </li>
+      );
+    });
+  };
 
   function renderPagination() {
     return (
@@ -84,7 +93,7 @@ function Table({ col, data, meta, goToPage, selectOption = 'gender' }) {
                 <FontAwesomeIcon icon={faChevronLeft} />
               </button>
             </li>
-            {elements}
+            {renderPageNumber()}
             <li
               className={classNames(
                 'flex justify-center items-center w-8 h-8 m-2.5 rounded-full text-[#4E97FD] border border-[#4E97FD] border-solid',
@@ -114,6 +123,35 @@ function Table({ col, data, meta, goToPage, selectOption = 'gender' }) {
     return <FormattedMessage {...messages.gender_male} />;
   }
 
+  const renderBody = (
+    <tbody {...getTableBodyProps()}>
+      {rows.map(row => {
+        prepareRow(row);
+        return (
+          <tr
+            className="text-center border-solid border-b-[1px] border-[#D8E0E9]"
+            {...row.getRowProps()}
+          >
+            {row.cells.map(cell => {
+              if (cell.column.id === selectOption) {
+                return (
+                  <td className="py-[10px] px-[16px]" {...cell.getCellProps()}>
+                    {optionSelect(cell)}
+                  </td>
+                );
+              }
+              return (
+                <td className="py-[10px] px-[16px]" {...cell.getCellProps()}>
+                  {cell.render('Cell')}
+                </td>
+              );
+            })}
+          </tr>
+        );
+      })}
+    </tbody>
+  );
+
   return (
     <>
       <table {...getTableProps()}>
@@ -126,38 +164,7 @@ function Table({ col, data, meta, goToPage, selectOption = 'gender' }) {
             </tr>
           ))}
         </thead>
-        <tbody {...getTableBodyProps()}>
-          {page.map(row => {
-            prepareRow(row);
-            return (
-              <tr
-                className="text-center border-solid border-b-[1px] border-[#D8E0E9]"
-                {...row.getRowProps()}
-              >
-                {row.cells.map(cell => {
-                  if (cell.column.id === selectOption) {
-                    return (
-                      <td
-                        className="py-[10px] px-[16px]"
-                        {...cell.getCellProps()}
-                      >
-                        {optionSelect(cell)}
-                      </td>
-                    );
-                  }
-                  return (
-                    <td
-                      className="py-[10px] px-[16px]"
-                      {...cell.getCellProps()}
-                    >
-                      {cell.render('Cell')}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
+        {renderBody}
       </table>
       {meta.page && renderPagination()}
     </>

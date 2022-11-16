@@ -27,7 +27,7 @@ function* updateUserInformation({ payload: { id, data, callback } }) {
 function* getListUsers({ payload: { id, callback } }) {
   const res = yield call(getUsers, id);
 
-  if (!res) callback();
+  if (!res && typeof callback === 'function') callback();
 
   const { status, data } = res;
 

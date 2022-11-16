@@ -1,12 +1,12 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'Components.User.product';
+export const scope = 'Components.Product';
 
 export default defineMessages({
   label: {
     name: {
       id: `${scope}.label.name`,
-      defaultMessage: 'Name product',
+      defaultMessage: 'Name',
     },
     price: {
       id: `${scope}.label.price`,
@@ -28,7 +28,7 @@ export default defineMessages({
   placeholder: {
     name: {
       id: `${scope}.placeholder.name`,
-      defaultMessage: 'Username',
+      defaultMessage: 'Name',
     },
     price: {
       id: `${scope}.placeholder.price`,
@@ -41,16 +41,6 @@ export default defineMessages({
     images: {
       id: `${scope}.placeholder.images`,
       defaultMessage: 'Images.....',
-    },
-  },
-  gender: {
-    female: {
-      id: `${scope}.gender.female`,
-      defaultMessage: 'Female',
-    },
-    male: {
-      id: `${scope}.gender.male`,
-      defaultMessage: 'Male',
     },
   },
   message: {

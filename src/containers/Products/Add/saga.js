@@ -7,12 +7,12 @@ import {
 import {
   addProductSuccess,
   addProductFailed,
-  getCategoriesSuccess,
-  getCategoriesFailed,
+  getAllCategoriesSuccess,
+  getAllCategoriesFailed,
 } from './actions';
 
 function* addProductSaga({ payload: { data, callback } }) {
-  const res = yield call(addProductApi, data);
+  const res = yield call(addProductApi, { ...data, images: [] });
 
   const {
     data: { status },
@@ -20,7 +20,7 @@ function* addProductSaga({ payload: { data, callback } }) {
 
   if (status) {
     yield put(addProductSuccess());
-    callback();
+    if (typeof callback === 'function') callback();
   } else {
     yield put(addProductFailed());
   }
@@ -34,9 +34,9 @@ function* getAllCategory() {
   } = res;
 
   if (status) {
-    yield put(getCategoriesSuccess(data));
+    yield put(getAllCategoriesSuccess(data));
   } else {
-    yield put(getCategoriesFailed());
+    yield put(getAllCategoriesFailed());
   }
 }
 

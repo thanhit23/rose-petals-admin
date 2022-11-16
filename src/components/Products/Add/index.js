@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
+import cls from 'classnames';
 
 import Breadcrumb from '../../Breadcrumb';
 import messages from './messages';
@@ -8,7 +10,6 @@ import ErrorMessage from '../../ErrorMessage';
 import LabelWithFormatMessage from '../../LabelWithFormatMessage';
 import InputWithFormatMessage from '../../InputWithFormatMessage';
 import TextareaWithFormatMessage from '../../TextareaWithFormatMessage';
-import InputWithFormatMessage20 from '../../InputWithFormatMessage2.0';
 import { required } from '../../../utils/validation';
 
 function AddProductComponent({ onSubmit, listCategory = [] }) {
@@ -17,8 +18,29 @@ function AddProductComponent({ onSubmit, listCategory = [] }) {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [label, setLabel] = useState({
+    name: false,
+  });
 
-  const { description, images, name, price, category } = errors;
+  const onFocusAndBlurInput = ({ name, value }, valueForFocusBlur) => {
+    if (!value) setLabel({ ...label, [name]: valueForFocusBlur });
+  };
+
+  const { description, name, price, category } = errors;
+
+  const clsInput = [
+    'h-[54px] outline-none appearance-none border border-[#e3e9ef] rounded w-full py-[16px] px-3 text-[14px] leading-tight',
+    { 'label-input-focus': label.name && !name },
+    { 'hover:border-[#111]': !label.name && !name },
+    { 'border-[#d1373a]': name },
+  ];
+
+  const clsLabel = [
+    'block text-[14px] text-black absolute label-input leading-[14px]',
+    { 'label-input-focus': label.name },
+    { 'text-[#4d97fd]': label.name && !name },
+    { 'text-[#d1373a]': name },
+  ];
 
   return (
     <>
@@ -29,36 +51,24 @@ function AddProductComponent({ onSubmit, listCategory = [] }) {
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         >
           <div className="mb-6">
-            <div className="relative">
+            <div className="relative wrapper-input">
               <LabelWithFormatMessage
                 message={messages.label.name}
-                className="block text-[14px] text-gray-700 font-bold absolute label-input md:animate-spin"
+                className={cls(clsLabel)}
                 htmlFor="name"
+                requiredField
               />
-              <InputWithFormatMessage20
-                className="input-focus h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 leading-tight "
+              <InputWithFormatMessage
+                className={cls(clsInput)}
                 id="name"
-                type="name"
+                type="text"
+                name="name"
+                onFocus={({ target }) => onFocusAndBlurInput(target, true)}
+                onBlur={({ target }) => onFocusAndBlurInput(target, false)}
                 message={messages.placeholder.name}
                 validate={register('name', required(messages.message.required))}
               />
-              <ErrorMessage name={name} />
             </div>
-          </div>
-          <div className="mb-6">
-            <LabelWithFormatMessage
-              message={messages.label.name}
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="name"
-              requiredField
-            />
-            <InputWithFormatMessage
-              className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="name"
-              type="name"
-              message={messages.placeholder.name}
-              validate={register('name', required(messages.message.required))}
-            />
             <ErrorMessage name={name} />
           </div>
           <div className="mb-6">
@@ -97,22 +107,6 @@ function AddProductComponent({ onSubmit, listCategory = [] }) {
               />
             </div>
             <ErrorMessage name={description} />
-          </div>
-          <div className="mb-6">
-            <LabelWithFormatMessage
-              message={messages.label.images}
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="images"
-              requiredField
-            />
-            <InputWithFormatMessage
-              className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="images"
-              type="file"
-              message={messages.placeholder.images}
-              validate={register('images', required(messages.message.required))}
-            />
-            <ErrorMessage name={images} />
           </div>
           <div className="mb-6">
             <LabelWithFormatMessage

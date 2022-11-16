@@ -7,7 +7,7 @@ import { faPen, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 import ButtonRedirect from '../../LinkWithFormatMessage';
 import Breadcrumb from '../../Breadcrumb';
 import Search from '../../Search';
-import Table from '../../../containers/Table';
+import Table from '../../Table';
 
 function ListCategoryComponent({ data, meta, deleteCategory, gotoPage }) {
   const handleDeleteCategory = id => deleteCategory(id);
@@ -62,7 +62,7 @@ function ListCategoryComponent({ data, meta, deleteCategory, gotoPage }) {
     },
   ]);
 
-  const renderButton = () => (
+  const renderAddCategoryButton = () => (
     <ButtonRedirect to="/admin/category" title="add_category" icon={faPlus} />
   );
 
@@ -71,7 +71,7 @@ function ListCategoryComponent({ data, meta, deleteCategory, gotoPage }) {
       <Breadcrumb title="category" />
       <div className="flex justify-between">
         <Search message="category" />
-        {renderButton()}
+        {renderAddCategoryButton()}
       </div>
       <div className="flex flex-col py-4 shadow-lg bg-white rounded mt-4">
         <Table

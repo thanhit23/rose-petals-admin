@@ -2,12 +2,13 @@ import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import AuthLayout from '../../../layouts/AuthLayout';
 import AddProductComponent from '../../../components/Products/Add';
 import {
   addProduct as addProductAction,
-  getCategories as getCategoriesAction,
+  getAllCategories as getCategoriesAction,
 } from './actions';
 import injectSaga from '../../../utils/injectSaga';
 import injectReducer from '../../../utils/injectReducer';
@@ -17,10 +18,11 @@ import reducer from '../List/reducers';
 function AddProduct({ addProduct, getCategories, listCategory }) {
   useEffect(() => getCategories(), []);
 
-  const onSubmit = data => {
-    console.log(data, 'data');
-    console.log(addProduct);
-  };
+  const navigate = useNavigate();
+
+  const callback = () => navigate('/admin/products');
+
+  const onSubmit = data => addProduct(data, callback);
 
   const component = (
     <AddProductComponent listCategory={listCategory} onSubmit={onSubmit} />

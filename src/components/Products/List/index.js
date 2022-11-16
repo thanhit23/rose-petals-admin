@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Search from '../../Search';
 import Breadcrumb from '../../Breadcrumb';
-import Table from '../../../containers/Table';
+import Table from '../../Table';
 import ButtonRedirect from '../../LinkWithFormatMessage';
 
 function ListProductComponent({
@@ -93,7 +93,7 @@ function ListProductComponent({
           {renderAddButton()}
         </div>
         <div className="flex flex-col py-4 shadow-lg bg-white rounded mt-4">
-          {Object.keys(meta).length ? table : <p>empty</p>}
+          {table}
         </div>
       </>
     ),

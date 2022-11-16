@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import ButtonRedirect from '../../LinkWithFormatMessage';
 import Breadcrumb from '../../Breadcrumb';
 import Search from '../../Search';
-import Table from '../../../containers/Table';
+import Table from '../../Table';
 
 function ListUserComponent({ data, meta, gotoPage, handleDeleteUser }) {
   const handleGoToPage = page => gotoPage(page);
