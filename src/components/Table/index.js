@@ -2,22 +2,13 @@ import React from 'react';
 import { useTable, usePagination } from 'react-table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import {
   faChevronRight,
   faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
-import messages from './messages';
-
-function Table({
-  col: columns,
-  data,
-  meta,
-  goToPage,
-  selectOption = 'gender',
-}) {
+function Table({ col: columns, data, meta, goToPage }) {
   const { page: pages, limit, totalPages } = meta;
 
   const dataTable = useTable(
@@ -116,13 +107,6 @@ function Table({
     );
   }
 
-  function optionSelect(cell) {
-    if (cell.value === 1) {
-      return <FormattedMessage {...messages.gender_female} />;
-    }
-    return <FormattedMessage {...messages.gender_male} />;
-  }
-
   const renderBody = (
     <tbody {...getTableBodyProps()}>
       {rows.map(row => {
@@ -133,13 +117,6 @@ function Table({
             {...row.getRowProps()}
           >
             {row.cells.map(cell => {
-              if (cell.column.id === selectOption) {
-                return (
-                  <td className="py-[10px] px-[16px]" {...cell.getCellProps()}>
-                    {optionSelect(cell)}
-                  </td>
-                );
-              }
               return (
                 <td className="py-[10px] px-[16px]" {...cell.getCellProps()}>
                   {cell.render('Cell')}

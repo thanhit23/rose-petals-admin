@@ -3,11 +3,13 @@ import propsTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 import ButtonRedirect from '../../LinkWithFormatMessage';
 import Breadcrumb from '../../Breadcrumb';
 import Search from '../../Search';
 import Table from '../../Table';
+import messages from './messages';
 
 function ListUserComponent({ data, meta, gotoPage, handleDeleteUser }) {
   const handleGoToPage = page => gotoPage(page);
@@ -36,11 +38,23 @@ function ListUserComponent({ data, meta, gotoPage, handleDeleteUser }) {
     {
       Header: 'Gender',
       accessor: 'gender',
+      Cell: props => {
+        const {
+          cell: {
+            row: {
+              values: { gender },
+            },
+          },
+        } = props;
+        if (gender === 1) {
+          return <FormattedMessage {...messages.gender_female} />;
+        }
+        return <FormattedMessage {...messages.gender_male} />;
+      },
     },
     {
       Header: 'Action',
       accessor: 'action',
-      // eslint-disable-next-line react/no-unstable-nested-components
       Cell: props => {
         const {
           cell: {

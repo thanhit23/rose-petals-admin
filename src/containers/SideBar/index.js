@@ -98,6 +98,10 @@ function SideBar({ isSidebar, isActiveItem }) {
                 path: '/admin/categories',
                 name: <FormattedMessage {...messages.product_category} />,
               },
+              {
+                path: '/admin/brands',
+                name: <FormattedMessage {...messages.product_brand} />,
+              },
             ]}
           />
         </ul>

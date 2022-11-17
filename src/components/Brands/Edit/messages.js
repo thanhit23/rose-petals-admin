@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'Components.Category.edit';
+export const scope = 'Components.Brand.edit';
 
 export default defineMessages({
   label: {

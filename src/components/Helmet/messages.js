@@ -31,4 +31,12 @@ export default defineMessages({
     id: `${scope}.list_product`,
     defaultMessage: 'List Product',
   },
+  list_brand: {
+    id: `${scope}.brand.list`,
+    defaultMessage: 'List Brand',
+  },
+  add_brand: {
+    id: `${scope}.brand.add`,
+    defaultMessage: 'Add Brand',
+  },
 });

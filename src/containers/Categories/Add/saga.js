@@ -3,14 +3,14 @@ import { CREATE_CATEGORY_REQUEST } from './constants';
 import { create } from './service';
 import { createCategorySuccessfully, createCategoryFailed } from './actions';
 
-function* createNewCategory({ payload: { data }, navigate }) {
+function* createNewCategory({ payload: { data, callback } }) {
   const res = yield call(create, data);
   const {
     data: { status },
   } = res;
   if (status) {
     yield put(createCategorySuccessfully());
-    navigate();
+    if (typeof callback === 'function') callback();
   } else {
     yield put(createCategoryFailed());
   }

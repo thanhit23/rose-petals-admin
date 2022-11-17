@@ -1,32 +1,34 @@
 import { FormattedMessage } from 'react-intl';
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 
 import Breadcrumb from '../../Breadcrumb';
 import messages from './messages';
+import ErrorMessage from '../../ErrorMessage';
 import LabelWithFormatMessage from '../../LabelWithFormatMessage';
 import InputWithFormatMessage from '../../InputWithFormatMessage';
+import { required } from '../../../utils/validation';
 
-function EditCategoryComponent({ onSubmit, data }) {
-  const { id } = useParams();
+function AddBrandComponent({ onSubmit }) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const [categoryEdit, setCategoryEdit] = useState(data);
-
-  const { name: categoryName } = categoryEdit;
-
-  const handleChangeInput = ({ target: { value } }) => {
-    setCategoryEdit({ name: value });
-  };
+  const { name } = errors;
 
   return (
     <>
       <Breadcrumb
-        prevPage={{ path: '/admin/categories', name: 'category' }}
-        title="edit_category"
+        prevPage={{ path: '/admin/brands', name: 'list_brand' }}
+        title="add_brand"
       />
       <div>
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form
+          onSubmit={handleSubmit(data => onSubmit(data))}
+          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        >
           <div className="mb-6">
             <LabelWithFormatMessage
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -35,19 +37,18 @@ function EditCategoryComponent({ onSubmit, data }) {
               requiredField
             />
             <InputWithFormatMessage
-              message={messages.placeholder.name}
               className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="name"
               type="text"
-              value={categoryName}
-              onChange={handleChangeInput}
+              message={messages.placeholder.name}
+              validate={register('name', required(messages.message.required))}
             />
+            <ErrorMessage name={name} />
           </div>
           <div className="flex items-center justify-between">
             <button
               className="bg-[#007bff] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
-              onClick={() => onSubmit(id, categoryEdit)}
+              type="submit"
             >
               <FormattedMessage {...messages.btn.submit} />
             </button>
@@ -58,9 +59,8 @@ function EditCategoryComponent({ onSubmit, data }) {
   );
 }
 
-EditCategoryComponent.prototype = {
-  onSubmit: PropTypes.func,
-  data: PropTypes.object,
+AddBrandComponent.prototype = {
+  onSubmitAddUser: PropTypes.func,
 };
 
-export default EditCategoryComponent;
+export default AddBrandComponent;

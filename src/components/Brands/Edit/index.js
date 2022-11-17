@@ -8,15 +8,15 @@ import messages from './messages';
 import LabelWithFormatMessage from '../../LabelWithFormatMessage';
 import InputWithFormatMessage from '../../InputWithFormatMessage';
 
-function EditCategoryComponent({ onSubmit, data }) {
+function EditBrandComponent({ onSubmit, data }) {
   const { id } = useParams();
 
-  const [categoryEdit, setCategoryEdit] = useState(data);
+  const [brandEdit, setBrandEdit] = useState(data);
 
-  const { name: categoryName } = categoryEdit;
+  const { name: brandName } = brandEdit;
 
   const handleChangeInput = ({ target: { value } }) => {
-    setCategoryEdit({ name: value });
+    setBrandEdit({ name: value });
   };
 
   return (
@@ -39,7 +39,7 @@ function EditCategoryComponent({ onSubmit, data }) {
               className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="name"
               type="text"
-              value={categoryName}
+              value={brandName}
               onChange={handleChangeInput}
             />
           </div>
@@ -47,7 +47,7 @@ function EditCategoryComponent({ onSubmit, data }) {
             <button
               className="bg-[#007bff] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button"
-              onClick={() => onSubmit(id, categoryEdit)}
+              onClick={() => onSubmit(id, brandEdit)}
             >
               <FormattedMessage {...messages.btn.submit} />
             </button>
@@ -58,9 +58,9 @@ function EditCategoryComponent({ onSubmit, data }) {
   );
 }
 
-EditCategoryComponent.prototype = {
-  onSubmit: PropTypes.func,
-  data: PropTypes.object,
+EditBrandComponent.prototype = {
+  onSubmitForUpdateUser: PropTypes.func,
+  users: PropTypes.array,
 };
 
-export default EditCategoryComponent;
+export default EditBrandComponent;

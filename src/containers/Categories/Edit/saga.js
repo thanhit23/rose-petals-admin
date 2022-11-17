@@ -11,14 +11,14 @@ import {
   getCategoryFailed,
 } from './actions';
 
-function* updateCategoryInformation({ payload: { id, data }, navigate }) {
+function* updateCategoryInformation({ payload: { id, data, callback } }) {
   const res = yield call(update, id, data);
   const {
     data: { status },
   } = res;
   if (status) {
     yield put(updateCategorySuccessfully());
-    navigate();
+    if (typeof callback === 'function') callback();
   } else {
     yield put(updateCategoryFailed());
   }
