@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'Components.Category.edit';
+export const scope = 'Components.Brand.add';
 
 export default defineMessages({
   label: {
@@ -13,6 +13,12 @@ export default defineMessages({
     name: {
       id: `${scope}.placeholder.name`,
       defaultMessage: 'Name...',
+    },
+  },
+  message: {
+    required: {
+      id: `${scope}.message.error.required`,
+      defaultMessage: 'This field is required',
     },
   },
   btn: {

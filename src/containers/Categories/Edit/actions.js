@@ -21,10 +21,9 @@ export const getCategoryFailed = () => ({
   type: GET_CATEGORY_DETAIL_FAILED,
 });
 
-export const updateCategory = (id, data, navigate) => ({
+export const updateCategory = (id, data, callback) => ({
   type: UPDATE_CATEGORY_REQUEST,
-  payload: { id, data },
-  navigate,
+  payload: { id, data, callback },
 });
 export const updateCategorySuccessfully = () => ({
   type: UPDATE_CATEGORY_SUCCESS,

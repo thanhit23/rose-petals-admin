@@ -20,9 +20,9 @@ function ListCategory({ getCategory, data, meta, deleteCategory }) {
 
   const redirect = useNavigate();
 
-  const navigate = () => redirect('/admin/categories');
+  const callback = () => redirect('/admin/categories');
 
-  const handleDeleteCategory = id => deleteCategory(id, navigate);
+  const handleDeleteCategory = id => deleteCategory(id, callback);
 
   const element = useMemo(
     () => (

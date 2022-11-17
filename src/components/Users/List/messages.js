@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'Containers.Table.user';
+export const scope = 'Containers.User.list';
 
 export default defineMessages({
   gender_female: {

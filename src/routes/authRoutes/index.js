@@ -8,6 +8,8 @@ import EditCategory from '../../containers/Categories/Edit';
 import ListProduct from '../../containers/Products/List';
 import AddProduct from '../../containers/Products/Add';
 import EditProduct from '../../containers/Products/Edit';
+import ListBrand from '../../containers/Brands/List';
+import AddBrand from '../../containers/Brands/Add';
 
 export default [
   {
@@ -59,6 +61,16 @@ export default [
   {
     path: '/admin/product/edit/:id',
     component: EditProduct,
+    exact: true,
+  },
+  {
+    path: '/admin/brands',
+    component: ListBrand,
+    exact: true,
+  },
+  {
+    path: '/admin/brand',
+    component: AddBrand,
     exact: true,
   },
 ];

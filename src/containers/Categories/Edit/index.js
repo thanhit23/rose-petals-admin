@@ -5,27 +5,29 @@ import { useNavigate, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import AuthLayout from '../../../layouts/AuthLayout';
-import EditCategoryComponent from '../../../components/Categories/Edit';
+import EditBrandComponent from '../../../components/Brands/Edit';
 import {
   updateCategory as updateCategoryAction,
   getCategory as getCategoryAction,
 } from './actions';
 import injectSaga from '../../../utils/injectSaga';
+import injectReducer from '../../../utils/injectReducer';
 import saga from './saga';
+import reducer from '../List/reducers';
 
-function EditCategory({ updateCategory, edit: category, getCategory }) {
+function EditCategory({ updateCategory, edit: brand, getCategory }) {
+  const { id: idEdit } = useParams();
+
+  useEffect(() => getCategory(idEdit), []);
+
   const redirect = useNavigate();
 
-  const navigate = () => redirect('/admin/categories');
+  const callback = () => redirect('/admin/categories');
 
-  const handleUpdateUser = (id, data) => updateCategory(id, data, navigate);
+  const handleUpdateUser = (id, data) => updateCategory(id, data, callback);
 
-  const { id } = useParams();
-
-  useEffect(() => getCategory(id), []);
-
-  const renderEditCategory = category && (
-    <EditCategoryComponent data={category} onSubmit={handleUpdateUser} />
+  const renderEditCategory = brand && (
+    <EditBrandComponent data={brand} onSubmit={handleUpdateUser} />
   );
 
   return <AuthLayout title="edit_category" children={renderEditCategory} />;
@@ -39,7 +41,7 @@ EditCategory.prototype = {
 
 const mapStateToProps = state => {
   const {
-    category: { edit },
+    brand: { edit },
   } = state;
   return {
     edit,
@@ -53,5 +55,6 @@ const mapDispatchToProps = dispatch => ({
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 const withSaga = injectSaga({ key: 'editCategory', saga });
+const withReducer = injectReducer({ key: 'category', reducer });
 
-export default compose(withSaga, withConnect)(EditCategory);
+export default compose(withReducer, withSaga, withConnect)(EditCategory);

@@ -23,4 +23,8 @@ export default defineMessages({
     id: `${scope}.category`,
     defaultMessage: 'Search Category...',
   },
+  brand: {
+    id: `${scope}.brand`,
+    defaultMessage: 'Search Brand...',
+  },
 });

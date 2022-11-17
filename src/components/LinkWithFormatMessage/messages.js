@@ -15,4 +15,8 @@ export default defineMessages({
     id: `${scope}.add_product`,
     defaultMessage: 'Add Product',
   },
+  add_brand: {
+    id: `${scope}.add_brand`,
+    defaultMessage: 'Add Brand',
+  },
 });

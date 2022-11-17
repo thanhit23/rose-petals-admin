@@ -35,4 +35,8 @@ export default defineMessages({
     id: `${scope}.product.category`,
     defaultMessage: 'Category',
   },
+  product_brand: {
+    id: `${scope}.product.brand`,
+    defaultMessage: 'Brand',
+  },
 });

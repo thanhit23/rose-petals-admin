@@ -4,10 +4,9 @@ import {
   CREATE_CATEGORY_REQUEST,
 } from './constants';
 
-export const createCategory = (data, navigate) => ({
+export const createCategory = (data, callback) => ({
   type: CREATE_CATEGORY_REQUEST,
-  payload: { data },
-  navigate,
+  payload: { data, callback },
 });
 export const createCategorySuccessfully = () => ({
   type: CREATE_CATEGORY_SUCCESS,

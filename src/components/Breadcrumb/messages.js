@@ -32,11 +32,19 @@ export default defineMessages({
     defaultMessage: 'Edit Category',
   },
   list_product: {
-    id: `${scope}.products.list`,
+    id: `${scope}.product.list`,
     defaultMessage: 'List Product',
   },
   add_product: {
-    id: `${scope}.products.add`,
+    id: `${scope}.product.add`,
     defaultMessage: 'Add Product',
+  },
+  add_brand: {
+    id: `${scope}.brand.add`,
+    defaultMessage: 'Add Brand',
+  },
+  list_brand: {
+    id: `${scope}.brand.list`,
+    defaultMessage: 'List Brand',
   },
 });
