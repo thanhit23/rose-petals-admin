@@ -8,9 +8,9 @@ import {
   DELETE_USER_DATA_EDIT,
 } from './constants';
 
-export const getUser = id => ({
+export const getUser = (id, callback) => ({
   type: GET_USER_REQUEST,
-  payload: { id },
+  payload: { id, callback },
 });
 
 export const deleteUserEditOld = () => ({

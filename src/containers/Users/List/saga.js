@@ -10,8 +10,9 @@ import {
 
 function* getListUsers({ payload: { page } }) {
   const res = yield call(getUsers, page);
+
   const { status, data } = res;
-  console.log(res, 'res');
+
   if (status) {
     yield put(getUsersSuccess(data));
   } else {
@@ -20,12 +21,14 @@ function* getListUsers({ payload: { page } }) {
   }
 }
 
-function* apiDeleteUser({ payload: { id }, navigate }) {
+function* apiDeleteUser({ payload: { id, callback } }) {
   const res = yield call(deleteUser, id);
+
   const { status, data } = res;
+
   if (status) {
     yield put(deleteUserSuccess());
-    yield navigate();
+    yield callback();
   } else {
     const { message } = data;
     yield put(getUsersListFailed(message));

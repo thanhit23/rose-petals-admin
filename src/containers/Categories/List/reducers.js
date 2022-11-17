@@ -1,6 +1,5 @@
 import produce from 'immer';
 import { GET_CATEGORY_SUCCESS } from './constants';
-import { GET_CATEGORY_DETAIL_SUCCESS } from '../Edit/constants';
 
 const initialState = {
   list: {
@@ -21,15 +20,6 @@ const categoryReducer = (state = initialState, action) =>
         } = action;
         draft.list.data = data;
         draft.list.meta = meta;
-        break;
-      }
-      case GET_CATEGORY_DETAIL_SUCCESS: {
-        const {
-          payload: {
-            data: { data },
-          },
-        } = action;
-        draft.edit = data;
         break;
       }
       default:

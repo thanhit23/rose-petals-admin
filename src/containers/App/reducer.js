@@ -15,8 +15,8 @@ const appReducer = (state = initialState, action) =>
             user,
           },
         } = action;
-        sessionStorage.setItem('token', token);
-        sessionStorage.setItem('refreshToken', refreshToken);
+        localStorage.setItem('token', token);
+        localStorage.setItem('refreshToken', refreshToken);
         draft.auth = user;
         break;
       }

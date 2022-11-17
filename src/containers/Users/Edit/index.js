@@ -25,7 +25,7 @@ function EditUser({ updateUser, edit: editUser, getUser, deleteUserEditOld }) {
 
   useEffect(() => {
     deleteUserEditOld();
-    getUser(id);
+    getUser(id, callback);
   }, []);
 
   const renderEditUser = Object.keys(editUser).length && (

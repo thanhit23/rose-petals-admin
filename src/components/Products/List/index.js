@@ -5,15 +5,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Search from '../../Search';
 import Breadcrumb from '../../Breadcrumb';
-import Table from '../../../containers/Table';
+import Table from '../../Table';
 import ButtonRedirect from '../../LinkWithFormatMessage';
 
-function ListComponent({ meta, data, gotoPage, deleteProduct }) {
-  const handleGoToPage = page => gotoPage(page);
+function ListProductComponent({
+  meta,
+  data,
+  getProducts,
+  handleDeleteProduct,
+}) {
+  const handleGetProducts = page => getProducts(page);
 
-  const handleDeleteProduct = id => deleteProduct(id);
-
-  const renderButton = () => (
+  const renderAddButton = () => (
     <ButtonRedirect to="/admin/product" title="add_product" icon={faPlus} />
   );
 
@@ -27,16 +30,20 @@ function ListComponent({ meta, data, gotoPage, deleteProduct }) {
       accessor: 'name',
     },
     {
-      Header: 'Phone Number',
-      accessor: 'phoneNumber',
+      Header: 'Price',
+      accessor: 'price',
     },
     {
-      Header: 'Email',
-      accessor: 'email',
+      Header: 'Brand',
+      accessor: 'brand',
     },
     {
-      Header: 'Gender',
-      accessor: 'gender',
+      Header: 'Category Id',
+      accessor: 'categoryId',
+    },
+    {
+      Header: 'Description',
+      accessor: 'description',
     },
     {
       Header: 'Action',
@@ -51,12 +58,12 @@ function ListComponent({ meta, data, gotoPage, deleteProduct }) {
           },
         } = props;
         return (
-          <>
+          <div className="flex">
             <button
               type="button"
               className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
             >
-              <Link to={`/admin/user/edit/${id}`}>
+              <Link to={`/admin/product/edit/${id}`}>
                 <FontAwesomeIcon className="text-[#7D879C]" icon={faPen} />
               </Link>
             </button>
@@ -67,14 +74,14 @@ function ListComponent({ meta, data, gotoPage, deleteProduct }) {
             >
               <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
             </button>
-          </>
+          </div>
         );
       },
     },
   ]);
 
   const table = (
-    <Table goToPage={handleGoToPage} meta={meta} col={columns} data={data} />
+    <Table goToPage={handleGetProducts} meta={meta} col={columns} data={data} />
   );
 
   return useMemo(
@@ -83,10 +90,10 @@ function ListComponent({ meta, data, gotoPage, deleteProduct }) {
         <Breadcrumb title="list_product" />
         <div className="flex justify-between">
           <Search message="product" />
-          {renderButton()}
+          {renderAddButton()}
         </div>
         <div className="flex flex-col py-4 shadow-lg bg-white rounded mt-4">
-          {Object.keys(meta).length ? table : ''}
+          {table}
         </div>
       </>
     ),
@@ -94,4 +101,4 @@ function ListComponent({ meta, data, gotoPage, deleteProduct }) {
   );
 }
 
-export default ListComponent;
+export default ListProductComponent;

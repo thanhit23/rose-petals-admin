@@ -29,7 +29,7 @@ function ListCategory({ getCategory, data, meta, deleteCategory }) {
       <CategoryComponent
         data={data}
         meta={meta}
-        deleteCategory={handleDeleteCategory}
+        handleDeleteCategory={handleDeleteCategory}
       />
     ),
     [data],

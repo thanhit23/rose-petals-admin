@@ -7,6 +7,7 @@ import AddCategory from '../../containers/Categories/Add';
 import EditCategory from '../../containers/Categories/Edit';
 import ListProduct from '../../containers/Products/List';
 import AddProduct from '../../containers/Products/Add';
+import EditProduct from '../../containers/Products/Edit';
 
 export default [
   {
@@ -53,6 +54,11 @@ export default [
   {
     path: '/admin/product',
     component: AddProduct,
+    exact: true,
+  },
+  {
+    path: '/admin/product/edit/:id',
+    component: EditProduct,
     exact: true,
   },
 ];

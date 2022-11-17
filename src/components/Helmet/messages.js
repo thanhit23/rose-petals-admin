@@ -11,6 +11,10 @@ export default defineMessages({
     id: `${scope}.add_user`,
     defaultMessage: 'Add user',
   },
+  add_product: {
+    id: `${scope}.add_product`,
+    defaultMessage: 'Add product',
+  },
   edit_user: {
     id: `${scope}.edit_user`,
     defaultMessage: 'Edit user',

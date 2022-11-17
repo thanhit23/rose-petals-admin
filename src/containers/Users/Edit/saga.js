@@ -10,21 +10,27 @@ import {
 
 function* updateUserInformation({ payload: { id, data, callback } }) {
   const res = yield call(updateUser, id, data);
+
   const {
     data: { status },
   } = res;
+
   if (status) {
     yield put(updateUserSuccessfully());
   } else {
     yield put(updateUserFailed());
   }
+
   if (callback instanceof Function) callback({ status });
 }
 
-function* getListUsers({ payload: { id } }) {
+function* getListUsers({ payload: { id, callback } }) {
   const res = yield call(getUsers, id);
-  console.log(res, 'res');
+
+  if (!res && typeof callback === 'function') callback();
+
   const { status, data } = res;
+
   if (status) {
     yield put(getUserSuccessfully(data));
   } else {

@@ -5,7 +5,7 @@ import { logout } from './service';
 import { loggedOut } from './actions';
 
 function* handleLogout() {
-  const refreshToken = sessionStorage.getItem('refreshToken');
+  const refreshToken = localStorage.getItem('refreshToken');
   const res = yield call(logout, { refreshToken });
   const { status } = res;
   if (status === STATUS_NO_CONTENT) {

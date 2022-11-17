@@ -7,12 +7,10 @@ import { Link } from 'react-router-dom';
 import ButtonRedirect from '../../LinkWithFormatMessage';
 import Breadcrumb from '../../Breadcrumb';
 import Search from '../../Search';
-import Table from '../../../containers/Table';
+import Table from '../../Table';
 
-function ListUserComponent({ data, meta, gotoPage, deleteUser }) {
+function ListUserComponent({ data, meta, gotoPage, handleDeleteUser }) {
   const handleGoToPage = page => gotoPage(page);
-
-  const handleDeleteUser = id => deleteUser(id);
 
   const renderButton = () => (
     <ButtonRedirect to="/admin/user" title="add_user" icon={faPlus} />
@@ -99,7 +97,7 @@ ListUserComponent.PropsType = {
   data: propsTypes.array,
   meta: propsTypes.object,
   gotoPage: propsTypes.func,
-  deleteUser: propsTypes.func,
+  handleDeleteUser: propsTypes.func,
 };
 
 export default ListUserComponent;

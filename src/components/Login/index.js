@@ -53,7 +53,7 @@ function Login({ handleOnSubmit }) {
                   <InputWithFormatMessage
                     id="email"
                     type="email"
-                    className="border-[1px] border-solid border-[#eaeaea] block w-full px-4 py-2 mt-2 text-purple-700 bg-white border outline-none"
+                    className="border-[1px] rounded border-solid border-[#eaeaea] block w-full px-4 py-2 mt-2 text-purple-700 bg-white border outline-none"
                     message={messages.placeholder.email}
                     validate={register(
                       'email',
@@ -63,11 +63,11 @@ function Login({ handleOnSubmit }) {
                   <ErrorMessage name={email} />
                 </div>
                 <div className="mb-2">
-                  <div className="flex border-[1px] border-solid border-[#eaeaea] bg-white border relative">
+                  <div className="flex border-[1px] border-solid border-[#eaeaea] bg-white border relative mt-2">
                     <InputWithFormatMessage
                       id="email"
                       type={showPass ? 'text' : 'password'}
-                      className="border-[1px] border-solid border-[#eaeaea] block w-full px-4 py-2 mt-2 text-purple-700 bg-white border outline-none"
+                      className="border-[1px] rounded border-solid border-[#eaeaea] block w-full px-4 py-2 text-purple-700 bg-white border outline-none"
                       message={messages.placeholder.password}
                       validate={register(
                         'password',

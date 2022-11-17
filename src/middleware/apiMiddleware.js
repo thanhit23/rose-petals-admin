@@ -9,11 +9,11 @@ const middlewareStorage = store => next => action => {
   store.getState();
   switch (action.type) {
     case LOGOUT_REQUEST:
-      sessionStorage.removeItem('token');
+      localStorage.removeItem('token');
       window.location.href = '/login';
       break;
     case CHECK_TOKEN_FAILED:
-      sessionStorage.removeItem('token');
+      localStorage.removeItem('token');
       window.location.href = '/login';
       break;
     case REDIRECT_LOGIN: {
