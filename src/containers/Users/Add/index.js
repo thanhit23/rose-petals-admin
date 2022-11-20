@@ -20,10 +20,9 @@ function AddUser({ createNewUser }) {
     createNewUser({ ...data, role: 'user' }, navigate);
 
   return (
-    <AuthLayout
-      title="add_user"
-      children={<AddUserComponent onSubmit={handleCreateUser} />}
-    />
+    <AuthLayout title="add_user">
+      <AddUserComponent onSubmit={handleCreateUser} />
+    </AuthLayout>
   );
 }
 

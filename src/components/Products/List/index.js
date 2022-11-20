@@ -16,10 +16,6 @@ function ListProductComponent({
 }) {
   const handleGetProducts = page => getProducts(page);
 
-  const renderAddButton = () => (
-    <ButtonRedirect to="/admin/product" title="add_product" icon={faPlus} />
-  );
-
   const columns = useMemo(() => [
     {
       Header: 'Id',
@@ -80,20 +76,25 @@ function ListProductComponent({
     },
   ]);
 
-  const table = (
-    <Table goToPage={handleGetProducts} meta={meta} col={columns} data={data} />
-  );
-
   return useMemo(
     () => (
       <>
         <Breadcrumb title="list_product" />
         <div className="flex justify-between">
           <Search message="product" />
-          {renderAddButton()}
+          <ButtonRedirect
+            to="/admin/product"
+            title="add_product"
+            icon={faPlus}
+          />
         </div>
         <div className="flex flex-col py-4 shadow-lg bg-white rounded mt-4">
-          {table}
+          <Table
+            goToPage={handleGetProducts}
+            meta={meta}
+            col={columns}
+            data={data}
+          />
         </div>
       </>
     ),

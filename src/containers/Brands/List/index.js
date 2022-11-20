@@ -1,17 +1,54 @@
+import { useEffect } from 'react';
+import { compose, bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
 import AuthLayout from '../../../layouts/AuthLayout';
 import ListBrandsComponent from '../../../components/Brands/List';
+import {
+  getBrand as getBrandAction,
+  deleteBrand as deleteBrandAction,
+} from './actions';
+import injectReducer from '../../../utils/injectReducer';
+import injectSaga from '../../../utils/injectSaga';
+import reducer from './reducers';
+import saga from './saga';
 
-function ListBrand() {
-  const meta = { page: 1, limit: 10, totalPages: 1, totalResults: 6 };
-  const data = [
-    {
-      id: '63749c10d58125000823459a',
-      name: 'Chanel',
-      logo: 'https://i.pinimg.com/originals/35/de/2e/35de2ec625940ab0456af538f5578d24.jpg',
-    },
-  ];
-  const renderListBrands = <ListBrandsComponent meta={meta} data={data} />;
-  return <AuthLayout title="list_brand" children={renderListBrands} />;
+function ListBrand({ getBrand, data, meta, deleteBrand }) {
+  useEffect(() => getBrand(), []);
+
+  const handleDeleteBrand = id => deleteBrand(id);
+
+  return (
+    <AuthLayout title="list_brand">
+      <ListBrandsComponent
+        handleDeleteBrand={handleDeleteBrand}
+        meta={meta}
+        data={data}
+      />
+    </AuthLayout>
+  );
 }
 
-export default ListBrand;
+const mapStateToProps = state => {
+  const {
+    brand: {
+      list: { data, meta },
+    },
+  } = state;
+  return {
+    data,
+    meta,
+  };
+};
+const mapDispatchToProps = dispatch => ({
+  getBrand: bindActionCreators(getBrandAction, dispatch),
+  deleteBrand: bindActionCreators(deleteBrandAction, dispatch),
+});
+
+const withReducer = injectReducer({ key: 'brand', reducer });
+
+const withSaga = injectSaga({ key: 'listBrand', saga });
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+
+export default compose(withSaga, withReducer, withConnect)(ListBrand);

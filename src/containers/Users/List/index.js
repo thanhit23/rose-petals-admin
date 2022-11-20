@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import propsTypes from 'prop-types';
@@ -23,19 +23,16 @@ function ListUser({ getUser, data, meta, deleteUser }) {
 
   const handleDeleteUser = id => deleteUser(id, callback);
 
-  const element = useMemo(
-    () => (
+  return (
+    <AuthLayout title="user">
       <ListUserComponent
         meta={meta}
         data={data}
         handleDeleteUser={handleDeleteUser}
         gotoPage={handleGoToPage}
       />
-    ),
-    [data],
+    </AuthLayout>
   );
-
-  return <AuthLayout title="user" children={element} />;
 }
 
 ListUser.PropsType = {

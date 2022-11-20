@@ -28,14 +28,14 @@ function EditUser({ updateUser, edit: editUser, getUser, deleteUserEditOld }) {
     getUser(id, callback);
   }, []);
 
-  const renderEditUser = Object.keys(editUser).length && (
-    <EditUserComponent
-      users={editUser}
-      onSubmitForUpdateUser={handleUpdateUser}
-    />
+  return (
+    <AuthLayout title="edit_user">
+      <EditUserComponent
+        users={editUser}
+        onSubmitForUpdateUser={handleUpdateUser}
+      />
+    </AuthLayout>
   );
-
-  return <AuthLayout title="edit_user" children={renderEditUser} />;
 }
 
 EditUser.prototype = {

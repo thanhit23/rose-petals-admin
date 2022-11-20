@@ -1,34 +1,51 @@
 import { useEffect } from 'react';
-import { compose } from 'redux';
+import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import AuthLayout from '../../../layouts/AuthLayout';
-import EditCategoryComponent from '../../../components/Categories/Edit';
+import EditBrandComponent from '../../../components/Brands/Edit';
+import {
+  getDetailBrand as getDetailBrandAction,
+  clearDetailBrandOld as clearDetailBrandOldAction,
+  updateBrand as updateBrandAction,
+} from './actions';
+import injectReducer from '../../../utils/injectReducer';
+import injectSaga from '../../../utils/injectSaga';
+import reducer from '../List/reducers';
+import saga from './saga';
 
-function EditBrand({ updateCategory, edit: category, getCategory }) {
+function EditBrand({
+  updateBrand,
+  edit: brand,
+  getDetailBrand,
+  clearDetailBrandOld,
+}) {
   const { id: idEdit } = useParams();
-
-  useEffect(() => getCategory(idEdit), []);
 
   const redirect = useNavigate();
 
-  const callback = () => redirect('/admin/categories');
+  const callback = () => redirect('/admin/brands');
 
-  const handleUpdateUser = (id, data) => updateCategory(id, data, callback);
+  useEffect(() => {
+    clearDetailBrandOld();
+    getDetailBrand(idEdit, callback);
+  }, []);
 
-  const renderEditCategory = category && (
-    <EditCategoryComponent data={category} onSubmit={handleUpdateUser} />
+  const handleUpdateBrand = (id, data) => updateBrand(id, data, callback);
+
+  return (
+    <AuthLayout title="edit_brand">
+      <EditBrandComponent data={brand} onSubmit={handleUpdateBrand} />
+    </AuthLayout>
   );
-
-  return <AuthLayout title="edit_category" children={renderEditCategory} />;
 }
 
 EditBrand.prototype = {
   edit: PropTypes.array,
-  getCategory: PropTypes.func,
-  updateCategoryInformation: PropTypes.func,
+  getDetailBrand: PropTypes.func,
+  updateCategory: PropTypes.func,
 };
 
 const mapStateToProps = state => {
@@ -40,8 +57,14 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = dispatch => ({
+  updateBrand: bindActionCreators(updateBrandAction, dispatch),
+  getDetailBrand: bindActionCreators(getDetailBrandAction, dispatch),
+  clearDetailBrandOld: bindActionCreators(clearDetailBrandOldAction, dispatch),
+});
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withReducer = injectReducer({ key: 'brand', reducer });
+const withSaga = injectSaga({ key: 'editBrand', saga });
 
-export default compose(withConnect)(EditBrand);
+export default compose(withSaga, withReducer, withConnect)(EditBrand);

@@ -8,11 +8,19 @@ export default defineMessages({
       id: `${scope}.label.name`,
       defaultMessage: 'Name',
     },
+    img: {
+      id: `${scope}.label.img`,
+      defaultMessage: 'Image',
+    },
   },
   placeholder: {
     name: {
       id: `${scope}.placeholder.name`,
       defaultMessage: 'Name...',
+    },
+    img: {
+      id: `${scope}.placeholder.img`,
+      defaultMessage: 'Image...',
     },
   },
   message: {
