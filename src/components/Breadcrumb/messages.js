@@ -47,4 +47,8 @@ export default defineMessages({
     id: `${scope}.brand.list`,
     defaultMessage: 'List Brand',
   },
+  edit_brand: {
+    id: `${scope}.brand.edit`,
+    defaultMessage: 'Edit Brand',
+  },
 });

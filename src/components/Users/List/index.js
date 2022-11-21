@@ -14,10 +14,6 @@ import messages from './messages';
 function ListUserComponent({ data, meta, gotoPage, handleDeleteUser }) {
   const handleGoToPage = page => gotoPage(page);
 
-  const renderButton = () => (
-    <ButtonRedirect to="/admin/user" title="add_user" icon={faPlus} />
-  );
-
   const columns = useMemo(() => [
     {
       Header: 'Id',
@@ -86,20 +82,21 @@ function ListUserComponent({ data, meta, gotoPage, handleDeleteUser }) {
     },
   ]);
 
-  const table = (
-    <Table goToPage={handleGoToPage} meta={meta} col={columns} data={data} />
-  );
-
   return useMemo(
     () => (
       <>
         <Breadcrumb title="user" />
         <div className="flex justify-between">
           <Search message="user" />
-          {renderButton()}
+          <ButtonRedirect to="/admin/user" title="add_user" icon={faPlus} />
         </div>
         <div className="flex flex-col py-4 shadow-lg bg-white rounded mt-4">
-          {Object.keys(meta).length ? table : ''}
+          <Table
+            goToPage={handleGoToPage}
+            meta={meta}
+            col={columns}
+            data={data}
+          />
         </div>
       </>
     ),

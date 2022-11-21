@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Breadcrumb from '../../Breadcrumb';
@@ -21,11 +21,13 @@ function EditUserComponent({ onSubmitForUpdateUser, users }) {
     gender,
   });
 
+  useEffect(() => setUserEdit(users), [users]);
+
   const {
-    email: emailUser,
-    name: nameUser,
-    gender: genderUser,
-    phoneNumber: phoneNumberUser,
+    email: emailUser = '',
+    name: nameUser = '',
+    gender: genderUser = '',
+    phoneNumber: phoneNumberUser = '',
   } = userEdit;
 
   const onSubmit = () => onSubmitForUpdateUser(id, userEdit);

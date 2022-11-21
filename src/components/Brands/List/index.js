@@ -9,10 +9,50 @@ import Breadcrumb from '../../Breadcrumb';
 import Search from '../../Search';
 import Table from '../../Table';
 
-function ListBrandsComponent({ data, meta, deleteBrand, gotoPage }) {
-  const handleDeleteBrand = id => deleteBrand(id);
-
+function ListBrandsComponent({ data, meta, handleDeleteBrand, gotoPage }) {
   const handleGoToPage = page => gotoPage(page);
+
+  const renderAction = props => {
+    const {
+      cell: {
+        row: {
+          values: { id },
+        },
+      },
+    } = props;
+
+    return (
+      <>
+        <Link to={`/admin/brand/edit/${id}`}>
+          <button
+            type="button"
+            className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
+          >
+            <FontAwesomeIcon className="text-[#7D879C]" icon={faPen} />
+          </button>
+        </Link>
+        <button
+          type="button"
+          className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full ml-2"
+          onClick={() => handleDeleteBrand(id)}
+        >
+          <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
+        </button>
+      </>
+    );
+  };
+
+  const renderImages = props => {
+    const {
+      cell: {
+        row: {
+          values: { logo },
+        },
+      },
+    } = props;
+
+    return <img className="w-9 m-auto" src={logo} alt="" />;
+  };
 
   const columns = useMemo(() => [
     {
@@ -26,73 +66,34 @@ function ListBrandsComponent({ data, meta, deleteBrand, gotoPage }) {
     {
       Header: 'Logo',
       accessor: 'logo',
-      // eslint-disable-next-line react/no-unstable-nested-components
-      Cell: props => {
-        const {
-          cell: {
-            row: {
-              values: { logo },
-            },
-          },
-        } = props;
-        return <img className="w-9 m-auto" src={logo} alt="" />;
-      },
+      Cell: props => renderImages(props),
     },
     {
       Header: 'Action',
       accessor: 'action',
-      // eslint-disable-next-line react/no-unstable-nested-components
-      Cell: props => {
-        const {
-          cell: {
-            row: {
-              values: { id },
-            },
-          },
-        } = props;
-        return (
-          <>
-            <button
-              type="button"
-              className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
-            >
-              <Link to={`/admin/category/edit/${id}`}>
-                <FontAwesomeIcon className="text-[#7D879C]" icon={faPen} />
-              </Link>
-            </button>
-            <button
-              type="button"
-              className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full ml-2"
-              onClick={() => handleDeleteBrand(id)}
-            >
-              <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
-            </button>
-          </>
-        );
-      },
+      Cell: props => renderAction(props),
     },
   ]);
 
-  const renderAddBrandButton = () => (
-    <ButtonRedirect to="/admin/brand" title="add_brand" icon={faPlus} />
-  );
-
-  return (
-    <>
-      <Breadcrumb title="list_brand" />
-      <div className="flex justify-between">
-        <Search message="brand" />
-        {renderAddBrandButton()}
-      </div>
-      <div className="flex flex-col py-4 shadow-lg bg-white rounded mt-4">
-        <Table
-          goToPage={handleGoToPage}
-          meta={meta}
-          col={columns}
-          data={data}
-        />
-      </div>
-    </>
+  return useMemo(
+    () => (
+      <>
+        <Breadcrumb title="list_brand" />
+        <div className="flex justify-between">
+          <Search message="brand" />
+          <ButtonRedirect to="/admin/brand" title="add_brand" icon={faPlus} />
+        </div>
+        <div className="flex flex-col py-4 shadow-lg bg-white rounded mt-4">
+          <Table
+            goToPage={handleGoToPage}
+            meta={meta}
+            col={columns}
+            data={data}
+          />
+        </div>
+      </>
+    ),
+    [data],
   );
 }
 

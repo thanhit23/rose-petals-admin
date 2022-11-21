@@ -10,6 +10,7 @@ import AddProduct from '../../containers/Products/Add';
 import EditProduct from '../../containers/Products/Edit';
 import ListBrand from '../../containers/Brands/List';
 import AddBrand from '../../containers/Brands/Add';
+import EditBrand from '../../containers/Brands/Edit';
 
 export default [
   {
@@ -71,6 +72,11 @@ export default [
   {
     path: '/admin/brand',
     component: AddBrand,
+    exact: true,
+  },
+  {
+    path: '/admin/brand/edit/:id',
+    component: EditBrand,
     exact: true,
   },
 ];

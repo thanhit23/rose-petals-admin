@@ -1,36 +1,37 @@
-import { compose } from 'redux';
+import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import AuthLayout from '../../../layouts/AuthLayout';
 import AddBrandComponent from '../../../components/Brands/Add';
+import { addBrand as addBrandAction } from './actions';
+import injectSaga from '../../../utils/injectSaga';
+import saga from './saga';
 
-function AddBrand({ createNewBrand }) {
+function AddBrand({ addBrand }) {
   const redirect = useNavigate();
 
-  const callback = () => {
-    redirect('/admin/brands');
-  };
+  const callback = () => redirect('/admin/brands');
 
-  const handleCreateBrand = data => createNewBrand(data, callback);
+  const handleCreateBrand = data => addBrand(data, callback);
 
   return (
-    <AuthLayout
-      title="add_brand"
-      children={<AddBrandComponent onSubmit={handleCreateBrand} />}
-    />
+    <AuthLayout title="add_brand">
+      <AddBrandComponent onSubmit={handleCreateBrand} />
+    </AuthLayout>
   );
 }
 
 AddBrand.prototype = {
-  createNewBrand: PropTypes.func,
+  addBrand: PropTypes.func,
 };
 
-const mapDispatchToProps = () => {
-  return {};
-};
+const mapDispatchToProps = dispatch => ({
+  addBrand: bindActionCreators(addBrandAction, dispatch),
+});
 
 const withConnect = connect(null, mapDispatchToProps);
+const withSaga = injectSaga({ key: 'addBrand', saga });
 
-export default compose(withConnect)(AddBrand);
+export default compose(withSaga, withConnect)(AddBrand);

@@ -1,5 +1,5 @@
 import { FormattedMessage } from 'react-intl';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -10,10 +10,11 @@ import InputWithFormatMessage from '../../InputWithFormatMessage';
 
 function EditBrandComponent({ onSubmit, data }) {
   const { id } = useParams();
+  const [brandEdit, setBrandEdit] = useState({});
 
-  const [brandEdit, setBrandEdit] = useState(data);
+  const { name = '' } = brandEdit;
 
-  const { name: brandName } = brandEdit;
+  useEffect(() => setBrandEdit(data), [data]);
 
   const handleChangeInput = ({ target: { value } }) => {
     setBrandEdit({ name: value });
@@ -22,8 +23,8 @@ function EditBrandComponent({ onSubmit, data }) {
   return (
     <>
       <Breadcrumb
-        prevPage={{ path: '/admin/categories', name: 'category' }}
-        title="edit_category"
+        prevPage={{ path: '/admin/brands', name: 'list_brand' }}
+        title="edit_brand"
       />
       <div>
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -39,7 +40,7 @@ function EditBrandComponent({ onSubmit, data }) {
               className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="name"
               type="text"
-              value={brandName}
+              value={name}
               onChange={handleChangeInput}
             />
           </div>
@@ -60,7 +61,7 @@ function EditBrandComponent({ onSubmit, data }) {
 
 EditBrandComponent.prototype = {
   onSubmitForUpdateUser: PropTypes.func,
-  users: PropTypes.array,
+  data: PropTypes.array,
 };
 
 export default EditBrandComponent;
