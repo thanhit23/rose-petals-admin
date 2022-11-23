@@ -24,6 +24,10 @@ export default defineMessages({
       id: `${scope}.label.category`,
       defaultMessage: 'Category',
     },
+    brand: {
+      id: `${scope}.label.brand`,
+      defaultMessage: 'Brand',
+    },
   },
   placeholder: {
     name: {

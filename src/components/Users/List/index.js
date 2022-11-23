@@ -16,8 +16,16 @@ function ListUserComponent({ data, meta, gotoPage, handleDeleteUser }) {
 
   const columns = useMemo(() => [
     {
-      Header: 'Id',
-      accessor: 'id',
+      Header: 'Stt',
+      accessor: 'stt',
+      Cell: props => {
+        const {
+          cell: {
+            row: { index },
+          },
+        } = props;
+        return index + 1;
+      },
     },
     {
       Header: 'Name',

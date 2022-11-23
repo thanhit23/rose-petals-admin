@@ -18,8 +18,16 @@ function ListProductComponent({
 
   const columns = useMemo(() => [
     {
-      Header: 'Id',
-      accessor: 'id',
+      Header: 'Stt',
+      accessor: 'stt',
+      Cell: props => {
+        const {
+          cell: {
+            row: { index },
+          },
+        } = props;
+        return index + 1;
+      },
     },
     {
       Header: 'Name',
@@ -34,7 +42,7 @@ function ListProductComponent({
       accessor: 'brand',
     },
     {
-      Header: 'Category Id',
+      Header: 'Category',
       accessor: 'categoryId',
     },
     {
@@ -44,12 +52,11 @@ function ListProductComponent({
     {
       Header: 'Action',
       accessor: 'action',
-      // eslint-disable-next-line react/no-unstable-nested-components
       Cell: props => {
         const {
           cell: {
             row: {
-              values: { id },
+              original: { id },
             },
           },
         } = props;

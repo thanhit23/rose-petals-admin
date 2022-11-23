@@ -1,14 +1,18 @@
 import produce from 'immer';
 
 import { GET_PRODUCTS_SUCCESS } from './constants';
-import { GET_ALL_CATEGORY_SUCCESS } from '../Add/constants';
+import {
+  GET_ALL_CATEGORY_SUCCESS,
+  GET_ALL_BRAND_SUCCESS,
+} from '../Add/constants';
 const initialState = {
   list: {
     data: [],
     meta: {},
   },
   add: {
-    listCategory: [],
+    categories: [],
+    brands: [],
   },
 };
 
@@ -27,7 +31,14 @@ const productReducer = (state = initialState, action) =>
         const {
           payload: { data },
         } = action;
-        draft.add.listCategory = data;
+        draft.add.categories = data;
+        break;
+      }
+      case GET_ALL_BRAND_SUCCESS: {
+        const {
+          payload: { data },
+        } = action;
+        draft.add.brands = data;
         break;
       }
       default:
