@@ -1,14 +1,21 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { ADD_PRODUCT_REQUEST, GET_ALL_CATEGORY_REQUEST } from './constants';
+import {
+  ADD_PRODUCT_REQUEST,
+  GET_ALL_CATEGORY_REQUEST,
+  GET_ALL_BRAND_REQUEST,
+} from './constants';
 import {
   addProduct as addProductApi,
   getAllCategory as getAllCategoryApi,
+  getAllBrand as getAllBrandApi,
 } from './service';
 import {
   addProductSuccess,
   addProductFailed,
   getAllCategoriesSuccess,
   getAllCategoriesFailed,
+  getAllBrandsSuccess,
+  getAllBrandsFailed,
 } from './actions';
 
 function* addProductSaga({ payload: { data, callback } }) {
@@ -40,9 +47,24 @@ function* getAllCategory() {
   }
 }
 
+function* getAllBrand() {
+  const res = yield call(getAllBrandApi);
+
+  const {
+    data: { status, data },
+  } = res;
+
+  if (status) {
+    yield put(getAllBrandsSuccess(data));
+  } else {
+    yield put(getAllBrandsFailed());
+  }
+}
+
 function* addProduct() {
   yield takeEvery(ADD_PRODUCT_REQUEST, addProductSaga);
   yield takeEvery(GET_ALL_CATEGORY_REQUEST, getAllCategory);
+  yield takeEvery(GET_ALL_BRAND_REQUEST, getAllBrand);
 }
 
 export default addProduct;

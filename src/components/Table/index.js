@@ -119,7 +119,7 @@ function Table({ col: columns, data, meta, goToPage }) {
             {row.cells.map(cell => {
               return (
                 <td className="py-[10px] px-[16px]" {...cell.getCellProps()}>
-                  {cell.render('Cell')}
+                  <span className="text-table">{cell.render('Cell')}</span>
                 </td>
               );
             })}

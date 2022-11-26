@@ -56,8 +56,16 @@ function ListBrandsComponent({ data, meta, handleDeleteBrand, gotoPage }) {
 
   const columns = useMemo(() => [
     {
-      Header: 'Id',
-      accessor: 'id',
+      Header: 'Stt',
+      accessor: 'stt',
+      Cell: props => {
+        const {
+          cell: {
+            row: { index },
+          },
+        } = props;
+        return index + 1;
+      },
     },
     {
       Header: 'Name',

@@ -12,7 +12,7 @@ import InputWithFormatMessage from '../../InputWithFormatMessage';
 import TextareaWithFormatMessage from '../../TextareaWithFormatMessage';
 import { required } from '../../../utils/validation';
 
-function AddProductComponent({ onSubmit, listCategory = [] }) {
+function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
   const {
     register,
     handleSubmit,
@@ -26,7 +26,7 @@ function AddProductComponent({ onSubmit, listCategory = [] }) {
     if (!value) setLabel({ ...label, [name]: valueForFocusBlur });
   };
 
-  const { description, name, price, category } = errors;
+  const { description, name, price, categoryId, brand, images } = errors;
 
   const clsInput = [
     'h-[54px] outline-none appearance-none border border-[#e3e9ef] rounded w-full py-[16px] px-3 text-[14px] leading-tight',
@@ -42,12 +42,16 @@ function AddProductComponent({ onSubmit, listCategory = [] }) {
     { 'text-[#d1373a]': name },
   ];
 
+  const handleOnSubmit = data => onSubmit({ ...data, images: [images] });
+
   return (
     <>
       <Breadcrumb title="add_product" />
       <div>
         <form
-          onSubmit={handleSubmit(data => onSubmit(data))}
+          onSubmit={handleSubmit(data => {
+            handleOnSubmit(data);
+          })}
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         >
           <div className="mb-6">
@@ -89,6 +93,22 @@ function AddProductComponent({ onSubmit, listCategory = [] }) {
           </div>
           <div className="mb-6">
             <LabelWithFormatMessage
+              message={messages.label.images}
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="images"
+              requiredField
+            />
+            <InputWithFormatMessage
+              className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="images"
+              type="text"
+              message={messages.placeholder.images}
+              validate={register('images', required(messages.message.required))}
+            />
+            <ErrorMessage name={images} />
+          </div>
+          <div className="mb-6">
+            <LabelWithFormatMessage
               message={messages.label.description}
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="description"
@@ -108,29 +128,55 @@ function AddProductComponent({ onSubmit, listCategory = [] }) {
             </div>
             <ErrorMessage name={description} />
           </div>
-          <div className="mb-6">
-            <LabelWithFormatMessage
-              message={messages.label.category}
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="category"
-              requiredField
-            />
-            <select
-              id="category"
-              name="category"
-              className="w-[100px] h-9 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
-              {...register('category', {
-                required: true,
-              })}
-            >
-              <option value={0}>Select...</option>
-              {listCategory.map(({ name: nameCategory, id }, index) => (
-                <option key={index} value={id}>
-                  {nameCategory}
-                </option>
-              ))}
-            </select>
-            <ErrorMessage name={category} />
+          <div className="mb-6 grid grid-cols-2 gap-4">
+            <div className="flex flex-col">
+              <LabelWithFormatMessage
+                message={messages.label.category}
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="category"
+                requiredField
+              />
+              <select
+                id="category"
+                name="category"
+                className="w-[100px] h-9 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
+                {...register('categoryId', {
+                  required: 'Category is required',
+                })}
+              >
+                <option value="">Select...</option>
+                {listCategory.map(({ name: nameCategory, id }, index) => (
+                  <option key={index} value={id}>
+                    {nameCategory}
+                  </option>
+                ))}
+              </select>
+              <ErrorMessage name={categoryId} />
+            </div>
+            <div className="flex flex-col">
+              <LabelWithFormatMessage
+                message={messages.label.brand}
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="category"
+                requiredField
+              />
+              <select
+                id="category"
+                name="category"
+                className="w-[100px] h-9 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
+                {...register('brand', {
+                  required: 'Brand is required',
+                })}
+              >
+                <option value="">Select...</option>
+                {listBrand.map(({ name: nameBrand, id }, index) => (
+                  <option key={index} value={id}>
+                    {nameBrand}
+                  </option>
+                ))}
+              </select>
+              <ErrorMessage name={brand} />
+            </div>
           </div>
           <div className="flex items-center justify-between">
             <button
@@ -148,6 +194,8 @@ function AddProductComponent({ onSubmit, listCategory = [] }) {
 
 AddProductComponent.prototype = {
   onSubmit: PropTypes.func,
+  listBrand: PropTypes.array,
+  listCategory: PropTypes.array,
 };
 
 export default AddProductComponent;

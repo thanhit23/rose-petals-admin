@@ -5,6 +5,9 @@ import {
   GET_ALL_CATEGORY_REQUEST,
   GET_ALL_CATEGORY_SUCCESS,
   GET_ALL_CATEGORY_FAILED,
+  GET_ALL_BRAND_REQUEST,
+  GET_ALL_BRAND_SUCCESS,
+  GET_ALL_BRAND_FAILED,
 } from './constants';
 
 export const addProduct = (data, callback) => ({
@@ -32,5 +35,19 @@ export const getAllCategoriesSuccess = data => ({
 
 export const getAllCategoriesFailed = message => ({
   type: GET_ALL_CATEGORY_FAILED,
+  payload: { message },
+});
+
+export const getAllBrands = () => ({
+  type: GET_ALL_BRAND_REQUEST,
+});
+
+export const getAllBrandsSuccess = data => ({
+  type: GET_ALL_BRAND_SUCCESS,
+  payload: { data },
+});
+
+export const getAllBrandsFailed = message => ({
+  type: GET_ALL_BRAND_FAILED,
   payload: { message },
 });

@@ -9,14 +9,24 @@ import AddProductComponent from '../../../components/Products/Add';
 import {
   addProduct as addProductAction,
   getAllCategories as getCategoriesAction,
+  getAllBrands as getAllBrandsAction,
 } from './actions';
 import injectSaga from '../../../utils/injectSaga';
 import injectReducer from '../../../utils/injectReducer';
 import saga from './saga';
 import reducer from '../List/reducers';
 
-function AddProduct({ addProduct, getCategories, listCategory }) {
-  useEffect(() => getCategories(), []);
+function AddProduct({
+  addProduct,
+  getCategories,
+  getBrands,
+  categories,
+  brands,
+}) {
+  useEffect(() => {
+    getCategories();
+    getBrands();
+  }, []);
 
   const navigate = useNavigate();
 
@@ -24,11 +34,15 @@ function AddProduct({ addProduct, getCategories, listCategory }) {
 
   const onSubmit = data => addProduct(data, callback);
 
-  const component = (
-    <AddProductComponent listCategory={listCategory} onSubmit={onSubmit} />
+  return (
+    <AuthLayout title="add_product">
+      <AddProductComponent
+        listBrand={brands}
+        listCategory={categories}
+        onSubmit={onSubmit}
+      />
+    </AuthLayout>
   );
-
-  return <AuthLayout title="add_product" children={component} />;
 }
 
 AddProduct.prototype = {
@@ -38,17 +52,19 @@ AddProduct.prototype = {
 const mapStateToProps = state => {
   const {
     product: {
-      add: { listCategory },
+      add: { categories, brands },
     },
   } = state;
   return {
-    listCategory,
+    categories,
+    brands,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   addProduct: bindActionCreators(addProductAction, dispatch),
   getCategories: bindActionCreators(getCategoriesAction, dispatch),
+  getBrands: bindActionCreators(getAllBrandsAction, dispatch),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

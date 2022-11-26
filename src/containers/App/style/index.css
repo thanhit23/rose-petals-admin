@@ -16,13 +16,14 @@
         font-size: 12px !important;
         border-color: #4d97fd !important;
     }
+
     .text-table {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
         overflow: hidden;
-        line-height: 16px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
+
     .lds-ring {
         display: inline-block;
         position: relative;
