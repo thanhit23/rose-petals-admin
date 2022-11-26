@@ -8,7 +8,9 @@ function LabelWithFormatMessage({ message, requiredField, htmlFor, ...props }) {
 
   return (
     <label {...props} htmlFor={htmlFor}>
-      <FormattedMessage {...message} />
+      <span className="z-[1]">
+        <FormattedMessage {...message} />
+      </span>
       {requiredField && renderRequiredIcon}
     </label>
   );

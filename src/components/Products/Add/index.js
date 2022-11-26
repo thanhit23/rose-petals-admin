@@ -26,21 +26,28 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
     if (!value) setLabel({ ...label, [name]: valueForFocusBlur });
   };
 
-  const { description, name, price, categoryId, brand, images } = errors;
+  const { description, name, price, category, brand, images } = errors;
 
-  const clsInput = [
-    'h-[54px] outline-none appearance-none border border-[#e3e9ef] rounded w-full py-[16px] px-3 text-[14px] leading-tight',
-    { 'label-input-focus': label.name && !name },
-    { 'hover:border-[#111]': !label.name && !name },
-    { 'border-[#d1373a]': name },
-  ];
+  // eslint-disable-next-line no-shadow
+  const renderClsInput = (label, name) => {
+    return [
+      'h-[54px] outline-none appearance-none border border-[#e3e9ef] rounded w-full py-[16px] px-3 text-[14px] leading-tight',
+      { 'label-input-focus': label.name && !name },
+      { 'hover:border-[#111]': !label.name && !name },
+      { 'border-[#d1373a]': name },
+    ];
+  };
 
-  const clsLabel = [
-    'block text-[14px] text-black absolute label-input leading-[14px]',
-    { 'label-input-focus': label.name },
-    { 'text-[#4d97fd]': label.name && !name },
-    { 'text-[#d1373a]': name },
-  ];
+  // eslint-disable-next-line no-shadow
+  const renderClsLabel = (label, name) => {
+    return [
+      'block text-[14px] text-black absolute label-input leading-[14px]',
+      { 'label__input label-input-focus': label.name },
+      { 'bg-white': !label.name },
+      { 'text-[#4d97fd]': label.name && !name },
+      { 'text-[#d1373a]': name },
+    ];
+  };
 
   const handleOnSubmit = data => onSubmit({ ...data, images: [images] });
 
@@ -58,12 +65,12 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
             <div className="relative wrapper-input">
               <LabelWithFormatMessage
                 message={messages.label.name}
-                className={cls(clsLabel)}
+                className={cls(renderClsLabel(label, name))}
                 htmlFor="name"
                 requiredField
               />
               <InputWithFormatMessage
-                className={cls(clsInput)}
+                className={cls(renderClsInput(label, name))}
                 id="name"
                 type="text"
                 name="name"
@@ -139,8 +146,8 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
               <select
                 id="category"
                 name="category"
-                className="w-[100px] h-9 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
-                {...register('categoryId', {
+                className="h-12 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
+                {...register('category', {
                   required: 'Category is required',
                 })}
               >
@@ -151,7 +158,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
                   </option>
                 ))}
               </select>
-              <ErrorMessage name={categoryId} />
+              <ErrorMessage name={category} />
             </div>
             <div className="flex flex-col">
               <LabelWithFormatMessage
@@ -163,7 +170,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
               <select
                 id="category"
                 name="category"
-                className="w-[100px] h-9 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
+                className="h-12 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
                 {...register('brand', {
                   required: 'Brand is required',
                 })}

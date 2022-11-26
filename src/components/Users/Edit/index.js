@@ -12,25 +12,17 @@ import InputWithFormatMessage from '../../InputWithFormatMessage';
 function EditUserComponent({ onSubmitForUpdateUser, users }) {
   const { id } = useParams();
 
-  const { email, phoneNumber, name, gender } = users;
-
-  const [userEdit, setUserEdit] = useState({
-    email,
-    phoneNumber,
-    name,
-    gender,
-  });
+  const [userEdit, setUserEdit] = useState(users);
 
   useEffect(() => setUserEdit(users), [users]);
 
-  const {
-    email: emailUser = '',
-    name: nameUser = '',
-    gender: genderUser = '',
-    phoneNumber: phoneNumberUser = '',
-  } = userEdit;
+  const { email = '', name = '', gender = '', phoneNumber = '' } = userEdit;
 
-  const onSubmit = () => onSubmitForUpdateUser(id, userEdit);
+  const onSubmit = () => {
+    // eslint-disable-next-line no-shadow
+    const { email, name, gender, phoneNumber } = userEdit;
+    onSubmitForUpdateUser(id, { email, name, gender, phoneNumber });
+  };
 
   const changeValueInput = ({ target }) => {
     // eslint-disable-next-line no-shadow,prefer-const
@@ -62,7 +54,7 @@ function EditUserComponent({ onSubmitForUpdateUser, users }) {
               id="username"
               name="name"
               type="text"
-              value={nameUser}
+              value={name}
               onChange={changeValueInput}
             />
           </div>
@@ -79,7 +71,7 @@ function EditUserComponent({ onSubmitForUpdateUser, users }) {
               id="email"
               name="email"
               type="email"
-              value={emailUser}
+              value={email}
               onChange={changeValueInput}
             />
           </div>
@@ -96,7 +88,7 @@ function EditUserComponent({ onSubmitForUpdateUser, users }) {
               id="phoneNumber"
               name="phoneNumber"
               type="number"
-              value={phoneNumberUser}
+              value={phoneNumber}
               onChange={changeValueInput}
             />
           </div>
@@ -115,7 +107,7 @@ function EditUserComponent({ onSubmitForUpdateUser, users }) {
                   name="gender"
                   type="radio"
                   value={FEMALE}
-                  checked={genderUser === FEMALE}
+                  checked={gender === FEMALE}
                   onChange={changeValueInput}
                 />
                 <FormattedMessage {...messages.gender.female} />
@@ -127,7 +119,7 @@ function EditUserComponent({ onSubmitForUpdateUser, users }) {
                   name="gender"
                   type="radio"
                   value={MALE}
-                  checked={genderUser === MALE}
+                  checked={gender === MALE}
                   onChange={changeValueInput}
                 />
                 <FormattedMessage {...messages.gender.male} />

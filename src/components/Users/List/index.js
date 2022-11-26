@@ -63,7 +63,7 @@ function ListUserComponent({ data, meta, gotoPage, handleDeleteUser }) {
         const {
           cell: {
             row: {
-              values: { id },
+              original: { id },
             },
           },
         } = props;

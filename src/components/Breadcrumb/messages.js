@@ -39,6 +39,10 @@ export default defineMessages({
     id: `${scope}.product.add`,
     defaultMessage: 'Add Product',
   },
+  edit_product: {
+    id: `${scope}.product.edit`,
+    defaultMessage: 'Edit Product',
+  },
   add_brand: {
     id: `${scope}.brand.add`,
     defaultMessage: 'Add Brand',

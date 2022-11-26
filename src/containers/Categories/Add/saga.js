@@ -10,7 +10,7 @@ function* createNewCategory({ payload: { data, callback } }) {
   } = res;
   if (status) {
     yield put(createCategorySuccessfully());
-    if (typeof callback === 'function') callback();
+    if (callback instanceof Function) callback();
   } else {
     yield put(createCategoryFailed());
   }

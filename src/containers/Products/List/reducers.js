@@ -5,6 +5,10 @@ import {
   GET_ALL_CATEGORY_SUCCESS,
   GET_ALL_BRAND_SUCCESS,
 } from '../Add/constants';
+import {
+  DELETE_DETAIL_PRODUCT_OLD,
+  GET_DETAIL_PRODUCT_SUCCESS,
+} from '../Edit/constants';
 const initialState = {
   list: {
     data: [],
@@ -14,6 +18,7 @@ const initialState = {
     categories: [],
     brands: [],
   },
+  edit: {},
 };
 
 const productReducer = (state = initialState, action) =>
@@ -39,6 +44,17 @@ const productReducer = (state = initialState, action) =>
           payload: { data },
         } = action;
         draft.add.brands = data;
+        break;
+      }
+      case DELETE_DETAIL_PRODUCT_OLD: {
+        draft.edit = {};
+        break;
+      }
+      case GET_DETAIL_PRODUCT_SUCCESS: {
+        const {
+          payload: { data },
+        } = action;
+        draft.edit = data;
         break;
       }
       default:

@@ -40,10 +40,34 @@ function ListProductComponent({
     {
       Header: 'Brand',
       accessor: 'brand',
+      Cell: props => {
+        const {
+          cell: {
+            row: {
+              values: {
+                brand: { name },
+              },
+            },
+          },
+        } = props;
+        return <h1>{name}</h1>;
+      },
     },
     {
       Header: 'Category',
-      accessor: 'categoryId',
+      accessor: 'category',
+      Cell: props => {
+        const {
+          cell: {
+            row: {
+              values: {
+                category: { name },
+              },
+            },
+          },
+        } = props;
+        return <h1>{name}</h1>;
+      },
     },
     {
       Header: 'Description',

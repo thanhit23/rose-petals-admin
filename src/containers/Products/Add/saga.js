@@ -27,10 +27,11 @@ function* addProductSaga({ payload: { data, callback } }) {
 
   if (status) {
     yield put(addProductSuccess());
-    if (typeof callback === 'function') callback();
   } else {
     yield put(addProductFailed());
   }
+
+  if (callback instanceof Function) callback();
 }
 
 function* getAllCategory() {
