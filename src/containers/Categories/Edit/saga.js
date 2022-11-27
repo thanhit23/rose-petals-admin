@@ -18,7 +18,7 @@ function* updateCategoryInformation({ payload: { id, data, callback } }) {
   } = res;
   if (status) {
     yield put(updateCategorySuccessfully());
-    if (typeof callback === 'function') callback();
+    if (callback instanceof Function) callback();
   } else {
     yield put(updateCategoryFailed());
   }
