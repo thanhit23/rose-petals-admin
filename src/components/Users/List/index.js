@@ -11,7 +11,13 @@ import Search from '../../Search';
 import Table from '../../Table';
 import messages from './messages';
 
-function ListUserComponent({ data, meta, gotoPage, handleDeleteUser }) {
+function ListUserComponent({
+  data,
+  meta,
+  gotoPage,
+  handleDeleteUser,
+  handleKeywordSearch,
+}) {
   const handleGoToPage = page => gotoPage(page);
 
   const columns = useMemo(() => [
@@ -95,10 +101,10 @@ function ListUserComponent({ data, meta, gotoPage, handleDeleteUser }) {
       <>
         <Breadcrumb title="user" />
         <div className="flex justify-between">
-          <Search message="user" />
+          <Search message="user" handleKeywordSearch={handleKeywordSearch} />
           <ButtonRedirect to="/admin/user" title="add_user" icon={faPlus} />
         </div>
-        <div className="flex flex-col py-4 shadow-lg bg-white rounded mt-4">
+        <div className="flex flex-col shadow-lg bg-white rounded mt-4">
           <Table
             goToPage={handleGoToPage}
             meta={meta}
@@ -117,6 +123,7 @@ ListUserComponent.PropsType = {
   meta: propsTypes.object,
   gotoPage: propsTypes.func,
   handleDeleteUser: propsTypes.func,
+  handleKeywordSearch: propsTypes.func,
 };
 
 export default ListUserComponent;

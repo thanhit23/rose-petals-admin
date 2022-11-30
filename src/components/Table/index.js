@@ -7,8 +7,10 @@ import {
   faChevronRight,
   faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
-function Table({ col: columns, data, meta, goToPage }) {
+function Table({ col: columns, data, meta, goToPage, showLoadingTable }) {
   const { page: pages, limit, totalPages } = meta;
 
   const dataTable = useTable(
@@ -129,20 +131,34 @@ function Table({ col: columns, data, meta, goToPage }) {
     </tbody>
   );
 
+  const showLoading = () => (
+    <div className="flex justify-center">
+      <div className="lds-ellipsis">
+        <div />
+        <div />
+        <div />
+        <div />
+      </div>
+    </div>
+  );
+
   return (
     <>
       <table {...getTableProps()}>
-        <thead>
+        <thead className="bg-[#f3f5f9]">
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                <th className="py-4" {...column.getHeaderProps()}>
+                  {column.render('Header')}
+                </th>
               ))}
             </tr>
           ))}
         </thead>
         {renderBody}
       </table>
+      {showLoadingTable && showLoading()}
       {meta.page && renderPagination()}
     </>
   );
@@ -155,4 +171,15 @@ Table.prototype = {
   goToPage: PropTypes.func,
 };
 
-export default Table;
+const mapStateToProps = state => {
+  const {
+    loading: { showLoadingTable },
+  } = state;
+  return {
+    showLoadingTable,
+  };
+};
+
+const withConnect = connect(mapStateToProps, null);
+
+export default compose(withConnect)(Table);
