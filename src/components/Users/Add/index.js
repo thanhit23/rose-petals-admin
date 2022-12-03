@@ -108,7 +108,10 @@ function AddUserComponent({ onSubmit }) {
               requiredField
             />
             <div className="flex">
-              <label className="flex items-center mr-2" htmlFor="female">
+              <label
+                className="flex text-sm items-center mr-2"
+                htmlFor="female"
+              >
                 <input
                   className="mr-1"
                   type="radio"
@@ -118,7 +121,7 @@ function AddUserComponent({ onSubmit }) {
                 />
                 <FormattedMessage {...messages.gender.female} />
               </label>
-              <label className="flex items-center" htmlFor="male">
+              <label className="flex text-sm items-center" htmlFor="male">
                 <input
                   className="mr-1"
                   type="radio"

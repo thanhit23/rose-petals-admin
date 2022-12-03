@@ -7,9 +7,7 @@ import {
   FETCH_USERS_FAILED,
 } from './constants';
 
-const pageDefault = 1; // get the list of users on the front page
-
-export const getUsers = (page = pageDefault) => ({
+export const getUsers = page => ({
   type: FETCH_USERS_REQUEST,
   payload: {
     page,

@@ -13,13 +13,15 @@ import reducer from './reducers';
 import ListUserComponent from '../../../components/Users/List';
 
 function ListUser({ getUser, data, meta, deleteUser }) {
-  useEffect(() => getUser(), []);
+  useEffect(() => getUser('page=1'), []);
 
   const redirect = useNavigate();
 
   const callback = () => redirect('/admin/users');
 
-  const handleGoToPage = page => getUser(page);
+  const handleGoToPage = (page = 1) => getUser(`page=${page}`);
+
+  const handleKeywordSearch = keyword => getUser(`q=${keyword}`);
 
   const handleDeleteUser = id => deleteUser(id, callback);
 
@@ -30,6 +32,7 @@ function ListUser({ getUser, data, meta, deleteUser }) {
         data={data}
         handleDeleteUser={handleDeleteUser}
         gotoPage={handleGoToPage}
+        handleKeywordSearch={handleKeywordSearch}
       />
     </AuthLayout>
   );
@@ -41,6 +44,7 @@ ListUser.PropsType = {
   meta: propsTypes.object,
   gotoPage: propsTypes.func,
   deleteUser: propsTypes.func,
+  searchUsers: propsTypes.func,
 };
 
 const mapStateToProps = state => {
