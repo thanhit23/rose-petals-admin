@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
@@ -9,10 +9,12 @@ import messages from './messages';
 import ErrorMessage from '../../ErrorMessage';
 import LabelWithFormatMessage from '../../LabelWithFormatMessage';
 import InputWithFormatMessage from '../../InputWithFormatMessage';
+import UploadFileComponent from '../../UploadFile';
 import TextareaWithFormatMessage from '../../TextareaWithFormatMessage';
 import { required } from '../../../utils/validation';
 
 function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
+  const [file, setFile] = useState('');
   const {
     register,
     handleSubmit,
@@ -49,7 +51,20 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
     ];
   };
 
-  const handleOnSubmit = data => onSubmit({ ...data, images: [images] });
+  const handleUploadImage = ({ target: { files } }) => setFile(files);
+
+  const handleOnSubmit = data => onSubmit(data, file);
+
+  const renderUploadComponent = useMemo(
+    () => (
+      <UploadFileComponent
+        messages={messages.placeholder.images}
+        validate={register('images', required(messages.message.required))}
+        handleUploadImage={handleUploadImage}
+      />
+    ),
+    [],
+  );
 
   return (
     <>
@@ -105,13 +120,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
               htmlFor="images"
               requiredField
             />
-            <InputWithFormatMessage
-              className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="images"
-              type="text"
-              message={messages.placeholder.images}
-              validate={register('images', required(messages.message.required))}
-            />
+            {renderUploadComponent}
             <ErrorMessage name={images} />
           </div>
           <div className="mb-6">

@@ -10,9 +10,9 @@ import {
   GET_ALL_BRAND_FAILED,
 } from './constants';
 
-export const addProduct = (data, callback) => ({
+export const addProduct = (data, file, callback) => ({
   type: ADD_PRODUCT_REQUEST,
-  payload: { data, callback },
+  payload: { data, file, callback },
 });
 
 export const addProductSuccess = () => ({
