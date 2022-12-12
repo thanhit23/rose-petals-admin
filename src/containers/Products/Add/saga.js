@@ -10,6 +10,10 @@ import {
   getAllBrand as getAllBrandApi,
 } from './service';
 import {
+  uploadFile as uploadFileService,
+  setHeaderContent,
+} from '../../UploadFile/service';
+import {
   addProductSuccess,
   addProductFailed,
   getAllCategoriesSuccess,
@@ -18,15 +22,29 @@ import {
   getAllBrandsFailed,
 } from './actions';
 
-function* addProductSaga({ payload: { data, callback } }) {
-  const res = yield call(addProductApi, { ...data, images: [] });
-
+function* handleAddProduct(data) {
+  const res = yield call(addProductApi, data);
   const {
     data: { status },
   } = res;
 
   if (status) {
     yield put(addProductSuccess());
+  } else {
+    yield put(addProductFailed());
+  }
+}
+
+function* addProduct({ payload: { data, file, callback } }) {
+  yield call(setHeaderContent);
+  const res = yield call(uploadFileService, file);
+
+  const {
+    data: { status, data: dataFile },
+  } = res;
+
+  if (status) {
+    yield* handleAddProduct({ ...data, images: dataFile });
   } else {
     yield put(addProductFailed());
   }
@@ -62,10 +80,10 @@ function* getAllBrand() {
   }
 }
 
-function* addProduct() {
-  yield takeEvery(ADD_PRODUCT_REQUEST, addProductSaga);
+function* addProductSaga() {
+  yield takeEvery(ADD_PRODUCT_REQUEST, addProduct);
   yield takeEvery(GET_ALL_CATEGORY_REQUEST, getAllCategory);
   yield takeEvery(GET_ALL_BRAND_REQUEST, getAllBrand);
 }
 
-export default addProduct;
+export default addProductSaga;

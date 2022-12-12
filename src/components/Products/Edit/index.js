@@ -12,7 +12,7 @@ import TextareaWithFormatMessage from '../../TextareaWithFormatMessage';
 function EditProductComponent({
   brands,
   categories,
-  onSubmitForUpdateUser,
+  onSubmitForUpdateProduct,
   product,
 }) {
   const { id } = useParams();
@@ -32,7 +32,7 @@ function EditProductComponent({
   const onSubmit = () => {
     // eslint-disable-next-line no-shadow
     const { price, description, name, category, brand } = productEdit;
-    onSubmitForUpdateUser(id, { price, description, name, category, brand });
+    onSubmitForUpdateProduct(id, { price, description, name, category, brand });
   };
 
   const changeValueInput = ({ target }) => {

@@ -16,6 +16,25 @@ function ListProductComponent({
 }) {
   const handleGetProducts = page => getProducts(page);
 
+  const renderImages = props => {
+    const {
+      cell: {
+        row: {
+          original: { thumbnail },
+        },
+      },
+    } = props;
+    return (
+      <div className="flex justify-center">
+        <img
+          className="object-contain h-[100px] w-[100px]"
+          src={thumbnail}
+          alt=""
+        />
+      </div>
+    );
+  };
+
   const columns = useMemo(() => [
     {
       Header: 'Stt',
@@ -70,8 +89,9 @@ function ListProductComponent({
       },
     },
     {
-      Header: 'Description',
-      accessor: 'description',
+      Header: 'Image',
+      accessor: 'thumbnail',
+      Cell: props => renderImages(props),
     },
     {
       Header: 'Action',

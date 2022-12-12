@@ -32,7 +32,7 @@ function AddProduct({
 
   const callback = () => navigate('/admin/products');
 
-  const onSubmit = data => addProduct(data, callback);
+  const onSubmit = (data, file) => addProduct(data, file, callback);
 
   return (
     <AuthLayout title="add_product">
@@ -51,9 +51,7 @@ AddProduct.prototype = {
 
 const mapStateToProps = state => {
   const {
-    product: {
-      add: { categories, brands },
-    },
+    product: { categories, brands },
   } = state;
   return {
     categories,

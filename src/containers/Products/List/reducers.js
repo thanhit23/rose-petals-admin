@@ -14,10 +14,8 @@ const initialState = {
     data: [],
     meta: {},
   },
-  add: {
-    categories: [],
-    brands: [],
-  },
+  categories: [],
+  brands: [],
   edit: {},
 };
 
@@ -36,14 +34,14 @@ const productReducer = (state = initialState, action) =>
         const {
           payload: { data },
         } = action;
-        draft.add.categories = data;
+        draft.categories = data;
         break;
       }
       case GET_ALL_BRAND_SUCCESS: {
         const {
           payload: { data },
         } = action;
-        draft.add.brands = data;
+        draft.brands = data;
         break;
       }
       case DELETE_DETAIL_PRODUCT_OLD: {

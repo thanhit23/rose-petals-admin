@@ -40,14 +40,14 @@ function EditProduct({
     getAllCategories();
   }, []);
 
-  const handleUpdateBrand = (id, data) => updateProduct(id, data, callback);
+  const handleUpdateProduct = (id, data) => updateProduct(id, data, callback);
 
   return (
     <AuthLayout title="edit_product">
       <EditProductComponent
         categories={categories}
         brands={brands}
-        onSubmitForUpdateUser={handleUpdateBrand}
+        onSubmitForUpdateProduct={handleUpdateProduct}
         product={product}
       />
     </AuthLayout>
@@ -73,10 +73,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => {
   const {
-    product: {
-      add: { categories, brands },
-      edit,
-    },
+    product: { categories, brands, edit },
   } = state;
   return { edit, categories, brands };
 };
