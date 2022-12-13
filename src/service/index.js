@@ -51,7 +51,7 @@ class Service {
     }
   };
 
-  get = url => this.instance.get(url);
+  get = (url, params = {}) => this.instance.get(url, { params });
 
   post = (url, body) => this.instance.post(url, body);
 

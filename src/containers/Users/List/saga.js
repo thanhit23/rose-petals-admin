@@ -1,4 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
+import { isEmpty } from 'lodash';
 
 import { FETCH_USERS_REQUEST, DELETE_USERS_REQUEST } from './constants';
 import { getUsers, deleteUser } from './service';
@@ -7,9 +8,18 @@ import {
   getUsersListFailed,
   deleteUserSuccess,
 } from './actions';
+import { convertArrayToObject } from '../../../helpers';
 
-function* getListUsers({ payload: { page } }) {
-  const res = yield call(getUsers, page);
+function* getListUsers({ payload: { options } }) {
+  let option = { page: 1 };
+
+  const ruleOption = ['role', 'name', 'page'];
+
+  if (!isEmpty(options)) {
+    option = convertArrayToObject(ruleOption, options);
+  }
+
+  const res = yield call(getUsers, option);
 
   const { status, data } = res;
 

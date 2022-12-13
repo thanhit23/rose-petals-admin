@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import propsTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
 import ButtonRedirect from '../../LinkWithFormatMessage';
@@ -18,6 +18,8 @@ function ListUserComponent({
   handleDeleteUser,
   handleKeywordSearch,
 }) {
+  const [valueSearch, setValueSearch] = useState();
+
   const handleGoToPage = page => gotoPage(page);
 
   const columns = useMemo(() => [
@@ -96,12 +98,24 @@ function ListUserComponent({
     },
   ]);
 
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const searchValue = searchParams.get('name');
+
+    if (searchValue) setValueSearch(searchValue);
+  }, []);
+
   return useMemo(
     () => (
       <>
         <Breadcrumb title="user" />
         <div className="flex justify-between">
-          <Search message="user" handleKeywordSearch={handleKeywordSearch} />
+          <Search
+            message="user"
+            valueSearch={valueSearch}
+            handleKeywordSearch={handleKeywordSearch}
+          />
           <ButtonRedirect to="/admin/user" title="add_user" icon={faPlus} />
         </div>
         <div className="flex flex-col shadow-lg bg-white rounded mt-4">

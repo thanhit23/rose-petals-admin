@@ -1,40 +1,45 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import PropTypes from 'prop-types';
+import { debounce } from 'lodash';
 import {
   faMagnifyingGlass,
   faCircleXmark,
 } from '@fortawesome/free-solid-svg-icons';
-import PropTypes from 'prop-types';
-import { debounce } from 'lodash';
 
 import messages from './messages';
-// import { useDebounce } from '../../hook';
 import InputSearchWithFormatMessage from '../InputSearchWithFormatMessage';
 
-function Search({ handleKeywordSearch, message = 'default' }) {
-  const [value, setValue] = useState('');
-  const debounceLoadData = useCallback(
-    // eslint-disable-next-line no-shadow
-    debounce(value => handleKeywordSearch(value), 1000),
-    [],
-  );
+function Search({
+  handleKeywordSearch,
+  valueSearch = '',
+  message = 'default',
+}) {
+  const [keyword, setKeyword] = useState('');
 
   const inputRef = useRef();
 
   useEffect(() => {
-    if (!value.trim()) {
-      setValue(value.trim());
-    }
-  }, [value]);
+    if (!keyword.trim()) setKeyword(keyword.trim());
+  }, [keyword]);
+
+  useEffect(() => {
+    if (valueSearch) setKeyword(valueSearch);
+  }, [valueSearch]);
+
+  const debounceLoadData = useCallback(
+    debounce(value => handleKeywordSearch(value), 1000),
+    [],
+  );
 
   const handleClearInput = () => {
-    setValue('');
+    setKeyword('');
+    handleKeywordSearch('');
     inputRef.current.focus();
   };
 
-  // eslint-disable-next-line no-shadow
   const handleSetValue = ({ target: { value } }) => {
-    setValue(value);
+    setKeyword(value);
     debounceLoadData(value);
   };
 
@@ -49,10 +54,10 @@ function Search({ handleKeywordSearch, message = 'default' }) {
         message={messages[message]}
         type="text"
         className="w-[356px] outline-none border-[1px] border-solid border-[#eaeaea] py-2.5 px-8 rounded-lg"
-        value={value}
+        value={keyword}
         onChange={handleSetValue}
       />
-      {value && (
+      {keyword && (
         <button
           className="hover:opacity-70"
           type="button"
@@ -70,6 +75,7 @@ function Search({ handleKeywordSearch, message = 'default' }) {
 
 Search.prototype = {
   message: PropTypes.string,
+  valueSearch: PropTypes.string,
   handleKeywordSearch: PropTypes.func,
 };
 
