@@ -1,6 +1,6 @@
-const convertArrayToObject = (ruleOption, option) => {
+const getObjectAcceptArrayKey = (queryAccept, option) => {
   // eslint-disable-next-line consistent-return
-  return ruleOption.reduce((accumulator, currentValue) => {
+  return queryAccept.reduce((accumulator, currentValue) => {
     if (option[currentValue]) {
       return {
         ...accumulator,
@@ -10,4 +10,4 @@ const convertArrayToObject = (ruleOption, option) => {
   }, []);
 };
 
-export default convertArrayToObject;
+export default getObjectAcceptArrayKey;

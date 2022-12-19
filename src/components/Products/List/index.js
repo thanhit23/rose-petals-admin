@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Search from '../../Search';
@@ -11,10 +11,13 @@ import ButtonRedirect from '../../LinkWithFormatMessage';
 function ListProductComponent({
   meta,
   data,
-  getProducts,
+  handleGetProduct,
   handleDeleteProduct,
+  handleKeywordSearch,
 }) {
-  const handleGetProducts = page => getProducts(page);
+  const [valueSearch, setValueSearch] = useState();
+
+  const handleGetProducts = page => handleGetProduct(page);
 
   const renderImages = props => {
     const {
@@ -127,19 +130,31 @@ function ListProductComponent({
     },
   ]);
 
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const searchValue = searchParams.get('name');
+
+    if (searchValue) setValueSearch(searchValue);
+  }, []);
+
   return useMemo(
     () => (
       <>
         <Breadcrumb title="list_product" />
         <div className="flex justify-between">
-          <Search message="product" />
+          <Search
+            message="product"
+            valueSearch={valueSearch}
+            handleKeywordSearch={handleKeywordSearch}
+          />
           <ButtonRedirect
             to="/admin/product"
             title="add_product"
             icon={faPlus}
           />
         </div>
-        <div className="flex flex-col py-4 shadow-lg bg-white rounded mt-4">
+        <div className="flex flex-col shadow-lg bg-white rounded mt-4">
           <Table
             goToPage={handleGetProducts}
             meta={meta}

@@ -81,7 +81,7 @@ function ListCategoryComponent({ data, meta, deleteCategory, gotoPage }) {
         <Search message="category" />
         {renderAddCategoryButton()}
       </div>
-      <div className="flex flex-col py-4 shadow-lg bg-white rounded mt-4">
+      <div className="flex flex-col shadow-lg bg-white rounded mt-4">
         <Table
           goToPage={handleGoToPage}
           meta={meta}

@@ -1,1 +1,1 @@
-export { default as convertArrayToObject } from './convertArrayToObject';
+export { default as getObjectAcceptArrayKey } from './getObjectAcceptArrayKey';
