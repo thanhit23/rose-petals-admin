@@ -23,7 +23,7 @@ function SideBar({ isSidebar, isActiveItem }) {
   return (
     <div
       className={classNames(
-        'fixed top-0 bottom-0 left-0 duration-300 w-[260px]',
+        'fixed top-0 bottom-0 left-0 duration-300 w-[260px] flex',
         { 'w-[64px]': !isSidebar },
       )}
     >
@@ -54,7 +54,7 @@ function SideBar({ isSidebar, isActiveItem }) {
             </div>
           </a>
         </div>
-        <ul className="relative px-1">
+        <ul className="relative px-1 overflow-scroll max-h-[calc(100vh-70px)]">
           <Navigated
             isSidebar={isSidebar}
             pathRedirect="/"
@@ -105,10 +105,6 @@ function SideBar({ isSidebar, isActiveItem }) {
             ]}
           />
         </ul>
-        <div className="text-center bottom-0 absolute w-full">
-          <hr className="m-0" />
-          <p className="py-2 text-sm text-gray-700 bg-[#343a40]">Multikart</p>
-        </div>
       </div>
     </div>
   );

@@ -7,10 +7,10 @@ import {
   FETCH_USERS_FAILED,
 } from './constants';
 
-export const getUsers = page => ({
+export const getUsers = options => ({
   type: FETCH_USERS_REQUEST,
   payload: {
-    page,
+    options,
   },
 });
 

@@ -1,27 +1,61 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import propsTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import _ from 'lodash';
 
+import { getUsers, deleteUsers } from './actions';
 import AuthLayout from '../../../layouts/AuthLayout';
 import injectSaga from '../../../utils/injectSaga';
 import saga from './saga';
-import { getUsers, deleteUsers } from './actions';
 import injectReducer from '../../../utils/injectReducer';
 import reducer from './reducers';
 import ListUserComponent from '../../../components/Users/List';
+import Url from '../../../helpers/url';
 
 function ListUser({ getUser, data, meta, deleteUser }) {
-  useEffect(() => getUser('page=1'), []);
+  const navigate = useNavigate();
 
-  const redirect = useNavigate();
+  const [filter, setFilter] = useState({
+    page: 1,
+  });
 
-  const callback = () => redirect('/admin/users');
+  const callback = () => navigate('/admin/users');
 
-  const handleGoToPage = (page = 1) => getUser(`page=${page}`);
+  useEffect(() => {
+    const params = Url.getQueryString();
 
-  const handleKeywordSearch = keyword => getUser(`q=${keyword}`);
+    if (params !== filter) getUser(params);
+  }, [filter]);
+
+  const handleGoToPage = page => {
+    const params = Url.getQueryString();
+
+    const queryToString = Url.objectToQueryString({ ...params, page });
+
+    window.history.pushState('', '', `/admin/users?${queryToString}`);
+
+    setFilter({ ...params, page });
+  };
+
+  const handleKeywordSearch = name => {
+    const params = Url.getQueryString();
+
+    const obj = {
+      page: 1,
+      ...params,
+      name,
+    };
+
+    const objectUrl = _.pickBy(obj, _.identity);
+
+    const queryToString = Url.objectToQueryString(objectUrl);
+
+    window.history.pushState('', '', `/admin/users?${queryToString}`);
+
+    setFilter(obj);
+  };
 
   const handleDeleteUser = id => deleteUser(id, callback);
 
