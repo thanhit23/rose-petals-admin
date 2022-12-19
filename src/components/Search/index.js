@@ -28,7 +28,7 @@ function Search({
   }, [valueSearch]);
 
   const debounceLoadData = useCallback(
-    debounce(value => handleKeywordSearch(value), 1000),
+    debounce(name => handleKeywordSearch({ name }), 1000),
     [],
   );
 

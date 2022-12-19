@@ -3,7 +3,6 @@ import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import propsTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import _ from 'lodash';
 
 import { getUsers, deleteUsers } from './actions';
 import AuthLayout from '../../../layouts/AuthLayout';
@@ -19,6 +18,7 @@ function ListUser({ getUser, data, meta, deleteUser }) {
 
   const [filter, setFilter] = useState({
     page: 1,
+    name: '',
   });
 
   const callback = () => navigate('/admin/users');
@@ -29,32 +29,17 @@ function ListUser({ getUser, data, meta, deleteUser }) {
     if (params !== filter) getUser(params);
   }, [filter]);
 
-  const handleGetUsers = page => {
-    const params = Url.getQueryString();
-
-    const queryToString = Url.objectToQueryString({ ...params, page });
-
-    window.history.pushState('', '', `/admin/users?${queryToString}`);
-
-    setFilter({ ...params, page });
-  };
-
-  const handleKeywordSearch = name => {
-    const params = Url.getQueryString();
-
-    const obj = {
-      page: 1,
-      ...params,
-      name,
+  const handleGetUsers = option => {
+    const objectUrl = {
+      ...filter,
+      ...option,
     };
 
-    const objectUrl = _.pickBy(obj, _.identity);
+    const query = Url.objectToQueryString(objectUrl);
 
-    const queryToString = Url.objectToQueryString(objectUrl);
+    window.history.pushState('', '', `/admin/users?${query}`);
 
-    window.history.pushState('', '', `/admin/users?${queryToString}`);
-
-    setFilter(obj);
+    setFilter(objectUrl);
   };
 
   const handleDeleteUser = id => deleteUser(id, callback);
@@ -66,7 +51,6 @@ function ListUser({ getUser, data, meta, deleteUser }) {
         data={data}
         handleDeleteUser={handleDeleteUser}
         handleGetUsers={handleGetUsers}
-        handleKeywordSearch={handleKeywordSearch}
       />
     </AuthLayout>
   );

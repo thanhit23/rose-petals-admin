@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import propsTypes from 'prop-types';
 
 import { Link, useSearchParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,11 +14,10 @@ function ListProductComponent({
   data,
   handleGetProduct,
   handleDeleteProduct,
-  handleKeywordSearch,
 }) {
   const [valueSearch, setValueSearch] = useState();
 
-  const handleGetProducts = page => handleGetProduct(page);
+  const handleGetProducts = page => handleGetProduct({ page });
 
   const renderImages = props => {
     const {
@@ -146,7 +146,7 @@ function ListProductComponent({
           <Search
             message="product"
             valueSearch={valueSearch}
-            handleKeywordSearch={handleKeywordSearch}
+            handleKeywordSearch={handleGetProduct}
           />
           <ButtonRedirect
             to="/admin/product"
@@ -167,5 +167,12 @@ function ListProductComponent({
     [data],
   );
 }
+
+ListProductComponent.PropsType = {
+  data: propsTypes.array,
+  meta: propsTypes.object,
+  handleGetProduct: propsTypes.func,
+  handleDeleteProduct: propsTypes.func,
+};
 
 export default ListProductComponent;

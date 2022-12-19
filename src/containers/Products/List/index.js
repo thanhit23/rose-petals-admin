@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
-import { pickBy, identity } from 'lodash';
 
 import AuthLayout from '../../../layouts/AuthLayout';
 import ListProductComponent from '../../../components/Products/List';
@@ -18,6 +17,7 @@ import Url from '../../../helpers/url';
 function ListProducts({ getProducts, data, meta, deleteProduct }) {
   const [filter, setFilter] = useState({
     page: 1,
+    name: '',
   });
 
   useEffect(() => {
@@ -26,32 +26,17 @@ function ListProducts({ getProducts, data, meta, deleteProduct }) {
     if (params !== filter) getProducts(params);
   }, [filter]);
 
-  const handleGetProduct = page => {
-    const params = Url.getQueryString();
-
-    const queryToString = Url.objectToQueryString({ ...params, page });
-
-    window.history.pushState('', '', `/admin/products?${queryToString}`);
-
-    setFilter({ ...params, page });
-  };
-
-  const handleKeywordSearch = name => {
-    const params = Url.getQueryString();
-
-    const obj = {
-      page: 1,
-      ...params,
-      name,
+  const handleGetProducts = option => {
+    const objectUrl = {
+      ...filter,
+      ...option,
     };
 
-    const objectUrl = pickBy(obj, identity);
+    const query = Url.objectToQueryString(objectUrl);
 
-    const queryToString = Url.objectToQueryString(objectUrl);
+    window.history.pushState('', '', `/admin/products?${query}`);
 
-    window.history.pushState('', '', `/admin/products?${queryToString}`);
-
-    setFilter(obj);
+    setFilter(objectUrl);
   };
 
   const handleDeleteProduct = id => deleteProduct(id);
@@ -61,9 +46,8 @@ function ListProducts({ getProducts, data, meta, deleteProduct }) {
       <ListProductComponent
         data={data}
         meta={meta}
-        handleGetProduct={handleGetProduct}
+        handleGetProduct={handleGetProducts}
         handleDeleteProduct={handleDeleteProduct}
-        handleKeywordSearch={handleKeywordSearch}
       />
     </AuthLayout>
   );

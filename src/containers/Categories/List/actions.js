@@ -7,8 +7,9 @@ import {
   DELETE_CATEGORY_SUCCESS,
 } from './constants';
 
-export const getCategories = () => ({
+export const getCategories = options => ({
   type: GET_CATEGORY_REQUEST,
+  payload: { options },
 });
 
 export const getCategoriesSuccess = data => ({

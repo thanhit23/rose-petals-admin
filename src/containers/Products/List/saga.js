@@ -1,5 +1,4 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { isEmpty } from 'lodash';
 
 import { DELETE_PRODUCTS_REQUEST, GET_PRODUCTS_REQUEST } from './constants';
 import { getObjectAcceptArrayKey } from '../../../helpers';
@@ -15,13 +14,9 @@ import {
 } from './actions';
 
 function* getProducts({ payload: { options } }) {
-  let option = { page: 1 };
+  const queryAccept = ['name', 'page'];
 
-  const ruleOption = ['name', 'page'];
-
-  if (!isEmpty(options)) {
-    option = getObjectAcceptArrayKey(ruleOption, options);
-  }
+  const option = getObjectAcceptArrayKey(queryAccept, { page: 1, ...options });
 
   const res = yield call(getProductsService, option);
 

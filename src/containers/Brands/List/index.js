@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -12,18 +12,42 @@ import injectReducer from '../../../utils/injectReducer';
 import injectSaga from '../../../utils/injectSaga';
 import reducer from './reducers';
 import saga from './saga';
+import Url from '../../../helpers/url';
 
 function ListBrand({ getBrand, data, meta, deleteBrand }) {
-  useEffect(() => getBrand(), []);
+  const [filter, setFilter] = useState({
+    page: 1,
+    name: '',
+  });
+
+  useEffect(() => {
+    const params = Url.getQueryString();
+
+    if (params !== filter) getBrand(params);
+  }, [filter]);
+
+  const handleGetBrands = option => {
+    const objectUrl = {
+      ...filter,
+      ...option,
+    };
+
+    const query = Url.objectToQueryString(objectUrl);
+
+    window.history.pushState('', '', `/admin/brands?${query}`);
+
+    setFilter(objectUrl);
+  };
 
   const handleDeleteBrand = id => deleteBrand(id);
 
   return (
     <AuthLayout title="list_brand">
       <ListBrandsComponent
-        handleDeleteBrand={handleDeleteBrand}
         meta={meta}
         data={data}
+        getBrands={handleGetBrands}
+        handleDeleteBrand={handleDeleteBrand}
       />
     </AuthLayout>
   );

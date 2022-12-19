@@ -7,8 +7,9 @@ import {
   DELETE_BRAND_FAILED,
 } from './constants';
 
-export const getBrand = () => ({
+export const getBrand = options => ({
   type: GET_BRAND_REQUEST,
+  payload: { options },
 });
 
 export const getBrandSuccess = ({ data, meta }) => ({
