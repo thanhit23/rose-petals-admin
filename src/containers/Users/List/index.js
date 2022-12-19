@@ -29,7 +29,7 @@ function ListUser({ getUser, data, meta, deleteUser }) {
     if (params !== filter) getUser(params);
   }, [filter]);
 
-  const handleGoToPage = page => {
+  const handleGetUsers = page => {
     const params = Url.getQueryString();
 
     const queryToString = Url.objectToQueryString({ ...params, page });
@@ -65,7 +65,7 @@ function ListUser({ getUser, data, meta, deleteUser }) {
         meta={meta}
         data={data}
         handleDeleteUser={handleDeleteUser}
-        gotoPage={handleGoToPage}
+        handleGetUsers={handleGetUsers}
         handleKeywordSearch={handleKeywordSearch}
       />
     </AuthLayout>

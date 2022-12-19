@@ -14,13 +14,13 @@ import messages from './messages';
 function ListUserComponent({
   data,
   meta,
-  gotoPage,
+  handleGetUsers,
   handleDeleteUser,
   handleKeywordSearch,
 }) {
   const [valueSearch, setValueSearch] = useState();
 
-  const handleGoToPage = page => gotoPage(page);
+  const handleGoToPage = page => handleGetUsers(page);
 
   const columns = useMemo(() => [
     {

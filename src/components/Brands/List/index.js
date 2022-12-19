@@ -91,7 +91,7 @@ function ListBrandsComponent({ data, meta, handleDeleteBrand, gotoPage }) {
           <Search message="brand" />
           <ButtonRedirect to="/admin/brand" title="add_brand" icon={faPlus} />
         </div>
-        <div className="flex flex-col py-4 shadow-lg bg-white rounded mt-4">
+        <div className="flex flex-col shadow-lg bg-white rounded mt-4">
           <Table
             goToPage={handleGoToPage}
             meta={meta}

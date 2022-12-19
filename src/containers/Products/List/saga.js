@@ -1,6 +1,8 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
+import { isEmpty } from 'lodash';
 
 import { DELETE_PRODUCTS_REQUEST, GET_PRODUCTS_REQUEST } from './constants';
+import { getObjectAcceptArrayKey } from '../../../helpers';
 import {
   getProducts as getProductsService,
   deleteProduct as deleteProductService,
@@ -12,8 +14,16 @@ import {
   deleteProductFailed,
 } from './actions';
 
-function* getProducts() {
-  const res = yield call(getProductsService);
+function* getProducts({ payload: { options } }) {
+  let option = { page: 1 };
+
+  const ruleOption = ['name', 'page'];
+
+  if (!isEmpty(options)) {
+    option = getObjectAcceptArrayKey(ruleOption, options);
+  }
+
+  const res = yield call(getProductsService, option);
 
   const { status, data } = res;
 

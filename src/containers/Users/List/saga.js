@@ -3,12 +3,12 @@ import { isEmpty } from 'lodash';
 
 import { FETCH_USERS_REQUEST, DELETE_USERS_REQUEST } from './constants';
 import { getUsers, deleteUser } from './service';
+import { getObjectAcceptArrayKey } from '../../../helpers';
 import {
   getUsersSuccess,
   getUsersListFailed,
   deleteUserSuccess,
 } from './actions';
-import { convertArrayToObject } from '../../../helpers';
 
 function* getListUsers({ payload: { options } }) {
   let option = { page: 1 };
@@ -16,7 +16,7 @@ function* getListUsers({ payload: { options } }) {
   const ruleOption = ['role', 'name', 'page'];
 
   if (!isEmpty(options)) {
-    option = convertArrayToObject(ruleOption, options);
+    option = getObjectAcceptArrayKey(ruleOption, options);
   }
 
   const res = yield call(getUsers, option);

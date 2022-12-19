@@ -7,8 +7,9 @@ import {
   DELETE_PRODUCTS_FAILED,
 } from './constants';
 
-export const getProduct = () => ({
+export const getProduct = options => ({
   type: GET_PRODUCTS_REQUEST,
+  payload: { options },
 });
 
 export const getProductSuccess = ({ data, meta }) => ({
