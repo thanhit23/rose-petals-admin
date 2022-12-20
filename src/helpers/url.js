@@ -1,9 +1,11 @@
 class Url {
-  static getQueryString() {
+  static getQueryObject() {
     return Object.fromEntries(new URLSearchParams(window.location.search));
   }
 
-  static objectToQueryString(obj) {
+  static convertToQueryString(options) {
+    const currentQuery = this.getQueryObject();
+    const obj = { ...currentQuery, ...options };
     return new URLSearchParams(obj).toString();
   }
 }

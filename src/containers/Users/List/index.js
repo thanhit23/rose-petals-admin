@@ -24,15 +24,15 @@ function ListUser({ getUser, data, meta, deleteUser }) {
   const callback = () => navigate('/admin/users');
 
   useEffect(() => {
-    const params = Url.getQueryString();
+    const params = Url.getQueryObject();
 
     if (params !== filter) getUser(params);
   }, [filter]);
 
   const handleGetUsers = page => {
-    const params = Url.getQueryString();
+    const params = Url.getQueryObject();
 
-    const queryToString = Url.objectToQueryString({ ...params, page });
+    const queryToString = Url.convertToQueryString({ ...params, page });
 
     window.history.pushState('', '', `/admin/users?${queryToString}`);
 
@@ -40,7 +40,7 @@ function ListUser({ getUser, data, meta, deleteUser }) {
   };
 
   const handleKeywordSearch = name => {
-    const params = Url.getQueryString();
+    const params = Url.getQueryObject();
 
     const obj = {
       page: 1,
@@ -50,7 +50,7 @@ function ListUser({ getUser, data, meta, deleteUser }) {
 
     const objectUrl = _.pickBy(obj, _.identity);
 
-    const queryToString = Url.objectToQueryString(objectUrl);
+    const queryToString = Url.convertToQueryString(objectUrl);
 
     window.history.pushState('', '', `/admin/users?${queryToString}`);
 

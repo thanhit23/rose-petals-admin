@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
-import { pickBy, identity } from 'lodash';
 
 import AuthLayout from '../../../layouts/AuthLayout';
 import ListProductComponent from '../../../components/Products/List';
@@ -21,37 +20,16 @@ function ListProducts({ getProducts, data, meta, deleteProduct }) {
   });
 
   useEffect(() => {
-    const params = Url.getQueryString();
-
-    if (params !== filter) getProducts(params);
+    const query = Url.getQueryObject();
+    getProducts(query);
   }, [filter]);
 
-  const handleGetProduct = page => {
-    const params = Url.getQueryString();
-
-    const queryToString = Url.objectToQueryString({ ...params, page });
-
+  const handleGetProduct = options => {
+    const queryToString = Url.convertToQueryString({ ...options });
     window.history.pushState('', '', `/admin/products?${queryToString}`);
 
-    setFilter({ ...params, page });
-  };
-
-  const handleKeywordSearch = name => {
-    const params = Url.getQueryString();
-
-    const obj = {
-      page: 1,
-      ...params,
-      name,
-    };
-
-    const objectUrl = pickBy(obj, identity);
-
-    const queryToString = Url.objectToQueryString(objectUrl);
-
-    window.history.pushState('', '', `/admin/products?${queryToString}`);
-
-    setFilter(obj);
+    // TODO: chỗ này có thể xem xét lại
+    setFilter({ ...filter, ...options });
   };
 
   const handleDeleteProduct = id => deleteProduct(id);
@@ -63,7 +41,6 @@ function ListProducts({ getProducts, data, meta, deleteProduct }) {
         meta={meta}
         handleGetProduct={handleGetProduct}
         handleDeleteProduct={handleDeleteProduct}
-        handleKeywordSearch={handleKeywordSearch}
       />
     </AuthLayout>
   );

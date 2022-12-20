@@ -36,7 +36,7 @@ function Table({ col: columns, data, meta, goToPage, showLoadingTable }) {
 
   const totalPagesArr = Array.from({ length: totalPages });
 
-  const handleClickPageButton = page => goToPage(page);
+  const handleClickPageButton = page => goToPage({ page });
 
   const renderPageNumber = () => {
     return totalPagesArr.map((_, index) => {

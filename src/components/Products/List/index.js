@@ -13,11 +13,10 @@ function ListProductComponent({
   data,
   handleGetProduct,
   handleDeleteProduct,
-  handleKeywordSearch,
 }) {
   const [valueSearch, setValueSearch] = useState();
 
-  const handleGetProducts = page => handleGetProduct(page);
+  const handleGetProducts = option => handleGetProduct(option);
 
   const renderImages = props => {
     const {
@@ -146,7 +145,7 @@ function ListProductComponent({
           <Search
             message="product"
             valueSearch={valueSearch}
-            handleKeywordSearch={handleKeywordSearch}
+            handleKeywordSearch={value => handleGetProducts({ name: value })}
           />
           <ButtonRedirect
             to="/admin/product"
