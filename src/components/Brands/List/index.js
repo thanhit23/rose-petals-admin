@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import propsTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -9,8 +9,10 @@ import Breadcrumb from '../../Breadcrumb';
 import Search from '../../Search';
 import Table from '../../Table';
 
-function ListBrandsComponent({ data, meta, handleDeleteBrand, gotoPage }) {
-  const handleGoToPage = page => gotoPage(page);
+function ListBrandsComponent({ data, meta, getBrands, handleDeleteBrand }) {
+  const [valueSearch, setValueSearch] = useState();
+
+  const handleGetBrands = page => getBrands({ page });
 
   const renderAction = props => {
     const {
@@ -54,6 +56,14 @@ function ListBrandsComponent({ data, meta, handleDeleteBrand, gotoPage }) {
     return <img className="w-9 m-auto" src={logo} alt="" />;
   };
 
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const searchValue = searchParams.get('name');
+
+    if (searchValue) setValueSearch(searchValue);
+  }, []);
+
   const columns = useMemo(() => [
     {
       Header: 'Stt',
@@ -88,12 +98,16 @@ function ListBrandsComponent({ data, meta, handleDeleteBrand, gotoPage }) {
       <>
         <Breadcrumb title="list_brand" />
         <div className="flex justify-between">
-          <Search message="brand" />
+          <Search
+            message="brand"
+            valueSearch={valueSearch}
+            handleKeywordSearch={getBrands}
+          />
           <ButtonRedirect to="/admin/brand" title="add_brand" icon={faPlus} />
         </div>
         <div className="flex flex-col shadow-lg bg-white rounded mt-4">
           <Table
-            goToPage={handleGoToPage}
+            goToPage={handleGetBrands}
             meta={meta}
             col={columns}
             data={data}
@@ -108,8 +122,8 @@ function ListBrandsComponent({ data, meta, handleDeleteBrand, gotoPage }) {
 ListBrandsComponent.PropsType = {
   data: propsTypes.array,
   meta: propsTypes.object,
-  gotoPage: propsTypes.func,
-  deleteBrand: propsTypes.func,
+  getBrands: propsTypes.func,
+  handleDeleteBrand: propsTypes.func,
 };
 
 export default ListBrandsComponent;

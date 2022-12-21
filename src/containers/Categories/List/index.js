@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { bindActionCreators, compose } from 'redux';
 import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -14,11 +14,34 @@ import {
   deleteCategory as deleteCategoryAction,
 } from './actions';
 import injectReducer from '../../../utils/injectReducer';
+import Url from '../../../helpers/url';
 
 function ListCategory({ getCategory, data, meta, deleteCategory }) {
-  useEffect(() => getCategory(), []);
-
   const redirect = useNavigate();
+
+  const [filter, setFilter] = useState({
+    page: 1,
+    name: '',
+  });
+
+  useEffect(() => {
+    const params = Url.getQueryString();
+
+    if (params !== filter) getCategory(params);
+  }, [filter]);
+
+  const handleGetCategories = option => {
+    const objectUrl = {
+      ...filter,
+      ...option,
+    };
+
+    const query = Url.objectToQueryString(objectUrl);
+
+    window.history.pushState('', '', `/admin/categories?${query}`);
+
+    setFilter(objectUrl);
+  };
 
   const callback = () => redirect('/admin/categories');
 
@@ -29,7 +52,8 @@ function ListCategory({ getCategory, data, meta, deleteCategory }) {
       <CategoryComponent
         data={data}
         meta={meta}
-        handleDeleteCategory={handleDeleteCategory}
+        getCategory={handleGetCategories}
+        deleteCategory={handleDeleteCategory}
       />
     ),
     [data],
@@ -41,8 +65,8 @@ function ListCategory({ getCategory, data, meta, deleteCategory }) {
 ListCategory.prototype = {
   data: PropTypes.array,
   meta: PropTypes.object,
-  deleteCategory: PropTypes.func,
   getCategory: PropTypes.func,
+  deleteCategory: PropTypes.func,
 };
 
 const mapStateToProps = ({

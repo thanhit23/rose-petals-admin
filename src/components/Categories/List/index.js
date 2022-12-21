@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import propsTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -9,10 +9,20 @@ import Breadcrumb from '../../Breadcrumb';
 import Search from '../../Search';
 import Table from '../../Table';
 
-function ListCategoryComponent({ data, meta, deleteCategory, gotoPage }) {
+function ListCategoryComponent({ data, meta, getCategory, deleteCategory }) {
+  const [valueSearch, setValueSearch] = useState();
+
   const handleDeleteCategory = id => deleteCategory(id);
 
-  const handleGoToPage = page => gotoPage(page);
+  const handleGetCategory = page => getCategory({ page });
+
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const searchValue = searchParams.get('name');
+
+    if (searchValue) setValueSearch(searchValue);
+  }, []);
 
   const columns = useMemo(() => [
     {
@@ -78,12 +88,16 @@ function ListCategoryComponent({ data, meta, deleteCategory, gotoPage }) {
     <>
       <Breadcrumb title="category" />
       <div className="flex justify-between">
-        <Search message="category" />
+        <Search
+          message="category"
+          valueSearch={valueSearch}
+          handleKeywordSearch={getCategory}
+        />
         {renderAddCategoryButton()}
       </div>
       <div className="flex flex-col shadow-lg bg-white rounded mt-4">
         <Table
-          goToPage={handleGoToPage}
+          goToPage={handleGetCategory}
           meta={meta}
           col={columns}
           data={data}
@@ -96,7 +110,7 @@ function ListCategoryComponent({ data, meta, deleteCategory, gotoPage }) {
 ListCategoryComponent.PropsType = {
   data: propsTypes.array,
   meta: propsTypes.object,
-  gotoPage: propsTypes.func,
+  getCategory: propsTypes.func,
   deleteCategory: propsTypes.func,
 };
 

@@ -1,5 +1,7 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
+// import { isEmpty } from 'lodash';
 import { GET_BRAND_REQUEST, DELETE_BRAND_REQUEST } from './constants';
+
 import {
   getBrand as getBrandService,
   deleteBrand as deleteBrandService,
@@ -10,11 +12,17 @@ import {
   deleteBrandSuccess,
   deleteBrandFailed,
 } from './actions';
+import { getObjectAcceptArrayKey } from '../../../helpers';
 
-function* getBrand() {
-  const res = yield call(getBrandService);
+function* getBrand({ payload: { options } }) {
+  const queryAccept = ['name', 'page'];
+
+  const option = getObjectAcceptArrayKey(queryAccept, { page: 1, ...options });
+
+  const res = yield call(getBrandService, option);
 
   const { data } = res;
+
   const { status } = data;
 
   if (status) {

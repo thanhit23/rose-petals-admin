@@ -1,4 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
+
 import { DELETE_CATEGORY_REQUEST, GET_CATEGORY_REQUEST } from './constants';
 import { get, deleteCategory as remove } from './service';
 import {
@@ -7,11 +8,19 @@ import {
   deleteCategorySuccess,
   deleteCategoryFailed,
 } from './actions';
+import { getObjectAcceptArrayKey } from '../../../helpers';
 
-function* getCategory() {
-  const res = yield call(get);
+function* getCategory({ payload: { options } }) {
+  const queryAccept = ['name', 'page'];
+
+  const option = getObjectAcceptArrayKey(queryAccept, { page: 1, ...options });
+
+  const res = yield call(get, option);
+
   const { data } = res;
+
   const { status, message } = data;
+
   if (status) {
     yield put(getCategoriesSuccess(data));
   } else {
@@ -21,6 +30,7 @@ function* getCategory() {
 
 function* deleteCategory({ payload: { id, callback } }) {
   const res = yield call(remove, id);
+
   const {
     data: { status, message },
   } = res;

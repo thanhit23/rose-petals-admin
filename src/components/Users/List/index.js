@@ -11,16 +11,10 @@ import Search from '../../Search';
 import Table from '../../Table';
 import messages from './messages';
 
-function ListUserComponent({
-  data,
-  meta,
-  handleGetUsers,
-  handleDeleteUser,
-  handleKeywordSearch,
-}) {
+function ListUserComponent({ data, meta, handleGetUsers, handleDeleteUser }) {
   const [valueSearch, setValueSearch] = useState();
 
-  const handleGoToPage = page => handleGetUsers(page);
+  const handleGoToPage = page => handleGetUsers({ page });
 
   const columns = useMemo(() => [
     {
@@ -114,7 +108,7 @@ function ListUserComponent({
           <Search
             message="user"
             valueSearch={valueSearch}
-            handleKeywordSearch={handleKeywordSearch}
+            handleKeywordSearch={handleGetUsers}
           />
           <ButtonRedirect to="/admin/user" title="add_user" icon={faPlus} />
         </div>
@@ -135,9 +129,8 @@ function ListUserComponent({
 ListUserComponent.PropsType = {
   data: propsTypes.array,
   meta: propsTypes.object,
-  gotoPage: propsTypes.func,
+  handleGetUsers: propsTypes.func,
   handleDeleteUser: propsTypes.func,
-  handleKeywordSearch: propsTypes.func,
 };
 
 export default ListUserComponent;
