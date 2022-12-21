@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import propsTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
+import { Url } from '../../../helpers';
 import { getUsers, deleteUsers } from './actions';
 import AuthLayout from '../../../layouts/AuthLayout';
 import injectSaga from '../../../utils/injectSaga';
@@ -11,7 +12,6 @@ import saga from './saga';
 import injectReducer from '../../../utils/injectReducer';
 import reducer from './reducers';
 import ListUserComponent from '../../../components/Users/List';
-import Url from '../../../helpers/url';
 
 function ListUser({ getUser, data, meta, deleteUser }) {
   const navigate = useNavigate();
@@ -49,8 +49,8 @@ function ListUser({ getUser, data, meta, deleteUser }) {
       <ListUserComponent
         meta={meta}
         data={data}
+        getUsers={handleGetUsers}
         handleDeleteUser={handleDeleteUser}
-        handleGetUsers={handleGetUsers}
       />
     </AuthLayout>
   );

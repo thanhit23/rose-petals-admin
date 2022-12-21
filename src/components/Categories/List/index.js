@@ -14,7 +14,7 @@ function ListCategoryComponent({ data, meta, getCategory, deleteCategory }) {
 
   const handleDeleteCategory = id => deleteCategory(id);
 
-  const handleGetCategory = page => getCategory({ page });
+  const handleGetCategories = options => getCategory(options);
 
   const [searchParams] = useSearchParams();
 
@@ -80,10 +80,6 @@ function ListCategoryComponent({ data, meta, getCategory, deleteCategory }) {
     },
   ]);
 
-  const renderAddCategoryButton = () => (
-    <ButtonRedirect to="/admin/category" title="add_category" icon={faPlus} />
-  );
-
   return (
     <>
       <Breadcrumb title="category" />
@@ -91,13 +87,17 @@ function ListCategoryComponent({ data, meta, getCategory, deleteCategory }) {
         <Search
           message="category"
           valueSearch={valueSearch}
-          handleKeywordSearch={getCategory}
+          handleKeywordSearch={handleGetCategories}
         />
-        {renderAddCategoryButton()}
+        <ButtonRedirect
+          to="/admin/category"
+          title="add_category"
+          icon={faPlus}
+        />
       </div>
       <div className="flex flex-col shadow-lg bg-white rounded mt-4">
         <Table
-          goToPage={handleGetCategory}
+          goToPage={handleGetCategories}
           meta={meta}
           col={columns}
           data={data}

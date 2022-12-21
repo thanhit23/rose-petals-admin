@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 
+import { Url } from '../../../helpers';
 import AuthLayout from '../../../layouts/AuthLayout';
 import ListProductComponent from '../../../components/Products/List';
 import injectReducer from '../../../utils/injectReducer';
@@ -12,9 +13,8 @@ import {
   getProduct as getProductAction,
   deleteProduct as deleteProductAction,
 } from './actions';
-import Url from '../../../helpers/url';
 
-function ListProducts({ getProducts, data, meta, deleteProduct }) {
+function ListProducts({ data, meta, getProducts, deleteProduct }) {
   const [filter, setFilter] = useState({
     page: 1,
     name: '',
@@ -46,7 +46,7 @@ function ListProducts({ getProducts, data, meta, deleteProduct }) {
       <ListProductComponent
         data={data}
         meta={meta}
-        handleGetProduct={handleGetProducts}
+        getProduct={handleGetProducts}
         handleDeleteProduct={handleDeleteProduct}
       />
     </AuthLayout>

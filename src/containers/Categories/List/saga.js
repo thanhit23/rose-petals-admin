@@ -1,7 +1,9 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 
-import { DELETE_CATEGORY_REQUEST, GET_CATEGORY_REQUEST } from './constants';
-import { get, deleteCategory as remove } from './service';
+import {
+  getCategories as getCategoriesService,
+  deleteCategory as deleteCategoryService,
+} from './service';
 import {
   getCategoriesSuccess,
   getCategoriesFailed,
@@ -9,13 +11,14 @@ import {
   deleteCategoryFailed,
 } from './actions';
 import { getObjectAcceptArrayKey } from '../../../helpers';
+import { DELETE_CATEGORY_REQUEST, GET_CATEGORY_REQUEST } from './constants';
 
 function* getCategory({ payload: { options } }) {
   const queryAccept = ['name', 'page'];
 
   const option = getObjectAcceptArrayKey(queryAccept, { page: 1, ...options });
 
-  const res = yield call(get, option);
+  const res = yield call(getCategoriesService, option);
 
   const { data } = res;
 
@@ -29,13 +32,15 @@ function* getCategory({ payload: { options } }) {
 }
 
 function* deleteCategory({ payload: { id, callback } }) {
-  const res = yield call(remove, id);
+  const res = yield call(deleteCategoryService, id);
 
   const {
     data: { status, message },
   } = res;
+
   if (status) {
     yield put(deleteCategorySuccess());
+
     if (callback instanceof Function) callback();
   } else {
     yield put(deleteCategoryFailed(message));

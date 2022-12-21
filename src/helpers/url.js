@@ -1,10 +1,13 @@
+import { identity, pickBy } from 'lodash';
+
 class Url {
   static getQueryString() {
     return Object.fromEntries(new URLSearchParams(window.location.search));
   }
 
   static objectToQueryString(obj) {
-    return new URLSearchParams(obj).toString();
+    const objectUrl = pickBy(obj, identity);
+    return new URLSearchParams(objectUrl).toString();
   }
 }
 

@@ -12,7 +12,7 @@ import Table from '../../Table';
 function ListBrandsComponent({ data, meta, getBrands, handleDeleteBrand }) {
   const [valueSearch, setValueSearch] = useState();
 
-  const handleGetBrands = page => getBrands({ page });
+  const handleGetBrands = options => getBrands(options);
 
   const renderAction = props => {
     const {
@@ -101,7 +101,7 @@ function ListBrandsComponent({ data, meta, getBrands, handleDeleteBrand }) {
           <Search
             message="brand"
             valueSearch={valueSearch}
-            handleKeywordSearch={getBrands}
+            handleKeywordSearch={handleGetBrands}
           />
           <ButtonRedirect to="/admin/brand" title="add_brand" icon={faPlus} />
         </div>

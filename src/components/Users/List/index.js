@@ -11,10 +11,10 @@ import Search from '../../Search';
 import Table from '../../Table';
 import messages from './messages';
 
-function ListUserComponent({ data, meta, handleGetUsers, handleDeleteUser }) {
+function ListUserComponent({ data, meta, getUsers, handleDeleteUser }) {
   const [valueSearch, setValueSearch] = useState();
 
-  const handleGoToPage = page => handleGetUsers({ page });
+  const handleGetUsers = options => getUsers(options);
 
   const columns = useMemo(() => [
     {
@@ -114,7 +114,7 @@ function ListUserComponent({ data, meta, handleGetUsers, handleDeleteUser }) {
         </div>
         <div className="flex flex-col shadow-lg bg-white rounded mt-4">
           <Table
-            goToPage={handleGoToPage}
+            goToPage={handleGetUsers}
             meta={meta}
             col={columns}
             data={data}
