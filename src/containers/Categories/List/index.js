@@ -13,8 +13,8 @@ import {
   getCategories,
   deleteCategory as deleteCategoryAction,
 } from './actions';
+import { Url } from '../../../helpers';
 import injectReducer from '../../../utils/injectReducer';
-import Url from '../../../helpers/url';
 
 function ListCategory({ getCategory, data, meta, deleteCategory }) {
   const redirect = useNavigate();

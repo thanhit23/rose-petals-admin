@@ -12,12 +12,12 @@ import ButtonRedirect from '../../LinkWithFormatMessage';
 function ListProductComponent({
   meta,
   data,
-  handleGetProduct,
+  getProducts,
   handleDeleteProduct,
 }) {
   const [valueSearch, setValueSearch] = useState();
 
-  const handleGetProducts = page => handleGetProduct({ page });
+  const handleGetProducts = options => getProducts(options);
 
   const renderImages = props => {
     const {
@@ -146,7 +146,7 @@ function ListProductComponent({
           <Search
             message="product"
             valueSearch={valueSearch}
-            handleKeywordSearch={handleGetProduct}
+            handleKeywordSearch={handleGetProducts}
           />
           <ButtonRedirect
             to="/admin/product"

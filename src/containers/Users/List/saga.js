@@ -1,20 +1,23 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 
-import { FETCH_USERS_REQUEST, DELETE_USERS_REQUEST } from './constants';
-import { getUsers, deleteUser } from './service';
-import { getObjectAcceptArrayKey } from '../../../helpers';
+import {
+  getUsers as getUsersService,
+  deleteUser as deleteUserService,
+} from './service';
 import {
   getUsersSuccess,
   getUsersListFailed,
   deleteUserSuccess,
 } from './actions';
+import { getObjectAcceptArrayKey } from '../../../helpers';
+import { FETCH_USERS_REQUEST, DELETE_USERS_REQUEST } from './constants';
 
-function* getListUsers({ payload: { options } }) {
+function* getUsers({ payload: { options } }) {
   const queryAccept = ['role', 'name', 'page'];
 
   const option = getObjectAcceptArrayKey(queryAccept, { page: 1, ...options });
 
-  const res = yield call(getUsers, option);
+  const res = yield call(getUsersService, option);
 
   const { status, data } = res;
 
@@ -26,8 +29,8 @@ function* getListUsers({ payload: { options } }) {
   }
 }
 
-function* apiDeleteUser({ payload: { id, callback } }) {
-  const res = yield call(deleteUser, id);
+function* deleteUser({ payload: { id, callback } }) {
+  const res = yield call(deleteUserService, id);
 
   const { status, data } = res;
 
@@ -41,8 +44,8 @@ function* apiDeleteUser({ payload: { id, callback } }) {
 }
 
 function* userSaga() {
-  yield takeEvery(FETCH_USERS_REQUEST, getListUsers);
-  yield takeEvery(DELETE_USERS_REQUEST, apiDeleteUser);
+  yield takeEvery(FETCH_USERS_REQUEST, getUsers);
+  yield takeEvery(DELETE_USERS_REQUEST, deleteUser);
 }
 
 export default userSaga;

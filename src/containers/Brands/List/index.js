@@ -12,7 +12,7 @@ import injectReducer from '../../../utils/injectReducer';
 import injectSaga from '../../../utils/injectSaga';
 import reducer from './reducers';
 import saga from './saga';
-import Url from '../../../helpers/url';
+import { Url } from '../../../helpers';
 
 function ListBrand({ getBrand, data, meta, deleteBrand }) {
   const [filter, setFilter] = useState({
