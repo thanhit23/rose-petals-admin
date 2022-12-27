@@ -1,7 +1,7 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { memo, useLayoutEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faCircle } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
@@ -47,10 +47,18 @@ function Navigated({
             <NavLink
               style={({ isActive }) => (isActive ? styleActive : undefined)}
               className={classNames(
-                'active flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 duration-300',
+                'active flex items-center text-xs py-4 px-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 duration-300',
               )}
               to={path}
             >
+              <div className="mr-4 flex items-center">
+                <FontAwesomeIcon
+                  className={classNames('w-[6px] h-[6px]', {
+                    'mr-3': isSidebar,
+                  })}
+                  icon={faCircle}
+                />
+              </div>
               {name}
             </NavLink>
           </div>

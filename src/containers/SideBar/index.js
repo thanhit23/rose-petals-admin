@@ -57,7 +57,7 @@ function SideBar({ isSidebar, isActiveItem }) {
             </div>
           </a>
         </div>
-        <ul className="relative px-3 overflow-scroll max-h-[calc(100vh-70px)]">
+        <ul className="relative px-3 mt-8 overflow-scroll max-h-[calc(100vh-70px)]">
           <Navigated
             isSidebar={isSidebar}
             pathRedirect="/"
