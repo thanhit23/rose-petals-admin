@@ -9,8 +9,17 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { Url } from '../../helpers';
+import LoadingTable from '../../containers/LoadingIndicatorTable';
 
-function Table({ col: columns, data, meta, goToPage, showLoadingTable }) {
+function Table({
+  col: columns,
+  data,
+  meta,
+  goToPage,
+  pagination = false,
+  showLoadingTable,
+}) {
   const { page: pages, limit, totalPages } = meta;
 
   const dataTable = useTable(
@@ -22,21 +31,18 @@ function Table({ col: columns, data, meta, goToPage, showLoadingTable }) {
     usePagination,
   );
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    nextPage,
-    previousPage,
-    canPreviousPage,
-    canNextPage,
-    prepareRow,
-  } = dataTable;
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    dataTable;
 
   const totalPagesArr = Array.from({ length: totalPages });
 
   const handleClickPageButton = page => goToPage({ page });
+
+  const handleClickPaginationButton = () => {
+    const params = Url.getQueryString();
+    const page = +params.page + 1;
+    goToPage({ page });
+  };
 
   const renderPageNumber = () => {
     return totalPagesArr.map((_, index) => {
@@ -53,7 +59,7 @@ function Table({ col: columns, data, meta, goToPage, showLoadingTable }) {
           )}
         >
           <button
-            className="py-[5px] px-[10px]"
+            className="py-[5px] px-[10px] w-8 h-8"
             type="button"
             onClick={() => handleClickPageButton(index + 1)}
             disabled={isCurrentPage}
@@ -74,14 +80,15 @@ function Table({ col: columns, data, meta, goToPage, showLoadingTable }) {
               className={classNames(
                 'flex justify-center items-center w-8 h-8 m-2.5 rounded-full text-[#4E97FD] border border-[#4E97FD] border-solid',
                 {
-                  'opacity-70': !canPreviousPage,
+                  'opacity-70': pages === 1,
                 },
               )}
             >
               <button
+                className="w-8 h-8"
                 type="button"
-                onClick={() => previousPage()}
-                disabled={!canPreviousPage}
+                onClick={() => handleClickPaginationButton(-1)}
+                disabled={pages === 1}
               >
                 <FontAwesomeIcon icon={faChevronLeft} />
               </button>
@@ -91,14 +98,15 @@ function Table({ col: columns, data, meta, goToPage, showLoadingTable }) {
               className={classNames(
                 'flex justify-center items-center w-8 h-8 m-2.5 rounded-full text-[#4E97FD] border border-[#4E97FD] border-solid',
                 {
-                  'opacity-70': !canNextPage,
+                  'opacity-70': pages === totalPages,
                 },
               )}
             >
               <button
+                className="w-8 h-8"
                 type="button"
-                onClick={() => nextPage()}
-                disabled={!canNextPage}
+                onClick={() => handleClickPaginationButton(1)}
+                disabled={pages === totalPages}
               >
                 <FontAwesomeIcon icon={faChevronRight} />
               </button>
@@ -131,20 +139,11 @@ function Table({ col: columns, data, meta, goToPage, showLoadingTable }) {
     </tbody>
   );
 
-  const showLoading = () => (
-    <div className="flex justify-center">
-      <div className="lds-ellipsis">
-        <div />
-        <div />
-        <div />
-        <div />
-      </div>
-    </div>
-  );
+  const showLoading = () => <LoadingTable />;
 
   return (
     <>
-      <table {...getTableProps()}>
+      <table className="w-full" {...getTableProps()}>
         <thead className="bg-[#f3f5f9]">
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -156,10 +155,10 @@ function Table({ col: columns, data, meta, goToPage, showLoadingTable }) {
             </tr>
           ))}
         </thead>
-        {renderBody}
+        {!showLoadingTable && renderBody}
       </table>
-      {showLoadingTable && showLoading()}
-      {meta.page && renderPagination()}
+      {showLoading()}
+      {meta.page && !showLoadingTable && pagination && renderPagination()}
     </>
   );
 }
@@ -173,7 +172,7 @@ Table.prototype = {
 
 const mapStateToProps = state => {
   const {
-    loading: { showLoadingTable },
+    loadingTable: { showLoadingTable },
   } = state;
   return {
     showLoadingTable,

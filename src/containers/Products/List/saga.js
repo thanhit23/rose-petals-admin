@@ -1,6 +1,9 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 
-import { DELETE_PRODUCTS_REQUEST, GET_PRODUCTS_REQUEST } from './constants';
+import {
+  DELETE_PRODUCTS_REQUEST,
+  GET_PRODUCTS_REQUEST_TABLE,
+} from './constants';
 import { getObjectAcceptArrayKey } from '../../../helpers';
 import {
   getProducts as getProductsService,
@@ -37,7 +40,7 @@ function* deleteProduct({ payload: { id } }) {
 
   if (status) {
     yield put(deleteProductSuccess());
-    yield put({ type: GET_PRODUCTS_REQUEST });
+    yield put({ type: GET_PRODUCTS_REQUEST_TABLE });
   } else {
     const { message } = data;
     yield put(deleteProductFailed(message));
@@ -45,7 +48,7 @@ function* deleteProduct({ payload: { id } }) {
 }
 
 function* listProduct() {
-  yield takeEvery(GET_PRODUCTS_REQUEST, getProducts);
+  yield takeEvery(GET_PRODUCTS_REQUEST_TABLE, getProducts);
   yield takeEvery(DELETE_PRODUCTS_REQUEST, deleteProduct);
 }
 

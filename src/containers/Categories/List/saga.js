@@ -11,7 +11,10 @@ import {
   deleteCategoryFailed,
 } from './actions';
 import { getObjectAcceptArrayKey } from '../../../helpers';
-import { DELETE_CATEGORY_REQUEST, GET_CATEGORY_REQUEST } from './constants';
+import {
+  DELETE_CATEGORY_REQUEST,
+  GET_CATEGORY_REQUEST_TABLE,
+} from './constants';
 
 function* getCategory({ payload: { options } }) {
   const queryAccept = ['name', 'page'];
@@ -48,7 +51,7 @@ function* deleteCategory({ payload: { id, callback } }) {
 }
 
 function* category() {
-  yield takeEvery(GET_CATEGORY_REQUEST, getCategory);
+  yield takeEvery(GET_CATEGORY_REQUEST_TABLE, getCategory);
   yield takeEvery(DELETE_CATEGORY_REQUEST, deleteCategory);
 }
 

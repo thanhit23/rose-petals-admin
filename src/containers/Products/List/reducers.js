@@ -1,6 +1,6 @@
 import produce from 'immer';
 
-import { GET_PRODUCTS_SUCCESS } from './constants';
+import { GET_PRODUCTS_SUCCESS_TABLE } from './constants';
 import {
   GET_ALL_CATEGORY_SUCCESS,
   GET_ALL_BRAND_SUCCESS,
@@ -22,7 +22,7 @@ const initialState = {
 const productReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case GET_PRODUCTS_SUCCESS: {
+      case GET_PRODUCTS_SUCCESS_TABLE: {
         const {
           payload: { data, meta },
         } = action;

@@ -7,6 +7,7 @@ import routes from '../../routes';
 import LoadingIndicator from '../LoadingIndicator';
 import injectReducer from '../../utils/injectReducer';
 import reducer from '../Users/List/reducers';
+import reducerLoadingTable from '../LoadingIndicatorTable/reducers';
 
 function App() {
   return (
@@ -19,5 +20,9 @@ function App() {
 }
 
 const withReducer = injectReducer({ key: 'user', reducer });
+const withReducerLoadingTable = injectReducer({
+  key: 'loadingTable',
+  reducer: reducerLoadingTable,
+});
 
-export default compose(withReducer)(App);
+export default compose(withReducer, withReducerLoadingTable)(App);

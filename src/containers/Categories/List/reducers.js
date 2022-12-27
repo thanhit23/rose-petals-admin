@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { GET_CATEGORY_SUCCESS } from './constants';
+import { GET_CATEGORY_SUCCESS_TABLE } from './constants';
 import { GET_CATEGORY_DETAIL_SUCCESS } from '../Edit/constants';
 
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
 const categoryReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case GET_CATEGORY_SUCCESS: {
+      case GET_CATEGORY_SUCCESS_TABLE: {
         const {
           payload: {
             data: { data, meta },

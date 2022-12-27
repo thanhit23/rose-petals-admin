@@ -47,7 +47,7 @@ function Navigated({
             <NavLink
               style={({ isActive }) => (isActive ? styleActive : undefined)}
               className={classNames(
-                'active flex items-center text-xs py-4 px-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 duration-300',
+                'active flex items-center text-xs py-5 px-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 duration-300',
               )}
               to={path}
             >
