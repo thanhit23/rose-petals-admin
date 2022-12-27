@@ -1,7 +1,7 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { memo, useLayoutEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faCircle } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
@@ -24,8 +24,8 @@ function Navigated({
   const [openDropdown, setOpen] = useState(open);
 
   const cls = [
-    'rounded w-full px-[18px] flex items-center text-sm h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap hover:text-[#fff !important] hover:bg-[#007bff] duration-300 cursor-pointer',
-    { 'hover:pl-[25px]': openDropdown },
+    'rounded w-full px-[18px] flex items-center text-sm h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap hover:text-[#fff !important] duration-300 cursor-pointer',
+    { 'bg-[#373f5099]': openDropdown },
   ];
 
   useLayoutEffect(() => {
@@ -39,23 +39,33 @@ function Navigated({
     });
   }, []);
 
-  const element =
-    isSidebar &&
-    item.map(({ path, name }, i) => {
-      return (
-        <div key={i}>
-          <NavLink
-            style={({ isActive }) => (isActive ? styleActive : undefined)}
-            className={classNames(
-              'active flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 duration-300',
-            )}
-            to={path}
-          >
-            {name}
-          </NavLink>
-        </div>
-      );
-    });
+  const element = isSidebar && (
+    <div className="transition duration-150 ease-out">
+      {item.map(({ path, name }, i) => {
+        return (
+          <div key={i}>
+            <NavLink
+              style={({ isActive }) => (isActive ? styleActive : undefined)}
+              className={classNames(
+                'active flex items-center text-xs py-4 px-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 duration-300',
+              )}
+              to={path}
+            >
+              <div className="mr-4 flex items-center">
+                <FontAwesomeIcon
+                  className={classNames('w-[6px] h-[6px]', {
+                    'mr-3': isSidebar,
+                  })}
+                  icon={faCircle}
+                />
+              </div>
+              {name}
+            </NavLink>
+          </div>
+        );
+      })}
+    </div>
+  );
 
   const renderElement = (
     <>
@@ -84,7 +94,10 @@ function Navigated({
     if (!pathRedirect) {
       return (
         <button
-          className={classNames(cls)}
+          className={classNames([
+            ...cls,
+            { 'px-0 justify-center': !isSidebar },
+          ])}
           type="button"
           onClick={() => setOpen(!openDropdown)}
         >
@@ -98,9 +111,7 @@ function Navigated({
         to={pathRedirect}
         className={({ isActive }) => {
           if (isActive) {
-            return classNames(cls, {
-              'hover:text-[#fff] text-[#4E97FD]': isActive,
-            });
+            return classNames([...cls, { 'px-0 justify-center': !isSidebar }]);
           }
           return classNames(cls);
         }}

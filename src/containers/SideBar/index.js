@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import {
   faGlobe,
-  faGauge,
-  faUser,
+  faUserGroup,
   faChevronDown,
+  faGripHorizontal,
 } from '@fortawesome/free-solid-svg-icons';
 import { bindActionCreators, compose } from 'redux';
 
@@ -20,6 +20,9 @@ import messages from './messages';
 function SideBar({ isSidebar, isActiveItem }) {
   const checkChildrenActive = active => active && isActiveItem();
 
+  const urlAvatar =
+    'https://scontent.fdad1-4.fna.fbcdn.net/v/t1.15752-9/317828686_542555651100563_8603678477965520851_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=ae9488&_nc_ohc=FZexx9lU8zIAX_wCAhP&_nc_ht=scontent.fdad1-4.fna&oh=03_AdQFZ7wVZTDwd7L1J_eZ8JrGYaMgj33Qu5QPxWPDiSFdfw&oe=63CBCB86';
+
   return (
     <div
       className={classNames(
@@ -27,7 +30,7 @@ function SideBar({ isSidebar, isActiveItem }) {
         { 'w-[64px]': !isSidebar },
       )}
     >
-      <div className="w-full h-full shadow-md bg-[#343a40] text-white">
+      <div className="w-full h-full shadow-md bg-[#2B3445] text-white">
         <div
           className={classNames(
             'pt-4 pb-2',
@@ -39,8 +42,8 @@ function SideBar({ isSidebar, isActiveItem }) {
             <div className="flex items-center">
               <div className="shrink-0">
                 <img
-                  src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp"
-                  className="rounded-full w-10"
+                  src={urlAvatar}
+                  className="rounded-full w-10 h-10 object-cover"
                   alt="Avatar"
                 />
               </div>
@@ -54,19 +57,19 @@ function SideBar({ isSidebar, isActiveItem }) {
             </div>
           </a>
         </div>
-        <ul className="relative px-1 overflow-scroll max-h-[calc(100vh-70px)]">
+        <ul className="relative px-3 mt-8 overflow-scroll max-h-[calc(100vh-70px)]">
           <Navigated
             isSidebar={isSidebar}
             pathRedirect="/"
             childrenActive={checkChildrenActive}
             babel={<FormattedMessage {...messages.dashboard} />}
-            iconAfter={faGauge}
+            iconAfter={faGripHorizontal}
           />
           <Navigated
             isSidebar={isSidebar}
             childrenActive={checkChildrenActive}
             babel={<FormattedMessage {...messages.user} />}
-            iconAfter={faUser}
+            iconAfter={faUserGroup}
             iconBefore={faChevronDown}
             item={[
               {
