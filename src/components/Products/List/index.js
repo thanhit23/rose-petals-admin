@@ -29,11 +29,13 @@ function ListProductComponent({
     } = props;
     return (
       <div className="flex justify-center">
-        <img
-          className="object-contain h-[100px] w-[100px]"
-          src={thumbnail}
-          alt=""
-        />
+        <div className="flex border-[#ebeff3] border-[1px] border-solid">
+          <img
+            className="object-cover h-[40px] w-[40px] rounded"
+            src={thumbnail}
+            alt=""
+          />
+        </div>
       </div>
     );
   };
@@ -48,7 +50,8 @@ function ListProductComponent({
             row: { index },
           },
         } = props;
-        return index + 1;
+        const { page, limit } = meta;
+        return (page - 1) * limit + (index + 1);
       },
     },
     {
@@ -160,6 +163,7 @@ function ListProductComponent({
             meta={meta}
             col={columns}
             data={data}
+            pagination
           />
         </div>
       </>

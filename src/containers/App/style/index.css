@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer components {
+    body {
+        font-family: Open Sans,Roboto,-apple-system,BlinkMacSystemFont,Segoe UI,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+    }
     .label-input {
         top: 50%;
         transform: translateY(-50%);

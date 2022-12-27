@@ -13,6 +13,7 @@ import { checkAuth } from './actions';
 import injectSaga from '../../utils/injectSaga';
 import Header from '../Header';
 import Dashboard from '../SideBar';
+import HomePageComponent from '../../components/HomePage';
 
 function HomePage({ isSidebar, auth, checkAuthenticate }) {
   useEffect(() => {
@@ -26,7 +27,7 @@ function HomePage({ isSidebar, auth, checkAuthenticate }) {
         <title>Admin</title>
         <meta name="description" />
       </Helmet>
-      <section className="container">
+      <section className="container bg-[#f7f9fc]">
         <div className="grid grid-cols-6">
           <Dashboard />
           <div
@@ -40,9 +41,7 @@ function HomePage({ isSidebar, auth, checkAuthenticate }) {
             )}
           >
             <Header />
-            <div className="px-8 mt-[80px]">
-              <div className="py-8" />
-            </div>
+            <HomePageComponent />
           </div>
         </div>
       </section>

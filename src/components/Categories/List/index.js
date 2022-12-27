@@ -34,7 +34,8 @@ function ListCategoryComponent({ data, meta, getCategory, deleteCategory }) {
             row: { index },
           },
         } = props;
-        return index + 1;
+        const { page, limit } = meta;
+        return (page - 1) * limit + (index + 1);
       },
     },
     {
@@ -101,6 +102,7 @@ function ListCategoryComponent({ data, meta, getCategory, deleteCategory }) {
           meta={meta}
           col={columns}
           data={data}
+          pagination
         />
       </div>
     </>
