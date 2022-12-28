@@ -26,7 +26,8 @@ function ListUserComponent({ data, meta, getUsers, handleDeleteUser }) {
             row: { index },
           },
         } = props;
-        return index + 1;
+        const { page, limit } = meta;
+        return (page - 1) * limit + (index + 1);
       },
     },
     {
@@ -118,6 +119,7 @@ function ListUserComponent({ data, meta, getUsers, handleDeleteUser }) {
             meta={meta}
             col={columns}
             data={data}
+            pagination
           />
         </div>
       </>

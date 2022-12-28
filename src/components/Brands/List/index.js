@@ -74,7 +74,8 @@ function ListBrandsComponent({ data, meta, getBrands, handleDeleteBrand }) {
             row: { index },
           },
         } = props;
-        return index + 1;
+        const { page, limit } = meta;
+        return (page - 1) * limit + (index + 1);
       },
     },
     {
@@ -111,6 +112,7 @@ function ListBrandsComponent({ data, meta, getBrands, handleDeleteBrand }) {
             meta={meta}
             col={columns}
             data={data}
+            pagination
           />
         </div>
       </>
