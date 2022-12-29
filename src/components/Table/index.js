@@ -10,14 +10,15 @@ import {
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Url } from '../../helpers';
+import LoadingTable from '../../containers/LoadingIndicatorTable';
 
 function Table({
   col: columns,
   data,
   meta,
   goToPage,
-  showLoadingTable,
   pagination = false,
+  showLoadingTable,
 }) {
   const { page: pages, limit, totalPages } = meta;
 
@@ -39,7 +40,7 @@ function Table({
 
   const handleClickPaginationButton = () => {
     const params = Url.getQueryString();
-    const page = params.page + 1;
+    const page = +params.page + 1;
     goToPage({ page });
   };
 
@@ -138,16 +139,7 @@ function Table({
     </tbody>
   );
 
-  const showLoading = () => (
-    <div className="flex justify-center">
-      <div className="lds-ellipsis">
-        <div />
-        <div />
-        <div />
-        <div />
-      </div>
-    </div>
-  );
+  const showLoading = () => <LoadingTable />;
 
   return (
     <>
@@ -163,10 +155,10 @@ function Table({
             </tr>
           ))}
         </thead>
-        {renderBody}
+        {!showLoadingTable && renderBody}
       </table>
-      {showLoadingTable && showLoading()}
-      {meta.page && pagination && renderPagination()}
+      {showLoading()}
+      {meta.page && !showLoadingTable && pagination && renderPagination()}
     </>
   );
 }
@@ -180,7 +172,7 @@ Table.prototype = {
 
 const mapStateToProps = state => {
   const {
-    loading: { showLoadingTable },
+    loadingTable: { showLoadingTable },
   } = state;
   return {
     showLoadingTable,

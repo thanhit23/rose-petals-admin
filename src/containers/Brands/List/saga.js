@@ -11,7 +11,7 @@ import {
   deleteBrandFailed,
 } from './actions';
 import { getObjectAcceptArrayKey } from '../../../helpers';
-import { GET_BRAND_REQUEST, DELETE_BRAND_REQUEST } from './constants';
+import { GET_BRAND_REQUEST_TABLE, DELETE_BRAND_REQUEST } from './constants';
 
 function* getBrands({ payload: { options } }) {
   const queryAccept = ['name', 'page'];
@@ -39,14 +39,14 @@ function* deleteBrand({ payload: { id } }) {
   if (status) {
     yield put(deleteBrandSuccess());
 
-    yield put({ type: GET_BRAND_REQUEST });
+    yield put({ type: GET_BRAND_REQUEST_TABLE });
   } else {
     yield put(deleteBrandFailed());
   }
 }
 
 function* listBrand() {
-  yield takeEvery(GET_BRAND_REQUEST, getBrands);
+  yield takeEvery(GET_BRAND_REQUEST_TABLE, getBrands);
   yield takeEvery(DELETE_BRAND_REQUEST, deleteBrand);
 }
 
