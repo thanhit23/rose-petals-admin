@@ -3,12 +3,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import {
-  faGlobe,
-  faUserGroup,
-  faChevronDown,
-  faGripHorizontal,
-} from '@fortawesome/free-solid-svg-icons';
+import { faUserGroup, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { bindActionCreators, compose } from 'redux';
 
 import Navigated from '../../components/Navigated';
@@ -16,6 +11,9 @@ import { toggleSidebar } from '../Header/actions';
 import injectReducer from '../../utils/injectReducer';
 import reducer from '../HomePage/reducers';
 import messages from './messages';
+import { ReactComponent as Product } from '../../resources/images/products.svg';
+import { ReactComponent as Dashboard } from '../../resources/images/dashboard.svg';
+import { ReactComponent as Order } from '../../resources/images/order.svg';
 
 function SideBar({ isSidebar, isActiveItem }) {
   const checkChildrenActive = active => active && isActiveItem();
@@ -63,7 +61,7 @@ function SideBar({ isSidebar, isActiveItem }) {
             pathRedirect="/"
             childrenActive={checkChildrenActive}
             babel={<FormattedMessage {...messages.dashboard} />}
-            iconAfter={faGripHorizontal}
+            iconSvg={<Dashboard className="w-5 h-5 mr-3" />}
           />
           <Navigated
             isSidebar={isSidebar}
@@ -86,7 +84,7 @@ function SideBar({ isSidebar, isActiveItem }) {
             isSidebar={isSidebar}
             childrenActive={checkChildrenActive}
             babel={<FormattedMessage {...messages.product} />}
-            iconAfter={faGlobe}
+            iconSvg={<Product className="w-5 h-5 mr-3" />}
             iconBefore={faChevronDown}
             item={[
               {
@@ -104,6 +102,19 @@ function SideBar({ isSidebar, isActiveItem }) {
               {
                 path: '/admin/brands',
                 name: <FormattedMessage {...messages.product_brand} />,
+              },
+            ]}
+          />
+          <Navigated
+            isSidebar={isSidebar}
+            childrenActive={checkChildrenActive}
+            babel={<FormattedMessage {...messages.order} />}
+            iconSvg={<Order className="w-5 h-5 mr-3" />}
+            iconBefore={faChevronDown}
+            item={[
+              {
+                path: '/admin/orders',
+                name: <FormattedMessage {...messages.order_list} />,
               },
             ]}
           />

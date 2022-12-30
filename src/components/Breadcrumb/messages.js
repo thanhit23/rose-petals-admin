@@ -55,4 +55,12 @@ export default defineMessages({
     id: `${scope}.brand.edit`,
     defaultMessage: 'Edit Brand',
   },
+  list_order: {
+    id: `${scope}.order.list`,
+    defaultMessage: 'List Order',
+  },
+  edit_order: {
+    id: `${scope}.order.edit`,
+    defaultMessage: 'Edit Order',
+  },
 });

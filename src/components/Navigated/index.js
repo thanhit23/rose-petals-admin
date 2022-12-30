@@ -14,6 +14,7 @@ function Navigated({
   iconBefore = null,
   childrenActive,
   isSidebar,
+  iconSvg = null,
 }) {
   const location = useLocation();
 
@@ -77,6 +78,7 @@ function Navigated({
           icon={iconAfter}
         />
       )}
+      {iconSvg}
       <span className={classNames({ hidden: !isSidebar })}>{babel}</span>
       {iconBefore && (
         <FontAwesomeIcon
