@@ -1,47 +1,47 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { UPDATE_USER_REQUEST, GET_USER_REQUEST } from './constants';
-import { updateUser, getUsers } from './service';
+import { UPDATE_ORDER_REQUEST, GET_ORDERS_REQUEST } from './constants';
+import { getOrder as getOrderService, updateOrder } from './service';
 import {
-  updateUserSuccessfully,
-  updateUserFailed,
-  getUserSuccessfully,
-  getUserFailed,
+  updateOrderSuccessfully,
+  updateOrderFailed,
+  getOrderSuccessfully,
+  getOrderFailed,
 } from './actions';
 
-function* updateUserInformation({ payload: { id, data, callback } }) {
-  const res = yield call(updateUser, id, data);
+function* updateOrderInformation({ payload: { id, data, callback } }) {
+  const res = yield call(updateOrder, id, data);
 
   const {
     data: { status },
   } = res;
 
   if (status) {
-    yield put(updateUserSuccessfully());
+    yield put(updateOrderSuccessfully());
   } else {
-    yield put(updateUserFailed());
+    yield put(updateOrderFailed());
   }
 
   if (callback instanceof Function) callback({ status });
 }
 
-function* getListUsers({ payload: { id, callback } }) {
-  const res = yield call(getUsers, id);
+function* getOrder({ payload: { id, callback } }) {
+  const res = yield call(getOrderService, id);
 
   if (!res && typeof callback === 'function') callback();
 
   const { status, data } = res;
 
   if (status) {
-    yield put(getUserSuccessfully(data));
+    yield put(getOrderSuccessfully(data));
   } else {
     const { message } = data;
-    yield put(getUserFailed(message));
+    yield put(getOrderFailed(message));
   }
 }
 
-function* editUser() {
-  yield takeEvery(UPDATE_USER_REQUEST, updateUserInformation);
-  yield takeEvery(GET_USER_REQUEST, getListUsers);
+function* editOrder() {
+  yield takeEvery(UPDATE_ORDER_REQUEST, updateOrderInformation);
+  yield takeEvery(GET_ORDERS_REQUEST, getOrder);
 }
 
-export default editUser;
+export default editOrder;

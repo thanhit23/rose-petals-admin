@@ -1,8 +1,4 @@
-import {
-  LOGIN_REQUEST,
-  FETCH_LOGIN_SUCCESS,
-  FETCH_LOGIN_FAILED,
-} from './constants';
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED } from './constants';
 
 export const accountLogin = ({ email, password }) => ({
   type: LOGIN_REQUEST,
@@ -13,7 +9,7 @@ export const accountLogin = ({ email, password }) => ({
 });
 
 export const logged = (access, refresh, user) => ({
-  type: FETCH_LOGIN_SUCCESS,
+  type: LOGIN_SUCCESS,
   payload: {
     access,
     refresh,
@@ -22,7 +18,7 @@ export const logged = (access, refresh, user) => ({
 });
 
 export const loginFailed = error => ({
-  type: FETCH_LOGIN_FAILED,
+  type: LOGIN_FAILED,
   payload: {
     error,
   },

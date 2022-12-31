@@ -19,8 +19,4 @@ export default defineMessages({
     id: `${scope}.add_brand`,
     defaultMessage: 'Add Brand',
   },
-  add_order: {
-    id: `${scope}.add_order`,
-    defaultMessage: 'Add Order',
-  },
 });

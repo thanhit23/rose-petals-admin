@@ -116,6 +116,10 @@ function SideBar({ isSidebar, isActiveItem }) {
                 path: '/admin/orders',
                 name: <FormattedMessage {...messages.order_list} />,
               },
+              {
+                path: '/admin/order/detail',
+                name: <FormattedMessage {...messages.order_list} />,
+              },
             ]}
           />
         </ul>

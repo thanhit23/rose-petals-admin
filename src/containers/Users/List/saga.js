@@ -10,7 +10,7 @@ import {
   deleteUserSuccess,
 } from './actions';
 import { getObjectAcceptArrayKey } from '../../../helpers';
-import { FETCH_USERS_REQUEST_TABLE, DELETE_USERS_REQUEST } from './constants';
+import { GET_USERS_REQUEST_TABLE, DELETE_USERS_REQUEST } from './constants';
 
 function* getUsers({ payload: { options } }) {
   const queryAccept = ['role', 'name', 'page'];
@@ -44,7 +44,7 @@ function* deleteUser({ payload: { id, callback } }) {
 }
 
 function* userSaga() {
-  yield takeEvery(FETCH_USERS_REQUEST_TABLE, getUsers);
+  yield takeEvery(GET_USERS_REQUEST_TABLE, getUsers);
   yield takeEvery(DELETE_USERS_REQUEST, deleteUser);
 }
 

@@ -1,6 +1,6 @@
 import produce from 'immer';
 import { GET_ORDERS_SUCCESS_TABLE } from './constants';
-import { GET_USER_SUCCESS, DELETE_USER_DATA_EDIT } from '../Edit/constants';
+import { GET_ORDERS_SUCCESS, RESET_ORDER_EDIT } from '../Edit/constants';
 
 const initialState = {
   list: {
@@ -21,7 +21,7 @@ const listUser = (state = initialState, action) =>
         draft.list.meta = meta;
         break;
       }
-      case GET_USER_SUCCESS: {
+      case GET_ORDERS_SUCCESS: {
         const {
           payload: {
             data: { data },
@@ -30,7 +30,7 @@ const listUser = (state = initialState, action) =>
         draft.edit = data;
         break;
       }
-      case DELETE_USER_DATA_EDIT: {
+      case RESET_ORDER_EDIT: {
         draft.edit = {};
         break;
       }

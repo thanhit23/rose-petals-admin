@@ -1,6 +1,6 @@
 import produce from 'immer';
-import { FETCH_USERS_SUCCESS_TABLE } from './constants';
-import { GET_USER_SUCCESS, DELETE_USER_DATA_EDIT } from '../Edit/constants';
+import { GET_USERS_SUCCESS_TABLE } from './constants';
+import { GET_USER_SUCCESS, RESET_USER_EDIT } from '../Edit/constants';
 
 const initialState = {
   list: {
@@ -13,7 +13,7 @@ const initialState = {
 const listUser = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case FETCH_USERS_SUCCESS_TABLE: {
+      case GET_USERS_SUCCESS_TABLE: {
         const {
           payload: { data, meta },
         } = action;
@@ -30,7 +30,7 @@ const listUser = (state = initialState, action) =>
         draft.edit = data;
         break;
       }
-      case DELETE_USER_DATA_EDIT: {
+      case RESET_USER_EDIT: {
         draft.edit = {};
         break;
       }

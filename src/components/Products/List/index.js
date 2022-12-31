@@ -106,7 +106,7 @@ function ListProductComponent({
         const {
           cell: {
             row: {
-              original: { id },
+              original: { _id },
             },
           },
         } = props;
@@ -116,14 +116,14 @@ function ListProductComponent({
               type="button"
               className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
             >
-              <Link to={`/admin/product/edit/${id}`}>
+              <Link to={`/admin/product/edit/${_id}`}>
                 <FontAwesomeIcon className="text-[#7D879C]" icon={faPen} />
               </Link>
             </button>
             <button
               type="button"
               className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
-              onClick={() => handleDeleteProduct(id)}
+              onClick={() => handleDeleteProduct(_id)}
             >
               <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
             </button>
@@ -138,7 +138,7 @@ function ListProductComponent({
   useEffect(() => {
     const searchValue = searchParams.get('name');
 
-    if (searchValue) setValueSearch(searchValue);
+    searchValue && setValueSearch(searchValue);
   }, []);
 
   return useMemo(

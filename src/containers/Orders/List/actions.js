@@ -2,9 +2,9 @@ import {
   GET_ORDERS_REQUEST_TABLE,
   GET_ORDERS_SUCCESS_TABLE,
   GET_ORDERS_FAILED_TABLE,
-  DELETE_ORDERS_REQUEST,
-  DELETE_ORDERS_SUCCESS,
-  DELETE_ORDERS_FAILED,
+  DELETE_ORDER_REQUEST,
+  DELETE_ORDER_SUCCESS,
+  DELETE_ORDER_FAILED,
 } from './constants';
 
 export const getOrders = options => ({
@@ -27,16 +27,16 @@ export const getOrdersListFailed = messages => ({
   payload: { messages },
 });
 
-export const deleteOrder = (id, callback) => ({
-  type: DELETE_ORDERS_REQUEST,
-  payload: { id, callback },
+export const deleteOrder = id => ({
+  type: DELETE_ORDER_REQUEST,
+  payload: { id },
 });
 
 export const deleteOrderSuccess = () => ({
-  type: DELETE_ORDERS_SUCCESS,
+  type: DELETE_ORDER_SUCCESS,
 });
 
 export const deleteOrderFailed = messages => ({
-  type: DELETE_ORDERS_FAILED,
+  type: DELETE_ORDER_FAILED,
   payload: { messages },
 });

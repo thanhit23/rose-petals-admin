@@ -1,62 +1,66 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'Components.User.add';
+export const scope = 'Components.Order.edit';
 
 export default defineMessages({
   label: {
-    name: {
-      id: `${scope}.label.name`,
-      defaultMessage: 'Username',
+    address: {
+      id: `${scope}.label.address`,
+      defaultMessage: 'Address',
     },
-    phone_number: {
-      id: `${scope}.label.phoneNumber`,
-      defaultMessage: 'Phone Number',
+    amount: {
+      id: `${scope}.label.amount`,
+      defaultMessage: 'Amount',
     },
-    gender: {
-      id: `${scope}.label.gender`,
-      defaultMessage: 'Gender',
+    quantity: {
+      id: `${scope}.label.quantity`,
+      defaultMessage: 'Quantity',
     },
-    email: {
-      id: `${scope}.label.email`,
-      defaultMessage: 'Email',
-    },
-    password: {
-      id: `${scope}.label.password`,
-      defaultMessage: 'Password',
+    status: {
+      id: `${scope}.label.status`,
+      defaultMessage: 'Status',
     },
   },
   placeholder: {
-    name: {
-      id: `${scope}.placeholder.name`,
-      defaultMessage: 'Username',
+    address: {
+      id: `${scope}.placeholder.address`,
+      defaultMessage: 'Address',
     },
-    phone_number: {
-      id: `${scope}.placeholder.phoneNumber`,
-      defaultMessage: '+84 123-456-789',
+    amount: {
+      id: `${scope}.placeholder.amount`,
+      defaultMessage: 'Amount',
     },
-    email: {
-      id: `${scope}.placeholder.email`,
-      defaultMessage: 'abc@gmail.com',
+    quantity: {
+      id: `${scope}.placeholder.quantity`,
+      defaultMessage: 'Quantity',
     },
-    password: {
-      id: `${scope}.placeholder.password`,
-      defaultMessage: 'Password.....',
-    },
-  },
-  gender: {
-    female: {
-      id: `${scope}.gender.female`,
-      defaultMessage: 'Female',
-    },
-    male: {
-      id: `${scope}.gender.male`,
-      defaultMessage: 'Male',
+    status: {
+      id: `${scope}.placeholder.status`,
+      defaultMessage: 'Status',
     },
   },
   btn: {
     submit: {
       id: `${scope}.button.submit`,
       defaultMessage: 'Submit',
+    },
+  },
+  status: {
+    cancelled: {
+      id: `${scope}.status.cancelled`,
+      defaultMessage: 'Cancelled',
+    },
+    pending: {
+      id: `${scope}.status.pending`,
+      defaultMessage: 'Pending',
+    },
+    processing: {
+      id: `${scope}.status.processing`,
+      defaultMessage: 'Processing',
+    },
+    delivered: {
+      id: `${scope}.status.delivered`,
+      defaultMessage: 'Delivered',
     },
   },
 });

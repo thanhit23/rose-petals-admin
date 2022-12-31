@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { FETCH_LOGIN_SUCCESS, SET_AUTHENTICATION } from './constants';
+import { LOGIN_SUCCESS, SET_AUTHENTICATION } from './constants';
 
 export const initialState = {
   auth: null,
@@ -7,7 +7,7 @@ export const initialState = {
 const appReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case FETCH_LOGIN_SUCCESS: {
+      case LOGIN_SUCCESS: {
         const {
           payload: {
             access: { token },

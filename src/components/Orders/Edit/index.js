@@ -1,130 +1,117 @@
 import { FormattedMessage } from 'react-intl';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Breadcrumb from '../../Breadcrumb';
 import messages from './messages';
-import { GENDER, MALE, FEMALE } from './constants';
+import { ARRAY_STATUS } from '../List/constants';
 import LabelWithFormatMessage from '../../LabelWithFormatMessage';
 import InputWithFormatMessage from '../../InputWithFormatMessage';
 
-function EditUserComponent({ onSubmitForUpdateUser, users }) {
+function EditOrderComponent({ onSubmitForUpdateOrder, order }) {
   const { id } = useParams();
 
-  const [userEdit, setUserEdit] = useState(users);
+  const [orderEdit, setOrderEdit] = useState(order);
 
-  useEffect(() => setUserEdit(users), [users]);
+  useEffect(() => setOrderEdit(order), [order]);
 
-  const { email = '', name = '', gender = '', phoneNumber = '' } = userEdit;
+  const { address = '', amount = '', quantity = '', status = '' } = orderEdit;
 
   const onSubmit = () => {
     // eslint-disable-next-line no-shadow
-    const { email, name, gender, phoneNumber } = userEdit;
-    onSubmitForUpdateUser(id, { email, name, gender, phoneNumber });
+    const { address, amount, quantity, status } = orderEdit;
+    onSubmitForUpdateOrder(id, { address, amount, quantity, status });
   };
 
   const changeValueInput = ({ target }) => {
     // eslint-disable-next-line no-shadow,prefer-const
     let { name, value } = target;
-    if (name === GENDER) {
+    if (name === 'status') {
       value = +value;
     }
-    setUserEdit({ ...userEdit, [name]: value });
+    setOrderEdit({ ...orderEdit, [name]: value });
   };
 
   return (
     <>
       <Breadcrumb
-        prevPage={{ path: '/admin/users', name: 'list_user' }}
-        title="edit_user"
+        prevPage={{ path: '/admin/users', name: 'list_order' }}
+        title="edit_order"
       />
       <div>
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-6">
             <LabelWithFormatMessage
-              message={messages.label.name}
+              message={messages.label.address}
               className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="username"
+              htmlFor="address"
               requiredField
             />
             <InputWithFormatMessage
-              message={messages.placeholder.name}
+              message={messages.placeholder.address}
               className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="username"
-              name="name"
+              id="address"
+              name="address"
               type="text"
-              value={name}
+              value={address}
               onChange={changeValueInput}
             />
           </div>
           <div className="mb-6">
             <LabelWithFormatMessage
-              message={messages.label.email}
+              message={messages.label.amount}
               className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="email"
+              htmlFor="amount"
               requiredField
             />
             <InputWithFormatMessage
-              message={messages.placeholder.email}
+              message={messages.placeholder.amount}
               className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
-              name="email"
-              type="email"
-              value={email}
-              onChange={changeValueInput}
-            />
-          </div>
-          <div className="mb-6">
-            <LabelWithFormatMessage
-              message={messages.label.phone_number}
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="phoneNumber"
-              requiredField
-            />
-            <InputWithFormatMessage
-              message={messages.placeholder.phone_number}
-              className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="phoneNumber"
-              name="phoneNumber"
+              id="amount"
+              name="amount"
               type="number"
-              value={phoneNumber}
+              value={amount}
               onChange={changeValueInput}
             />
           </div>
           <div className="mb-6">
             <LabelWithFormatMessage
-              message={messages.label.gender}
+              message={messages.label.quantity}
               className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="gender"
+              htmlFor="quantity"
               requiredField
             />
-            <div className="flex">
-              <label className="flex items-center mr-2" htmlFor="female">
-                <input
-                  id="female"
-                  className="mr-1"
-                  name="gender"
-                  type="radio"
-                  value={FEMALE}
-                  checked={gender === FEMALE}
-                  onChange={changeValueInput}
-                />
-                <FormattedMessage {...messages.gender.female} />
-              </label>
-              <label className="flex items-center" htmlFor="male">
-                <input
-                  id="male"
-                  className="mr-1"
-                  name="gender"
-                  type="radio"
-                  value={MALE}
-                  checked={gender === MALE}
-                  onChange={changeValueInput}
-                />
-                <FormattedMessage {...messages.gender.male} />
-              </label>
-            </div>
+            <InputWithFormatMessage
+              message={messages.placeholder.quantity}
+              className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="quantity"
+              name="quantity"
+              type="number"
+              value={quantity}
+              onChange={changeValueInput}
+            />
+          </div>
+          <div className="mb-6">
+            <LabelWithFormatMessage
+              message={messages.label.status}
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="status"
+              requiredField
+            />
+            <select
+              id="status"
+              name="status"
+              className="h-12 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
+              defaultValue={status}
+            >
+              <option value="">Select...</option>
+              {ARRAY_STATUS.map((value, index) => (
+                <option key={index} value={index}>
+                  <FormattedMessage {...messages.status[value]} />
+                </option>
+              ))}
+            </select>
           </div>
           <div className="flex items-center justify-between">
             <button
@@ -141,9 +128,9 @@ function EditUserComponent({ onSubmitForUpdateUser, users }) {
   );
 }
 
-EditUserComponent.prototype = {
-  onSubmitForUpdateUser: PropTypes.func,
-  users: PropTypes.array,
+EditOrderComponent.prototype = {
+  onSubmitForUpdateOrder: PropTypes.func,
+  order: PropTypes.array,
 };
 
-export default EditUserComponent;
+export default EditOrderComponent;

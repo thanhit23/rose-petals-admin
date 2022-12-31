@@ -15,7 +15,7 @@ import injectReducer from '../../../utils/injectReducer';
 import saga from './saga';
 import reducer from '../List/reducers';
 
-function EditCategory({ updateCategory, edit: brand, getCategory }) {
+function EditCategory({ updateCategory, edit: category, getCategory }) {
   const { id: idEdit } = useParams();
 
   useEffect(() => getCategory(idEdit), []);
@@ -26,8 +26,8 @@ function EditCategory({ updateCategory, edit: brand, getCategory }) {
 
   const handleUpdateUser = (id, data) => updateCategory(id, data, callback);
 
-  const renderEditCategory = brand && (
-    <EditBrandComponent data={brand} onSubmit={handleUpdateUser} />
+  const renderEditCategory = category && (
+    <EditBrandComponent data={category} onSubmit={handleUpdateUser} />
   );
 
   return <AuthLayout title="edit_category" children={renderEditCategory} />;
@@ -41,7 +41,7 @@ EditCategory.prototype = {
 
 const mapStateToProps = state => {
   const {
-    brand: { edit },
+    category: { edit },
   } = state;
   return {
     edit,

@@ -5,54 +5,62 @@ import PropTypes from 'prop-types';
 
 import { useEffect } from 'react';
 import AuthLayout from '../../../layouts/AuthLayout';
-import EditUserComponent from '../../../components/Users/Edit';
+import EditOrderComponent from '../../../components/Orders/Edit';
 import {
-  updateUser as updateUserAction,
-  getUser as getUserAction,
-  deleteUserEditOld as deleteUserEditOldAction,
+  updateOrder as updateOrderAction,
+  getOrder as getOrderAction,
+  deleteOrderEditOld as deleteOrderEditOldAction,
 } from './actions';
 import injectSaga from '../../../utils/injectSaga';
 import saga from './saga';
+import injectReducer from '../../../utils/injectReducer';
+import reducer from '../List/reducers';
 
-function EditUser({ updateUser, edit: editUser, getUser, deleteUserEditOld }) {
+function EditOrder({
+  updateOrder,
+  edit: editOrder,
+  getOrder,
+  deleteOrderEditOld,
+}) {
   const navigate = useNavigate();
 
-  const callback = () => navigate('/admin/users');
+  const callback = () => navigate('/admin/orders');
 
-  const handleUpdateUser = (id, data) => updateUser(id, data, callback);
+  const handleUpdateOrder = (id, data) => updateOrder(id, data, callback);
 
   const { id } = useParams();
 
   useEffect(() => {
-    deleteUserEditOld();
-    getUser(id, callback);
+    deleteOrderEditOld();
+    getOrder(id, callback);
   }, []);
 
   return (
-    <AuthLayout title="edit_user">
-      <EditUserComponent
-        users={editUser}
-        onSubmitForUpdateUser={handleUpdateUser}
+    <AuthLayout title="edit_order">
+      <EditOrderComponent
+        order={editOrder}
+        onSubmitForUpdateOrder={handleUpdateOrder}
       />
     </AuthLayout>
   );
 }
 
-EditUser.prototype = {
+EditOrder.prototype = {
   edit: PropTypes.array,
-  getUser: PropTypes.func,
-  updateUserInformation: PropTypes.func,
+  getOrder: PropTypes.func,
+  updateOrder: PropTypes.func,
+  deleteOrderEditOld: PropTypes.func,
 };
 
 const mapDispatchToProps = dispatch => ({
-  updateUser: bindActionCreators(updateUserAction, dispatch),
-  getUser: bindActionCreators(getUserAction, dispatch),
-  deleteUserEditOld: bindActionCreators(deleteUserEditOldAction, dispatch),
+  updateOrder: bindActionCreators(updateOrderAction, dispatch),
+  getOrder: bindActionCreators(getOrderAction, dispatch),
+  deleteOrderEditOld: bindActionCreators(deleteOrderEditOldAction, dispatch),
 });
 
 const mapStateToProps = state => {
   const {
-    user: { edit },
+    order: { edit },
   } = state;
   return {
     edit,
@@ -60,6 +68,7 @@ const mapStateToProps = state => {
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
-const withSaga = injectSaga({ key: 'editUser', saga });
+const withSaga = injectSaga({ key: 'editOrder', saga });
+const withReducer = injectReducer({ key: 'order', reducer });
 
-export default compose(withSaga, withConnect)(EditUser);
+export default compose(withSaga, withReducer, withConnect)(EditOrder);

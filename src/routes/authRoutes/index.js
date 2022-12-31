@@ -13,6 +13,7 @@ import AddBrand from '../../containers/Brands/Add';
 import EditBrand from '../../containers/Brands/Edit';
 import ListOrder from '../../containers/Orders/List';
 import EditOrder from '../../containers/Orders/Edit';
+import DetailOrder from '../../containers/Orders/Detail';
 
 export default [
   {
@@ -89,6 +90,11 @@ export default [
   {
     path: '/admin/order/edit/:id',
     component: EditOrder,
+    exact: true,
+  },
+  {
+    path: '/admin/order/detail',
+    component: DetailOrder,
     exact: true,
   },
 ];

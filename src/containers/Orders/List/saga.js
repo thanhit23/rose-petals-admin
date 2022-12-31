@@ -5,15 +5,16 @@ import {
   deleteOrder as deleteOrderService,
 } from './service';
 import {
+  getOrders as getOrdersAction,
   getOrdersSuccess,
   getOrdersListFailed,
-  deleteOrderSuccess,
   deleteOrderFailed,
+  deleteOrderSuccess,
 } from './actions';
 import { getObjectAcceptArrayKey } from '../../../helpers';
-import { GET_ORDERS_REQUEST_TABLE, DELETE_ORDERS_REQUEST } from './constants';
+import { GET_ORDERS_REQUEST_TABLE, DELETE_ORDER_REQUEST } from './constants';
 
-function* getUsers({ payload: { options } }) {
+function* getOrders({ payload: { options } }) {
   const queryAccept = ['role', 'name', 'page'];
 
   const option = getObjectAcceptArrayKey(queryAccept, { page: 1, ...options });
@@ -30,14 +31,14 @@ function* getUsers({ payload: { options } }) {
   }
 }
 
-function* deleteUser({ payload: { id, callback } }) {
+function* deleteOrder({ payload: { id } }) {
   const res = yield call(deleteOrderService, id);
 
   const { status, data } = res;
 
   if (status) {
+    yield put(getOrdersAction());
     yield put(deleteOrderSuccess());
-    yield callback();
   } else {
     const { message } = data;
     yield put(deleteOrderFailed(message));
@@ -45,8 +46,8 @@ function* deleteUser({ payload: { id, callback } }) {
 }
 
 function* orderSaga() {
-  yield takeEvery(GET_ORDERS_REQUEST_TABLE, getUsers);
-  yield takeEvery(DELETE_ORDERS_REQUEST, deleteUser);
+  yield takeEvery(GET_ORDERS_REQUEST_TABLE, getOrders);
+  yield takeEvery(DELETE_ORDER_REQUEST, deleteOrder);
 }
 
 export default orderSaga;

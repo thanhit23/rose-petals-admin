@@ -18,7 +18,7 @@ function ListBrandsComponent({ data, meta, getBrands, handleDeleteBrand }) {
     const {
       cell: {
         row: {
-          values: { id },
+          original: { id },
         },
       },
     } = props;
@@ -61,7 +61,7 @@ function ListBrandsComponent({ data, meta, getBrands, handleDeleteBrand }) {
   useEffect(() => {
     const searchValue = searchParams.get('name');
 
-    if (searchValue) setValueSearch(searchValue);
+    searchValue && setValueSearch(searchValue);
   }, []);
 
   const columns = useMemo(() => [

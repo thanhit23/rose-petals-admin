@@ -6,7 +6,7 @@ import {
   GET_ALL_BRAND_SUCCESS,
 } from '../Add/constants';
 import {
-  DELETE_DETAIL_PRODUCT_OLD,
+  RESET_PRODUCT_EDIT,
   GET_DETAIL_PRODUCT_SUCCESS,
 } from '../Edit/constants';
 const initialState = {
@@ -44,7 +44,7 @@ const productReducer = (state = initialState, action) =>
         draft.brands = data;
         break;
       }
-      case DELETE_DETAIL_PRODUCT_OLD: {
+      case RESET_PRODUCT_EDIT: {
         draft.edit = {};
         break;
       }

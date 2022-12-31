@@ -2,14 +2,14 @@ import {
   GET_DETAIL_BRAND_REQUEST,
   GET_DETAIL_BRAND_SUCCESS,
   GET_DETAIL_BRAND_FAILED,
-  CLEAR_DETAIL_BRAND_OLD,
+  RESET_BRAND_EDIT,
   UPDATE_BRAND_REQUEST,
   UPDATE_BRAND_FAILED,
   UPDATE_BRAND_SUCCESS,
 } from './constants';
 
 export const clearDetailBrandOld = () => ({
-  type: CLEAR_DETAIL_BRAND_OLD,
+  type: RESET_BRAND_EDIT,
 });
 
 export const getDetailBrand = id => ({

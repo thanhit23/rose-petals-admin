@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import propsTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
 
 import { Url } from '../../../helpers';
 import {
@@ -17,14 +16,10 @@ import reducer from './reducers';
 import ListOrderComponent from '../../../components/Orders/List';
 
 function ListOrder({ data, meta, getOrders, deleteOrder }) {
-  const navigate = useNavigate();
-
   const [filter, setFilter] = useState({
     page: 1,
     name: '',
   });
-
-  const callback = () => navigate('/admin/orders');
 
   useEffect(() => {
     const params = Url.getQueryString();
@@ -45,10 +40,10 @@ function ListOrder({ data, meta, getOrders, deleteOrder }) {
     setFilter(objectUrl);
   };
 
-  const handleDeleteOrder = id => deleteOrder(id, callback);
+  const handleDeleteOrder = id => deleteOrder(id);
 
   return (
-    <AuthLayout title="user">
+    <AuthLayout title="list_order">
       <ListOrderComponent
         meta={meta}
         data={data}

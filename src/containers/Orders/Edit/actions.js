@@ -1,39 +1,39 @@
 import {
-  UPDATE_USER_REQUEST,
-  UPDATE_USER_SUCCESS,
-  UPDATE_USER_FAILED,
-  GET_USER_REQUEST,
-  GET_USER_FAILED,
-  GET_USER_SUCCESS,
-  DELETE_USER_DATA_EDIT,
+  UPDATE_ORDER_REQUEST,
+  UPDATE_ORDER_SUCCESS,
+  UPDATE_ORDER_FAILED,
+  GET_ORDERS_REQUEST,
+  GET_ORDERS_FAILED,
+  GET_ORDERS_SUCCESS,
+  RESET_ORDER_EDIT,
 } from './constants';
 
-export const getUser = (id, callback) => ({
-  type: GET_USER_REQUEST,
+export const getOrder = (id, callback) => ({
+  type: GET_ORDERS_REQUEST,
   payload: { id, callback },
 });
 
-export const deleteUserEditOld = () => ({
-  type: DELETE_USER_DATA_EDIT,
+export const deleteOrderEditOld = () => ({
+  type: RESET_ORDER_EDIT,
 });
 
-export const getUserSuccessfully = data => ({
-  type: GET_USER_SUCCESS,
+export const getOrderSuccessfully = data => ({
+  type: GET_ORDERS_SUCCESS,
   payload: {
     data,
   },
 });
-export const getUserFailed = () => ({
-  type: GET_USER_FAILED,
+export const getOrderFailed = () => ({
+  type: GET_ORDERS_FAILED,
 });
 
-export const updateUser = (id, data, callback) => ({
-  type: UPDATE_USER_REQUEST,
+export const updateOrder = (id, data, callback) => ({
+  type: UPDATE_ORDER_REQUEST,
   payload: { id, data, callback },
 });
-export const updateUserSuccessfully = () => ({
-  type: UPDATE_USER_SUCCESS,
+export const updateOrderSuccessfully = () => ({
+  type: UPDATE_ORDER_SUCCESS,
 });
-export const updateUserFailed = () => ({
-  type: UPDATE_USER_FAILED,
+export const updateOrderFailed = () => ({
+  type: UPDATE_ORDER_FAILED,
 });
