@@ -6,8 +6,6 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import { Navigate } from 'react-router-dom';
-import injectReducer from '../../utils/injectReducer';
-import reducer from './reducers';
 import saga from './saga';
 import { checkAuth } from './actions';
 import injectSaga from '../../utils/injectSaga';
@@ -15,7 +13,7 @@ import Header from '../Header';
 import Dashboard from '../SideBar';
 import HomePageComponent from '../../components/HomePage';
 
-function HomePage({ isSidebar, auth, checkAuthenticate }) {
+function HomePage({ isSidebarOpen, auth, checkAuthenticate }) {
   useEffect(() => {
     checkAuthenticate();
     if (!auth) <Navigate to="/login" replace />;
@@ -33,8 +31,8 @@ function HomePage({ isSidebar, auth, checkAuthenticate }) {
           <div
             className={classNames(
               {
-                'ml-[260px]': isSidebar,
-                'ml-[64px]': !isSidebar,
+                'ml-[260px]': isSidebarOpen,
+                'ml-[64px]': !isSidebarOpen,
               },
               'duration-300',
               'col-span-6',
@@ -50,19 +48,21 @@ function HomePage({ isSidebar, auth, checkAuthenticate }) {
 }
 
 HomePage.prototype = {
-  isSidebar: PropTypes.bool,
+  isSidebarOpen: PropTypes.bool,
   auth: PropTypes.object,
   checkAuth: PropTypes.func,
 };
 
 const mapStateToProps = state => {
   const {
-    home: { isSidebar },
-    global: { auth },
+    global: {
+      auth,
+      sidebar: { isSidebarOpen },
+    },
   } = state;
   return {
     auth,
-    isSidebar,
+    isSidebarOpen,
   };
 };
 
@@ -73,7 +73,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
-const withReducer = injectReducer({ key: 'home', reducer });
 const withSaga = injectSaga({ key: 'home', saga });
 
-export default compose(withReducer, withSaga, withConnect)(HomePage);
+export default compose(withSaga, withConnect)(HomePage);

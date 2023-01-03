@@ -1,21 +1,21 @@
 import {
-  GET_USERS_REQUEST_TABLE,
-  GET_USERS_SUCCESS_TABLE,
+  GET_USERS_LIST_REQUEST,
+  GET_USERS_LIST_SUCCESS,
   DELETE_USERS_REQUEST,
   DELETE_USERS_SUCCESS,
   DELETE_USERS_FAILED,
-  GET_USERS_FAILED_TABLE,
+  GET_USERS_LIST_FAILED,
 } from './constants';
 
 export const getUsers = options => ({
-  type: GET_USERS_REQUEST_TABLE,
+  type: GET_USERS_LIST_REQUEST,
   payload: {
     options,
   },
 });
 
 export const getUsersSuccess = ({ data, meta }) => ({
-  type: GET_USERS_SUCCESS_TABLE,
+  type: GET_USERS_LIST_SUCCESS,
   payload: {
     data,
     meta,
@@ -23,7 +23,7 @@ export const getUsersSuccess = ({ data, meta }) => ({
 });
 
 export const getUsersListFailed = messages => ({
-  type: GET_USERS_FAILED_TABLE,
+  type: GET_USERS_LIST_FAILED,
   payload: { messages },
 });
 

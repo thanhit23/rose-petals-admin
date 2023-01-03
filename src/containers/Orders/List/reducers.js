@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { GET_ORDERS_SUCCESS_TABLE } from './constants';
+import { GET_ORDERS_LIST_SUCCESS } from './constants';
 import { GET_ORDERS_SUCCESS, RESET_ORDER_EDIT } from '../Edit/constants';
 
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
 const listUser = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case GET_ORDERS_SUCCESS_TABLE: {
+      case GET_ORDERS_LIST_SUCCESS: {
         const {
           payload: { data, meta },
         } = action;

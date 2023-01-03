@@ -13,7 +13,7 @@ export const getOrder = (id, callback) => ({
   payload: { id, callback },
 });
 
-export const deleteOrderEditOld = () => ({
+export const resetOrderEdit = () => ({
   type: RESET_ORDER_EDIT,
 });
 

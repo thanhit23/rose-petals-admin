@@ -14,7 +14,7 @@ import {
   GET_ALL_BRAND_FAILED,
 } from './constants';
 
-export const deleteDetailProductOld = () => ({
+export const resetProductEdit = () => ({
   type: RESET_PRODUCT_EDIT,
 });
 

@@ -15,6 +15,16 @@ module.exports = {
       orange: '#ff7849',
       green: '#13ce66',
       gray: '#8492a6',
+      cancelled: '#e94560',
+      pending: '#4e97fd',
+      processing: '#ffcd4e',
+      delivered: '#33d067',
+    },
+    backgroundColors: {
+      cancelled: '#ffeaea',
+      pending: '#dbf0fe',
+      processing: '#fff8e5',
+      delivered: '#E7F9ED',
     },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],

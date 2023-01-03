@@ -1,12 +1,12 @@
 import AuthLayout from '../../../layouts/AuthLayout';
-import DetailOrderComponent from '../../../components/Orders/Detail';
+import OrderDetailComponent from '../../../components/Orders/Detail';
 
-function DetailOrder() {
+function OrderDetail() {
   return (
-    <AuthLayout title="detail_order">
-      <DetailOrderComponent />
+    <AuthLayout title="order_detail">
+      <OrderDetailComponent />
     </AuthLayout>
   );
 }
 
-export default DetailOrder;
+export default OrderDetail;

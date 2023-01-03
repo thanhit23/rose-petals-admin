@@ -1,17 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import propTypes from 'prop-types';
 
-import injectReducer from '../../utils/injectReducer';
-import reducer from './reducers';
 import Loadings from '../../components/Loading';
 
-class Loading extends Component {
-  render() {
-    const { showLoading } = this.props;
-    return showLoading ? <Loadings /> : '';
-  }
+function Loading({ showLoading }) {
+  return showLoading ? <Loadings /> : '';
 }
 
 Loading.propTypes = {
@@ -20,7 +15,9 @@ Loading.propTypes = {
 
 const mapStateToProps = state => {
   const {
-    loading: { showLoading },
+    global: {
+      loading: { showLoading },
+    },
   } = state;
   return {
     showLoading,
@@ -28,6 +25,5 @@ const mapStateToProps = state => {
 };
 
 const withConnect = connect(mapStateToProps, null);
-const withReducer = injectReducer({ key: 'loading', reducer });
 
-export default compose(withReducer, withConnect)(Loading);
+export default compose(withConnect)(Loading);

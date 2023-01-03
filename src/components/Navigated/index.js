@@ -13,7 +13,7 @@ function Navigated({
   iconAfter = null,
   iconBefore = null,
   childrenActive,
-  isSidebar,
+  isSidebarOpen,
   iconSvg = null,
 }) {
   const location = useLocation();
@@ -34,13 +34,13 @@ function Navigated({
       if (path === pathname) {
         setOpen(true);
       }
-      if (path === pathname && !isSidebar) {
+      if (path === pathname && !isSidebarOpen) {
         childrenActive(true);
       }
     });
   }, []);
 
-  const element = isSidebar && (
+  const element = isSidebarOpen && (
     <div className="transition duration-150 ease-out">
       {item.map(({ path, name }, i) => {
         return (
@@ -55,7 +55,7 @@ function Navigated({
               <div className="mr-4 flex items-center">
                 <FontAwesomeIcon
                   className={classNames('w-[6px] h-[6px]', {
-                    'mr-3': isSidebar,
+                    'mr-3': isSidebarOpen,
                   })}
                   icon={faCircle}
                 />
@@ -73,17 +73,19 @@ function Navigated({
       {iconAfter && (
         <FontAwesomeIcon
           className={classNames('w-5 h-5', {
-            'mr-3': isSidebar,
+            'mr-3': isSidebarOpen,
           })}
           icon={iconAfter}
         />
       )}
       {iconSvg}
-      <span className={classNames({ hidden: !isSidebar })}>{babel}</span>
-      {iconBefore && (
+      {isSidebarOpen && (
+        <span className={classNames({ hidden: !isSidebarOpen })}>{babel}</span>
+      )}
+      {iconBefore && isSidebarOpen && (
         <FontAwesomeIcon
           className={classNames('w-3 h-3 ml-auto duration-300', {
-            hidden: !isSidebar,
+            hidden: !isSidebarOpen,
             'rotate-[-90deg]': !openDropdown,
           })}
           icon={faChevronDown}
@@ -98,7 +100,7 @@ function Navigated({
         <button
           className={classNames([
             ...cls,
-            { 'px-0 justify-center': !isSidebar },
+            { 'px-0 justify-center': !isSidebarOpen },
           ])}
           type="button"
           onClick={() => setOpen(!openDropdown)}
@@ -113,7 +115,10 @@ function Navigated({
         to={pathRedirect}
         className={({ isActive }) => {
           if (isActive) {
-            return classNames([...cls, { 'px-0 justify-center': !isSidebar }]);
+            return classNames([
+              ...cls,
+              { 'px-0 justify-center': !isSidebarOpen },
+            ]);
           }
           return classNames(cls);
         }}
@@ -133,7 +138,7 @@ function Navigated({
 
 Navigated.prototype = {
   babel: PropTypes.string,
-  isSidebar: PropTypes.bool,
+  isSidebarOpen: PropTypes.bool,
   item: PropTypes.array,
   open: PropTypes.bool,
   childrenActive: PropTypes.func,

@@ -10,7 +10,7 @@ import injectReducer from '../../../utils/injectReducer';
 import reducer from '../List/reducers';
 import saga from './saga';
 import {
-  deleteDetailProductOld as deleteUserEditOldAction,
+  resetProductEdit as resetProductEditAction,
   getDetailProduct as getDetailProductAction,
   updateProduct as updateProductAction,
   getAllBrands as getAllBrandsAction,
@@ -18,14 +18,14 @@ import {
 } from './actions';
 
 function EditProduct({
-  deleteProductEditOld,
+  resetData,
   getDetailProduct,
   updateProduct,
   getAllBrands,
   getAllCategories,
   categories,
   brands,
-  edit: product,
+  edit: editProduct,
 }) {
   const { id: idEdit } = useParams();
 
@@ -34,7 +34,7 @@ function EditProduct({
   const callback = () => redirect('/admin/products');
 
   useEffect(() => {
-    deleteProductEditOld();
+    resetData();
     getDetailProduct(idEdit, callback);
     getAllBrands();
     getAllCategories();
@@ -47,8 +47,8 @@ function EditProduct({
       <EditProductComponent
         categories={categories}
         brands={brands}
-        onSubmitForUpdateProduct={handleUpdateProduct}
-        product={product}
+        submit={handleUpdateProduct}
+        product={editProduct}
       />
     </AuthLayout>
   );
@@ -68,7 +68,7 @@ const mapDispatchToProps = dispatch => ({
   getDetailProduct: bindActionCreators(getDetailProductAction, dispatch),
   getAllBrands: bindActionCreators(getAllBrandsAction, dispatch),
   getAllCategories: bindActionCreators(getAllCategoriesAction, dispatch),
-  deleteProductEditOld: bindActionCreators(deleteUserEditOldAction, dispatch),
+  resetData: bindActionCreators(resetProductEditAction, dispatch),
 });
 
 const mapStateToProps = state => {

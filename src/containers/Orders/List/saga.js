@@ -12,7 +12,7 @@ import {
   deleteOrderSuccess,
 } from './actions';
 import { getObjectAcceptArrayKey } from '../../../helpers';
-import { GET_ORDERS_REQUEST_TABLE, DELETE_ORDER_REQUEST } from './constants';
+import { GET_ORDERS_LIST_REQUEST, DELETE_ORDER_REQUEST } from './constants';
 
 function* getOrders({ payload: { options } }) {
   const queryAccept = ['role', 'name', 'page'];
@@ -46,7 +46,7 @@ function* deleteOrder({ payload: { id } }) {
 }
 
 function* orderSaga() {
-  yield takeEvery(GET_ORDERS_REQUEST_TABLE, getOrders);
+  yield takeEvery(GET_ORDERS_LIST_REQUEST, getOrders);
   yield takeEvery(DELETE_ORDER_REQUEST, deleteOrder);
 }
 
