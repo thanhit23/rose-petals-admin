@@ -34,7 +34,7 @@ function Search({
 
   const handleClearInput = () => {
     setKeyword('');
-    handleKeywordSearch('');
+    handleKeywordSearch({ name: '' });
     inputRef.current.focus();
   };
 

@@ -1,9 +1,6 @@
 import produce from 'immer';
 import { GET_BRAND_SUCCESS_TABLE } from './constants';
-import {
-  CLEAR_DETAIL_BRAND_OLD,
-  GET_DETAIL_BRAND_SUCCESS,
-} from '../Edit/constants';
+import { RESET_BRAND_EDIT, GET_DETAIL_BRAND_SUCCESS } from '../Edit/constants';
 
 const initialState = {
   list: {
@@ -31,7 +28,7 @@ const listBrand = (state = initialState, action) =>
         draft.edit = data;
         break;
       }
-      case CLEAR_DETAIL_BRAND_OLD: {
+      case RESET_BRAND_EDIT: {
         draft.edit = {};
         break;
       }

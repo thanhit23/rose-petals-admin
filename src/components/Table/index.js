@@ -9,17 +9,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+
 import { Url } from '../../helpers';
 import LoadingTable from '../../containers/LoadingIndicatorTable';
 
-function Table({
-  col: columns,
-  data,
-  meta,
-  goToPage,
-  pagination = false,
-  showLoadingTable,
-}) {
+function Table({ col: columns, data, meta, goToPage, pagination = false }) {
   const { page: pages, limit, totalPages } = meta;
 
   const dataTable = useTable(
@@ -117,8 +111,10 @@ function Table({
     );
   }
 
+  const showLoading = () => <LoadingTable />;
+
   const renderBody = (
-    <tbody {...getTableBodyProps()}>
+    <tbody className="relative" {...getTableBodyProps()}>
       {rows.map(row => {
         prepareRow(row);
         return (
@@ -136,10 +132,10 @@ function Table({
           </tr>
         );
       })}
+      {showLoading()}
+      {!data.length && <tr className="h-40" />}
     </tbody>
   );
-
-  const showLoading = () => <LoadingTable />;
 
   return (
     <>
@@ -155,10 +151,9 @@ function Table({
             </tr>
           ))}
         </thead>
-        {!showLoadingTable && renderBody}
+        {renderBody}
       </table>
-      {showLoading()}
-      {meta.page && !showLoadingTable && pagination && renderPagination()}
+      {meta.page && pagination && renderPagination()}
     </>
   );
 }

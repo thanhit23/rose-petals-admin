@@ -98,7 +98,7 @@ function ListUserComponent({ data, meta, getUsers, handleDeleteUser }) {
   useEffect(() => {
     const searchValue = searchParams.get('name');
 
-    if (searchValue) setValueSearch(searchValue);
+    searchValue && setValueSearch(searchValue);
   }, []);
 
   return useMemo(

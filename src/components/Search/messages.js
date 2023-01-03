@@ -27,4 +27,8 @@ export default defineMessages({
     id: `${scope}.brand`,
     defaultMessage: 'Search Brand...',
   },
+  order: {
+    id: `${scope}.order`,
+    defaultMessage: 'Search Order...',
+  },
 });

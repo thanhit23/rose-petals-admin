@@ -39,4 +39,12 @@ export default defineMessages({
     id: `${scope}.product.brand`,
     defaultMessage: 'Brand',
   },
+  order: {
+    id: `${scope}.order`,
+    defaultMessage: 'Order',
+  },
+  order_list: {
+    id: `${scope}.order.list`,
+    defaultMessage: 'Order List',
+  },
 });

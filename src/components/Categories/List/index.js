@@ -21,7 +21,7 @@ function ListCategoryComponent({ data, meta, getCategory, deleteCategory }) {
   useEffect(() => {
     const searchValue = searchParams.get('name');
 
-    if (searchValue) setValueSearch(searchValue);
+    searchValue && setValueSearch(searchValue);
   }, []);
 
   const columns = useMemo(() => [
@@ -54,7 +54,7 @@ function ListCategoryComponent({ data, meta, getCategory, deleteCategory }) {
         const {
           cell: {
             row: {
-              values: { id },
+              original: { id },
             },
           },
         } = props;

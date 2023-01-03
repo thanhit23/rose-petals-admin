@@ -1,6 +1,6 @@
 import {
   GET_DETAIL_PRODUCT_SUCCESS,
-  DELETE_DETAIL_PRODUCT_OLD,
+  RESET_PRODUCT_EDIT,
   GET_DETAIL_PRODUCT_FAILED,
   UPDATE_PRODUCT_FAILED,
   UPDATE_PRODUCT_REQUEST,
@@ -15,7 +15,7 @@ import {
 } from './constants';
 
 export const deleteDetailProductOld = () => ({
-  type: DELETE_DETAIL_PRODUCT_OLD,
+  type: RESET_PRODUCT_EDIT,
 });
 
 export const getDetailProduct = id => ({

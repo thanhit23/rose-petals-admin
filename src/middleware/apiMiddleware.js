@@ -20,7 +20,6 @@ const middlewareStorage = store => next => action => {
       window.location.href = '/login';
       break;
     }
-
     default:
       break;
   }

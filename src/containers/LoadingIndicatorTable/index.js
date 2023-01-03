@@ -9,9 +9,9 @@ import Loadings from '../../components/LoadingTable';
 
 function LoadingTable({ showLoadingTable }) {
   return showLoadingTable ? (
-    <div className="flex justify-center w-full h-24">
+    <tr className="lex justify-center w-full absolute bg-[#0000000d] inset-0">
       <Loadings />
-    </div>
+    </tr>
   ) : (
     ''
   );

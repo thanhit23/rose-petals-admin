@@ -5,7 +5,7 @@ import {
   GET_USER_REQUEST,
   GET_USER_FAILED,
   GET_USER_SUCCESS,
-  DELETE_USER_DATA_EDIT,
+  RESET_USER_EDIT,
 } from './constants';
 
 export const getUser = (id, callback) => ({
@@ -14,7 +14,7 @@ export const getUser = (id, callback) => ({
 });
 
 export const deleteUserEditOld = () => ({
-  type: DELETE_USER_DATA_EDIT,
+  type: RESET_USER_EDIT,
 });
 
 export const getUserSuccessfully = data => ({

@@ -11,6 +11,9 @@ import EditProduct from '../../containers/Products/Edit';
 import ListBrand from '../../containers/Brands/List';
 import AddBrand from '../../containers/Brands/Add';
 import EditBrand from '../../containers/Brands/Edit';
+import ListOrder from '../../containers/Orders/List';
+import EditOrder from '../../containers/Orders/Edit';
+import DetailOrder from '../../containers/Orders/Detail';
 
 export default [
   {
@@ -77,6 +80,21 @@ export default [
   {
     path: '/admin/brand/edit/:id',
     component: EditBrand,
+    exact: true,
+  },
+  {
+    path: '/admin/orders',
+    component: ListOrder,
+    exact: true,
+  },
+  {
+    path: '/admin/order/edit/:id',
+    component: EditOrder,
+    exact: true,
+  },
+  {
+    path: '/admin/order/detail',
+    component: DetailOrder,
     exact: true,
   },
 ];
