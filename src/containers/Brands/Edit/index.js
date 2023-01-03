@@ -8,7 +8,7 @@ import AuthLayout from '../../../layouts/AuthLayout';
 import EditBrandComponent from '../../../components/Brands/Edit';
 import {
   getDetailBrand as getDetailBrandAction,
-  clearDetailBrandOld as clearDetailBrandOldAction,
+  resetBrandEdit as resetBrandEditAction,
   updateBrand as updateBrandAction,
 } from './actions';
 import injectReducer from '../../../utils/injectReducer';
@@ -18,9 +18,9 @@ import saga from './saga';
 
 function EditBrand({
   updateBrand,
-  edit: brand,
+  edit: editBrand,
   getDetailBrand,
-  clearDetailBrandOld,
+  resetData,
 }) {
   const { id: idEdit } = useParams();
 
@@ -29,7 +29,7 @@ function EditBrand({
   const callback = () => redirect('/admin/brands');
 
   useEffect(() => {
-    clearDetailBrandOld();
+    resetData();
     getDetailBrand(idEdit, callback);
   }, []);
 
@@ -37,15 +37,16 @@ function EditBrand({
 
   return (
     <AuthLayout title="edit_brand">
-      <EditBrandComponent data={brand} onSubmit={handleUpdateBrand} />
+      <EditBrandComponent data={editBrand} onSubmit={handleUpdateBrand} />
     </AuthLayout>
   );
 }
 
 EditBrand.prototype = {
   edit: PropTypes.array,
+  resetData: PropTypes.func,
+  updateBrand: PropTypes.func,
   getDetailBrand: PropTypes.func,
-  updateCategory: PropTypes.func,
 };
 
 const mapStateToProps = state => {
@@ -60,7 +61,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   updateBrand: bindActionCreators(updateBrandAction, dispatch),
   getDetailBrand: bindActionCreators(getDetailBrandAction, dispatch),
-  clearDetailBrandOld: bindActionCreators(clearDetailBrandOldAction, dispatch),
+  resetData: bindActionCreators(resetBrandEditAction, dispatch),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

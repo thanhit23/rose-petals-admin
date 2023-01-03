@@ -9,7 +9,7 @@ import { ARRAY_STATUS } from '../List/constants';
 import LabelWithFormatMessage from '../../LabelWithFormatMessage';
 import InputWithFormatMessage from '../../InputWithFormatMessage';
 
-function EditOrderComponent({ onSubmitForUpdateOrder, order }) {
+function EditOrderComponent({ submit, order }) {
   const { id } = useParams();
 
   const [orderEdit, setOrderEdit] = useState(order);
@@ -21,7 +21,7 @@ function EditOrderComponent({ onSubmitForUpdateOrder, order }) {
   const onSubmit = () => {
     // eslint-disable-next-line no-shadow
     const { address, amount, quantity, status } = orderEdit;
-    onSubmitForUpdateOrder(id, { address, amount, quantity, status });
+    submit(id, { address, amount, quantity, status });
   };
 
   const changeValueInput = ({ target }) => {
@@ -129,7 +129,7 @@ function EditOrderComponent({ onSubmitForUpdateOrder, order }) {
 }
 
 EditOrderComponent.prototype = {
-  onSubmitForUpdateOrder: PropTypes.func,
+  submit: PropTypes.func,
   order: PropTypes.array,
 };
 

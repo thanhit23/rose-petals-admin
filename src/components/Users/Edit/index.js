@@ -9,7 +9,7 @@ import { GENDER, MALE, FEMALE } from './constants';
 import LabelWithFormatMessage from '../../LabelWithFormatMessage';
 import InputWithFormatMessage from '../../InputWithFormatMessage';
 
-function EditUserComponent({ onSubmitForUpdateUser, users }) {
+function EditUserComponent({ submit, users }) {
   const { id } = useParams();
 
   const [userEdit, setUserEdit] = useState(users);
@@ -21,7 +21,7 @@ function EditUserComponent({ onSubmitForUpdateUser, users }) {
   const onSubmit = () => {
     // eslint-disable-next-line no-shadow
     const { email, name, gender, phoneNumber } = userEdit;
-    onSubmitForUpdateUser(id, { email, name, gender, phoneNumber });
+    submit(id, { email, name, gender, phoneNumber });
   };
 
   const changeValueInput = ({ target }) => {

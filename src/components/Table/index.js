@@ -7,8 +7,6 @@ import {
   faChevronRight,
   faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
 
 import { Url } from '../../helpers';
 import LoadingTable from '../../containers/LoadingIndicatorTable';
@@ -165,15 +163,4 @@ Table.prototype = {
   goToPage: PropTypes.func,
 };
 
-const mapStateToProps = state => {
-  const {
-    loadingTable: { showLoadingTable },
-  } = state;
-  return {
-    showLoadingTable,
-  };
-};
-
-const withConnect = connect(mapStateToProps, null);
-
-export default compose(withConnect)(Table);
+export default Table;

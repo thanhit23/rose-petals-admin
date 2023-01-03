@@ -13,7 +13,7 @@ export const getUser = (id, callback) => ({
   payload: { id, callback },
 });
 
-export const deleteUserEditOld = () => ({
+export const resetUserEdit = () => ({
   type: RESET_USER_EDIT,
 });
 

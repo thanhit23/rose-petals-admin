@@ -8,7 +8,7 @@ import {
   UPDATE_BRAND_SUCCESS,
 } from './constants';
 
-export const clearDetailBrandOld = () => ({
+export const resetBrandEdit = () => ({
   type: RESET_BRAND_EDIT,
 });
 

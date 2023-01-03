@@ -9,12 +9,12 @@ import EditUserComponent from '../../../components/Users/Edit';
 import {
   updateUser as updateUserAction,
   getUser as getUserAction,
-  deleteUserEditOld as deleteUserEditOldAction,
+  resetUserEdit as resetUserEditAction,
 } from './actions';
 import injectSaga from '../../../utils/injectSaga';
 import saga from './saga';
 
-function EditUser({ updateUser, edit: editUser, getUser, deleteUserEditOld }) {
+function EditUser({ updateUser, edit: editUser, getUser, resetUserEdit }) {
   const navigate = useNavigate();
 
   const callback = () => navigate('/admin/users');
@@ -24,16 +24,13 @@ function EditUser({ updateUser, edit: editUser, getUser, deleteUserEditOld }) {
   const { id } = useParams();
 
   useEffect(() => {
-    deleteUserEditOld();
+    resetUserEdit();
     getUser(id, callback);
   }, []);
 
   return (
     <AuthLayout title="edit_user">
-      <EditUserComponent
-        users={editUser}
-        onSubmitForUpdateUser={handleUpdateUser}
-      />
+      <EditUserComponent users={editUser} submit={handleUpdateUser} />
     </AuthLayout>
   );
 }
@@ -41,13 +38,14 @@ function EditUser({ updateUser, edit: editUser, getUser, deleteUserEditOld }) {
 EditUser.prototype = {
   edit: PropTypes.array,
   getUser: PropTypes.func,
-  updateUserInformation: PropTypes.func,
+  updateUser: PropTypes.func,
+  resetUserEdit: PropTypes.func,
 };
 
 const mapDispatchToProps = dispatch => ({
   updateUser: bindActionCreators(updateUserAction, dispatch),
   getUser: bindActionCreators(getUserAction, dispatch),
-  deleteUserEditOld: bindActionCreators(deleteUserEditOldAction, dispatch),
+  resetUserEdit: bindActionCreators(resetUserEditAction, dispatch),
 });
 
 const mapStateToProps = state => {

@@ -5,8 +5,6 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
 
-import injectReducer from '../../utils/injectReducer';
-import reducer from '../../containers/HomePage/reducers';
 import saga from '../../containers/HomePage/saga';
 import { checkAuth } from '../../containers/HomePage/actions';
 import injectSaga from '../../utils/injectSaga';
@@ -14,7 +12,7 @@ import Header from '../../containers/Header';
 import SideBar from '../../containers/SideBar';
 import Helmet from '../../components/Helmet';
 
-function AuthLayout({ children, title, isSidebar, auth, onCheckAuth }) {
+function AuthLayout({ children, title, isSidebarOpen, auth, onCheckAuth }) {
   useEffect(() => {
     onCheckAuth();
     if (!auth) <Navigate to="/login" replace />;
@@ -29,8 +27,8 @@ function AuthLayout({ children, title, isSidebar, auth, onCheckAuth }) {
           <div
             className={classNames(
               {
-                'ml-[260px]': isSidebar,
-                'ml-[64px]': !isSidebar,
+                'ml-[260px]': isSidebarOpen,
+                'ml-[64px]': !isSidebarOpen,
               },
               'duration-300',
               'col-span-6',
@@ -48,7 +46,7 @@ function AuthLayout({ children, title, isSidebar, auth, onCheckAuth }) {
 }
 
 AuthLayout.prototype = {
-  isSidebar: PropTypes.bool,
+  isSidebarOpen: PropTypes.bool,
   auth: PropTypes.object,
   onCheckAuth: PropTypes.func,
   title: PropTypes.string,
@@ -57,12 +55,14 @@ AuthLayout.prototype = {
 
 const mapStateToProps = state => {
   const {
-    home: { isSidebar },
-    global: { auth },
+    global: {
+      auth,
+      sidebar: { isSidebarOpen },
+    },
   } = state;
   return {
     auth,
-    isSidebar,
+    isSidebarOpen,
   };
 };
 
@@ -73,7 +73,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
-const withReducer = injectReducer({ key: 'home', reducer });
 const withSaga = injectSaga({ key: 'home', saga });
 
-export default compose(withReducer, withSaga, withConnect)(AuthLayout);
+export default compose(withSaga, withConnect)(AuthLayout);

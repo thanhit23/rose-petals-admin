@@ -1,24 +1,24 @@
 import {
-  GET_CATEGORY_REQUEST_TABLE,
-  GET_CATEGORY_SUCCESS_TABLE,
-  GET_CATEGORY_FAILED_TABLE,
+  GET_CATEGORY_LIST_REQUEST,
+  GET_CATEGORY_LIST_SUCCESS,
+  GET_CATEGORY_LIST_FAILED,
   DELETE_CATEGORY_REQUEST,
   DELETE_CATEGORY_FAILED,
   DELETE_CATEGORY_SUCCESS,
 } from './constants';
 
 export const getCategories = options => ({
-  type: GET_CATEGORY_REQUEST_TABLE,
+  type: GET_CATEGORY_LIST_REQUEST,
   payload: { options },
 });
 
 export const getCategoriesSuccess = data => ({
-  type: GET_CATEGORY_SUCCESS_TABLE,
+  type: GET_CATEGORY_LIST_SUCCESS,
   payload: { data },
 });
 
 export const getCategoriesFailed = message => ({
-  type: GET_CATEGORY_FAILED_TABLE,
+  type: GET_CATEGORY_LIST_FAILED,
   payload: { message },
 });
 

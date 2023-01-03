@@ -13,7 +13,7 @@ import {
 import { getObjectAcceptArrayKey } from '../../../helpers';
 import {
   DELETE_CATEGORY_REQUEST,
-  GET_CATEGORY_REQUEST_TABLE,
+  GET_CATEGORY_LIST_REQUEST,
 } from './constants';
 
 function* getCategory({ payload: { options } }) {
@@ -51,7 +51,7 @@ function* deleteCategory({ payload: { id, callback } }) {
 }
 
 function* category() {
-  yield takeEvery(GET_CATEGORY_REQUEST_TABLE, getCategory);
+  yield takeEvery(GET_CATEGORY_LIST_REQUEST, getCategory);
   yield takeEvery(DELETE_CATEGORY_REQUEST, deleteCategory);
 }
 

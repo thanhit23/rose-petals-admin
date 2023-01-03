@@ -1,13 +1,13 @@
 import React from 'react';
 import Breadcrumb from '../../Breadcrumb';
 
-function DetailOrderComponent() {
+function OrderDetailComponent() {
   return (
     <>
-      <Breadcrumb title="detail_order" />
+      <Breadcrumb title="order_detail" />
       <h1>thanh</h1>
     </>
   );
 }
 
-export default DetailOrderComponent;
+export default OrderDetailComponent;
