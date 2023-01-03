@@ -6,6 +6,27 @@
     body {
         font-family: Open Sans,Roboto,-apple-system,BlinkMacSystemFont,Segoe UI,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
     }
+
+    .cancelled {
+        color: theme('colors.cancelled');
+        background-color: theme('backgroundColors.cancelled');
+    }
+
+    .pending {
+        color: theme('colors.pending');
+        background-color: theme('backgroundColors.pending');
+    }
+
+    .processing {
+        color: theme('colors.processing');
+        background-color: theme('backgroundColors.processing');
+    }
+
+    .delivered {
+        color: theme('colors.delivered');
+        background-color: theme('backgroundColors.delivered');
+    }
+
     .label-input {
         top: 50%;
         transform: translateY(-50%);

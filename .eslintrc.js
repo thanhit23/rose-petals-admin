@@ -44,6 +44,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': 0,
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react/jsx-one-expression-per-line': [0, { allow: 'literal' }],
+    'jsx-a11y/label-has-associated-control': 0,
     'import/imports-first': 0,
     'no-underscore-dangle': 0,
     'import/newline-after-import': 0,

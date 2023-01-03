@@ -63,7 +63,7 @@ export default defineMessages({
     id: `${scope}.order.edit`,
     defaultMessage: 'Edit Order',
   },
-  detail_order: {
+  order_detail: {
     id: `${scope}.order.detail`,
     defaultMessage: 'Order Details',
   },

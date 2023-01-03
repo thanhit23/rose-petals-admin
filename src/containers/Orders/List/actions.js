@@ -1,21 +1,21 @@
 import {
-  GET_ORDERS_REQUEST_TABLE,
-  GET_ORDERS_SUCCESS_TABLE,
-  GET_ORDERS_FAILED_TABLE,
+  GET_ORDERS_LIST_REQUEST,
+  GET_ORDERS_LIST_SUCCESS,
+  GET_ORDERS_LIST_FAILED,
   DELETE_ORDER_REQUEST,
   DELETE_ORDER_SUCCESS,
   DELETE_ORDER_FAILED,
 } from './constants';
 
 export const getOrders = options => ({
-  type: GET_ORDERS_REQUEST_TABLE,
+  type: GET_ORDERS_LIST_REQUEST,
   payload: {
     options,
   },
 });
 
 export const getOrdersSuccess = ({ data, meta }) => ({
-  type: GET_ORDERS_SUCCESS_TABLE,
+  type: GET_ORDERS_LIST_SUCCESS,
   payload: {
     data,
     meta,
@@ -23,7 +23,7 @@ export const getOrdersSuccess = ({ data, meta }) => ({
 });
 
 export const getOrdersListFailed = messages => ({
-  type: GET_ORDERS_FAILED_TABLE,
+  type: GET_ORDERS_LIST_FAILED,
   payload: { messages },
 });
 

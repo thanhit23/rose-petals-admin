@@ -17,15 +17,20 @@ function ListOrderComponent({ data, meta, getOrders, handleDeleteOrder }) {
 
   const handleGetOrders = options => getOrders(options);
 
-  const color = [
-    'text-[#e94560] bg-[#ffeaea] rounded-lg',
-    'text-[#4e97fd] bg-[#dbf0fe] rounded-lg',
-    'text-[#ffcd4e] bg-[#fff8e5] rounded-lg',
-    'text-[#33d067] bg-[#E7F9ED] rounded-lg',
+  const colorStatusMapping = [
+    'cancelled',
+    'pending',
+    'processing',
+    'delivered',
   ];
 
   const handleStatus = status => (
-    <div className={clx(color[status], 'inline-flex text-xs py-1 px-4')}>
+    <div
+      className={clx(
+        colorStatusMapping[status],
+        'rounded-lg inline-flex text-xs py-1 px-4',
+      )}
+    >
       <FormattedMessage {...messages.status[ARRAY_STATUS[status]]} />
     </div>
   );

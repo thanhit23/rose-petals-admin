@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { GET_BRAND_SUCCESS_TABLE } from './constants';
+import { GET_BRAND_LIST_SUCCESS } from './constants';
 import { RESET_BRAND_EDIT, GET_DETAIL_BRAND_SUCCESS } from '../Edit/constants';
 
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
 const listBrand = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case GET_BRAND_SUCCESS_TABLE: {
+      case GET_BRAND_LIST_SUCCESS: {
         const {
           payload: { data, meta },
         } = action;

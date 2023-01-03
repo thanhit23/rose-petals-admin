@@ -118,6 +118,7 @@
 	"Components.Order.edit.placeholder.quantity": "Quantity...",
 	"Components.Order.edit.placeholder.status": "Status...",
 	"Components.Order.edit.button.submit": "Submit",
+	"Components.Order.detail.button.submit": "Submit",
 	"Containers.Sidebar.dashboard": "Dashboard",
 	"Containers.Sidebar.user": "User",
 	"Containers.Sidebar.user.list": "List Users",
@@ -128,5 +129,6 @@
 	"Containers.Sidebar.product.category": "Category",
 	"Containers.Sidebar.product.brand": "Brand",
 	"Containers.Sidebar.order": "Order",
-	"Containers.Sidebar.order.list": "Order List"
+	"Containers.Sidebar.order.list": "Order List",
+	"Containers.Sidebar.order.detail": "Order Detail"
 }

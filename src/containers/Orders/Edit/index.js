@@ -9,19 +9,14 @@ import EditOrderComponent from '../../../components/Orders/Edit';
 import {
   updateOrder as updateOrderAction,
   getOrder as getOrderAction,
-  deleteOrderEditOld as deleteOrderEditOldAction,
+  resetOrderEdit as resetOrderEditAction,
 } from './actions';
 import injectSaga from '../../../utils/injectSaga';
 import saga from './saga';
 import injectReducer from '../../../utils/injectReducer';
 import reducer from '../List/reducers';
 
-function EditOrder({
-  updateOrder,
-  edit: editOrder,
-  getOrder,
-  deleteOrderEditOld,
-}) {
+function EditOrder({ updateOrder, edit: editOrder, getOrder, resetData }) {
   const navigate = useNavigate();
 
   const callback = () => navigate('/admin/orders');
@@ -31,16 +26,13 @@ function EditOrder({
   const { id } = useParams();
 
   useEffect(() => {
-    deleteOrderEditOld();
+    resetData();
     getOrder(id, callback);
   }, []);
 
   return (
     <AuthLayout title="edit_order">
-      <EditOrderComponent
-        order={editOrder}
-        onSubmitForUpdateOrder={handleUpdateOrder}
-      />
+      <EditOrderComponent order={editOrder} submit={handleUpdateOrder} />
     </AuthLayout>
   );
 }
@@ -48,14 +40,14 @@ function EditOrder({
 EditOrder.prototype = {
   edit: PropTypes.array,
   getOrder: PropTypes.func,
+  resetData: PropTypes.func,
   updateOrder: PropTypes.func,
-  deleteOrderEditOld: PropTypes.func,
 };
 
 const mapDispatchToProps = dispatch => ({
   updateOrder: bindActionCreators(updateOrderAction, dispatch),
   getOrder: bindActionCreators(getOrderAction, dispatch),
-  deleteOrderEditOld: bindActionCreators(deleteOrderEditOldAction, dispatch),
+  resetData: bindActionCreators(resetOrderEditAction, dispatch),
 });
 
 const mapStateToProps = state => {

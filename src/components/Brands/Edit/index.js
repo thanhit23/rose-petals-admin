@@ -8,7 +8,7 @@ import messages from './messages';
 import LabelWithFormatMessage from '../../LabelWithFormatMessage';
 import InputWithFormatMessage from '../../InputWithFormatMessage';
 
-function EditBrandComponent({ onSubmit, data }) {
+function EditBrandComponent({ submit, data }) {
   const { id } = useParams();
   const [brandEdit, setBrandEdit] = useState({});
 
@@ -48,7 +48,7 @@ function EditBrandComponent({ onSubmit, data }) {
             <button
               className="bg-[#007bff] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button"
-              onClick={() => onSubmit(id, brandEdit)}
+              onClick={() => submit(id, brandEdit)}
             >
               <FormattedMessage {...messages.btn.submit} />
             </button>

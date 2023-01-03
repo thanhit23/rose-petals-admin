@@ -4,9 +4,7 @@ import { bindActionCreators, compose } from 'redux';
 import propTypes from 'prop-types';
 
 import { toggleSidebar, logout } from './actions';
-import injectReducer from '../../utils/injectReducer';
 import injectSaga from '../../utils/injectSaga';
-import reducer from '../HomePage/reducers';
 import saga from './saga';
 import HeaderComponent from '../../components/Header';
 
@@ -36,7 +34,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 const withConnect = connect(null, mapDispatchToProps);
-const withReducer = injectReducer({ key: 'home', reducer });
 const withSaga = injectSaga({ key: 'header', saga });
 
-export default compose(withReducer, withSaga, withConnect)(Header);
+export default compose(withSaga, withConnect)(Header);

@@ -9,12 +9,7 @@ import LabelWithFormatMessage from '../../LabelWithFormatMessage';
 import InputWithFormatMessage from '../../InputWithFormatMessage';
 import TextareaWithFormatMessage from '../../TextareaWithFormatMessage';
 
-function EditProductComponent({
-  brands,
-  categories,
-  onSubmitForUpdateProduct,
-  product,
-}) {
+function EditProductComponent({ brands, categories, submit, product }) {
   const { id } = useParams();
 
   const [productEdit, setProductEdit] = useState(product);
@@ -32,7 +27,7 @@ function EditProductComponent({
   const onSubmit = () => {
     // eslint-disable-next-line no-shadow
     const { price, description, name, category, brand } = productEdit;
-    onSubmitForUpdateProduct(id, { price, description, name, category, brand });
+    submit(id, { price, description, name, category, brand });
   };
 
   const changeValueInput = ({ target }) => {
@@ -164,8 +159,10 @@ function EditProductComponent({
 }
 
 EditProductComponent.prototype = {
-  onSubmitForUpdateUser: PropTypes.func,
+  submit: PropTypes.func,
   users: PropTypes.array,
+  brands: PropTypes.array,
+  categories: PropTypes.array,
 };
 
 export default EditProductComponent;
