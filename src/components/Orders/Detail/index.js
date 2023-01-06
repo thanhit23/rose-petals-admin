@@ -3,11 +3,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { FormattedMessage } from 'react-intl';
+import cls from 'classnames';
 import Breadcrumb from '../../Breadcrumb';
 import messages from './messages';
+import TextareaWithFormatMessage from '../../TextareaWithFormatMessage';
+import LabelWithFormatMessage from '../../LabelWithFormatMessage';
 
 function OrderDetailComponent() {
   const statusOrder = ['Cancelled', 'Pending', 'Processing', 'Delivered'];
+
+  const renderClsTextarea = () => {
+    return [
+      'hover:border-[#111] w-full outline-none appearance-none border border-[#e3e9ef] rounded p-3 text-[14px] leading-tight mt-3',
+    ];
+  };
+
   return (
     <>
       <Breadcrumb title="order_detail" />
@@ -16,19 +26,21 @@ function OrderDetailComponent() {
           <div className="flex flex-row gap-8">
             <p className="m-0 text-sm">
               <span className="text-[#7d879c] normal-case whitespace-normal mr-1">
-                Order ID:
+                <FormattedMessage {...messages.order_id} />:
               </span>
               f0ba538b-c8f3-45ce-b6c1-209cf07ba5f8
             </p>
             <p className="m-0 text-sm">
               <span className="text-[#7d879c] normal-case whitespace-normal mr-1">
-                Placed on:{' '}
+                <FormattedMessage {...messages.placed_on} />:
               </span>
               10 Nov, 2022
             </p>
           </div>
           <div className="flex flex-col my-6">
-            <label className="mb-2">Order Status</label>
+            <label className="mb-2">
+              <FormattedMessage {...messages.order_status} />
+            </label>
             <div className="relative w-1/2">
               <select className="hover:border-[#111] h-12 w-full outline-none appearance-none border border-[#e3e9ef] rounded py-[16px] px-3 text-[14px] leading-tight">
                 {statusOrder.map((e, i) => (
@@ -72,7 +84,7 @@ function OrderDetailComponent() {
             </div>
             <div className="flex flex-row gap-4 w-1/2 place-items-center justify-between">
               <p className="text-[#7d879c] text-sm">
-                Product properties: Black, L
+                <FormattedMessage {...messages.product_properties} />: Black, L
               </p>
               <button type="button" className="p-4">
                 <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
@@ -157,39 +169,56 @@ function OrderDetailComponent() {
         <div className="col-span-1 shadow-[#03004717_0px_1px_3px] bg-white rounded mt-4 rounded-lg mt-6">
           <div className="p-6">
             <div>
-              <label className="mb-2" htmlFor="name">
-                Shipping Address
-              </label>
-              <textarea
-                id="name"
-                className="hover:border-[#111] w-full outline-none appearance-none border border-[#e3e9ef] rounded p-1 text-[14px] leading-tight mt-3"
-                name="name"
-                rows={4}
+              <LabelWithFormatMessage
+                message={messages.label.shipping_address}
+                className="mb-2"
+                htmlFor="shipping-address"
               />
+              <div className={cls(renderClsTextarea())}>
+                <TextareaWithFormatMessage
+                  className="w-full outline-none appearance-none border-none text-[14px] leading-tight"
+                  id="shipping-address"
+                  type="text"
+                  name="shipping-address"
+                  rows={4}
+                  message={messages.placeholder.shipping_address}
+                />
+              </div>
             </div>
-            <div>
-              <label className="mb-2" htmlFor="name">
-                {/* eslint-disable-next-line react/no-unescaped-entities */}
-                Customer's Note
-              </label>
-              <textarea
-                id="name"
-                className="hover:border-[#111] w-full outline-none appearance-none border border-[#e3e9ef] rounded p-1 text-[14px] leading-tight mt-3"
-                name="name"
-                rows={4}
+            <div className="mt-3">
+              <LabelWithFormatMessage
+                message={messages.label.customer_note}
+                className="mb-2"
+                htmlFor="customer-note"
               />
+              <div className={cls(renderClsTextarea())}>
+                <TextareaWithFormatMessage
+                  className="w-full outline-none appearance-none border-none text-[14px] leading-tight"
+                  id="customer-note"
+                  type="text"
+                  name="customer-note"
+                  rows={4}
+                  message={messages.placeholder.customer_note}
+                />
+              </div>
             </div>
           </div>
         </div>
         <div className="col-span-1 shadow-[#03004717_0px_1px_3px] bg-white rounded mt-4 rounded-lg mt-6">
           <div className="p-6">
-            <h6 className="text-base mb-3">Total Summary</h6>
+            <h6 className="text-base mb-3">
+              <FormattedMessage {...messages.total_summary} />
+            </h6>
             <div className="flex justify-between mb-3">
-              <p className="text-[#7d879c] text-sm">Subtotal:</p>
+              <p className="text-[#7d879c] text-sm">
+                <FormattedMessage {...messages.subtotal} />:
+              </p>
               <h6 className="text-sm">$350.00</h6>
             </div>
             <div className="flex justify-between mb-3">
-              <p className="text-[#7d879c] text-sm">Shipping fee:</p>
+              <p className="text-[#7d879c] text-sm">
+                <FormattedMessage {...messages.shipping_fee} />:
+              </p>
               <div className="flex place-items-center">
                 <h6 className="text-sm mr-1">$</h6>
                 <div className="max-w-[60px] ml-2">
@@ -204,7 +233,10 @@ function OrderDetailComponent() {
               </div>
             </div>
             <div className="flex justify-between mb-3">
-              <p className="text-[#7d879c] text-sm">Discount(%):</p>
+              <p className="text-[#7d879c] text-sm">
+                <FormattedMessage {...messages.discount} />
+                (%):
+              </p>
               <div className="flex place-items-center">
                 <h6 className="text-sm mr-1">$</h6>
                 <div className="max-w-[60px] ml-2">
@@ -220,11 +252,13 @@ function OrderDetailComponent() {
             </div>
             <hr className="my-4 border-[#f3f5f9]" />
             <div className="flex justify-between mb-3">
-              <p className="text-[#2b3445] text-sm font-semibold">Total</p>
+              <p className="text-[#2b3445] text-sm font-semibold">
+                <FormattedMessage {...messages.total} />
+              </p>
               <h6 className="text-sm">$350.00</h6>
             </div>
             <h6 className="text-sm mb-3 text-[#2b3445] font-light">
-              Paid by Credit/Debit Card
+              <FormattedMessage {...messages.paid_method} />
             </h6>
           </div>
         </div>
