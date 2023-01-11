@@ -47,8 +47,4 @@ export default defineMessages({
     id: `${scope}.order.list`,
     defaultMessage: 'Order List',
   },
-  order_detail: {
-    id: `${scope}.order.detail`,
-    defaultMessage: 'Order Detail',
-  },
 });

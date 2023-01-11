@@ -93,7 +93,7 @@ export default [
     exact: true,
   },
   {
-    path: '/admin/order/detail',
+    path: '/admin/order/:orderId/detail/:id',
     component: DetailOrder,
     exact: true,
   },
