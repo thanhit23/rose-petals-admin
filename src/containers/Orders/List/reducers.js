@@ -1,6 +1,12 @@
 import produce from 'immer';
+
 import { GET_ORDERS_LIST_SUCCESS } from './constants';
 import { GET_ORDERS_SUCCESS, RESET_ORDER_EDIT } from '../Edit/constants';
+import {
+  GET_ORDER_DETAIL_SUCCESS,
+  RESET_ORDER_DETAIL,
+  GET_ORDER_SUCCESS,
+} from '../Detail/constants';
 
 const initialState = {
   list: {
@@ -8,6 +14,10 @@ const initialState = {
     meta: {},
   },
   edit: {},
+  detail: {
+    order: {},
+    product: [],
+  },
 };
 
 const listUser = (state = initialState, action) =>
@@ -32,6 +42,24 @@ const listUser = (state = initialState, action) =>
       }
       case RESET_ORDER_EDIT: {
         draft.edit = {};
+        break;
+      }
+      case GET_ORDER_DETAIL_SUCCESS: {
+        const {
+          payload: { data },
+        } = action;
+        draft.detail.product = data;
+        break;
+      }
+      case GET_ORDER_SUCCESS: {
+        const {
+          payload: { data },
+        } = action;
+        draft.detail.order = data;
+        break;
+      }
+      case RESET_ORDER_DETAIL: {
+        draft.detail.product = {};
         break;
       }
       default:

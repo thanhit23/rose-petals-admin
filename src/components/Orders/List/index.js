@@ -108,7 +108,7 @@ function ListOrderComponent({ data, meta, getOrders, handleDeleteOrder }) {
               type="button"
               className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
             >
-              <Link to={`/admin/order/edit/${_id}`}>
+              <Link to={`/admin/order/${_id}/detail/${_id}`}>
                 <FontAwesomeIcon className="text-[#7D879C]" icon={faEye} />
               </Link>
             </button>

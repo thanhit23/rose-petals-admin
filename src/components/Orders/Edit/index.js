@@ -21,6 +21,7 @@ function EditOrderComponent({ submit, order }) {
   const onSubmit = () => {
     // eslint-disable-next-line no-shadow
     const { address, amount, quantity, status } = orderEdit;
+
     submit(id, { address, amount, quantity, status });
   };
 
@@ -36,7 +37,7 @@ function EditOrderComponent({ submit, order }) {
   return (
     <>
       <Breadcrumb
-        prevPage={{ path: '/admin/users', name: 'list_order' }}
+        prevPage={{ path: '/admin/orders', name: 'list_order' }}
         title="edit_order"
       />
       <div>
@@ -104,8 +105,8 @@ function EditOrderComponent({ submit, order }) {
               name="status"
               className="h-12 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
               defaultValue={status}
+              onChange={changeValueInput}
             >
-              <option value="">Select...</option>
               {ARRAY_STATUS.map((value, index) => (
                 <option key={index} value={index}>
                   <FormattedMessage {...messages.status[value]} />
