@@ -92,6 +92,10 @@ function SideBar({ isSidebarOpen, isActiveItem }) {
                 name: <FormattedMessage {...messages.product_list} />,
               },
               {
+                path: '/admin/product-reviews',
+                name: <FormattedMessage {...messages.product_review} />,
+              },
+              {
                 path: '/admin/product',
                 name: <FormattedMessage {...messages.product_add} />,
               },
@@ -115,10 +119,6 @@ function SideBar({ isSidebarOpen, isActiveItem }) {
               {
                 path: '/admin/orders',
                 name: <FormattedMessage {...messages.order_list} />,
-              },
-              {
-                path: '/admin/order/detail',
-                name: <FormattedMessage {...messages.order_detail} />,
               },
             ]}
           />

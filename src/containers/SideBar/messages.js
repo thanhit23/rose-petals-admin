@@ -31,6 +31,10 @@ export default defineMessages({
     id: `${scope}.product.add`,
     defaultMessage: 'Add Product',
   },
+  product_review: {
+    id: `${scope}.product.review`,
+    defaultMessage: 'Review',
+  },
   product_category: {
     id: `${scope}.product.category`,
     defaultMessage: 'Category',
@@ -46,9 +50,5 @@ export default defineMessages({
   order_list: {
     id: `${scope}.order.list`,
     defaultMessage: 'Order List',
-  },
-  order_detail: {
-    id: `${scope}.order.detail`,
-    defaultMessage: 'Order Detail',
   },
 });

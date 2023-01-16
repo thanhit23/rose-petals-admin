@@ -6,6 +6,7 @@ import ListCategory from '../../containers/Categories/List';
 import AddCategory from '../../containers/Categories/Add';
 import EditCategory from '../../containers/Categories/Edit';
 import ListProduct from '../../containers/Products/List';
+import ProductReview from '../../containers/Products/Review';
 import AddProduct from '../../containers/Products/Add';
 import EditProduct from '../../containers/Products/Edit';
 import ListBrand from '../../containers/Brands/List';
@@ -63,6 +64,11 @@ export default [
     exact: true,
   },
   {
+    path: '/admin/product-reviews',
+    component: ProductReview,
+    exact: true,
+  },
+  {
     path: '/admin/product/edit/:id',
     component: EditProduct,
     exact: true,
@@ -93,7 +99,7 @@ export default [
     exact: true,
   },
   {
-    path: '/admin/order/detail',
+    path: '/admin/order/:orderId/detail/:id',
     component: DetailOrder,
     exact: true,
   },

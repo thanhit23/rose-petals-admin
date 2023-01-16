@@ -106,9 +106,9 @@
 	"Components.Order.list.status.processing": "Processing",
 	"Components.Order.list.status.delivered": "Delivered",
 	"Components.Order.edit.status.delivered": "Delivered",
-	"Components.Order.edit.status.pending": "Delivered",
-	"Components.Order.edit.status.processing": "Delivered",
-	"Components.Order.edit.status.cancelled": "Delivered",
+	"Components.Order.edit.status.pending": "Pending",
+	"Components.Order.edit.status.processing": "Processing",
+	"Components.Order.edit.status.cancelled": "Cancelled",
 	"Components.Order.edit.label.address": "Address",
 	"Components.Order.edit.label.amount": "Amount",
 	"Components.Order.edit.label.quantity": "Quantity",
@@ -140,9 +140,9 @@
 	"Containers.Sidebar.product": "Product",
 	"Containers.Sidebar.product.list": "List Products",
 	"Containers.Sidebar.product.add": "Add Product",
+	"Containers.Sidebar.product.review": "Review",
 	"Containers.Sidebar.product.category": "Category",
 	"Containers.Sidebar.product.brand": "Brand",
 	"Containers.Sidebar.order": "Order",
-	"Containers.Sidebar.order.list": "Order List",
-	"Containers.Sidebar.order.detail": "Order Detail"
+	"Containers.Sidebar.order.list": "Order List"
 }

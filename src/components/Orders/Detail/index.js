@@ -6,16 +6,88 @@ import { FormattedMessage } from 'react-intl';
 import cls from 'classnames';
 import Breadcrumb from '../../Breadcrumb';
 import messages from './messages';
+import { formatMoney } from '../../../helpers';
 import TextareaWithFormatMessage from '../../TextareaWithFormatMessage';
 import LabelWithFormatMessage from '../../LabelWithFormatMessage';
+import visa from '../../../resources/images/visa.png';
+import masterCard from '../../../resources/images/38fd98e55806c3b2e4535c4e4a6c4c08.png';
+import JapanCreditBureau from '../../../resources/images/a0a9062ebe19b45c1ae0506f16af5c16.png';
 
-function OrderDetailComponent() {
+function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
   const statusOrder = ['Cancelled', 'Pending', 'Processing', 'Delivered'];
 
   const renderClsTextarea = () => {
     return [
       'hover:border-[#111] w-full outline-none appearance-none border border-[#e3e9ef] rounded p-3 text-[14px] leading-tight mt-3',
     ];
+  };
+
+  const imgCreditDebit = [visa, masterCard, JapanCreditBureau];
+
+  const { status, id, customerNote, address, amount } = order;
+
+  const renderProduct = () =>
+    productOrder.map(
+      ({ _id, product: { thumbnail, name }, price, quantity }, i) => {
+        return (
+          <div key={i} className="flex flex-row gap-4 my-6">
+            <div className="flex flex-row gap-4 w-1/2">
+              <div className="max-h-[64px] max-w-[64px]">
+                <img
+                  className="object-cover h-full w-full rounded"
+                  src={thumbnail}
+                  alt=""
+                />
+              </div>
+              <div>
+                <h6 className="text-sm mb-1">{name}</h6>
+                <div className="flex place-items-center">
+                  <p className="whitespace-nowrap text-[#7d879c] text-sm">
+                    {price} VND x
+                  </p>
+                  <div className="max-w-[60px] ml-2">
+                    <div className="min-w-0 ">
+                      <input
+                        className="hover:border-[#111] h-8 w-full outline-none appearance-none border border-[#e3e9ef] rounded p-2 text-[14px] leading-tight"
+                        type="number"
+                        defaultValue={quantity}
+                        disabled
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-row gap-4 w-1/2 place-items-center justify-between">
+              <p className="text-[#7d879c] text-sm">
+                Product properties: Black, L
+              </p>
+              <button
+                type="button"
+                className="p-4"
+                onClick={() => deleteProductOrder(_id)}
+              >
+                <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
+              </button>
+            </div>
+          </div>
+        );
+      },
+    );
+
+  const renderShippingFee = () => {
+    let result = 0;
+    productOrder.map(({ shipingFee }) => (result += shipingFee));
+    return result;
+  };
+
+  const renderDiscountPercent = () => {
+    let result = 0;
+    productOrder.map(
+      ({ discountPercent, price }) =>
+        (result += (price * discountPercent) / 100),
+    );
+    return result;
   };
 
   return (
@@ -28,7 +100,7 @@ function OrderDetailComponent() {
               <span className="text-[#7d879c] normal-case whitespace-normal mr-1">
                 <FormattedMessage {...messages.order_id} />:
               </span>
-              f0ba538b-c8f3-45ce-b6c1-209cf07ba5f8
+              {id}
             </p>
             <p className="m-0 text-sm">
               <span className="text-[#7d879c] normal-case whitespace-normal mr-1">
@@ -42,9 +114,9 @@ function OrderDetailComponent() {
               <FormattedMessage {...messages.order_status} />
             </label>
             <div className="relative w-1/2">
-              <select className="hover:border-[#111] h-12 w-full outline-none appearance-none border border-[#e3e9ef] rounded py-[16px] px-3 text-[14px] leading-tight">
+              <select className="hover:border-[#111] h-12 w-full outline-none appearance-none border border-[#e3e9ef] rounded p-3 text-[14px] leading-tight">
                 {statusOrder.map((e, i) => (
-                  <option key={i} value={i}>
+                  <option key={i} value={i} selected={i === status}>
                     {e}
                   </option>
                 ))}
@@ -55,114 +127,7 @@ function OrderDetailComponent() {
               />
             </div>
           </div>
-          <div className="flex flex-row gap-4 my-6">
-            <div className="flex flex-row gap-4 w-1/2">
-              <div className="max-h-[64px] max-w-[64px]">
-                <img
-                  className="object-cover h-full w-full rounded"
-                  src="https://res.cloudinary.com/daily-now/image/upload/f_auto,q_auto/v1/posts/ea0f30d29f648fe8d34d9ffd26cb3e63"
-                  alt=""
-                />
-              </div>
-              <div>
-                <h6 className="text-sm mb-1">Budi 2017</h6>
-                <div className="flex place-items-center">
-                  <p className="whitespace-nowrap text-[#7d879c] text-sm">
-                    $226.00 x
-                  </p>
-                  <div className="max-w-[60px] ml-2">
-                    <div className="min-w-0 ">
-                      <input
-                        className="hover:border-[#111] h-8 w-full outline-none appearance-none border border-[#e3e9ef] rounded p-2 text-[14px] leading-tight"
-                        type="number"
-                        defaultValue={1}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-row gap-4 w-1/2 place-items-center justify-between">
-              <p className="text-[#7d879c] text-sm">
-                <FormattedMessage {...messages.product_properties} />: Black, L
-              </p>
-              <button type="button" className="p-4">
-                <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
-              </button>
-            </div>
-          </div>
-          <div className="flex flex-row gap-4 my-6">
-            <div className="flex flex-row gap-4 w-1/2">
-              <div className="max-h-[64px] max-w-[64px]">
-                <img
-                  className="object-cover h-full w-full rounded"
-                  src="https://res.cloudinary.com/daily-now/image/upload/f_auto,q_auto/v1/posts/ea0f30d29f648fe8d34d9ffd26cb3e63"
-                  alt=""
-                />
-              </div>
-              <div>
-                <h6 className="text-sm mb-1">Budi 2017</h6>
-                <div className="flex place-items-center">
-                  <p className="whitespace-nowrap text-[#7d879c] text-sm">
-                    $226.00 x
-                  </p>
-                  <div className="max-w-[60px] ml-2">
-                    <div className="min-w-0 ">
-                      <input
-                        className="hover:border-[#111] h-8 w-full outline-none appearance-none border border-[#e3e9ef] rounded p-2 text-[14px] leading-tight"
-                        type="number"
-                        defaultValue={1}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-row gap-4 w-1/2 place-items-center justify-between">
-              <p className="text-[#7d879c] text-sm">
-                Product properties: Black, L
-              </p>
-              <button type="button" className="p-4">
-                <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
-              </button>
-            </div>
-          </div>
-          <div className="flex flex-row gap-4 my-6">
-            <div className="flex flex-row gap-4 w-1/2">
-              <div className="max-h-[64px] max-w-[64px]">
-                <img
-                  className="object-cover h-full w-full rounded"
-                  src="https://res.cloudinary.com/daily-now/image/upload/f_auto,q_auto/v1/posts/ea0f30d29f648fe8d34d9ffd26cb3e63"
-                  alt=""
-                />
-              </div>
-              <div>
-                <h6 className="text-sm mb-1">Budi 2017</h6>
-                <div className="flex place-items-center">
-                  <p className="whitespace-nowrap text-[#7d879c] text-sm">
-                    $226.00 x
-                  </p>
-                  <div className="max-w-[60px] ml-2">
-                    <div className="min-w-0 ">
-                      <input
-                        className="hover:border-[#111] h-8 w-full outline-none appearance-none border border-[#e3e9ef] rounded p-2 text-[14px] leading-tight"
-                        type="number"
-                        defaultValue={1}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-row gap-4 w-1/2 place-items-center justify-between">
-              <p className="text-[#7d879c] text-sm">
-                Product properties: Black, L
-              </p>
-              <button type="button" className="p-4">
-                <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
-              </button>
-            </div>
-          </div>
+          {productOrder.length && renderProduct()}
         </div>
       </div>
       <div className="grid grid-cols-2 gap-6">
@@ -182,6 +147,7 @@ function OrderDetailComponent() {
                   name="shipping-address"
                   rows={4}
                   message={messages.placeholder.shipping_address}
+                  value={address}
                 />
               </div>
             </div>
@@ -199,6 +165,7 @@ function OrderDetailComponent() {
                   name="customer-note"
                   rows={4}
                   message={messages.placeholder.customer_note}
+                  value={customerNote}
                 />
               </div>
             </div>
@@ -213,22 +180,18 @@ function OrderDetailComponent() {
               <p className="text-[#7d879c] text-sm">
                 <FormattedMessage {...messages.subtotal} />:
               </p>
-              <h6 className="text-sm">$350.00</h6>
+              <h6 className="text-sm">{formatMoney(amount)} VNĐ</h6>
             </div>
             <div className="flex justify-between mb-3">
               <p className="text-[#7d879c] text-sm">
                 <FormattedMessage {...messages.shipping_fee} />:
               </p>
               <div className="flex place-items-center">
-                <h6 className="text-sm mr-1">$</h6>
+                <h6 className="text-sm mr-1">VNĐ</h6>
                 <div className="max-w-[60px] ml-2">
-                  <div className="min-w-0">
-                    <input
-                      className="hover:border-[#111] h-8 w-full outline-none appearance-none border border-[#e3e9ef] rounded p-2 text-[14px] leading-tight"
-                      type="number"
-                      defaultValue={1}
-                    />
-                  </div>
+                  <h6 className="text-sm">
+                    {productOrder.length && formatMoney(renderShippingFee())}
+                  </h6>
                 </div>
               </div>
             </div>
@@ -238,15 +201,12 @@ function OrderDetailComponent() {
                 (%):
               </p>
               <div className="flex place-items-center">
-                <h6 className="text-sm mr-1">$</h6>
+                <h6 className="text-sm mr-1">VNĐ</h6>
                 <div className="max-w-[60px] ml-2">
-                  <div className="min-w-0">
-                    <input
-                      className="hover:border-[#111] h-8 w-full outline-none appearance-none border border-[#e3e9ef] rounded p-2 text-[14px] leading-tight"
-                      type="number"
-                      defaultValue={1}
-                    />
-                  </div>
+                  <h6 className="text-sm">
+                    {productOrder.length &&
+                      formatMoney(renderDiscountPercent())}
+                  </h6>
                 </div>
               </div>
             </div>
@@ -255,11 +215,31 @@ function OrderDetailComponent() {
               <p className="text-[#2b3445] text-sm font-semibold">
                 <FormattedMessage {...messages.total} />
               </p>
-              <h6 className="text-sm">$350.00</h6>
+              <div className="flex">
+                <div className="max-w-[60px] mr-2">
+                  <h6 className="text-sm">
+                    {productOrder.length &&
+                      formatMoney(
+                        renderShippingFee() + amount - renderDiscountPercent(),
+                      )}
+                  </h6>
+                </div>
+                <h6 className="text-sm">VNĐ</h6>
+              </div>
             </div>
             <h6 className="text-sm mb-3 text-[#2b3445] font-light">
               <FormattedMessage {...messages.paid_method} />
             </h6>
+            <div className="flex flex-row">
+              {imgCreditDebit.map((e, i) => (
+                <div
+                  key={i}
+                  className="shadow-[#03004717_0px_1px_3px] bg-white rounded p-1 mr-2"
+                >
+                  <img src={e} alt="" />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

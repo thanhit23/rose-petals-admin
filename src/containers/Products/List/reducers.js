@@ -9,6 +9,8 @@ import {
   RESET_PRODUCT_EDIT,
   GET_DETAIL_PRODUCT_SUCCESS,
 } from '../Edit/constants';
+import { GET_PRODUCTS_REVIEW_LIST_SUCCESS } from '../Review/constants';
+
 const initialState = {
   list: {
     data: [],
@@ -17,6 +19,10 @@ const initialState = {
   categories: [],
   brands: [],
   edit: {},
+  review: {
+    data: [],
+    meta: {},
+  },
 };
 
 const productReducer = (state = initialState, action) =>
@@ -28,6 +34,14 @@ const productReducer = (state = initialState, action) =>
         } = action;
         draft.list.data = data;
         draft.list.meta = meta;
+        break;
+      }
+      case GET_PRODUCTS_REVIEW_LIST_SUCCESS: {
+        const {
+          payload: { data, meta },
+        } = action;
+        draft.review.data = data;
+        draft.review.meta = meta;
         break;
       }
       case GET_ALL_CATEGORY_SUCCESS: {
