@@ -6,6 +6,7 @@ import ListCategory from '../../containers/Categories/List';
 import AddCategory from '../../containers/Categories/Add';
 import EditCategory from '../../containers/Categories/Edit';
 import ListProduct from '../../containers/Products/List';
+import ProductReview from '../../containers/Products/Review';
 import AddProduct from '../../containers/Products/Add';
 import EditProduct from '../../containers/Products/Edit';
 import ListBrand from '../../containers/Brands/List';
@@ -60,6 +61,11 @@ export default [
   {
     path: '/admin/product',
     component: AddProduct,
+    exact: true,
+  },
+  {
+    path: '/admin/product-reviews',
+    component: ProductReview,
     exact: true,
   },
   {

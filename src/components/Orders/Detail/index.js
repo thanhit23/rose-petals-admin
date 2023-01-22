@@ -89,7 +89,6 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
     );
     return result;
   };
-  console.log(status);
 
   return (
     <>

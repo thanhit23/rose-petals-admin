@@ -31,6 +31,10 @@ export default defineMessages({
     id: `${scope}.product.add`,
     defaultMessage: 'Add Product',
   },
+  product_review: {
+    id: `${scope}.product.review`,
+    defaultMessage: 'Review',
+  },
   product_category: {
     id: `${scope}.product.category`,
     defaultMessage: 'Category',
