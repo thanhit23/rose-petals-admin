@@ -10,6 +10,7 @@ import {
   SERVER_FAILED,
 } from './constants';
 import store from '../store';
+import { LOGIN_FAILED } from '../containers/LoginPage/constants';
 
 class Service {
   constructor() {
@@ -40,7 +41,13 @@ class Service {
     } = err;
     switch (status) {
       case UNAUTHORIZED:
-        store.dispatch({ type: LOGOUT_REQUEST });
+        store.dispatch({
+          type: LOGIN_FAILED,
+          payload: {
+            data,
+          },
+        });
+        setTimeout(() => store.dispatch({ type: LOGOUT_REQUEST }), 6000);
         break;
       case BAD_REQUEST:
         store.dispatch({ type: BAD_REQUEST_FAILED, payload: { data } });

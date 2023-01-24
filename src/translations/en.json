@@ -41,6 +41,7 @@
 	"Components.Login.forgetPassword": "Forget Password?",
 	"Components.Login.signUp": "Sign up",
 	"Components.Login.message.error.required": "This field is required",
+	"Components.Login.message.error.email": "Please enter correct email format",
 	"Components.Search.default": "Search...",
 	"Components.Search.product": "Search Product...",
 	"Components.Search.user": "Search User...",
