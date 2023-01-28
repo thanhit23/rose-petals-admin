@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 import messages from './messages';
 import ErrorMessage from '../ErrorMessage';
-import { required } from '../../utils/validation';
+import { required, email as emailValidation } from '../../utils/validation';
 import InputWithFormatMessage from '../InputWithFormatMessage';
 import '../../containers/App/style/login.css';
 
@@ -19,7 +19,9 @@ function Login({ handleOnSubmit }) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    mode: 'onChange',
+  });
 
   const { email, password } = errors;
 
@@ -48,24 +50,29 @@ function Login({ handleOnSubmit }) {
                   </p>
                 </div>
               </div>
-              <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
+              <form
+                onSubmit={handleSubmit(data => onSubmit(data))}
+                className="mt-6"
+              >
                 <div className="mb-4">
                   <InputWithFormatMessage
                     id="email"
-                    type="email"
+                    type="text"
+                    name="email"
                     className="border-[1px] rounded border-solid border-[#eaeaea] block w-full px-4 py-2 mt-2 text-purple-700 bg-white border outline-none"
                     message={messages.placeholder.email}
-                    validate={register(
-                      'email',
-                      required(messages.message.required),
-                    )}
+                    validate={register('email', {
+                      ...required(messages.message.required),
+                      ...emailValidation(messages.message.email),
+                    })}
                   />
                   <ErrorMessage name={email} />
                 </div>
                 <div className="mb-2">
                   <div className="flex border-[1px] border-solid border-[#eaeaea] bg-white border relative mt-2">
                     <InputWithFormatMessage
-                      id="email"
+                      id="password"
+                      name="password"
                       type={showPass ? 'text' : 'password'}
                       className="border-[1px] rounded border-solid border-[#eaeaea] block w-full px-4 py-2 text-purple-700 bg-white border outline-none"
                       message={messages.placeholder.password}

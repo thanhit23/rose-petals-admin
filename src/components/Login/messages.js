@@ -45,5 +45,9 @@ export default defineMessages({
       id: `${scope}.message.error.required`,
       defaultMessage: 'This field is required',
     },
+    email: {
+      id: `${scope}.message.error.email`,
+      defaultMessage: 'Please enter correct email format',
+    },
   },
 });
