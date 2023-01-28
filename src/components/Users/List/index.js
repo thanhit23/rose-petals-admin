@@ -104,7 +104,7 @@ function ListUserComponent({ data, meta, getUsers, handleDeleteUser }) {
   return useMemo(
     () => (
       <>
-        <Breadcrumb title="user" />
+        <Breadcrumb title="list_user" />
         <div className="flex justify-between">
           <Search
             message="user"

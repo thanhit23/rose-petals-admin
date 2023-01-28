@@ -158,7 +158,7 @@ function ProductReviewComponent({
   return useMemo(
     () => (
       <>
-        <Breadcrumb title="list_product" />
+        <Breadcrumb title="review_product" />
         <div className="flex justify-between">
           <Search
             message="product"
