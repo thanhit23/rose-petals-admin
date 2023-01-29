@@ -15,20 +15,16 @@ export default defineMessages({
     id: `${scope}.edit_user`,
     defaultMessage: 'Edit User',
   },
-  user: {
-    id: `${scope}.user`,
-    defaultMessage: 'User',
-  },
-  category: {
-    id: `${scope}.category`,
+  list_category: {
+    id: `${scope}.category.list`,
     defaultMessage: 'Category',
   },
   add_category: {
-    id: `${scope}.add_category`,
+    id: `${scope}.category.add`,
     defaultMessage: 'Add Category',
   },
   edit_category: {
-    id: `${scope}.edit_category`,
+    id: `${scope}.category.edit`,
     defaultMessage: 'Edit Category',
   },
   list_product: {
@@ -42,6 +38,10 @@ export default defineMessages({
   edit_product: {
     id: `${scope}.product.edit`,
     defaultMessage: 'Edit Product',
+  },
+  review_product: {
+    id: `${scope}.product.review`,
+    defaultMessage: 'Review Product',
   },
   add_brand: {
     id: `${scope}.brand.add`,

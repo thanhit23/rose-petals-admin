@@ -83,7 +83,7 @@ function ListCategoryComponent({ data, meta, getCategory, deleteCategory }) {
 
   return (
     <>
-      <Breadcrumb title="category" />
+      <Breadcrumb title="list_category" />
       <div className="flex justify-between">
         <Search
           message="category"
