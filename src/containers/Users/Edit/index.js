@@ -13,6 +13,8 @@ import {
 } from './actions';
 import injectSaga from '../../../utils/injectSaga';
 import saga from './saga';
+import injectReducer from '../../../utils/injectReducer';
+import reducer from '../List/reducers';
 
 function EditUser({ updateUser, edit: editUser, getUser, resetUserEdit }) {
   const navigate = useNavigate();
@@ -58,6 +60,7 @@ const mapStateToProps = state => {
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withReducer = injectReducer({ key: 'user', reducer });
 const withSaga = injectSaga({ key: 'editUser', saga });
 
-export default compose(withSaga, withConnect)(EditUser);
+export default compose(withSaga, withReducer, withConnect)(EditUser);
