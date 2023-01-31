@@ -60,7 +60,7 @@ export default defineMessages({
     },
     length: {
       id: `${scope}.message.error.length`,
-      defaultMessage: 'Length from 9 -15 characters',
+      defaultMessage: 'Length from 9 - 15 characters',
     },
     is_number: {
       id: `${scope}.message.error.isNumber`,

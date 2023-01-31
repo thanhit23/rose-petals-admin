@@ -62,6 +62,7 @@
 	"Components.User.add.placeholder.phoneNumber": "+84 123-456-789",
 	"Components.User.add.placeholder.email": "abc@gmail.com",
 	"Components.User.add.message.error.required": "This field is required",
+	"Components.User.add.message.error.email": "Please enter correct email format",
 	"Components.User.add.message.error.length": "Length from 9 -15 characters",
 	"Components.User.add.message.error.isNumber": "This field must be a number",
 	"Components.User.add.button.submit": "Submit",

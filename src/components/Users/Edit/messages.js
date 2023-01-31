@@ -43,6 +43,24 @@ export default defineMessages({
       defaultMessage: 'Password.....',
     },
   },
+  message: {
+    required: {
+      id: `${scope}.messages.required`,
+      defaultMessage: 'This field is required',
+    },
+    email: {
+      id: `${scope}.messages.required`,
+      defaultMessage: 'Please enter correct email format',
+    },
+    length: {
+      id: `${scope}.messages.error.length`,
+      defaultMessage: 'Length from 9 - 15 characters',
+    },
+    is_number: {
+      id: `${scope}.messages.error.isNumber`,
+      defaultMessage: 'This field must be a number',
+    },
+  },
   gender: {
     female: {
       id: `${scope}.gender.female`,
