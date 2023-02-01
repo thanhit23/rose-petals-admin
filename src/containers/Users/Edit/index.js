@@ -19,11 +19,11 @@ import reducer from '../List/reducers';
 function EditUser({ updateUser, edit: editUser, getUser, resetUserEdit }) {
   const navigate = useNavigate();
 
+  const { id } = useParams();
+
   const callback = () => navigate('/admin/users');
 
-  const handleUpdateUser = (id, data) => updateUser(id, data, callback);
-
-  const { id } = useParams();
+  const handleUpdateUser = data => updateUser(id, data, callback);
 
   useEffect(() => {
     resetUserEdit();

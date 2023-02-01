@@ -1,36 +1,49 @@
+import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 
 import Breadcrumb from '../../Breadcrumb';
 import messages from './messages';
-import { GENDER, MALE, FEMALE } from './constants';
+import { MALE, FEMALE } from './constants';
 import LabelWithFormatMessage from '../../LabelWithFormatMessage';
 import InputWithFormatMessage from '../../InputWithFormatMessage';
+import ErrorMessage from '../../ErrorMessage';
+import {
+  required,
+  email as emailValidation,
+  maxLength,
+  minLength,
+} from '../../../utils/validation';
 
 function EditUserComponent({ submit, users }) {
-  const { id } = useParams();
+  const { gender, name, email, phoneNumber } = users;
+  const defaultValues = { gender, name, email, phoneNumber };
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues,
+    mode: 'onChange',
+  });
 
-  const [userEdit, setUserEdit] = useState(users);
+  useEffect(() => {
+    !isEmpty(users) && reset(defaultValues);
+  }, [users]);
 
-  useEffect(() => setUserEdit(users), [users]);
+  const {
+    name: nameError,
+    email: emailError,
+    phoneNumber: phoneNumberError,
+  } = errors;
 
-  const { email = '', name = '', gender = '', phoneNumber = '' } = userEdit;
-
-  const onSubmit = () => {
+  const onSubmit = data => {
     // eslint-disable-next-line no-shadow
-    const { email, name, gender, phoneNumber } = userEdit;
-    submit(id, { email, name, gender, phoneNumber });
-  };
-
-  const changeValueInput = ({ target }) => {
-    // eslint-disable-next-line no-shadow,prefer-const
-    let { name, value } = target;
-    if (name === GENDER) {
-      value = +value;
-    }
-    setUserEdit({ ...userEdit, [name]: value });
+    const { gender } = data;
+    submit({ ...data, gender: +gender });
   };
 
   return (
@@ -40,7 +53,10 @@ function EditUserComponent({ submit, users }) {
         title="edit_user"
       />
       <div>
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form
+          onSubmit={handleSubmit(data => onSubmit(data))}
+          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        >
           <div className="mb-6">
             <LabelWithFormatMessage
               message={messages.label.name}
@@ -54,9 +70,9 @@ function EditUserComponent({ submit, users }) {
               id="username"
               name="name"
               type="text"
-              value={name}
-              onChange={changeValueInput}
+              validate={register('name', required(messages.message.required))}
             />
+            <ErrorMessage name={nameError} />
           </div>
           <div className="mb-6">
             <LabelWithFormatMessage
@@ -71,9 +87,12 @@ function EditUserComponent({ submit, users }) {
               id="email"
               name="email"
               type="email"
-              value={email}
-              onChange={changeValueInput}
+              validate={register('email', {
+                ...required(messages.message.required),
+                ...emailValidation(messages.message.email),
+              })}
             />
+            <ErrorMessage name={emailError} />
           </div>
           <div className="mb-6">
             <LabelWithFormatMessage
@@ -88,9 +107,13 @@ function EditUserComponent({ submit, users }) {
               id="phoneNumber"
               name="phoneNumber"
               type="number"
-              value={phoneNumber}
-              onChange={changeValueInput}
+              validate={register('phoneNumber', {
+                ...required(messages.message.required),
+                ...maxLength(messages.message.length),
+                ...minLength(messages.message.length),
+              })}
             />
+            <ErrorMessage name={phoneNumberError} />
           </div>
           <div className="mb-6">
             <LabelWithFormatMessage
@@ -101,27 +124,31 @@ function EditUserComponent({ submit, users }) {
             />
             <div className="flex">
               <label className="flex items-center mr-2" htmlFor="female">
-                <input
-                  id="female"
-                  className="mr-1"
-                  name="gender"
-                  type="radio"
-                  value={FEMALE}
-                  checked={gender === FEMALE}
-                  onChange={changeValueInput}
-                />
+                {gender && (
+                  <input
+                    id="female"
+                    className="mr-1"
+                    name="gender"
+                    type="radio"
+                    value={FEMALE}
+                    defaultChecked={gender === FEMALE}
+                    {...register('gender')}
+                  />
+                )}
                 <FormattedMessage {...messages.gender.female} />
               </label>
               <label className="flex items-center" htmlFor="male">
-                <input
-                  id="male"
-                  className="mr-1"
-                  name="gender"
-                  type="radio"
-                  value={MALE}
-                  checked={gender === MALE}
-                  onChange={changeValueInput}
-                />
+                {gender && (
+                  <input
+                    id="male"
+                    className="mr-1"
+                    name="gender"
+                    type="radio"
+                    value={MALE}
+                    defaultChecked={gender === MALE}
+                    {...register('gender')}
+                  />
+                )}
                 <FormattedMessage {...messages.gender.male} />
               </label>
             </div>
@@ -129,8 +156,7 @@ function EditUserComponent({ submit, users }) {
           <div className="flex items-center justify-between">
             <button
               className="bg-[#007bff] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
-              onClick={onSubmit}
+              type="submit"
             >
               <FormattedMessage {...messages.btn.submit} />
             </button>
