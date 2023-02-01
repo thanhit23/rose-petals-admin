@@ -40,6 +40,7 @@
 	"Components.User.add.message.error.length": "Độ dài từ 9 - 15 ký tự",
 	"Components.User.add.message.error.isNumber": "Trường này phải là một số",
 	"Components.User.add.button.submit": "Nộp",
+	"Components.Notfound.title": "Không tìm thấy",
 	"Containers.User.list.button.add": "Thêm người dùng",
 	"Components.Category.add.label.name": "Tên",
 	"Components.Category.add.placeholder.name": "Tên...",
