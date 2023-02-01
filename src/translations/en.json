@@ -137,6 +137,8 @@
 	"Components.Order.detail.label.shipping_address": "Shipping Address",
 	"Components.Order.detail.placeholder.customer_note": "Customer's Note...",
 	"Components.Order.detail.placeholder.shipping_address": "Shipping Address...",
+	"Components.Notfound.title": "Not Found",
+	"Components.Notfound.button": "Back to home page",
 	"Containers.Sidebar.dashboard": "Dashboard",
 	"Containers.Sidebar.user": "User",
 	"Containers.Sidebar.user.list": "List Users",
