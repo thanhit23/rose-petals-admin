@@ -25,7 +25,7 @@
 	"Components.Search.product": "Tìm kiếm sản phẩm...",
 	"Components.Search.user": "Tìm kiếm người dùng...",
 	"Components.Search.category": "Danh mục tìm kiếm...",
-	"Components.User.add.gender_female": "Nữ",
+	"Components.User.add.gender.female": "Nữ",
 	"Components.User.add.gender_male": "Nam",
 	"Components.User.add.label.name": "Tên tài khoản",
 	"Components.User.add.label.phone_number": "Số điện thoại",
