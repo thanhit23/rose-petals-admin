@@ -24,6 +24,12 @@ export default [
     index: true,
   },
   {
+    path: '/admin',
+    component: HomePage,
+    exact: true,
+    index: true,
+  },
+  {
     path: '/admin/users',
     component: ListUser,
     exact: true,
