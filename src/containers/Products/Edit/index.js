@@ -40,7 +40,9 @@ function EditProduct({
     getAllCategories();
   }, []);
 
-  const handleUpdateProduct = (id, data) => updateProduct(id, data, callback);
+  const handleUpdateProduct = (id, data, file) => {
+    updateProduct(id, data, file, callback);
+  };
 
   return (
     <AuthLayout title="edit_product">
@@ -53,6 +55,7 @@ function EditProduct({
     </AuthLayout>
   );
 }
+
 EditProduct.prototype = {
   data: PropTypes.array,
   categories: PropTypes.array,

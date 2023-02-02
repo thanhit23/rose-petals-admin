@@ -21,7 +21,7 @@ function AddCategoryComponent({ onSubmit }) {
   return (
     <>
       <Breadcrumb
-        prevPage={{ path: '/admin/categories', name: 'category' }}
+        prevPage={{ path: '/admin/categories', name: 'list_category' }}
         title="add_category"
       />
       <div>

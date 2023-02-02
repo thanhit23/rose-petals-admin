@@ -9,10 +9,7 @@ import {
   getAllCategory as getAllCategoryApi,
   getAllBrand as getAllBrandApi,
 } from './service';
-import {
-  uploadFile as uploadFileService,
-  setHeaderContent,
-} from '../../UploadFile/service';
+import { uploadFile as uploadFileService } from '../../UploadFile/service';
 import {
   addProductSuccess,
   addProductFailed,
@@ -36,7 +33,6 @@ function* handleAddProduct(data) {
 }
 
 function* addProduct({ payload: { data, file, callback } }) {
-  yield call(setHeaderContent);
   const res = yield call(uploadFileService, file);
 
   const {

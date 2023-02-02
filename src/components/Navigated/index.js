@@ -12,7 +12,6 @@ function Navigated({
   open = false,
   iconAfter = null,
   iconBefore = null,
-  childrenActive,
   isSidebarOpen,
   iconSvg = null,
 }) {
@@ -34,9 +33,6 @@ function Navigated({
       if (path === pathname) {
         setOpen(true);
       }
-      if (path === pathname && !isSidebarOpen) {
-        childrenActive(true);
-      }
     });
   }, []);
 
@@ -46,7 +42,7 @@ function Navigated({
         return (
           <div key={i}>
             <NavLink
-              style={({ isActive }) => (isActive ? styleActive : undefined)}
+              style={({ isActive }) => (isActive ? styleActive : {})}
               className={classNames(
                 'active flex items-center text-xs py-5 px-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 duration-300',
               )}
@@ -141,7 +137,6 @@ Navigated.prototype = {
   isSidebarOpen: PropTypes.bool,
   item: PropTypes.array,
   open: PropTypes.bool,
-  childrenActive: PropTypes.func,
   iconAfter: PropTypes.elementType,
   iconBefore: PropTypes.elementType,
 };

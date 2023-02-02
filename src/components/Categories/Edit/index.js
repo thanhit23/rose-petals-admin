@@ -22,7 +22,7 @@ function EditCategoryComponent({ onSubmit, data }) {
   return (
     <>
       <Breadcrumb
-        prevPage={{ path: '/admin/categories', name: 'category' }}
+        prevPage={{ path: '/admin/categories', name: 'list_category' }}
         title="edit_category"
       />
       <div>

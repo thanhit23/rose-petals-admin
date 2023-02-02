@@ -1,40 +1,76 @@
+import { useEffect, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { isEmpty } from 'lodash';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 
+import { useForm } from 'react-hook-form';
 import Breadcrumb from '../../Breadcrumb';
 import messages from './messages';
 import LabelWithFormatMessage from '../../LabelWithFormatMessage';
 import InputWithFormatMessage from '../../InputWithFormatMessage';
 import TextareaWithFormatMessage from '../../TextareaWithFormatMessage';
+import ErrorMessage from '../../ErrorMessage';
+import UploadFileComponent from '../../UploadFile';
+import { required } from '../../../utils/validation';
 
 function EditProductComponent({ brands, categories, submit, product }) {
+  const [file, setFile] = useState('');
+
+  const [images, setImages] = useState([]);
+
   const { id } = useParams();
 
-  const [productEdit, setProductEdit] = useState(product);
-
-  useEffect(() => setProductEdit(product), [product]);
+  const { _id, slug, createdAt, updatedAt, ...productData } = product;
 
   const {
-    price = '',
-    name = '',
-    description = '',
-    brand = '',
-    category = '',
-  } = productEdit;
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: productData,
+  });
 
-  const onSubmit = () => {
-    // eslint-disable-next-line no-shadow
-    const { price, description, name, category, brand } = productEdit;
-    submit(id, { price, description, name, category, brand });
+  const {
+    name,
+    price,
+    images: imagesError,
+    description,
+    category,
+    brand,
+  } = errors;
+
+  useEffect(() => {
+    !isEmpty(product) && reset(productData);
+    const { images: imagesDefault = [] } = productData;
+    setImages(imagesDefault);
+  }, [product]);
+
+  const onSubmit = data => {
+    const arrImages = images.map(({ path }) => path);
+    submit(id, { ...data, images: arrImages }, file);
   };
 
-  const changeValueInput = ({ target }) => {
-    // eslint-disable-next-line no-shadow
-    const { name, value } = target;
-    setProductEdit({ ...productEdit, [name]: value });
+  const handleUploadImage = ({ target: { files } }) => setFile(files);
+
+  const handleRemoveFile = url => {
+    const arrFile = images.filter(({ fullUrl }) => fullUrl !== url);
+    setImages(arrFile);
   };
+
+  const renderUploadComponent = useMemo(
+    () => (
+      <UploadFileComponent
+        messages={messages.placeholder.images}
+        validate={register('images', required(messages.message.required))}
+        handleUploadImage={handleUploadImage}
+      />
+    ),
+    [],
+  );
 
   return (
     <>
@@ -43,7 +79,10 @@ function EditProductComponent({ brands, categories, submit, product }) {
         title="edit_product"
       />
       <div>
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form
+          onSubmit={handleSubmit(data => onSubmit(data))}
+          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        >
           <div className="mb-6">
             <LabelWithFormatMessage
               message={messages.label.name}
@@ -57,9 +96,104 @@ function EditProductComponent({ brands, categories, submit, product }) {
               id="username"
               name="name"
               type="text"
-              value={name}
-              onChange={changeValueInput}
+              validate={register('name', required(messages.message.required))}
             />
+            <ErrorMessage name={name} />
+          </div>
+          <div className="mb-6">
+            <LabelWithFormatMessage
+              message={messages.label.price}
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="price"
+              requiredField
+            />
+            <InputWithFormatMessage
+              message={messages.placeholder.price}
+              className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="price"
+              name="price"
+              type="number"
+              validate={register('price', required(messages.message.required))}
+            />
+            <ErrorMessage name={price} />
+          </div>
+          <div className="mb-6 grid grid-cols-2 gap-4">
+            <div className="flex flex-col">
+              <LabelWithFormatMessage
+                message={messages.label.brand}
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="brand"
+                requiredField
+              />
+              <select
+                id="brand"
+                name="brand"
+                className="h-12 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
+                {...register('brand', required(messages.message.required))}
+              >
+                <option value="">Select...</option>
+                {/* eslint-disable-next-line no-shadow */}
+                {brands.map(({ name, id }, index) => (
+                  <option key={index} value={id}>
+                    {name}
+                  </option>
+                ))}
+              </select>
+              <ErrorMessage name={brand} />
+            </div>
+            <div className="flex flex-col">
+              <LabelWithFormatMessage
+                message={messages.label.category}
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="category"
+                requiredField
+              />
+              <select
+                id="category"
+                name="category"
+                className="h-12 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
+                {...register('category', required(messages.message.required))}
+              >
+                <option value="">Select...</option>
+                {/* eslint-disable-next-line no-shadow */}
+                {categories.map(({ name, id }, index) => (
+                  <option key={index} value={id}>
+                    {name}
+                  </option>
+                ))}
+              </select>
+              <ErrorMessage name={category} />
+            </div>
+          </div>
+          <div className="mb-6">
+            <LabelWithFormatMessage
+              message={messages.label.images}
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="images"
+              requiredField
+            />
+            {renderUploadComponent}
+            <ErrorMessage name={imagesError} />
+            <div className="flex flex-wrap mt-4">
+              {images.map(({ fullUrl }, i) => (
+                <div key={i} className="relative mr-5">
+                  <img
+                    loading="lazy"
+                    className="w-[60px]"
+                    decoding="async"
+                    src={fullUrl}
+                    alt={`product-${i}`}
+                  />
+                  <button
+                    type="button"
+                    className="absolute top-[-15px] right-[-15px] flex w-[35px] h-[35px] bg-[#efefef] items-center justify-center rounded-full"
+                    onClick={() => handleRemoveFile(fullUrl)}
+                  >
+                    <FontAwesomeIcon icon={faXmark} />
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="mb-6">
             <LabelWithFormatMessage
@@ -75,79 +209,18 @@ function EditProductComponent({ brands, categories, submit, product }) {
                 name="description"
                 rows={6}
                 message={messages.placeholder.description}
-                value={description}
-                onChange={changeValueInput}
+                validate={register(
+                  'description',
+                  required(messages.message.required),
+                )}
               />
-            </div>
-          </div>
-          <div className="mb-6">
-            <LabelWithFormatMessage
-              message={messages.label.price}
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="price"
-              requiredField
-            />
-            <InputWithFormatMessage
-              message={messages.placeholder.price}
-              className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="price"
-              name="price"
-              type="number"
-              value={price}
-              onChange={changeValueInput}
-            />
-          </div>
-          <div className="mb-6 grid grid-cols-2 gap-4">
-            <div className="flex flex-col">
-              <LabelWithFormatMessage
-                message={messages.label.brand}
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="brand"
-                requiredField
-              />
-              <select
-                id="brand"
-                name="brand"
-                className="h-12 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
-                defaultValue={brand}
-              >
-                <option value="">Select...</option>
-                {/* eslint-disable-next-line no-shadow */}
-                {brands.map(({ name, id }, index) => (
-                  <option key={index} value={id}>
-                    {name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="flex flex-col">
-              <LabelWithFormatMessage
-                message={messages.label.price}
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="category"
-                requiredField
-              />
-              <select
-                id="category"
-                name="category"
-                className="h-12 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
-                defaultValue={category}
-              >
-                <option value="">Select...</option>
-                {/* eslint-disable-next-line no-shadow */}
-                {categories.map(({ name, id }, index) => (
-                  <option key={index} value={id}>
-                    {name}
-                  </option>
-                ))}
-              </select>
+              <ErrorMessage name={description} />
             </div>
           </div>
           <div className="flex items-center justify-between">
             <button
               className="bg-[#007bff] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
-              onClick={onSubmit}
+              type="submit"
             >
               <FormattedMessage {...messages.btn.submit} />
             </button>

@@ -25,8 +25,6 @@ function ProductReviewComponent({
 
   const handleGetProductReview = options => getProductReview(options);
 
-  console.log(data, 'data');
-
   const columns = useMemo(() => [
     {
       Header: 'Stt',
