@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'Component.Helmet';
+export const scope = 'Components.Helmet';
 
 export default defineMessages({
   user: {
@@ -11,10 +11,6 @@ export default defineMessages({
     id: `${scope}.add_user`,
     defaultMessage: 'Add user',
   },
-  add_product: {
-    id: `${scope}.add_product`,
-    defaultMessage: 'Add product',
-  },
   edit_user: {
     id: `${scope}.edit_user`,
     defaultMessage: 'Edit user',
@@ -24,15 +20,23 @@ export default defineMessages({
     defaultMessage: 'Category',
   },
   edit_category: {
-    id: `${scope}.edit_category`,
+    id: `${scope}.category.edit`,
     defaultMessage: 'Edit Category',
   },
+  add_category: {
+    id: `${scope}.category.add`,
+    defaultMessage: 'Add Category',
+  },
   list_product: {
-    id: `${scope}.list_product`,
+    id: `${scope}.product.list`,
     defaultMessage: 'List Product',
   },
+  add_product: {
+    id: `${scope}.product.add`,
+    defaultMessage: 'Add product',
+  },
   edit_product: {
-    id: `${scope}.edit_product`,
+    id: `${scope}.product.edit`,
     defaultMessage: 'Edit Product',
   },
   list_brand: {

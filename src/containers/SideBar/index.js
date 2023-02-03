@@ -13,11 +13,10 @@ import { ReactComponent as Product } from '../../resources/images/products.svg';
 import { ReactComponent as Dashboard } from '../../resources/images/dashboard.svg';
 import { ReactComponent as Order } from '../../resources/images/order.svg';
 
-function SideBar({ isSidebarOpen, isActiveItem }) {
-  const checkChildrenActive = active => active && isActiveItem();
+function SideBar({ isSidebarOpen }) {
+  const checkChildrenActive = active => active;
 
-  const urlAvatar =
-    'https://scontent.fdad1-4.fna.fbcdn.net/v/t1.15752-9/317828686_542555651100563_8603678477965520851_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=ae9488&_nc_ohc=FZexx9lU8zIAX_wCAhP&_nc_ht=scontent.fdad1-4.fna&oh=03_AdQFZ7wVZTDwd7L1J_eZ8JrGYaMgj33Qu5QPxWPDiSFdfw&oe=63CBCB86';
+  const urlAvatar = '';
 
   const clx = ['w-5 h-5', { 'mr-3': isSidebarOpen }];
 
@@ -88,12 +87,12 @@ function SideBar({ isSidebarOpen, isActiveItem }) {
             iconBefore={faChevronDown}
             item={[
               {
-                path: '/admin/products',
-                name: <FormattedMessage {...messages.product_list} />,
-              },
-              {
                 path: '/admin/product-reviews',
                 name: <FormattedMessage {...messages.product_review} />,
+              },
+              {
+                path: '/admin/products',
+                name: <FormattedMessage {...messages.product_list} />,
               },
               {
                 path: '/admin/product',

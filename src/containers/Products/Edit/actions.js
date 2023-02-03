@@ -32,9 +32,9 @@ export const getDetailProductFailed = () => ({
   type: GET_DETAIL_PRODUCT_FAILED,
 });
 
-export const updateProduct = (id, data, callback) => ({
+export const updateProduct = (id, data, file, callback) => ({
   type: UPDATE_PRODUCT_REQUEST,
-  payload: { id, data, callback },
+  payload: { id, data, file, callback },
 });
 
 export const updateProductSuccess = () => ({

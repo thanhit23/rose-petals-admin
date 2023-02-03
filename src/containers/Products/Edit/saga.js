@@ -18,17 +18,34 @@ import {
   getAllBrandsFailed,
   getAllCategoriesSuccess,
   updateProductFailed,
+  updateProductSuccess,
 } from './actions';
+import { uploadFile as uploadFileService } from '../../UploadFile/service';
 
-function* updateProduct({ payload: { id, data, callback } }) {
+function* updateProduct({ payload: { id, data, file, callback } }) {
+  if (file) {
+    const res = yield call(uploadFileService, file);
+    const {
+      data: { status, data: dataFile, message },
+    } = res;
+
+    if (status) {
+      const { images } = data;
+      Object.assign(data, { images: [...images, ...dataFile] });
+    } else {
+      yield put(updateProductFailed(message));
+    }
+  }
+
   const res = yield call(updateProductService, id, data);
-  const { status } = res;
+  const {
+    data: { status },
+  } = res;
 
   if (status) {
-    yield put(getDetailProductSuccess(data));
+    yield put(updateProductSuccess());
   } else {
-    const { message } = data;
-    yield put(getDetailProductFailed(message));
+    yield put(updateProductFailed());
   }
 
   if (callback instanceof Function) callback();

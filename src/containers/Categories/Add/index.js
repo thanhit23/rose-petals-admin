@@ -20,7 +20,7 @@ function AddCategory({ createNewCategory }) {
 
   return (
     <AuthLayout
-      title="add_user"
+      title="add_category"
       children={<AddCategoryComponent onSubmit={handleCreateCategory} />}
     />
   );
