@@ -8,6 +8,7 @@ import ButtonRedirect from '../../LinkWithFormatMessage';
 import Breadcrumb from '../../Breadcrumb';
 import Search from '../../Search';
 import Table from '../../Table';
+import ConfirmModal from '../../ConfirmModal';
 
 function ListBrandsComponent({ data, meta, getBrands, handleDeleteBrand }) {
   const [valueSearch, setValueSearch] = useState();
@@ -33,13 +34,12 @@ function ListBrandsComponent({ data, meta, getBrands, handleDeleteBrand }) {
             <FontAwesomeIcon className="text-[#7D879C]" icon={faPen} />
           </button>
         </Link>
-        <button
-          type="button"
-          className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full ml-2"
-          onClick={() => handleDeleteBrand(id)}
+        <ConfirmModal
+          classNames="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
+          callback={() => handleDeleteBrand(id)}
         >
           <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
-        </button>
+        </ConfirmModal>
       </>
     );
   };

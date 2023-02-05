@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import propsTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
 
 import { Url } from '../../../helpers';
 import { getUsers, deleteUsers } from './actions';
@@ -14,14 +13,10 @@ import reducer from './reducers';
 import ListUserComponent from '../../../components/Users/List';
 
 function ListUser({ getUser, data, meta, deleteUser }) {
-  const navigate = useNavigate();
-
   const [filter, setFilter] = useState({
     page: 1,
     name: '',
   });
-
-  const callback = () => navigate('/admin/users');
 
   useEffect(() => {
     const params = Url.getQueryString();
@@ -42,7 +37,7 @@ function ListUser({ getUser, data, meta, deleteUser }) {
     setFilter(objectUrl);
   };
 
-  const handleDeleteUser = id => deleteUser(id, callback);
+  const handleDeleteUser = id => deleteUser(id);
 
   return (
     <AuthLayout title="user">
@@ -60,9 +55,7 @@ ListUser.PropsType = {
   getUser: propsTypes.func,
   data: propsTypes.array,
   meta: propsTypes.object,
-  gotoPage: propsTypes.func,
   deleteUser: propsTypes.func,
-  searchUsers: propsTypes.func,
 };
 
 const mapStateToProps = state => {

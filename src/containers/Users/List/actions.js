@@ -27,9 +27,9 @@ export const getUsersListFailed = messages => ({
   payload: { messages },
 });
 
-export const deleteUsers = (id, callback) => ({
+export const deleteUsers = id => ({
   type: DELETE_USERS_REQUEST,
-  payload: { id, callback },
+  payload: { id },
 });
 
 export const deleteUserSuccess = () => ({

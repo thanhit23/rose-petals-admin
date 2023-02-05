@@ -26,6 +26,9 @@ module.exports = {
       processing: '#fff8e5',
       delivered: '#E7F9ED',
     },
+    boxShadow: {
+      default: '0 0 5px 2px #d8d8d8',
+    },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],
       serif: ['Merriweather', 'serif'],
