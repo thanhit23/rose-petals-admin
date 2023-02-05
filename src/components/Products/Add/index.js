@@ -156,9 +156,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
                 id="category"
                 name="category"
                 className="h-12 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
-                {...register('category', {
-                  required: 'Category is required',
-                })}
+                {...register('category', required(messages.message.required))}
               >
                 <option value="">Select...</option>
                 {listCategory.map(({ name: nameCategory, id }, index) => (
@@ -180,9 +178,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
                 id="category"
                 name="category"
                 className="h-12 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
-                {...register('brand', {
-                  required: 'Brand is required',
-                })}
+                {...register('brand', required(messages.message.required))}
               >
                 <option value="">Select...</option>
                 {listBrand.map(({ name: nameBrand, id }, index) => (
