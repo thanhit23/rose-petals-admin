@@ -53,7 +53,13 @@ function ListBrandsComponent({ data, meta, getBrands, handleDeleteBrand }) {
       },
     } = props;
 
-    return <img className="w-9 m-auto" src={logo} alt="" />;
+    return (
+      <img
+        className="object-cover h-[40px] w-[40px] rounded m-auto"
+        src={logo}
+        alt=""
+      />
+    );
   };
 
   const [searchParams] = useSearchParams();

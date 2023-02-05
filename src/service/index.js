@@ -5,7 +5,6 @@ import {
   UNAUTHORIZED,
   LOGOUT_REQUEST,
   BASE_URL,
-  SERVER_FAILED,
   SERVER_ERROR,
 } from './constants';
 import store from '../store';
@@ -51,8 +50,7 @@ class Service {
         setTimeout(() => store.dispatch({ type: LOGOUT_REQUEST }), 6000);
         break;
       case SERVER_ERROR:
-        store.dispatch({ type: SERVER_FAILED, payload: { message } });
-        window.location.reload(true);
+        setTimeout(() => store.dispatch({ type: LOGOUT_REQUEST }), 6000);
         break;
       default:
         break;
