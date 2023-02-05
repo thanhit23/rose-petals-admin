@@ -24,8 +24,9 @@ export const getCategorySuccessfully = data => ({
   },
 });
 
-export const getCategoryFailed = () => ({
+export const getCategoryFailed = message => ({
   type: GET_CATEGORY_DETAIL_FAILED,
+  payload: { message },
 });
 
 export const updateCategory = (id, data, callback) => ({
@@ -37,6 +38,7 @@ export const updateCategorySuccessfully = () => ({
   type: UPDATE_CATEGORY_SUCCESS,
 });
 
-export const updateCategoryFailed = () => ({
+export const updateCategoryFailed = message => ({
   type: UPDATE_CATEGORY_FAILED,
+  payload: { message },
 });

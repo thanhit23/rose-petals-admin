@@ -17,8 +17,9 @@ export const getBrandSuccess = ({ data, meta }) => ({
   payload: { data, meta },
 });
 
-export const getBrandFailed = () => ({
+export const getBrandFailed = message => ({
   type: GET_BRAND_LIST_FAILED,
+  payload: { message },
 });
 
 export const deleteBrand = id => ({
@@ -30,6 +31,7 @@ export const deleteBrandSuccess = () => ({
   type: DELETE_BRAND_SUCCESS,
 });
 
-export const deleteBrandFailed = () => ({
+export const deleteBrandFailed = message => ({
   type: DELETE_BRAND_FAILED,
+  payload: { message },
 });

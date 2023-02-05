@@ -20,8 +20,9 @@ export const getProductSuccess = ({ data, meta }) => ({
   },
 });
 
-export const getProductFailed = () => ({
+export const getProductFailed = message => ({
   type: GET_PRODUCTS_LIST_FAILED,
+  payload: { message },
 });
 
 export const deleteProduct = id => ({
@@ -35,6 +36,7 @@ export const deleteProductSuccess = () => ({
   type: DELETE_PRODUCTS_SUCCESS,
 });
 
-export const deleteProductFailed = () => ({
+export const deleteProductFailed = message => ({
   type: DELETE_PRODUCTS_FAILED,
+  payload: { message },
 });

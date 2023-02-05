@@ -3,3 +3,5 @@ export const TOAST_ERROR = 'TOAST_ERROR';
 export const TOAST_INFO = 'TOAST_INFO';
 export const _SUCCESS = '_SUCCESS';
 export const _FAILED = '_FAILED';
+
+export const RESET_MESSAGE = 'RESET_MESSAGE';

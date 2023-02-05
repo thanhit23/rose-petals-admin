@@ -1,25 +1,34 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { bindActionCreators, compose } from 'redux';
 import propTypes from 'prop-types';
 import { toast, ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { TOAST_ERROR, TOAST_INFO, TOAST_SUCCESS } from './constants';
+import { resetMessage as resetMessageAction } from './actions';
 
-function Toast({ toast: { message, type } }) {
+function Toast({ toast: { message, type }, resetMessage }) {
   useEffect(() => {
-    if (type === TOAST_SUCCESS) toast.success(message);
-    if (type === TOAST_ERROR) toast.error(message);
-    if (type === TOAST_INFO) toast.info(message);
+    type === TOAST_SUCCESS && toast.success(message);
+    type === TOAST_ERROR && toast.error(message);
+    type === TOAST_INFO && toast.info(message);
+    message && resetMessage();
   }, [message]);
 
   return <ToastContainer />;
 }
 
 Toast.propTypes = {
-  message: propTypes.string,
   type: propTypes.string,
+  message: propTypes.string,
+  resetMessage: propTypes.func,
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    resetMessage: bindActionCreators(resetMessageAction, dispatch),
+  };
 };
 
 const mapStateToProps = state => {
@@ -32,6 +41,6 @@ const mapStateToProps = state => {
   };
 };
 
-const withConnect = connect(mapStateToProps, null);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(Toast);

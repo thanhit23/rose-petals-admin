@@ -39,13 +39,13 @@ function* updateProduct({ payload: { id, data, file, callback } }) {
 
   const res = yield call(updateProductService, id, data);
   const {
-    data: { status },
+    data: { status, message },
   } = res;
 
   if (status) {
     yield put(updateProductSuccess());
   } else {
-    yield put(updateProductFailed());
+    yield put(updateProductFailed(message));
   }
 
   if (callback instanceof Function) callback();

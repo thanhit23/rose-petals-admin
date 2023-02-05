@@ -14,13 +14,13 @@ import {
 function* updateCategoryInformation({ payload: { id, data, callback } }) {
   const res = yield call(update, id, data);
   const {
-    data: { status },
+    data: { status, message },
   } = res;
   if (status) {
     yield put(updateCategorySuccessfully());
     if (callback instanceof Function) callback();
   } else {
-    yield put(updateCategoryFailed());
+    yield put(updateCategoryFailed(message));
   }
 }
 

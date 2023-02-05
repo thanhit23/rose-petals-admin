@@ -11,6 +11,7 @@ export const createCategory = (data, callback) => ({
 export const createCategorySuccessfully = () => ({
   type: CREATE_CATEGORY_SUCCESS,
 });
-export const createCategoryFailed = () => ({
+export const createCategoryFailed = message => ({
   type: CREATE_CATEGORY_FAILED,
+  payload: { message },
 });

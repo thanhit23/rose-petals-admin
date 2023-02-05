@@ -25,13 +25,13 @@ function* getOrderDetail({ payload: { id } }) {
   const res = yield call(getOrderDetailService, id);
 
   const {
-    data: { status, data },
+    data: { status, data, message },
   } = res;
 
   if (status) {
     yield put(getOrderDetailSuccess(data));
   } else {
-    yield put(getOrderDetailFailed());
+    yield put(getOrderDetailFailed(message));
   }
 }
 
@@ -39,13 +39,13 @@ function* getOrder({ payload: { id } }) {
   const res = yield call(getOrderService, id);
 
   const {
-    data: { status, data },
+    data: { status, data, message },
   } = res;
 
   if (status) {
     yield put(getOrderSuccess(data));
   } else {
-    yield put(getOrderFailed());
+    yield put(getOrderFailed(message));
   }
 }
 

@@ -5,9 +5,8 @@ import {
   UNAUTHORIZED,
   LOGOUT_REQUEST,
   BASE_URL,
-  BAD_REQUEST_FAILED,
-  BAD_REQUEST,
   SERVER_FAILED,
+  SERVER_ERROR,
 } from './constants';
 import store from '../store';
 import { LOGIN_FAILED } from '../containers/LoginPage/constants';
@@ -39,24 +38,26 @@ class Service {
     const {
       response: { status, data },
     } = err;
+
+    const { message } = data;
     switch (status) {
       case UNAUTHORIZED:
         store.dispatch({
           type: LOGIN_FAILED,
           payload: {
-            data,
+            message,
           },
         });
         setTimeout(() => store.dispatch({ type: LOGOUT_REQUEST }), 6000);
         break;
-      case BAD_REQUEST:
-        store.dispatch({ type: BAD_REQUEST_FAILED, payload: { data } });
-        break;
-      default:
-        store.dispatch({ type: SERVER_FAILED, payload: { data } });
+      case SERVER_ERROR:
+        store.dispatch({ type: SERVER_FAILED, payload: { message } });
         window.location.reload(true);
         break;
+      default:
+        break;
     }
+    return { data };
   };
 
   get = (url, params = {}) => this.instance.get(url, { params });

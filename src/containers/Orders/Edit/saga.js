@@ -12,13 +12,13 @@ function* updateOrderInformation({ payload: { id, data, callback } }) {
   const res = yield call(updateOrder, id, data);
 
   const {
-    data: { status },
+    data: { status, message },
   } = res;
 
   if (status) {
     yield put(updateOrderSuccessfully());
   } else {
-    yield put(updateOrderFailed());
+    yield put(updateOrderFailed(message));
   }
 
   if (callback instanceof Function) callback({ status });
