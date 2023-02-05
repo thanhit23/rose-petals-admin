@@ -22,26 +22,27 @@ function* getBrands({ payload: { options } }) {
 
   const { data } = res;
 
-  const { status } = data;
+  const { status, message } = data;
 
   if (status) {
     yield put(getBrandSuccess(data));
   } else {
-    yield put(getBrandFailed());
+    yield put(getBrandFailed(message));
   }
 }
 
 function* deleteBrand({ payload: { id } }) {
   const res = yield call(deleteBrandService, id);
 
-  const { status } = res;
+  const {
+    data: { status, message },
+  } = res;
 
   if (status) {
     yield put(deleteBrandSuccess());
-
-    yield put({ type: GET_BRAND_LIST_REQUEST });
+    yield put({ type: GET_BRAND_LIST_REQUEST, payload: { options: {} } });
   } else {
-    yield put(deleteBrandFailed());
+    yield put(deleteBrandFailed(message));
   }
 }
 

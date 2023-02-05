@@ -10,6 +10,8 @@ function* createNewUser({ payload: { data }, navigate }) {
     data: { status },
   } = res;
 
+  console.log(res);
+
   if (status) {
     yield put(createUserSuccessfully());
     navigate();

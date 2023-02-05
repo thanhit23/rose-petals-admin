@@ -17,6 +17,7 @@ export const getProductReviewSuccess = ({ data, meta }) => ({
   },
 });
 
-export const getProductReviewFailed = () => ({
+export const getProductReviewFailed = message => ({
   type: GET_PRODUCTS_REVIEW_LIST_FAILED,
+  payload: { message },
 });

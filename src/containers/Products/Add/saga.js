@@ -36,29 +36,28 @@ function* addProduct({ payload: { data, file, callback } }) {
   const res = yield call(uploadFileService, file);
 
   const {
-    data: { status, data: dataFile },
+    data: { status, data: dataFile, message },
   } = res;
 
   if (status) {
     yield* handleAddProduct({ ...data, images: dataFile });
+    if (callback instanceof Function) callback();
   } else {
-    yield put(addProductFailed());
+    yield put(addProductFailed(message));
   }
-
-  if (callback instanceof Function) callback();
 }
 
 function* getAllCategory() {
   const res = yield call(getAllCategoryApi);
 
   const {
-    data: { status, data },
+    data: { status, data, message },
   } = res;
 
   if (status) {
     yield put(getAllCategoriesSuccess(data));
   } else {
-    yield put(getAllCategoriesFailed());
+    yield put(getAllCategoriesFailed(message));
   }
 }
 
@@ -66,13 +65,13 @@ function* getAllBrand() {
   const res = yield call(getAllBrandApi);
 
   const {
-    data: { status, data },
+    data: { status, data, message },
   } = res;
 
   if (status) {
     yield put(getAllBrandsSuccess(data));
   } else {
-    yield put(getAllBrandsFailed());
+    yield put(getAllBrandsFailed(message));
   }
 }
 

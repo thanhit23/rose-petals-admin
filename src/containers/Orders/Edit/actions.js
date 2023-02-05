@@ -23,8 +23,9 @@ export const getOrderSuccessfully = data => ({
     data,
   },
 });
-export const getOrderFailed = () => ({
+export const getOrderFailed = message => ({
   type: GET_ORDERS_FAILED,
+  payload: { message },
 });
 
 export const updateOrder = (id, data, callback) => ({
@@ -34,6 +35,7 @@ export const updateOrder = (id, data, callback) => ({
 export const updateOrderSuccessfully = () => ({
   type: UPDATE_ORDER_SUCCESS,
 });
-export const updateOrderFailed = () => ({
+export const updateOrderFailed = message => ({
   type: UPDATE_ORDER_FAILED,
+  payload: { message },
 });

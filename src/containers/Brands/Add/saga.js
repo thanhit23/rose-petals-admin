@@ -5,12 +5,14 @@ import { addBrandSuccess, addBrandFailed } from './actions';
 
 function* addBrand({ payload: { data, callback } }) {
   const res = yield call(addBrandService, data);
-  const { status } = res;
+  const {
+    data: { status, message },
+  } = res;
 
   if (status) {
     yield put(addBrandSuccess());
   } else {
-    yield put(addBrandFailed());
+    yield put(addBrandFailed(message));
   }
 
   if (callback instanceof Function) callback();

@@ -12,9 +12,7 @@ import saga from './saga';
 function AddCategory({ createNewCategory }) {
   const redirect = useNavigate();
 
-  const callback = () => {
-    redirect('/admin/categories');
-  };
+  const callback = () => redirect('/admin/categories');
 
   const handleCreateCategory = data => createNewCategory(data, callback);
 

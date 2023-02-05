@@ -28,8 +28,9 @@ export const getDetailProductSuccess = ({ data }) => ({
   payload: { data },
 });
 
-export const getDetailProductFailed = () => ({
+export const getDetailProductFailed = message => ({
   type: GET_DETAIL_PRODUCT_FAILED,
+  payload: { message },
 });
 
 export const updateProduct = (id, data, file, callback) => ({
@@ -41,8 +42,9 @@ export const updateProductSuccess = () => ({
   type: UPDATE_PRODUCT_SUCCESS,
 });
 
-export const updateProductFailed = () => ({
+export const updateProductFailed = message => ({
   type: UPDATE_PRODUCT_FAILED,
+  payload: { message },
 });
 
 export const getAllBrands = () => ({
@@ -54,8 +56,9 @@ export const getAllBrandsSuccess = ({ data }) => ({
   payload: { data },
 });
 
-export const getAllBrandsFailed = () => ({
+export const getAllBrandsFailed = message => ({
   type: GET_ALL_BRAND_FAILED,
+  payload: { message },
 });
 
 export const getAllCategories = () => ({
@@ -67,6 +70,7 @@ export const getAllCategoriesSuccess = ({ data }) => ({
   payload: { data },
 });
 
-export const getAllCategoriesFailed = () => ({
+export const getAllCategoriesFailed = message => ({
   type: GET_ALL_CATEGORY_FAILED,
+  payload: { message },
 });

@@ -13,6 +13,7 @@ export const addBrandSuccess = () => ({
   type: ADD_BRAND_SUCCESS,
 });
 
-export const addBrandFailed = () => ({
+export const addBrandFailed = message => ({
   type: ADD_BRAND_FAILED,
+  payload: { message },
 });

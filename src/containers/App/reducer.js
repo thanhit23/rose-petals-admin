@@ -1,7 +1,7 @@
 import produce from 'immer';
 
 import { LOGIN_SUCCESS, SET_AUTHENTICATION } from './constants';
-import { TOAST_ERROR } from '../ToastMessage/constants';
+import { TOAST_ERROR, RESET_MESSAGE } from '../ToastMessage/constants';
 import { TOGGLE_SIDEBAR } from '../SideBar/constants';
 
 export const initialState = {
@@ -45,6 +45,10 @@ const appReducer = (state = initialState, action) =>
       case TOGGLE_SIDEBAR:
         draft.sidebar.isSidebarOpen = !draft.sidebar.isSidebarOpen;
         break;
+      case RESET_MESSAGE:
+        draft.toast.type = null;
+        draft.toast.message = null;
+        break;
       default:
         const text = action.type;
 
@@ -55,9 +59,7 @@ const appReducer = (state = initialState, action) =>
 
         if (text.includes('_FAILED')) {
           const {
-            payload: {
-              data: { message },
-            },
+            payload: { message },
           } = action;
           draft.toast.type = TOAST_ERROR;
           draft.toast.message = message;
