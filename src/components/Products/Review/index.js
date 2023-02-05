@@ -1,19 +1,14 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import propsTypes from 'prop-types';
-
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faPen,
-  faPlus,
-  faTrash,
-  faStar,
-} from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
+
 import Search from '../../Search';
 import Breadcrumb from '../../Breadcrumb';
 import Table from '../../Table';
-import ButtonRedirect from '../../LinkWithFormatMessage';
+import ConfirmModal from '../../ConfirmModal';
 
 function ProductReviewComponent({
   meta,
@@ -123,22 +118,13 @@ function ProductReviewComponent({
           },
         } = props;
         return (
-          <div className="flex">
-            <button
-              type="button"
-              className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
-            >
-              <Link to={`/admin/product/edit/${_id}`}>
-                <FontAwesomeIcon className="text-[#7D879C]" icon={faPen} />
-              </Link>
-            </button>
-            <button
-              type="button"
-              className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
-              onClick={() => handleDeleteProduct(_id)}
+          <div className="flex justify-center">
+            <ConfirmModal
+              classNames="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
+              callback={() => handleDeleteProduct(_id)}
             >
               <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
-            </button>
+            </ConfirmModal>
           </div>
         );
       },
@@ -162,11 +148,6 @@ function ProductReviewComponent({
             message="product"
             valueSearch={valueSearch}
             handleKeywordSearch={handleGetProductReview}
-          />
-          <ButtonRedirect
-            to="/admin/product"
-            title="add_product"
-            icon={faPlus}
           />
         </div>
         <div className="flex flex-col shadow-lg bg-white rounded mt-4">
