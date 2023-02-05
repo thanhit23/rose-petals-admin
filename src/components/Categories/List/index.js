@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import ButtonRedirect from '../../LinkWithFormatMessage';
+import ConfirmModal from '../../ConfirmModal';
 import Breadcrumb from '../../Breadcrumb';
 import Search from '../../Search';
 import Table from '../../Table';
@@ -68,13 +69,12 @@ function ListCategoryComponent({ data, meta, getCategory, deleteCategory }) {
                 <FontAwesomeIcon className="text-[#7D879C]" icon={faPen} />
               </Link>
             </button>
-            <button
-              type="button"
-              className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full ml-2"
-              onClick={() => handleDeleteCategory(id)}
+            <ConfirmModal
+              classNames="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
+              callback={() => handleDeleteCategory(id)}
             >
               <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
-            </button>
+            </ConfirmModal>
           </>
         );
       },

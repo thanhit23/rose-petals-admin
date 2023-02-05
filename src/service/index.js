@@ -54,6 +54,7 @@ class Service {
         break;
       default:
         store.dispatch({ type: SERVER_FAILED, payload: { data } });
+        window.location.reload(true);
         break;
     }
   };

@@ -40,7 +40,7 @@ function* deleteProduct({ payload: { id } }) {
 
   if (status) {
     yield put(deleteProductSuccess());
-    yield put({ type: GET_PRODUCTS_LIST_REQUEST });
+    yield put({ type: GET_PRODUCTS_LIST_REQUEST, payload: { options: {} } });
   } else {
     const { message } = data;
     yield put(deleteProductFailed(message));

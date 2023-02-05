@@ -29,14 +29,14 @@ function* getUsers({ payload: { options } }) {
   }
 }
 
-function* deleteUser({ payload: { id, callback } }) {
+function* deleteUser({ payload: { id } }) {
   const res = yield call(deleteUserService, id);
 
   const { status, data } = res;
 
   if (status) {
     yield put(deleteUserSuccess());
-    yield callback();
+    yield put({ type: GET_USERS_LIST_REQUEST, payload: { options: {} } });
   } else {
     const { message } = data;
     yield put(getUsersListFailed(message));

@@ -21,7 +21,7 @@ const renderLogout = handleLogout => (
 function HeaderComponent({ handleSidebar, handleLogout }) {
   const [dropdown, setDropDown] = useState(false);
   return (
-    <header className="relative z-[100]">
+    <header className="relative z-[90]">
       <div className="shadow-md absolute inset-x-0 top-0 bg-white">
         <div className="px-4 sm:px-6">
           <div className="flex items-center justify-between py-4 md:justify-start md:space-x-10">

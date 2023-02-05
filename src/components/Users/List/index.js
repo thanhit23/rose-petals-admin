@@ -6,6 +6,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
 import ButtonRedirect from '../../LinkWithFormatMessage';
+import ConfirmModal from '../../ConfirmModal';
 import Breadcrumb from '../../Breadcrumb';
 import Search from '../../Search';
 import Table from '../../Table';
@@ -80,13 +81,12 @@ function ListUserComponent({ data, meta, getUsers, handleDeleteUser }) {
                 <FontAwesomeIcon className="text-[#7D879C]" icon={faPen} />
               </Link>
             </button>
-            <button
-              type="button"
-              className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
-              onClick={() => handleDeleteUser(id)}
+            <ConfirmModal
+              classNames="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
+              callback={() => handleDeleteUser(id)}
             >
               <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
-            </button>
+            </ConfirmModal>
           </>
         );
       },

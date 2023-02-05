@@ -11,6 +11,7 @@ import Search from '../../Search';
 import Table from '../../Table';
 import messages from './messages';
 import { ARRAY_STATUS } from './constants';
+import ConfirmModal from '../../ConfirmModal';
 
 function ListOrderComponent({ data, meta, getOrders, handleDeleteOrder }) {
   const [valueSearch, setValueSearch] = useState();
@@ -120,13 +121,12 @@ function ListOrderComponent({ data, meta, getOrders, handleDeleteOrder }) {
                 <FontAwesomeIcon className="text-[#7D879C]" icon={faPen} />
               </Link>
             </button>
-            <button
-              type="button"
-              className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
-              onClick={() => handleDeleteOrder(_id)}
+            <ConfirmModal
+              classNames="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
+              callback={() => handleDeleteOrder(_id)}
             >
               <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
-            </button>
+            </ConfirmModal>
           </>
         );
       },

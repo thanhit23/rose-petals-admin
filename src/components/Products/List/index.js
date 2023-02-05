@@ -8,6 +8,7 @@ import Search from '../../Search';
 import Breadcrumb from '../../Breadcrumb';
 import Table from '../../Table';
 import ButtonRedirect from '../../LinkWithFormatMessage';
+import ConfirmModal from '../../ConfirmModal';
 
 function ListProductComponent({
   meta,
@@ -117,13 +118,12 @@ function ListProductComponent({
                 <FontAwesomeIcon className="text-[#7D879C]" icon={faPen} />
               </div>
             </Link>
-            <button
-              type="button"
-              className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
-              onClick={() => handleDeleteProduct(_id)}
+            <ConfirmModal
+              classNames="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
+              callback={() => handleDeleteProduct(_id)}
             >
               <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
-            </button>
+            </ConfirmModal>
           </div>
         );
       },
