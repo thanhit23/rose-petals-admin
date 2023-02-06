@@ -112,7 +112,7 @@ function ListProductComponent({
           },
         } = props;
         return (
-          <div className="flex">
+          <div className="flex justify-center">
             <Link to={`/admin/product/edit/${_id}`}>
               <div className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full flex justify-center items-center">
                 <FontAwesomeIcon className="text-[#7D879C]" icon={faPen} />

@@ -5,7 +5,6 @@ import {
   deleteOrder as deleteOrderService,
 } from './service';
 import {
-  getOrders as getOrdersAction,
   getOrdersSuccess,
   getOrdersListFailed,
   deleteOrderFailed,
@@ -31,14 +30,14 @@ function* getOrders({ payload: { options } }) {
   }
 }
 
-function* deleteOrder({ payload: { id } }) {
+function* deleteOrder({ payload: { id, callback } }) {
   const res = yield call(deleteOrderService, id);
 
   const { status, data } = res;
 
   if (status) {
-    yield put(getOrdersAction());
     yield put(deleteOrderSuccess());
+    if (callback instanceof Function) callback();
   } else {
     const { message } = data;
     yield put(deleteOrderFailed(message));

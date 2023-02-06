@@ -33,7 +33,6 @@ function OrderDetail({
     getOrder(idOrder);
   }, []);
 
-  // eslint-disable-next-line no-shadow
   const deleteProductOrder = id => deleteProductDetail(idOrder, id);
 
   return (

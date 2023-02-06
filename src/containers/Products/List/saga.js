@@ -33,14 +33,14 @@ function* getProducts({ payload: { options } }) {
   }
 }
 
-function* deleteProduct({ payload: { id } }) {
+function* deleteProduct({ payload: { id, callback } }) {
   const res = yield call(deleteProductService, id);
 
   const { status, data } = res;
 
   if (status) {
     yield put(deleteProductSuccess());
-    yield put({ type: GET_PRODUCTS_LIST_REQUEST, payload: { options: {} } });
+    if (callback instanceof Function) callback();
   } else {
     const { message } = data;
     yield put(deleteProductFailed(message));

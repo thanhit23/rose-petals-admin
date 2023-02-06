@@ -22,9 +22,9 @@ export const getBrandFailed = message => ({
   payload: { message },
 });
 
-export const deleteBrand = id => ({
+export const deleteBrand = (id, callback) => ({
   type: DELETE_BRAND_REQUEST,
-  payload: { id },
+  payload: { id, callback },
 });
 
 export const deleteBrandSuccess = () => ({

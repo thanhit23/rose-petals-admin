@@ -18,6 +18,7 @@ function ListProducts({ data, meta, getProducts, deleteProduct }) {
   const [filter, setFilter] = useState({
     page: 1,
     name: '',
+    forkUpdate: null,
   });
 
   useEffect(() => {
@@ -39,7 +40,9 @@ function ListProducts({ data, meta, getProducts, deleteProduct }) {
     setFilter(objectUrl);
   };
 
-  const handleDeleteProduct = id => deleteProduct(id);
+  const callback = () => setFilter({ ...filter, forkUpdate: '' });
+
+  const handleDeleteProduct = id => deleteProduct(id, callback);
 
   return (
     <AuthLayout title="list_product">

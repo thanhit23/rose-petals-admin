@@ -31,7 +31,7 @@ function* getBrands({ payload: { options } }) {
   }
 }
 
-function* deleteBrand({ payload: { id } }) {
+function* deleteBrand({ payload: { id, callback } }) {
   const res = yield call(deleteBrandService, id);
 
   const {
@@ -40,7 +40,7 @@ function* deleteBrand({ payload: { id } }) {
 
   if (status) {
     yield put(deleteBrandSuccess());
-    yield put({ type: GET_BRAND_LIST_REQUEST, payload: { options: {} } });
+    if (callback instanceof Function) callback();
   } else {
     yield put(deleteBrandFailed(message));
   }

@@ -43,7 +43,6 @@ function* deleteCategory({ payload: { id, callback } }) {
 
   if (status) {
     yield put(deleteCategorySuccess());
-
     if (callback instanceof Function) callback();
   } else {
     yield put(deleteCategoryFailed(message));

@@ -16,6 +16,7 @@ function ListUser({ getUser, data, meta, deleteUser }) {
   const [filter, setFilter] = useState({
     page: 1,
     name: '',
+    forkUpdate: null,
   });
 
   useEffect(() => {
@@ -37,7 +38,9 @@ function ListUser({ getUser, data, meta, deleteUser }) {
     setFilter(objectUrl);
   };
 
-  const handleDeleteUser = id => deleteUser(id);
+  const callback = () => setFilter({ ...filter, forkUpdate: '' });
+
+  const handleDeleteUser = id => deleteUser(id, callback);
 
   return (
     <AuthLayout title="user">
