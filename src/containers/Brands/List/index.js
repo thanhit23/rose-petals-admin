@@ -18,6 +18,7 @@ function ListBrand({ getBrand, data, meta, deleteBrand }) {
   const [filter, setFilter] = useState({
     page: 1,
     name: '',
+    forkUpdate: null,
   });
 
   useEffect(() => {
@@ -39,7 +40,9 @@ function ListBrand({ getBrand, data, meta, deleteBrand }) {
     setFilter(objectUrl);
   };
 
-  const handleDeleteBrand = id => deleteBrand(id);
+  const callback = () => setFilter({ ...filter, forkUpdate: '' });
+
+  const handleDeleteBrand = id => deleteBrand(id, callback);
 
   return (
     <AuthLayout title="list_brand">

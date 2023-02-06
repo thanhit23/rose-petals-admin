@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { bindActionCreators, compose } from 'redux';
-import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -17,11 +16,10 @@ import { Url } from '../../../helpers';
 import injectReducer from '../../../utils/injectReducer';
 
 function ListCategory({ getCategory, data, meta, deleteCategory }) {
-  const redirect = useNavigate();
-
   const [filter, setFilter] = useState({
     page: 1,
     name: '',
+    forkUpdate: null,
   });
 
   useEffect(() => {
@@ -43,7 +41,7 @@ function ListCategory({ getCategory, data, meta, deleteCategory }) {
     setFilter(objectUrl);
   };
 
-  const callback = () => redirect('/admin/categories');
+  const callback = () => setFilter({ ...filter, forkUpdate: '' });
 
   const handleDeleteCategory = id => deleteCategory(id, callback);
 

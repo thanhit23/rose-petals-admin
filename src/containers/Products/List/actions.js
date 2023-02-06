@@ -25,10 +25,11 @@ export const getProductFailed = message => ({
   payload: { message },
 });
 
-export const deleteProduct = id => ({
+export const deleteProduct = (id, callback) => ({
   type: DELETE_PRODUCTS_REQUEST,
   payload: {
     id,
+    callback,
   },
 });
 

@@ -19,6 +19,7 @@ function ListOrder({ data, meta, getOrders, deleteOrder }) {
   const [filter, setFilter] = useState({
     page: 1,
     name: '',
+    forkUpdate: null,
   });
 
   useEffect(() => {
@@ -40,7 +41,9 @@ function ListOrder({ data, meta, getOrders, deleteOrder }) {
     setFilter(objectUrl);
   };
 
-  const handleDeleteOrder = id => deleteOrder(id);
+  const callback = () => setFilter({ ...filter, forkUpdate: '' });
+
+  const handleDeleteOrder = id => deleteOrder(id, callback);
 
   return (
     <AuthLayout title="list_order">

@@ -9,6 +9,7 @@ import messages from './messages';
 import { formatMoney } from '../../../helpers';
 import TextareaWithFormatMessage from '../../TextareaWithFormatMessage';
 import LabelWithFormatMessage from '../../LabelWithFormatMessage';
+import ConfirmModal from '../../ConfirmModal';
 import visa from '../../../resources/images/visa.png';
 import masterCard from '../../../resources/images/38fd98e55806c3b2e4535c4e4a6c4c08.png';
 import JapanCreditBureau from '../../../resources/images/a0a9062ebe19b45c1ae0506f16af5c16.png';
@@ -28,51 +29,50 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
 
   const renderProduct = () =>
     productOrder.map(
-      ({ _id, product: { thumbnail, name }, price, quantity }, i) => {
-        return (
-          <div key={i} className="flex flex-row gap-4 my-6">
-            <div className="flex flex-row gap-4 w-1/2">
-              <div className="max-h-[64px] max-w-[64px]">
-                <img
-                  className="object-cover h-full w-full rounded"
-                  src={thumbnail}
-                  alt=""
-                />
-              </div>
-              <div>
-                <h6 className="text-sm mb-1">{name}</h6>
-                <div className="flex place-items-center">
-                  <p className="whitespace-nowrap text-[#7d879c] text-sm">
-                    {price} VND x
-                  </p>
-                  <div className="max-w-[60px] ml-2">
-                    <div className="min-w-0 ">
-                      <input
-                        className="hover:border-[#111] h-8 w-full outline-none appearance-none border border-[#e3e9ef] rounded p-2 text-[14px] leading-tight"
-                        type="number"
-                        defaultValue={quantity}
-                        disabled
-                      />
-                    </div>
+      ({ _id, product: { thumbnail, name }, price, quantity }, i) => (
+        <div key={i} className="flex flex-row gap-4 my-6">
+          <div className="flex flex-row gap-4 w-1/2">
+            <div className="max-h-[64px] max-w-[64px]">
+              <img
+                className="object-cover h-full w-full rounded"
+                src={thumbnail}
+                alt=""
+              />
+            </div>
+            <div>
+              <h6 className="text-sm mb-1">{name}</h6>
+              <div className="flex place-items-center">
+                <p className="whitespace-nowrap text-[#7d879c] text-sm">
+                  {price} VND x
+                </p>
+                <div className="max-w-[60px] ml-2">
+                  <div className="min-w-0 ">
+                    <input
+                      className="hover:border-[#111] h-8 w-full outline-none appearance-none border border-[#e3e9ef] rounded p-2 text-[14px] leading-tight"
+                      type="number"
+                      defaultValue={quantity}
+                      disabled
+                    />
                   </div>
                 </div>
               </div>
             </div>
-            <div className="flex flex-row gap-4 w-1/2 place-items-center justify-between">
-              <p className="text-[#7d879c] text-sm">
-                Product properties: Black, L
-              </p>
-              <button
-                type="button"
-                className="p-4"
-                onClick={() => deleteProductOrder(_id)}
+          </div>
+          <div className="flex flex-row gap-4 w-1/2 place-items-center justify-between">
+            <p className="text-[#7d879c] text-sm">
+              Product properties: Black, L
+            </p>
+            <div>
+              <ConfirmModal
+                classNames="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
+                callback={() => deleteProductOrder(_id)}
               >
                 <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
-              </button>
+              </ConfirmModal>
             </div>
           </div>
-        );
-      },
+        </div>
+      ),
     );
 
   const renderShippingFee = () => {
@@ -114,9 +114,12 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
               <FormattedMessage {...messages.order_status} />
             </label>
             <div className="relative w-1/2">
-              <select className="hover:border-[#111] h-12 w-full outline-none appearance-none border border-[#e3e9ef] rounded p-3 text-[14px] leading-tight">
+              <select
+                className="hover:border-[#111] h-12 w-full outline-none appearance-none border border-[#e3e9ef] rounded p-3 text-[14px] leading-tight"
+                defaultChecked={status}
+              >
                 {statusOrder.map((e, i) => (
-                  <option key={i} value={i} selected={i === status}>
+                  <option key={i} value={i}>
                     {e}
                   </option>
                 ))}
@@ -147,7 +150,7 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
                   name="shipping-address"
                   rows={4}
                   message={messages.placeholder.shipping_address}
-                  value={address}
+                  defaultValue={address}
                 />
               </div>
             </div>
@@ -165,7 +168,7 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
                   name="customer-note"
                   rows={4}
                   message={messages.placeholder.customer_note}
-                  value={customerNote}
+                  defaultValue={customerNote}
                 />
               </div>
             </div>
@@ -243,14 +246,15 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-between mt-4">
-        <button
-          className="bg-[#007bff] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          type="submit"
-        >
-          <FormattedMessage {...messages.button.submit} />
-        </button>
-      </div>
+      {/* <div className="flex items-center justify-between mt-4"> */}
+      {/*  <button */}
+      {/* eslint-disable-next-line max-len */}
+      {/*    className="bg-[#007bff] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" */}
+      {/*    type="submit" */}
+      {/*  > */}
+      {/*    <FormattedMessage {...messages.button.submit} /> */}
+      {/*  </button> */}
+      {/* </div> */}
     </>
   );
 }

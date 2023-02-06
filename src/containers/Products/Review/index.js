@@ -9,12 +9,21 @@ import injectReducer from '../../../utils/injectReducer';
 import injectSaga from '../../../utils/injectSaga';
 import reducer from '../List/reducers';
 import saga from './saga';
-import { getProductReview as getProductReviewAction } from './actions';
+import {
+  getProductReview as getProductReviewAction,
+  deleteProductReview as deleteProductReviewAction,
+} from './actions';
 
-function ProductsReview({ data, meta, getProductsReview, deleteProduct }) {
+function ProductsReview({
+  data,
+  meta,
+  getProductsReview,
+  deleteProductsReview,
+}) {
   const [filter, setFilter] = useState({
     page: 1,
     name: '',
+    forkUpdate: null,
   });
 
   useEffect(() => {
@@ -36,7 +45,9 @@ function ProductsReview({ data, meta, getProductsReview, deleteProduct }) {
     setFilter(objectUrl);
   };
 
-  const handleDeleteProduct = id => deleteProduct(id);
+  const callback = () => setFilter({ ...filter, forkUpdate: '' });
+
+  const handleDeleteProduct = id => deleteProductsReview(id, callback);
 
   return (
     <AuthLayout title="list_product">
@@ -64,6 +75,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   getProductsReview: bindActionCreators(getProductReviewAction, dispatch),
+  deleteProductsReview: bindActionCreators(deleteProductReviewAction, dispatch),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

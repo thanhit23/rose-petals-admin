@@ -27,9 +27,9 @@ export const getOrdersListFailed = messages => ({
   payload: { messages },
 });
 
-export const deleteOrder = id => ({
+export const deleteOrder = (id, callback) => ({
   type: DELETE_ORDER_REQUEST,
-  payload: { id },
+  payload: { id, callback },
 });
 
 export const deleteOrderSuccess = () => ({
