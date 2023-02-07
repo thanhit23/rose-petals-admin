@@ -12,12 +12,10 @@ import saga from './saga';
 function AddUser({ createNewUser }) {
   const redirect = useNavigate();
 
-  const navigate = () => {
-    redirect('/admin/users');
-  };
+  const callback = () => redirect('/admin/users');
 
   const handleCreateUser = data =>
-    createNewUser({ ...data, role: 'user' }, navigate);
+    createNewUser({ ...data, role: 'user' }, callback);
 
   return (
     <AuthLayout title="add_user">

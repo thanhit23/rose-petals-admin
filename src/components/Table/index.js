@@ -123,7 +123,9 @@ function Table({ col: columns, data, meta, goToPage, pagination = false }) {
             {row.cells.map(cell => {
               return (
                 <td className="py-[10px] px-[16px]" {...cell.getCellProps()}>
-                  <span className="text-table">{cell.render('Cell')}</span>
+                  <div className="flex max-w-sm justify-center">
+                    <span className="text-table">{cell.render('Cell')}</span>
+                  </div>
                 </td>
               );
             })}

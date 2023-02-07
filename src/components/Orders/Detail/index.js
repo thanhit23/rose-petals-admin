@@ -32,7 +32,7 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
       ({ _id, product: { thumbnail, name }, price, quantity }, i) => (
         <div key={i} className="flex flex-row gap-4 my-6">
           <div className="flex flex-row gap-4 w-1/2">
-            <div className="max-h-[64px] max-w-[64px]">
+            <div className="h-[64px] w-[64px]">
               <img
                 className="object-cover h-full w-full rounded"
                 src={thumbnail}

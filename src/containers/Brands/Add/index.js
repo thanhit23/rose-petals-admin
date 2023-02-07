@@ -14,11 +14,11 @@ function AddBrand({ addBrand }) {
 
   const callback = () => redirect('/admin/brands');
 
-  const handleCreateBrand = data => addBrand(data, callback);
+  const onSubmit = (data, file) => addBrand(data, file, callback);
 
   return (
     <AuthLayout title="add_brand">
-      <AddBrandComponent onSubmit={handleCreateBrand} />
+      <AddBrandComponent onSubmit={onSubmit} />
     </AuthLayout>
   );
 }

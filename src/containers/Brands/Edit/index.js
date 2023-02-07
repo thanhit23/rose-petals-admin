@@ -33,11 +33,11 @@ function EditBrand({
     getDetailBrand(idEdit, callback);
   }, []);
 
-  const handleUpdateBrand = (id, data) => updateBrand(id, data, callback);
+  const onSubmit = (id, data, file) => updateBrand(id, data, file, callback);
 
   return (
     <AuthLayout title="edit_brand">
-      <EditBrandComponent data={editBrand} onSubmit={handleUpdateBrand} />
+      <EditBrandComponent data={editBrand} onSubmit={onSubmit} />
     </AuthLayout>
   );
 }

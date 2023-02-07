@@ -26,15 +26,16 @@ export const getDetailBrandFailed = () => ({
   type: GET_DETAIL_BRAND_FAILED,
 });
 
-export const updateBrand = (id, data, callback) => ({
+export const updateBrand = (id, data, file, callback) => ({
   type: UPDATE_BRAND_REQUEST,
-  payload: { id, data, callback },
+  payload: { id, data, file, callback },
 });
 
 export const updateBrandSuccess = () => ({
   type: UPDATE_BRAND_SUCCESS,
 });
 
-export const updateBrandFailed = () => ({
+export const updateBrandFailed = message => ({
   type: UPDATE_BRAND_FAILED,
+  payload: { message },
 });

@@ -19,14 +19,14 @@ function ListBrandsComponent({ data, meta, getBrands, handleDeleteBrand }) {
     const {
       cell: {
         row: {
-          original: { id },
+          original: { _id },
         },
       },
     } = props;
 
     return (
       <>
-        <Link to={`/admin/brand/edit/${id}`}>
+        <Link to={`/admin/brand/edit/${_id}`}>
           <button
             type="button"
             className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
@@ -36,7 +36,7 @@ function ListBrandsComponent({ data, meta, getBrands, handleDeleteBrand }) {
         </Link>
         <ConfirmModal
           classNames="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
-          callback={() => handleDeleteBrand(id)}
+          callback={() => handleDeleteBrand(_id)}
         >
           <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
         </ConfirmModal>

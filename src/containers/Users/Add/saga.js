@@ -7,14 +7,14 @@ function* createNewUser({ payload: { data }, navigate }) {
   const res = yield call(createUsers, data);
 
   const {
-    data: { status },
+    data: { status, message },
   } = res;
 
   if (status) {
     yield put(createUserSuccessfully());
     navigate();
   } else {
-    yield put(createUserFailed());
+    yield put(createUserFailed(message));
   }
 }
 

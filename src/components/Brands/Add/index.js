@@ -2,21 +2,38 @@ import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 
+import { useMemo, useState } from 'react';
 import Breadcrumb from '../../Breadcrumb';
 import messages from './messages';
 import ErrorMessage from '../../ErrorMessage';
 import LabelWithFormatMessage from '../../LabelWithFormatMessage';
 import InputWithFormatMessage from '../../InputWithFormatMessage';
 import { required } from '../../../utils/validation';
+import UploadFileComponent from '../../UploadFile';
 
 function AddBrandComponent({ onSubmit }) {
+  const [file, setFile] = useState('');
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const { name } = errors;
+  const { name, logo } = errors;
+
+  const handleUploadImage = ({ target: { files } }) => setFile(files);
+
+  const renderUploadComponent = useMemo(
+    () => (
+      <UploadFileComponent
+        messages={messages.placeholder.img}
+        validate={register('logo', required(messages.message.required))}
+        handleUploadImage={handleUploadImage}
+      />
+    ),
+    [],
+  );
 
   return (
     <>
@@ -26,7 +43,7 @@ function AddBrandComponent({ onSubmit }) {
       />
       <div>
         <form
-          onSubmit={handleSubmit(data => onSubmit(data))}
+          onSubmit={handleSubmit(data => onSubmit(data, file))}
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         >
           <div className="mb-6">
@@ -52,14 +69,8 @@ function AddBrandComponent({ onSubmit }) {
               htmlFor="name"
               requiredField
             />
-            <InputWithFormatMessage
-              className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="name"
-              type="text"
-              message={messages.placeholder.img}
-              validate={register('logo', required(messages.message.required))}
-            />
-            <ErrorMessage name={name} />
+            {renderUploadComponent}
+            <ErrorMessage name={logo} />
           </div>
           <div className="flex items-center justify-between">
             <button
