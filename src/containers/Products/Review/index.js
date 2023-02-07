@@ -79,7 +79,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
-const withSaga = injectSaga({ key: 'product', saga });
+const withSaga = injectSaga({ key: 'reviewProduct', saga });
 const withReducer = injectReducer({ key: 'product', reducer });
 
 export default compose(withSaga, withReducer, withConnect)(ProductsReview);
