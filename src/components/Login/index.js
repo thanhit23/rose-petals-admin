@@ -10,7 +10,6 @@ import messages from './messages';
 import ErrorMessage from '../ErrorMessage';
 import { required, email as emailValidation } from '../../utils/validation';
 import InputWithFormatMessage from '../InputWithFormatMessage';
-import '../../containers/App/style/login.css';
 
 function Login({ handleOnSubmit }) {
   const [showPass, setShowPass] = useState(false);

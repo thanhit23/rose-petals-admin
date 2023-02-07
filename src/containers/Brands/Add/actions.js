@@ -4,9 +4,9 @@ import {
   ADD_BRAND_FAILED,
 } from './constants';
 
-export const addBrand = (data, callback) => ({
+export const addBrand = (data, file, callback) => ({
   type: ADD_BRAND_REQUEST,
-  payload: { data, callback },
+  payload: { data, file, callback },
 });
 
 export const addBrandSuccess = () => ({

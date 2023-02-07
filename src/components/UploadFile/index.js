@@ -1,6 +1,11 @@
 import InputWithFormatMessage from '../InputWithFormatMessage';
 
-function UploadFileComponent({ messages, validate, handleUploadImage }) {
+function UploadFileComponent({
+  messages,
+  validate,
+  handleUploadImage,
+  multiple = true,
+}) {
   return (
     <InputWithFormatMessage
       className="file-img h-[100px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
@@ -8,7 +13,7 @@ function UploadFileComponent({ messages, validate, handleUploadImage }) {
       type="file"
       message={messages}
       validate={validate}
-      multiple
+      multiple={multiple}
       onChange={handleUploadImage}
     />
   );

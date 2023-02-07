@@ -7,19 +7,36 @@ import {
   updateBrandFailed,
 } from './actions';
 import { getDetailBrand, updateBrand as updateBrandService } from './service';
+import { uploadFile as uploadFileService } from '../../UploadFile/service';
 
-function* updateBrand({ payload: { id, data: dataBody, callback } }) {
-  const res = yield call(updateBrandService, id, dataBody);
-  const { status, data } = res;
+function* updateBrand({ payload: { id, data, file, callback } }) {
+  if (file) {
+    const res = yield call(uploadFileService, file);
+    const {
+      data: { status, data: dataFile, message },
+    } = res;
+
+    if (status) {
+      Object.assign(data, { logo: dataFile.toString() });
+    } else {
+      yield put(updateBrandFailed(message));
+    }
+  }
+
+  const { id: idBrand, ...dataUpdate } = data;
+
+  const res = yield call(updateBrandService, id, { ...dataUpdate });
+
+  const {
+    data: { status, message },
+  } = res;
 
   if (status) {
     yield put(updateBrandSuccess());
+    if (callback instanceof Function) callback();
   } else {
-    const { message } = data;
     yield put(updateBrandFailed(message));
   }
-
-  if (callback instanceof Function) callback();
 }
 
 function* getDetail({ payload: { id } }) {

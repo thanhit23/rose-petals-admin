@@ -12,6 +12,7 @@ export const createUser = (data, navigate) => ({
 export const createUserSuccessfully = () => ({
   type: CREATE_USER_SUCCESS,
 });
-export const createUserFailed = () => ({
+export const createUserFailed = message => ({
   type: CREATE_USER_FAILED,
+  payload: { message },
 });
