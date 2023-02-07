@@ -40,9 +40,8 @@ function EditProduct({
     getAllCategories();
   }, []);
 
-  const handleUpdateProduct = (id, data, file) => {
+  const handleUpdateProduct = (id, data, file) =>
     updateProduct(id, data, file, callback);
-  };
 
   return (
     <AuthLayout title="edit_product">

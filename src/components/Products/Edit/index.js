@@ -23,7 +23,8 @@ function EditProductComponent({ brands, categories, submit, product }) {
 
   const { id } = useParams();
 
-  const { _id, slug, createdAt, updatedAt, ...productData } = product;
+  const { _id, slug, createdAt, updatedAt, deletedAt, ...productData } =
+    product;
 
   const {
     register,
