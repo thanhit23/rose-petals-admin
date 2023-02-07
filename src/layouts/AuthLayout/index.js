@@ -21,7 +21,7 @@ function AuthLayout({ children, title, isSidebarOpen, auth, onCheckAuth }) {
   return (
     <>
       <Helmet title={title} />
-      <section className="container">
+      <section>
         <div className="grid grid-cols-6">
           <SideBar />
           <div
@@ -35,7 +35,7 @@ function AuthLayout({ children, title, isSidebarOpen, auth, onCheckAuth }) {
             )}
           >
             <Header />
-            <div className="px-8 mt-[80px] bg-[#f8f8f8] h-[100vh]">
+            <div className="px-8 mt-[80px] bg-[#f8f8f8] min-h-[100vh]">
               <div className="py-8">{children}</div>
             </div>
           </div>

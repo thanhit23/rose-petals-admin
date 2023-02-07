@@ -40,7 +40,8 @@ function EditBrandComponent({ onSubmit, data: dataBrand }) {
   const { name, logo } = errors;
 
   const handleOnSubmit = data => {
-    onSubmit(id, { ...data, logo: images.toString() }, file);
+    const { _id, slug, createdAt, updatedAt, ...dataUpdate } = data;
+    onSubmit(id, { ...dataUpdate, logo: images.toString() }, file);
   };
 
   const handleUploadImage = ({ target: { files } }) => setFile(files);
