@@ -25,7 +25,7 @@ function HomePage({ isSidebarOpen, auth, checkAuthenticate }) {
         <title>Admin</title>
         <meta name="description" />
       </Helmet>
-      <section className="container bg-[#f7f9fc]">
+      <section className="bg-[#f7f9fc]">
         <div className="grid grid-cols-6">
           <Dashboard />
           <div

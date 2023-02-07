@@ -117,54 +117,6 @@ function EditProductComponent({ brands, categories, submit, product }) {
             />
             <ErrorMessage name={price} />
           </div>
-          <div className="mb-6 grid grid-cols-2 gap-4">
-            <div className="flex flex-col">
-              <LabelWithFormatMessage
-                message={messages.label.brand}
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="brand"
-                requiredField
-              />
-              <select
-                id="brand"
-                name="brand"
-                className="h-12 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
-                {...register('brand', required(messages.message.required))}
-              >
-                <option value="">Select...</option>
-                {/* eslint-disable-next-line no-shadow */}
-                {brands.map(({ name, id }, index) => (
-                  <option key={index} value={id}>
-                    {name}
-                  </option>
-                ))}
-              </select>
-              <ErrorMessage name={brand} />
-            </div>
-            <div className="flex flex-col">
-              <LabelWithFormatMessage
-                message={messages.label.category}
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="category"
-                requiredField
-              />
-              <select
-                id="category"
-                name="category"
-                className="h-12 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
-                {...register('category', required(messages.message.required))}
-              >
-                <option value="">Select...</option>
-                {/* eslint-disable-next-line no-shadow */}
-                {categories.map(({ name, id }, index) => (
-                  <option key={index} value={id}>
-                    {name}
-                  </option>
-                ))}
-              </select>
-              <ErrorMessage name={category} />
-            </div>
-          </div>
           <div className="mb-6">
             <LabelWithFormatMessage
               message={messages.label.images}
@@ -215,6 +167,54 @@ function EditProductComponent({ brands, categories, submit, product }) {
                 )}
               />
               <ErrorMessage name={description} />
+            </div>
+          </div>
+          <div className="mb-6 grid grid-cols-2 gap-4">
+            <div className="flex flex-col">
+              <LabelWithFormatMessage
+                message={messages.label.brand}
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="brand"
+                requiredField
+              />
+              <select
+                id="brand"
+                name="brand"
+                className="h-12 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
+                {...register('brand', required(messages.message.required))}
+              >
+                <option value="">Select...</option>
+                {/* eslint-disable-next-line no-shadow */}
+                {brands.map(({ name, id }, index) => (
+                  <option key={index} value={id}>
+                    {name}
+                  </option>
+                ))}
+              </select>
+              <ErrorMessage name={brand} />
+            </div>
+            <div className="flex flex-col">
+              <LabelWithFormatMessage
+                message={messages.label.category}
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="category"
+                requiredField
+              />
+              <select
+                id="category"
+                name="category"
+                className="h-12 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
+                {...register('category', required(messages.message.required))}
+              >
+                <option value="">Select...</option>
+                {/* eslint-disable-next-line no-shadow */}
+                {categories.map(({ name, id }, index) => (
+                  <option key={index} value={id}>
+                    {name}
+                  </option>
+                ))}
+              </select>
+              <ErrorMessage name={category} />
             </div>
           </div>
           <div className="flex items-center justify-between">
