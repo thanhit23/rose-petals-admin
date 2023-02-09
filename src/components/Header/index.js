@@ -10,10 +10,10 @@ import messages from './messages';
 const renderLogout = handleLogout => (
   <ul
     aria-labelledby="dropdownDefault"
-    className="dropdown-menu w-[120px] absolute bg-white right-[-5px] py-2 shadow-default rounded-[5px]"
+    className="dropdown-menu w-[120px] absolute bg-white right-[-5px] py-3 shadow-default rounded-[5px]"
   >
     <li
-      className="cursor-pointer px-3 py-1 hover:bg-[#f2f2f2] hover:text-[#6e6e6e]"
+      className="cursor-pointer px-3 py-2 hover:bg-[#f1f1f1] transition"
       onClick={handleLogout}
       aria-hidden
     >
@@ -35,7 +35,7 @@ function HeaderComponent({ handleSidebar, handleLogout }) {
               </button>
             </div>
             <nav className="space-x-10 md:flex">
-              <Search />
+              <Search className="w-[356px] outline-none py-2.5 px-8 rounded-lg bg-[#f7f9fc]" />
               <div className="relative">
                 <button type="button" onClick={() => setDropDown(!dropdown)}>
                   <img

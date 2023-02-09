@@ -13,6 +13,7 @@ import InputSearchWithFormatMessage from '../InputSearchWithFormatMessage';
 function Search({
   handleKeywordSearch,
   valueSearch = '',
+  className = 'w-[356px] outline-none py-2.5 px-8 rounded-lg',
   message = 'default',
 }) {
   const [keyword, setKeyword] = useState('');
@@ -53,7 +54,7 @@ function Search({
         innerRef={inputRef}
         message={messages[message]}
         type="text"
-        className="w-[356px] outline-none border-[1px] border-solid border-[#eaeaea] py-2.5 px-8 rounded-lg"
+        className={className}
         value={keyword}
         onChange={handleSetValue}
       />
