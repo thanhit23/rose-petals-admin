@@ -47,7 +47,7 @@ class Service {
             message,
           },
         });
-        setTimeout(() => store.dispatch({ type: LOGOUT_REQUEST }), 6000);
+        store.dispatch({ type: LOGOUT_REQUEST });
         break;
       case SERVER_ERROR:
         setTimeout(() => store.dispatch({ type: LOGOUT_REQUEST }), 6000);
