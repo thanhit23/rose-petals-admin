@@ -10,9 +10,13 @@ import messages from './messages';
 const renderLogout = handleLogout => (
   <ul
     aria-labelledby="dropdownDefault"
-    className="dropdown-menu w-[120px] absolute bg-white right-[-5px] p-5 shadow-lg rounded-[5px]"
+    className="dropdown-menu w-[120px] absolute bg-white right-[-5px] py-3 shadow-default rounded-[5px]"
   >
-    <li className="cursor-pointer" onClick={handleLogout} aria-hidden>
+    <li
+      className="cursor-pointer px-3 py-2 hover:bg-[#f1f1f1] transition"
+      onClick={handleLogout}
+      aria-hidden
+    >
       <FormattedMessage {...messages.logout} />
     </li>
   </ul>
@@ -31,7 +35,7 @@ function HeaderComponent({ handleSidebar, handleLogout }) {
               </button>
             </div>
             <nav className="space-x-10 md:flex">
-              <Search />
+              <Search className="w-[356px] outline-none py-2.5 px-8 rounded-lg bg-[#f7f9fc]" />
               <div className="relative">
                 <button type="button" onClick={() => setDropDown(!dropdown)}>
                   <img

@@ -26,6 +26,7 @@ function Navigated({
   const cls = [
     'rounded w-full px-[18px] flex items-center text-sm h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap hover:text-[#fff !important] duration-300 cursor-pointer',
     { 'bg-[#373f5099]': openDropdown },
+    { 'px-0 justify-center': !isSidebarOpen },
   ];
 
   useLayoutEffect(() => {
@@ -94,10 +95,7 @@ function Navigated({
     if (!pathRedirect) {
       return (
         <button
-          className={classNames([
-            ...cls,
-            { 'px-0 justify-center': !isSidebarOpen },
-          ])}
+          className={classNames(cls)}
           type="button"
           onClick={() => setOpen(!openDropdown)}
         >
@@ -107,18 +105,7 @@ function Navigated({
     }
 
     return (
-      <NavLink
-        to={pathRedirect}
-        className={({ isActive }) => {
-          if (isActive) {
-            return classNames([
-              ...cls,
-              { 'px-0 justify-center': !isSidebarOpen },
-            ]);
-          }
-          return classNames(cls);
-        }}
-      >
+      <NavLink to={pathRedirect} className={classNames(cls)}>
         {renderElement}
       </NavLink>
     );
