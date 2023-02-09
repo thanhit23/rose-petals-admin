@@ -10,9 +10,13 @@ import messages from './messages';
 const renderLogout = handleLogout => (
   <ul
     aria-labelledby="dropdownDefault"
-    className="dropdown-menu w-[120px] absolute bg-white right-[-5px] p-5 shadow-lg rounded-[5px]"
+    className="dropdown-menu w-[120px] absolute bg-white right-[-5px] py-2 shadow-default rounded-[5px]"
   >
-    <li className="cursor-pointer" onClick={handleLogout} aria-hidden>
+    <li
+      className="cursor-pointer px-3 py-1 hover:bg-[#f2f2f2] hover:text-[#6e6e6e]"
+      onClick={handleLogout}
+      aria-hidden
+    >
       <FormattedMessage {...messages.logout} />
     </li>
   </ul>

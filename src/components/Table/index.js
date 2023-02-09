@@ -7,9 +7,11 @@ import {
   faChevronRight,
   faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
+import { FormattedMessage } from 'react-intl';
 
 import { Url } from '../../helpers';
 import LoadingTable from '../../containers/LoadingIndicatorTable';
+import messages from './messages';
 
 function Table({ col: columns, data, meta, goToPage, pagination = false }) {
   const { page: pages, limit, totalPages } = meta;
@@ -64,49 +66,52 @@ function Table({ col: columns, data, meta, goToPage, pagination = false }) {
   };
 
   function renderPagination() {
-    return (
-      <div className="mt-4 flex justify-center">
-        <div>
-          <ul className="flex">
-            <li
-              className={classNames(
-                'flex justify-center items-center w-8 h-8 m-2.5 rounded-full text-[#4E97FD] border border-[#4E97FD] border-solid',
-                {
-                  'opacity-70': pages === 1,
-                },
-              )}
-            >
-              <button
-                className="w-8 h-8"
-                type="button"
-                onClick={() => handleClickPaginationButton(-1)}
-                disabled={pages === 1}
+    if (meta.page && pagination && data.length) {
+      return (
+        <div className="mt-4 flex justify-center">
+          <div>
+            <ul className="flex">
+              <li
+                className={classNames(
+                  'flex justify-center items-center w-8 h-8 m-2.5 rounded-full text-[#4E97FD] border border-[#4E97FD] border-solid',
+                  {
+                    'opacity-70': pages === 1,
+                  },
+                )}
               >
-                <FontAwesomeIcon icon={faChevronLeft} />
-              </button>
-            </li>
-            {renderPageNumber()}
-            <li
-              className={classNames(
-                'flex justify-center items-center w-8 h-8 m-2.5 rounded-full text-[#4E97FD] border border-[#4E97FD] border-solid',
-                {
-                  'opacity-70': pages === totalPages,
-                },
-              )}
-            >
-              <button
-                className="w-8 h-8"
-                type="button"
-                onClick={() => handleClickPaginationButton(1)}
-                disabled={pages === totalPages}
+                <button
+                  className="w-8 h-8"
+                  type="button"
+                  onClick={() => handleClickPaginationButton(-1)}
+                  disabled={pages === 1}
+                >
+                  <FontAwesomeIcon icon={faChevronLeft} />
+                </button>
+              </li>
+              {renderPageNumber()}
+              <li
+                className={classNames(
+                  'flex justify-center items-center w-8 h-8 m-2.5 rounded-full text-[#4E97FD] border border-[#4E97FD] border-solid',
+                  {
+                    'opacity-70': pages === totalPages,
+                  },
+                )}
               >
-                <FontAwesomeIcon icon={faChevronRight} />
-              </button>
-            </li>
-          </ul>
+                <button
+                  className="w-8 h-8"
+                  type="button"
+                  onClick={() => handleClickPaginationButton(1)}
+                  disabled={pages === totalPages}
+                >
+                  <FontAwesomeIcon icon={faChevronRight} />
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+    return null;
   }
 
   const showLoading = () => <LoadingTable />;
@@ -133,7 +138,15 @@ function Table({ col: columns, data, meta, goToPage, pagination = false }) {
         );
       })}
       {showLoading()}
-      {!data.length && <tr className="h-40" />}
+      {!data.length && (
+        <tr className="h-40">
+          <td colSpan={columns.length} className="text-center">
+            <span>
+              <FormattedMessage {...messages.message_table} />
+            </span>
+          </td>
+        </tr>
+      )}
     </tbody>
   );
 
@@ -153,7 +166,7 @@ function Table({ col: columns, data, meta, goToPage, pagination = false }) {
         </thead>
         {renderBody}
       </table>
-      {meta.page && pagination && renderPagination()}
+      {renderPagination()}
     </>
   );
 }

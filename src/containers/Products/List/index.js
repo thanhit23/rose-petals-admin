@@ -49,7 +49,7 @@ function ListProducts({ data, meta, getProducts, deleteProduct }) {
       <ListProductComponent
         data={data}
         meta={meta}
-        getProduct={handleGetProducts}
+        getProducts={handleGetProducts}
         handleDeleteProduct={handleDeleteProduct}
       />
     </AuthLayout>

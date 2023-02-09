@@ -16,6 +16,7 @@
 	"Components.Helmet.order.edit": "Edit Order",
 	"Components.Helmet.order.detail": "Order Detail",
 	"Components.Breadcrumb.edit_user": "Edit User",
+	"Components.Table.message.table": "There aren't any lines.",
 	"Components.Breadcrumb.add_user": "Add User",
 	"Components.Breadcrumb.list_user": "List Users",
 	"Components.Breadcrumb.product.add": "Add Product",
