@@ -11,8 +11,12 @@ import injectSaga from '../../utils/injectSaga';
 import Header from '../../containers/Header';
 import SideBar from '../../containers/SideBar';
 import Helmet from '../../components/Helmet';
+import useResponsive from '../../hook/useResponsive';
+import ModalSidebar from '../../components/ModalSidebar';
 
 function AuthLayout({ children, title, isSidebarOpen, auth, onCheckAuth }) {
+  const { isMobile, isDesktop } = useResponsive();
+
   useEffect(() => {
     onCheckAuth();
     if (!auth) <Navigate to="/login" replace />;
@@ -23,12 +27,13 @@ function AuthLayout({ children, title, isSidebarOpen, auth, onCheckAuth }) {
       <Helmet title={title} />
       <section>
         <div className="grid grid-cols-6">
-          <SideBar />
+          {isDesktop && <SideBar />}
+          <ModalSidebar />
           <div
             className={classNames(
               {
-                'ml-[260px]': isSidebarOpen,
-                'ml-[64px]': !isSidebarOpen,
+                'ml-[260px]': isSidebarOpen && !isMobile,
+                'ml-[64px]': !isSidebarOpen && !isMobile,
               },
               'duration-300',
               'col-span-6',

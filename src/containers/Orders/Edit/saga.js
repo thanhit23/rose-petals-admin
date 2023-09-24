@@ -1,12 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { UPDATE_ORDER_REQUEST, GET_ORDERS_REQUEST } from './constants';
 import { getOrder as getOrderService, updateOrder } from './service';
-import {
-  updateOrderSuccessfully,
-  updateOrderFailed,
-  getOrderSuccessfully,
-  getOrderFailed,
-} from './actions';
+import { updateOrderSuccessfully, updateOrderFailed, getOrderSuccessfully, getOrderFailed } from './actions';
 
 function* updateOrderInformation({ payload: { id, data, callback } }) {
   const res = yield call(updateOrder, id, data);

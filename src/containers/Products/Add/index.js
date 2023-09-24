@@ -16,13 +16,7 @@ import injectReducer from '../../../utils/injectReducer';
 import saga from './saga';
 import reducer from '../List/reducers';
 
-function AddProduct({
-  addProduct,
-  getCategories,
-  getBrands,
-  categories,
-  brands,
-}) {
+function AddProduct({ addProduct, getCategories, getBrands, categories, brands }) {
   useEffect(() => {
     getCategories();
     getBrands();
@@ -36,11 +30,7 @@ function AddProduct({
 
   return (
     <AuthLayout title="add_product">
-      <AddProductComponent
-        listBrand={brands}
-        listCategory={categories}
-        onSubmit={onSubmit}
-      />
+      <AddProductComponent listBrand={brands} listCategory={categories} onSubmit={onSubmit} />
     </AuthLayout>
   );
 }

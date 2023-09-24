@@ -1,8 +1,4 @@
-import {
-  CREATE_USER_REQUEST,
-  CREATE_USER_SUCCESS,
-  CREATE_USER_FAILED,
-} from './constants';
+import { CREATE_USER_REQUEST, CREATE_USER_SUCCESS, CREATE_USER_FAILED } from './constants';
 
 export const createUser = (data, navigate) => ({
   type: CREATE_USER_REQUEST,

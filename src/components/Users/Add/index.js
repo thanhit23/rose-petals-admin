@@ -77,10 +77,7 @@ function AddUserComponent({ onSubmit }) {
               id="password"
               type="password"
               message={messages.placeholder.password}
-              validate={register(
-                'password',
-                required(messages.message.required),
-              )}
+              validate={register('password', required(messages.message.required))}
             />
             <ErrorMessage name={password} />
           </div>
@@ -108,10 +105,7 @@ function AddUserComponent({ onSubmit }) {
               requiredField
             />
             <div className="flex">
-              <label
-                className="flex text-sm items-center mr-2"
-                htmlFor="female"
-              >
+              <label className="flex text-sm items-center mr-2" htmlFor="female">
                 <input
                   className="mr-1"
                   type="radio"

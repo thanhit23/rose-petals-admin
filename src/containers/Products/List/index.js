@@ -9,10 +9,7 @@ import injectReducer from '../../../utils/injectReducer';
 import injectSaga from '../../../utils/injectSaga';
 import reducer from './reducers';
 import saga from './saga';
-import {
-  getProduct as getProductAction,
-  deleteProduct as deleteProductAction,
-} from './actions';
+import { getProduct as getProductAction, deleteProduct as deleteProductAction } from './actions';
 
 function ListProducts({ data, meta, getProducts, deleteProduct }) {
   const [filter, setFilter] = useState({

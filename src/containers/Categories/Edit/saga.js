@@ -1,8 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import {
-  UPDATE_CATEGORY_REQUEST,
-  GET_CATEGORY_DETAIL_REQUEST,
-} from './constants';
+import { UPDATE_CATEGORY_REQUEST, GET_CATEGORY_DETAIL_REQUEST } from './constants';
 import { update, getCategory } from './service';
 import {
   updateCategorySuccessfully,

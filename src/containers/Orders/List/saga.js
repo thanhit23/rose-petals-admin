@@ -1,15 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 
-import {
-  getOrders as getOrdersService,
-  deleteOrder as deleteOrderService,
-} from './service';
-import {
-  getOrdersSuccess,
-  getOrdersListFailed,
-  deleteOrderFailed,
-  deleteOrderSuccess,
-} from './actions';
+import { getOrders as getOrdersService, deleteOrder as deleteOrderService } from './service';
+import { getOrdersSuccess, getOrdersListFailed, deleteOrderFailed, deleteOrderSuccess } from './actions';
 import { getObjectAcceptArrayKey } from '../../../helpers';
 import { GET_ORDERS_LIST_REQUEST, DELETE_ORDER_REQUEST } from './constants';
 

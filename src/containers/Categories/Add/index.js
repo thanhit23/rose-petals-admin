@@ -16,12 +16,7 @@ function AddCategory({ createNewCategory }) {
 
   const handleCreateCategory = data => createNewCategory(data, callback);
 
-  return (
-    <AuthLayout
-      title="add_category"
-      children={<AddCategoryComponent onSubmit={handleCreateCategory} />}
-    />
-  );
+  return <AuthLayout title="add_category" children={<AddCategoryComponent onSubmit={handleCreateCategory} />} />;
 }
 
 AddCategory.prototype = {

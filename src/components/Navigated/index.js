@@ -76,9 +76,7 @@ function Navigated({
         />
       )}
       {iconSvg}
-      {isSidebarOpen && (
-        <span className={classNames({ hidden: !isSidebarOpen })}>{babel}</span>
-      )}
+      {isSidebarOpen && <span className={classNames({ hidden: !isSidebarOpen })}>{babel}</span>}
       {iconBefore && isSidebarOpen && (
         <FontAwesomeIcon
           className={classNames('w-3 h-3 ml-auto duration-300', {
@@ -94,11 +92,7 @@ function Navigated({
   const buttonRender = () => {
     if (!pathRedirect) {
       return (
-        <button
-          className={classNames(cls)}
-          type="button"
-          onClick={() => setOpen(!openDropdown)}
-        >
+        <button className={classNames(cls)} type="button" onClick={() => setOpen(!openDropdown)}>
           {renderElement}
         </button>
       );

@@ -4,10 +4,7 @@ import { connect } from 'react-redux';
 
 import AuthLayout from '../../../layouts/AuthLayout';
 import ListBrandsComponent from '../../../components/Brands/List';
-import {
-  getBrand as getBrandAction,
-  deleteBrand as deleteBrandAction,
-} from './actions';
+import { getBrand as getBrandAction, deleteBrand as deleteBrandAction } from './actions';
 import injectReducer from '../../../utils/injectReducer';
 import injectSaga from '../../../utils/injectSaga';
 import reducer from './reducers';
@@ -46,12 +43,7 @@ function ListBrand({ getBrand, data, meta, deleteBrand }) {
 
   return (
     <AuthLayout title="list_brand">
-      <ListBrandsComponent
-        meta={meta}
-        data={data}
-        getBrands={handleGetBrands}
-        handleDeleteBrand={handleDeleteBrand}
-      />
+      <ListBrandsComponent meta={meta} data={data} getBrands={handleGetBrands} handleDeleteBrand={handleDeleteBrand} />
     </AuthLayout>
   );
 }

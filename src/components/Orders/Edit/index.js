@@ -36,10 +36,7 @@ function EditOrderComponent({ submit, order }) {
 
   return (
     <>
-      <Breadcrumb
-        prevPage={{ path: '/admin/orders', name: 'list_order' }}
-        title="edit_order"
-      />
+      <Breadcrumb prevPage={{ path: '/admin/orders', name: 'list_order' }} title="edit_order" />
       <div>
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-6">

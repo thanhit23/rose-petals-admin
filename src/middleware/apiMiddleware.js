@@ -1,8 +1,5 @@
 import { LOGOUT_REQUEST } from '../containers/Header/constants';
-import {
-  CHECK_TOKEN_FAILED,
-  REDIRECT_LOGIN,
-} from '../containers/Authenticated/constants';
+import { CHECK_TOKEN_FAILED, REDIRECT_LOGIN } from '../containers/Authenticated/constants';
 
 const middlewareStorage = store => next => action => {
   next(action);

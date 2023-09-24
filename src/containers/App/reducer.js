@@ -52,8 +52,7 @@ const appReducer = (state = initialState, action) =>
       default:
         const text = action.type;
 
-        draft.loading.showLoading =
-          text.includes('_REQUEST') && !text.includes('LIST_REQUEST');
+        draft.loading.showLoading = text.includes('_REQUEST') && !text.includes('LIST_REQUEST');
 
         draft.loading.showLoadingTable = text.includes('LIST_REQUEST');
 

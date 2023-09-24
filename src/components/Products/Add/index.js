@@ -136,10 +136,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
                 id="description"
                 rows={6}
                 message={messages.placeholder.description}
-                validate={register(
-                  'description',
-                  required(messages.message.required),
-                )}
+                validate={register('description', required(messages.message.required))}
               />
             </div>
             <ErrorMessage name={description} />

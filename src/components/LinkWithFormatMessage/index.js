@@ -11,10 +11,12 @@ function LinkWithFormatMessage({ title, icon, to = '/' }) {
   return (
     <Link
       to={to}
-      className="flex items-center bg-[#4E97FD] hover:opacity-70 text-white font-semibold hover:text-white py-2 px-4 border border-[rgb(78,151,253)] hover:border-transparent rounded"
+      className="flex items-center bg-[#4E97FD] hover:opacity-70 text-white font-semibold hover:text-white py-2 px-3 md:px-4 border border-[rgb(78,151,253)] hover:border-transparent rounded"
     >
       {icon && renderIcon()}
-      <FormattedMessage {...messages[title]} />
+      <div className="md:text-[16px] text-[8px]">
+        <FormattedMessage {...messages[title]} />
+      </div>
     </Link>
   );
 }

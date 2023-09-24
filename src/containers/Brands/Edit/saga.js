@@ -1,11 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { GET_DETAIL_BRAND_REQUEST, UPDATE_BRAND_REQUEST } from './constants';
-import {
-  getDetailBrandSuccess,
-  getDetailBrandFailed,
-  updateBrandSuccess,
-  updateBrandFailed,
-} from './actions';
+import { getDetailBrandSuccess, getDetailBrandFailed, updateBrandSuccess, updateBrandFailed } from './actions';
 import { getDetailBrand, updateBrand as updateBrandService } from './service';
 import { uploadFile as uploadFileService } from '../../UploadFile/service';
 

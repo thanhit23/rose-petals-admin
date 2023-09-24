@@ -1,14 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 
-import {
-  getUsers as getUsersService,
-  deleteUser as deleteUserService,
-} from './service';
-import {
-  getUsersSuccess,
-  getUsersListFailed,
-  deleteUserSuccess,
-} from './actions';
+import { getUsers as getUsersService, deleteUser as deleteUserService } from './service';
+import { getUsersSuccess, getUsersListFailed, deleteUserSuccess } from './actions';
 import { getObjectAcceptArrayKey } from '../../../helpers';
 import { GET_USERS_LIST_REQUEST, DELETE_USERS_REQUEST } from './constants';
 

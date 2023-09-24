@@ -1,20 +1,9 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 
-import {
-  getCategories as getCategoriesService,
-  deleteCategory as deleteCategoryService,
-} from './service';
-import {
-  getCategoriesSuccess,
-  getCategoriesFailed,
-  deleteCategorySuccess,
-  deleteCategoryFailed,
-} from './actions';
+import { getCategories as getCategoriesService, deleteCategory as deleteCategoryService } from './service';
+import { getCategoriesSuccess, getCategoriesFailed, deleteCategorySuccess, deleteCategoryFailed } from './actions';
 import { getObjectAcceptArrayKey } from '../../../helpers';
-import {
-  DELETE_CATEGORY_REQUEST,
-  GET_CATEGORY_LIST_REQUEST,
-} from './constants';
+import { DELETE_CATEGORY_REQUEST, GET_CATEGORY_LIST_REQUEST } from './constants';
 
 function* getCategory({ payload: { options } }) {
   const queryAccept = ['name', 'page'];

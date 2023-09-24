@@ -1,12 +1,7 @@
 import axios from 'axios';
 import { map } from 'lodash';
 
-import {
-  UNAUTHORIZED,
-  LOGOUT_REQUEST,
-  BASE_URL,
-  SERVER_ERROR,
-} from './constants';
+import { UNAUTHORIZED, LOGOUT_REQUEST, BASE_URL, SERVER_ERROR } from './constants';
 import store from '../store';
 import { LOGIN_FAILED } from '../containers/LoginPage/constants';
 
@@ -15,10 +10,7 @@ class Service {
     this.instance = axios.create({
       baseURL: BASE_URL,
     });
-    this.instance.interceptors.response.use(
-      this.handleSuccess,
-      this.handleError,
-    );
+    this.instance.interceptors.response.use(this.handleSuccess, this.handleError);
   }
 
   setHeaderDefault = headers => {

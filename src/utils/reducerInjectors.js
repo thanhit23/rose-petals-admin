@@ -12,10 +12,7 @@ export function injectReducerFactory(store, isValid) {
       isString(key) && !isEmpty(key) && isFunction(reducer),
       '(app/utils...) injectReducer: Expected `reducer` to be a reducer function',
     );
-    if (
-      Reflect.has(store.injectedReducers, key) &&
-      store.injectedReducers[key] === reducer
-    ) {
+    if (Reflect.has(store.injectedReducers, key) && store.injectedReducers[key] === reducer) {
       return;
     }
 

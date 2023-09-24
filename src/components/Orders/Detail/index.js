@@ -28,52 +28,39 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
   const { status, id, customerNote, address, amount } = order;
 
   const renderProduct = () =>
-    productOrder.map(
-      ({ _id, product: { thumbnail, name }, price, quantity }, i) => (
-        <div key={i} className="flex flex-row gap-4 my-6">
-          <div className="flex flex-row gap-4 w-1/2">
-            <div className="h-[64px] w-[64px]">
-              <img
-                className="object-cover h-full w-full rounded"
-                src={thumbnail}
-                alt=""
-              />
-            </div>
-            <div>
-              <h6 className="text-sm mb-1">{name}</h6>
-              <div className="flex place-items-center">
-                <p className="whitespace-nowrap text-[#7d879c] text-sm">
-                  {price} VND x
-                </p>
-                <div className="max-w-[60px] ml-2">
-                  <div className="min-w-0 ">
-                    <input
-                      className="hover:border-[#111] h-8 w-full outline-none appearance-none border border-[#e3e9ef] rounded p-2 text-[14px] leading-tight"
-                      type="number"
-                      defaultValue={quantity}
-                      disabled
-                    />
-                  </div>
+    productOrder.map(({ _id, product: { thumbnail, name }, price, quantity }, i) => (
+      <div key={i} className="flex flex-row gap-4 my-6">
+        <div className="flex flex-row gap-4 w-1/2">
+          <div className="h-[64px] w-[64px]">
+            <img className="object-cover h-full w-full rounded" src={thumbnail} alt="" />
+          </div>
+          <div>
+            <h6 className="text-sm mb-1">{name}</h6>
+            <div className="flex place-items-center">
+              <p className="whitespace-nowrap text-[#7d879c] text-sm">{price} VND x</p>
+              <div className="max-w-[60px] ml-2">
+                <div className="min-w-0 ">
+                  <input
+                    className="hover:border-[#111] h-8 w-full outline-none appearance-none border border-[#e3e9ef] rounded p-2 text-[14px] leading-tight"
+                    type="number"
+                    defaultValue={quantity}
+                    disabled
+                  />
                 </div>
               </div>
             </div>
           </div>
-          <div className="flex flex-row gap-4 w-1/2 place-items-center justify-between">
-            <p className="text-[#7d879c] text-sm">
-              Product properties: Black, L
-            </p>
-            <div>
-              <ConfirmModal
-                classNames="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
-                callback={() => deleteProductOrder(_id)}
-              >
-                <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
-              </ConfirmModal>
-            </div>
+        </div>
+        <div className="flex flex-row gap-4 w-1/2 place-items-center justify-between">
+          <p className="text-[#7d879c] text-sm">Product properties: Black, L</p>
+          <div>
+            <ConfirmModal classNames="w-8 h-8 hover:bg-[#EBEFF4] rounded-full" callback={() => deleteProductOrder(_id)}>
+              <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
+            </ConfirmModal>
           </div>
         </div>
-      ),
-    );
+      </div>
+    ));
 
   const renderShippingFee = () => {
     let result = 0;
@@ -83,10 +70,7 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
 
   const renderDiscountPercent = () => {
     let result = 0;
-    productOrder.map(
-      ({ discountPercent, price }) =>
-        (result += (price * discountPercent) / 100),
-    );
+    productOrder.map(({ discountPercent, price }) => (result += (price * discountPercent) / 100));
     return result;
   };
 
@@ -155,11 +139,7 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
               </div>
             </div>
             <div className="mt-3">
-              <LabelWithFormatMessage
-                message={messages.label.customer_note}
-                className="mb-2"
-                htmlFor="customer-note"
-              />
+              <LabelWithFormatMessage message={messages.label.customer_note} className="mb-2" htmlFor="customer-note" />
               <div className={cls(renderClsTextarea())}>
                 <TextareaWithFormatMessage
                   className="w-full outline-none appearance-none border-none text-[14px] leading-tight"
@@ -192,9 +172,7 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
               <div className="flex place-items-center">
                 <h6 className="text-sm mr-1">VNĐ</h6>
                 <div className="max-w-[60px] ml-2">
-                  <h6 className="text-sm">
-                    {productOrder.length && formatMoney(renderShippingFee())}
-                  </h6>
+                  <h6 className="text-sm">{productOrder.length && formatMoney(renderShippingFee())}</h6>
                 </div>
               </div>
             </div>
@@ -206,10 +184,7 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
               <div className="flex place-items-center">
                 <h6 className="text-sm mr-1">VNĐ</h6>
                 <div className="max-w-[60px] ml-2">
-                  <h6 className="text-sm">
-                    {productOrder.length &&
-                      formatMoney(renderDiscountPercent())}
-                  </h6>
+                  <h6 className="text-sm">{productOrder.length && formatMoney(renderDiscountPercent())}</h6>
                 </div>
               </div>
             </div>
@@ -221,10 +196,8 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
               <div className="flex">
                 <div className="max-w-[60px] mr-2">
                   <h6 className="text-sm">
-                    {productOrder.length &&
-                      formatMoney(
-                        renderShippingFee() + amount - renderDiscountPercent(),
-                      )}
+                    {/* eslint-disable-next-line max-len */}
+                    {productOrder.length && formatMoney(renderShippingFee() + amount - renderDiscountPercent())}
                   </h6>
                 </div>
                 <h6 className="text-sm">VNĐ</h6>
@@ -235,10 +208,7 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
             </h6>
             <div className="flex flex-row">
               {imgCreditDebit.map((e, i) => (
-                <div
-                  key={i}
-                  className="shadow-[#03004717_0px_1px_3px] bg-white rounded p-1 mr-2"
-                >
+                <div key={i} className="shadow-[#03004717_0px_1px_3px] bg-white rounded p-1 mr-2">
                   <img src={e} alt="" />
                 </div>
               ))}

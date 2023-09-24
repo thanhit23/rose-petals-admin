@@ -13,12 +13,7 @@ function Header({ handleToggleSidebar, handleUserLogout }) {
 
   const handleLogout = () => handleUserLogout();
 
-  return (
-    <HeaderComponent
-      handleSidebar={handleSidebar}
-      handleLogout={handleLogout}
-    />
-  );
+  return <HeaderComponent handleSidebar={handleSidebar} handleLogout={handleLogout} />;
 }
 
 Header.propTypes = {

@@ -20,9 +20,7 @@ export default ({ key, reducer }) =>
       static contextType = ReactReduxContext;
 
       // eslint-disable-next-line react/static-property-placement
-      static displayName = `withReducer(${
-        WrappedComponent.displayName || WrappedComponent.name || 'Component'
-      })`;
+      static displayName = `withReducer(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
 
       constructor(props, context) {
         super(props, context);

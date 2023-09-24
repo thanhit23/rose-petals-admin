@@ -30,8 +30,8 @@ function Login({ handleOnSubmit }) {
     <div className="container">
       <div className="grid grid-cols-12 gap-2">
         <div className="col-start-3 col-span-2 col-end-11">
-          <div className="flex flex-row p-5 bg-white rounded-md shadow-md">
-            <div className="w-7/12 z-[1] m-4 lg:max-w-xl">
+          <div className="flex flex-col md:flex-row p-5 bg-white rounded-md shadow-md">
+            <div className="w-full md:w-7/12 z-[1] m-4 lg:max-w-xl">
               <div className="m-auto lg:max-w-xl">
                 <img
                   src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-135.jpg?w=2000"
@@ -40,19 +40,19 @@ function Login({ handleOnSubmit }) {
                 />
               </div>
             </div>
-            <div className="w-5/12 p-6 m-auto lg:max-w-xl">
+            <div className="w-full md:w-5/12 p-6 m-auto lg:max-w-xl">
               <div className="flex ">
-                <div className="flex align-center text-[18px] px-[10px] py-[8px] border-b-2 border-solid border-[#19c7a9] text-[#19c7a9]">
+                <div
+                  id=""
+                  className="flex align-center text-[18px] px-[10px] py-[8px] border-b-2 border-solid border-[#19c7a9] text-[#19c7a9]"
+                >
                   <FontAwesomeIcon className="mb-[2px]" icon={faUser} />
                   <p className="ml-[5px]">
                     <FormattedMessage {...messages.title} />
                   </p>
                 </div>
               </div>
-              <form
-                onSubmit={handleSubmit(data => onSubmit(data))}
-                className="mt-6"
-              >
+              <form onSubmit={handleSubmit(data => onSubmit(data))} className="mt-6">
                 <div className="mb-4">
                   <InputWithFormatMessage
                     id="email"
@@ -75,22 +75,12 @@ function Login({ handleOnSubmit }) {
                       type={showPass ? 'text' : 'password'}
                       className="border-[1px] rounded border-solid border-[#eaeaea] block w-full px-4 py-2 text-purple-700 bg-white border outline-none"
                       message={messages.placeholder.password}
-                      validate={register(
-                        'password',
-                        required(messages.message.required),
-                      )}
+                      validate={register('password', required(messages.message.required))}
                     />
                     <div className="flex items-center absolute right-[5px] top-[50%] translate-y-[-50%]">
-                      <button
-                        type="button"
-                        className="px-2 text-[#757575]"
-                        onClick={() => setShowPass(!showPass)}
-                      >
-                        {!showPass ? (
-                          <FontAwesomeIcon icon={faEye} />
-                        ) : (
-                          <FontAwesomeIcon icon={faEyeSlash} />
-                        )}
+                      <button type="button" className="px-2 text-[#757575]" onClick={() => setShowPass(!showPass)}>
+                        {/* eslint-disable-next-line max-len */}
+                        {!showPass ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
                       </button>
                     </div>
                   </div>
@@ -110,10 +100,7 @@ function Login({ handleOnSubmit }) {
               </form>
               <p className="mt-8 text-xs font-light text-center text-gray-700">
                 <FormattedMessage {...messages.not_account} />
-                <Link
-                  to="/register"
-                  className="font-medium text-purple-600 hover:underline"
-                >
+                <Link to="/register" className="font-medium text-purple-600 hover:underline">
                   <FormattedMessage {...messages.sign_up} />
                 </Link>
               </p>

@@ -12,43 +12,33 @@ import messages from './messages';
 import { ReactComponent as Product } from '../../resources/images/products.svg';
 import { ReactComponent as Dashboard } from '../../resources/images/dashboard.svg';
 import { ReactComponent as Order } from '../../resources/images/order.svg';
+import useResponsive from '../../hook/useResponsive';
 
 function SideBar({ isSidebarOpen }) {
+  const { isMobile } = useResponsive();
+
   const checkChildrenActive = active => active;
 
   const urlAvatar = '';
 
   const clx = ['w-5 h-5', { 'mr-3': isSidebarOpen }];
 
+  if (isMobile) return null;
+
   return (
     <div
-      className={classNames(
-        'fixed top-0 bottom-0 left-0 duration-300 w-[260px] flex',
-        { 'w-[64px]': !isSidebarOpen },
-      )}
+      className={classNames('fixed top-0 bottom-0 left-0 duration-300 w-[260px] flex', { 'w-[64px]': !isSidebarOpen })}
     >
       <div className="w-full h-full shadow-md bg-[#2B3445] text-white">
-        <div
-          className={classNames(
-            'pt-4 pb-2',
-            { 'px-[18px]': isSidebarOpen },
-            { 'px-3': !isSidebarOpen },
-          )}
-        >
+        <div className={classNames('pt-4 pb-2', { 'px-[18px]': isSidebarOpen }, { 'px-3': !isSidebarOpen })}>
           <a href="#">
             <div className="flex items-center">
               <div className="shrink-0">
-                <img
-                  src={urlAvatar}
-                  className="rounded-full w-10 h-10 object-cover"
-                  alt="Avatar"
-                />
+                <img src={urlAvatar} className="rounded-full w-10 h-10 object-cover" alt="Avatar" />
               </div>
               {isSidebarOpen && (
                 <div className="grow ml-3">
-                  <p className="text-sm font-semibold text-blue-600">
-                    Nguyễn Duy Thành
-                  </p>
+                  <p className="text-sm font-semibold text-blue-600">Nguyễn Duy Thành</p>
                 </div>
               )}
             </div>

@@ -1,20 +1,9 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 
-import {
-  DELETE_PRODUCTS_REQUEST,
-  GET_PRODUCTS_LIST_REQUEST,
-} from './constants';
+import { DELETE_PRODUCTS_REQUEST, GET_PRODUCTS_LIST_REQUEST } from './constants';
 import { getObjectAcceptArrayKey } from '../../../helpers';
-import {
-  getProducts as getProductsService,
-  deleteProduct as deleteProductService,
-} from './service';
-import {
-  getProductSuccess,
-  getProductFailed,
-  deleteProductSuccess,
-  deleteProductFailed,
-} from './actions';
+import { getProducts as getProductsService, deleteProduct as deleteProductService } from './service';
+import { getProductSuccess, getProductFailed, deleteProductSuccess, deleteProductFailed } from './actions';
 
 function* getProducts({ payload: { options } }) {
   const queryAccept = ['name', 'page'];

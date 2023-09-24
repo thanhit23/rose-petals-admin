@@ -37,10 +37,7 @@ function AddBrandComponent({ onSubmit }) {
 
   return (
     <>
-      <Breadcrumb
-        prevPage={{ path: '/admin/brands', name: 'list_brand' }}
-        title="add_brand"
-      />
+      <Breadcrumb prevPage={{ path: '/admin/brands', name: 'list_brand' }} title="add_brand" />
       <div>
         <form
           onSubmit={handleSubmit(data => onSubmit(data, file))}

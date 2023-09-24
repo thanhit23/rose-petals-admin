@@ -2,10 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import { debounce } from 'lodash';
-import {
-  faMagnifyingGlass,
-  faCircleXmark,
-} from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 import messages from './messages';
 import InputSearchWithFormatMessage from '../InputSearchWithFormatMessage';
@@ -13,7 +10,7 @@ import InputSearchWithFormatMessage from '../InputSearchWithFormatMessage';
 function Search({
   handleKeywordSearch,
   valueSearch = '',
-  className = 'w-[356px] outline-none py-2.5 px-8 rounded-lg',
+  className = 'md:w-[356px] w-full outline-none py-2.5 px-8 rounded-lg',
   message = 'default',
 }) {
   const [keyword, setKeyword] = useState('');
@@ -59,11 +56,7 @@ function Search({
         onChange={handleSetValue}
       />
       {keyword && (
-        <button
-          className="hover:opacity-70"
-          type="button"
-          onClick={handleClearInput}
-        >
+        <button className="hover:opacity-70" type="button" onClick={handleClearInput}>
           <FontAwesomeIcon
             className="text-sm text-[#8e8e8e] translate-y-[-50%] right-4 top-[50%] absolute cursor-pointer"
             icon={faCircleXmark}

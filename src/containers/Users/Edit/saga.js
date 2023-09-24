@@ -1,12 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { UPDATE_USER_REQUEST, GET_USER_REQUEST } from './constants';
 import { updateUser, getUsers } from './service';
-import {
-  updateUserSuccessfully,
-  updateUserFailed,
-  getUserSuccessfully,
-  getUserFailed,
-} from './actions';
+import { updateUserSuccessfully, updateUserFailed, getUserSuccessfully, getUserFailed } from './actions';
 
 function* updateUserInformation({ payload: { id, data, callback } }) {
   const res = yield call(updateUser, id, data);
