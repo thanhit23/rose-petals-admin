@@ -4,10 +4,7 @@ import { connect } from 'react-redux';
 import propsTypes from 'prop-types';
 
 import { Url } from '../../../helpers';
-import {
-  getOrders as getOrdersAction,
-  deleteOrder as deleteOrderAction,
-} from './actions';
+import { getOrders as getOrdersAction, deleteOrder as deleteOrderAction } from './actions';
 import AuthLayout from '../../../layouts/AuthLayout';
 import injectSaga from '../../../utils/injectSaga';
 import saga from './saga';
@@ -47,12 +44,7 @@ function ListOrder({ data, meta, getOrders, deleteOrder }) {
 
   return (
     <AuthLayout title="list_order">
-      <ListOrderComponent
-        meta={meta}
-        data={data}
-        getOrders={handleGetOrders}
-        handleDeleteOrder={handleDeleteOrder}
-      />
+      <ListOrderComponent meta={meta} data={data} getOrders={handleGetOrders} handleDeleteOrder={handleDeleteOrder} />
     </AuthLayout>
   );
 }

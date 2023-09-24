@@ -63,13 +63,7 @@ function EditBrandComponent({ onSubmit, data: dataBrand }) {
   const renderImages = () =>
     images.map((i, k) => (
       <div key={k} className="relative mr-5">
-        <img
-          loading="lazy"
-          className="w-[60px]"
-          decoding="async"
-          src={i}
-          alt="logo-brand"
-        />
+        <img loading="lazy" className="w-[60px]" decoding="async" src={i} alt="logo-brand" />
         <button
           type="button"
           className="absolute top-[-15px] right-[-15px] flex w-[35px] h-[35px] bg-[#efefef] items-center justify-center rounded-full"
@@ -82,10 +76,7 @@ function EditBrandComponent({ onSubmit, data: dataBrand }) {
 
   return (
     <>
-      <Breadcrumb
-        prevPage={{ path: '/admin/brands', name: 'list_brand' }}
-        title="edit_brand"
-      />
+      <Breadcrumb prevPage={{ path: '/admin/brands', name: 'list_brand' }} title="edit_brand" />
       <div>
         <form
           onSubmit={handleSubmit(data => handleOnSubmit(data))}

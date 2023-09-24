@@ -16,12 +16,7 @@ import injectSaga from '../../../utils/injectSaga';
 import reducer from '../List/reducers';
 import saga from './saga';
 
-function EditBrand({
-  updateBrand,
-  edit: editBrand,
-  getDetailBrand,
-  resetData,
-}) {
+function EditBrand({ updateBrand, edit: editBrand, getDetailBrand, resetData }) {
   const { id: idEdit } = useParams();
 
   const redirect = useNavigate();

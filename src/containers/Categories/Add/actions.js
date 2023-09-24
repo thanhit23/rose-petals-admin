@@ -1,8 +1,4 @@
-import {
-  CREATE_CATEGORY_SUCCESS,
-  CREATE_CATEGORY_FAILED,
-  CREATE_CATEGORY_REQUEST,
-} from './constants';
+import { CREATE_CATEGORY_SUCCESS, CREATE_CATEGORY_FAILED, CREATE_CATEGORY_REQUEST } from './constants';
 
 export const createCategory = (data, callback) => ({
   type: CREATE_CATEGORY_REQUEST,

@@ -44,12 +44,8 @@ function ListUser({ getUser, data, meta, deleteUser }) {
 
   return (
     <AuthLayout title="user">
-      <ListUserComponent
-        meta={meta}
-        data={data}
-        getUsers={handleGetUsers}
-        handleDeleteUser={handleDeleteUser}
-      />
+      {/* eslint-disable-next-line max-len */}
+      <ListUserComponent meta={meta} data={data} getUsers={handleGetUsers} handleDeleteUser={handleDeleteUser} />
     </AuthLayout>
   );
 }

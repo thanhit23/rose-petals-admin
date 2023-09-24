@@ -14,8 +14,7 @@ function AddUser({ createNewUser }) {
 
   const callback = () => redirect('/admin/users');
 
-  const handleCreateUser = data =>
-    createNewUser({ ...data, role: 'user' }, callback);
+  const handleCreateUser = data => createNewUser({ ...data, role: 'user' }, callback);
 
   return (
     <AuthLayout title="add_user">

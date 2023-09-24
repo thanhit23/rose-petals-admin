@@ -14,12 +14,7 @@ import {
   deleteProductReview as deleteProductReviewAction,
 } from './actions';
 
-function ProductsReview({
-  data,
-  meta,
-  getProductsReview,
-  deleteProductsReview,
-}) {
+function ProductsReview({ data, meta, getProductsReview, deleteProductsReview }) {
   const [filter, setFilter] = useState({
     page: 1,
     name: '',

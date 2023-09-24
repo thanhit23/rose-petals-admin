@@ -3,10 +3,7 @@ import { useTable, usePagination } from 'react-table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import {
-  faChevronRight,
-  faChevronLeft,
-} from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FormattedMessage } from 'react-intl';
 
 import { Url } from '../../helpers';
@@ -25,8 +22,7 @@ function Table({ col: columns, data, meta, goToPage, pagination = false }) {
     usePagination,
   );
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    dataTable;
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = dataTable;
 
   const totalPagesArr = Array.from({ length: totalPages });
 
@@ -44,13 +40,9 @@ function Table({ col: columns, data, meta, goToPage, pagination = false }) {
       return (
         <li
           key={index}
-          className={classNames(
-            'flex justify-center items-center w-8 h-8 m-2.5',
-            {
-              'rounded-full text-[#4E97FD] border border-[#4E97FD] border-solid':
-                isCurrentPage,
-            },
-          )}
+          className={classNames('flex justify-center items-center w-8 h-8 m-2.5', {
+            'rounded-full text-[#4E97FD] border border-[#4E97FD] border-solid': isCurrentPage,
+          })}
         >
           <button
             className="py-[5px] px-[10px] w-8 h-8"
@@ -121,10 +113,7 @@ function Table({ col: columns, data, meta, goToPage, pagination = false }) {
       {rows.map(row => {
         prepareRow(row);
         return (
-          <tr
-            className="text-center border-solid border-b-[1px] border-[#D8E0E9]"
-            {...row.getRowProps()}
-          >
+          <tr className="text-center border-solid border-b-[1px] border-[#D8E0E9]" {...row.getRowProps()}>
             {row.cells.map(cell => {
               return (
                 <td className="py-[10px] px-[16px]" {...cell.getCellProps()}>

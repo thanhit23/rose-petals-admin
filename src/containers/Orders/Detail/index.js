@@ -17,14 +17,7 @@ import saga from './saga';
 import injectReducer from '../../../utils/injectReducer';
 import reducer from '../List/reducers';
 
-function OrderDetail({
-  order,
-  product,
-  getOrder,
-  getOrderDetail,
-  resetOrderDetail,
-  deleteProductDetail,
-}) {
+function OrderDetail({ order, product, getOrder, getOrderDetail, resetOrderDetail, deleteProductDetail }) {
   const { id: idOrder } = useParams();
 
   useEffect(() => {
@@ -37,11 +30,7 @@ function OrderDetail({
 
   return (
     <AuthLayout title="order_detail">
-      <OrderDetailComponent
-        order={order}
-        productOrder={product}
-        deleteProductOrder={deleteProductOrder}
-      />
+      <OrderDetailComponent order={order} productOrder={product} deleteProductOrder={deleteProductOrder} />
     </AuthLayout>
   );
 }

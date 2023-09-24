@@ -28,10 +28,7 @@ function Register() {
         />
       </div>
       <div className="text-center mt-6">
-        <button
-          type="button"
-          className="py-3 w-64 text-xl text-white bg-[rgb(36,115,225)] rounded-2xl"
-        >
+        <button type="button" className="py-3 w-64 text-xl text-white bg-[rgb(36,115,225)] rounded-2xl">
           <FormattedMessage {...messages.btn_create_account} />
         </button>
         <p className="mt-4 text-sm">

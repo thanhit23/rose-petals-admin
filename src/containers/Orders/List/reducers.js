@@ -2,11 +2,7 @@ import produce from 'immer';
 
 import { GET_ORDERS_LIST_SUCCESS } from './constants';
 import { GET_ORDERS_SUCCESS, RESET_ORDER_EDIT } from '../Edit/constants';
-import {
-  GET_ORDER_DETAIL_SUCCESS,
-  RESET_ORDER_DETAIL,
-  GET_ORDER_SUCCESS,
-} from '../Detail/constants';
+import { GET_ORDER_DETAIL_SUCCESS, RESET_ORDER_DETAIL, GET_ORDER_SUCCESS } from '../Detail/constants';
 
 const initialState = {
   list: {

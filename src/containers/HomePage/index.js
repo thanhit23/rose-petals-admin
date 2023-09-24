@@ -4,16 +4,21 @@ import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-
 import { Navigate } from 'react-router-dom';
+
 import saga from './saga';
 import { checkAuth } from './actions';
 import injectSaga from '../../utils/injectSaga';
 import Header from '../Header';
 import Dashboard from '../SideBar';
 import HomePageComponent from '../../components/HomePage';
+import useResponsive from '../../hook/useResponsive';
+import ModalSidebar from '../../components/ModalSidebar';
+import { toggleSidebar as toggleSidebarAction } from '../Header/actions';
 
 function HomePage({ isSidebarOpen, auth, checkAuthenticate }) {
+  const { isMobile } = useResponsive();
+
   useEffect(() => {
     checkAuthenticate();
     if (!auth) <Navigate to="/login" replace />;
@@ -27,12 +32,13 @@ function HomePage({ isSidebarOpen, auth, checkAuthenticate }) {
       </Helmet>
       <section className="bg-[#f7f9fc]">
         <div className="grid grid-cols-6">
-          <Dashboard />
+          {!isMobile && <Dashboard />}
+          <ModalSidebar />
           <div
             className={classNames(
               {
-                'ml-[260px]': isSidebarOpen,
-                'ml-[64px]': !isSidebarOpen,
+                'ml-[260px]': isSidebarOpen && !isMobile,
+                'ml-[64px]': !isSidebarOpen && !isMobile,
               },
               'duration-300',
               'col-span-6',
@@ -69,6 +75,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     checkAuthenticate: bindActionCreators(checkAuth, dispatch),
+    isActiveItem: bindActionCreators(toggleSidebarAction, dispatch),
   };
 };
 

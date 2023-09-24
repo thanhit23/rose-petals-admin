@@ -1,9 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import {
-  ADD_PRODUCT_REQUEST,
-  GET_ALL_CATEGORY_REQUEST,
-  GET_ALL_BRAND_REQUEST,
-} from './constants';
+import { ADD_PRODUCT_REQUEST, GET_ALL_CATEGORY_REQUEST, GET_ALL_BRAND_REQUEST } from './constants';
 import {
   addProduct as addProductApi,
   getAllCategory as getAllCategoryApi,

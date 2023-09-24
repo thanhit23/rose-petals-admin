@@ -23,8 +23,7 @@ function EditProductComponent({ brands, categories, submit, product }) {
 
   const { id } = useParams();
 
-  const { _id, slug, createdAt, updatedAt, deletedAt, ...productData } =
-    product;
+  const { _id, slug, createdAt, updatedAt, deletedAt, ...productData } = product;
 
   const {
     register,
@@ -35,14 +34,7 @@ function EditProductComponent({ brands, categories, submit, product }) {
     defaultValues: productData,
   });
 
-  const {
-    name,
-    price,
-    images: imagesError,
-    description,
-    category,
-    brand,
-  } = errors;
+  const { name, price, images: imagesError, description, category, brand } = errors;
 
   useEffect(() => {
     !isEmpty(product) && reset(productData);
@@ -75,10 +67,7 @@ function EditProductComponent({ brands, categories, submit, product }) {
 
   return (
     <>
-      <Breadcrumb
-        prevPage={{ path: '/admin/products', name: 'list_product' }}
-        title="edit_product"
-      />
+      <Breadcrumb prevPage={{ path: '/admin/products', name: 'list_product' }} title="edit_product" />
       <div>
         <form
           onSubmit={handleSubmit(data => onSubmit(data))}
@@ -130,13 +119,7 @@ function EditProductComponent({ brands, categories, submit, product }) {
             <div className="flex flex-wrap mt-4">
               {images.map(({ fullUrl }, i) => (
                 <div key={i} className="relative mr-5">
-                  <img
-                    loading="lazy"
-                    className="w-[60px]"
-                    decoding="async"
-                    src={fullUrl}
-                    alt={`product-${i}`}
-                  />
+                  <img loading="lazy" className="w-[60px]" decoding="async" src={fullUrl} alt={`product-${i}`} />
                   <button
                     type="button"
                     className="absolute top-[-15px] right-[-15px] flex w-[35px] h-[35px] bg-[#efefef] items-center justify-center rounded-full"
@@ -162,10 +145,7 @@ function EditProductComponent({ brands, categories, submit, product }) {
                 name="description"
                 rows={6}
                 message={messages.placeholder.description}
-                validate={register(
-                  'description',
-                  required(messages.message.required),
-                )}
+                validate={register('description', required(messages.message.required))}
               />
               <ErrorMessage name={description} />
             </div>

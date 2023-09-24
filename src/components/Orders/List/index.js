@@ -18,20 +18,10 @@ function ListOrderComponent({ data, meta, getOrders, handleDeleteOrder }) {
 
   const handleGetOrders = options => getOrders(options);
 
-  const colorStatusMapping = [
-    'cancelled',
-    'pending',
-    'processing',
-    'delivered',
-  ];
+  const colorStatusMapping = ['cancelled', 'pending', 'processing', 'delivered'];
 
   const handleStatus = status => (
-    <div
-      className={clx(
-        colorStatusMapping[status],
-        'rounded-lg inline-flex text-xs py-1 px-4',
-      )}
-    >
+    <div className={clx(colorStatusMapping[status], 'rounded-lg inline-flex text-xs py-1 px-4')}>
       <FormattedMessage {...messages.status[ARRAY_STATUS[status]]} />
     </div>
   );
@@ -105,26 +95,17 @@ function ListOrderComponent({ data, meta, getOrders, handleDeleteOrder }) {
         } = props;
         return (
           <>
-            <button
-              type="button"
-              className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
-            >
+            <button type="button" className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full">
               <Link to={`/admin/order/${_id}/detail/${_id}`}>
                 <FontAwesomeIcon className="text-[#7D879C]" icon={faEye} />
               </Link>
             </button>
-            <button
-              type="button"
-              className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
-            >
+            <button type="button" className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full">
               <Link to={`/admin/order/edit/${_id}`}>
                 <FontAwesomeIcon className="text-[#7D879C]" icon={faPen} />
               </Link>
             </button>
-            <ConfirmModal
-              classNames="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
-              callback={() => handleDeleteOrder(_id)}
-            >
+            <ConfirmModal classNames="w-8 h-8 hover:bg-[#EBEFF4] rounded-full" callback={() => handleDeleteOrder(_id)}>
               <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
             </ConfirmModal>
           </>
@@ -146,20 +127,10 @@ function ListOrderComponent({ data, meta, getOrders, handleDeleteOrder }) {
       <>
         <Breadcrumb title="list_order" />
         <div className="flex justify-between">
-          <Search
-            message="order"
-            valueSearch={valueSearch}
-            handleKeywordSearch={handleGetOrders}
-          />
+          <Search message="order" valueSearch={valueSearch} handleKeywordSearch={handleGetOrders} />
         </div>
-        <div className="flex flex-col shadow-lg bg-white rounded mt-4">
-          <Table
-            goToPage={handleGetOrders}
-            meta={meta}
-            col={columns}
-            data={data}
-            pagination
-          />
+        <div className="flex flex-col shadow-lg bg-white rounded mt-4 overflow-auto">
+          <Table goToPage={handleGetOrders} meta={meta} col={columns} data={data} pagination />
         </div>
       </>
     ),

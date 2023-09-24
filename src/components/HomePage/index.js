@@ -101,6 +101,7 @@ function HomePageComponent() {
       },
     },
   ]);
+
   const columns2 = useMemo(() => [
     {
       Header: 'Stt',
@@ -125,33 +126,30 @@ function HomePageComponent() {
       accessor: 'phoneNumber',
     },
   ]);
+
   return (
     <div className="px-8 mt-[80px]">
       <div className="py-8">
-        <div className="grid grid-cols-2 gap-6">
-          <div className="col-span-1 p-6 bg-white shadow-[0px_1px_3px_#03004717] relative rounded-lg">
-            <h5 className="mb-1 mt-0 text-base text-[#4E97FD]">
-              Good Morning, Maruf!
-            </h5>
-            <p className="my-0 text-sm text-[#7D879C]">
-              Here’s what happening with your store today!
-            </p>
-            <h3 className="mt-[24px] mb-0 text-xl text-[#2B3445] font-semibold">
-              15,350.25
-            </h3>
+        <div className="grid grid-cols-12 gap-4">
+          <div
+            className="md:col-span-6 col-span-12 p-6 bg-white shadow-[0px_1px_3px_#03004717] relative rounded-lg"
+            id="123123"
+          >
+            <h5 className="mb-1 mt-0 text-base text-[#4E97FD]">Good Morning, Maruf!</h5>
+            <p className="my-0 text-sm text-[#7D879C]">Here’s what happening with your store today!</p>
+            <h3 className="mt-[24px] mb-0 text-xl text-[#2B3445] font-semibold">15,350.25</h3>
             <p className="my-0 text-sm text-[#7D879C]">Today’s Visit</p>
-            <h3 className="mt-[24px] mb-0 text-xl  text-[#2B3445] font-semibold">
-              $10,360.66
-            </h3>
+            <h3 className="mt-[24px] mb-0 text-xl  text-[#2B3445] font-semibold">$10,360.66</h3>
             <p className="my-0 text-sm text-[#7D879C]">Today’s total sales</p>
             <div className="absolute bottom-0 right-[24px]">
               <img
+                className="w-[140px] md:w-full"
                 src="https://bazar-react.vercel.app/assets/images/illustrations/dashboard/welcome.svg"
                 alt=""
               />
             </div>
           </div>
-          <div className="col-span-1 grid grid-cols-2 gap-6">
+          <div className="md:col-span-6 col-span-12 grid grid-cols-2 gap-4">
             <Card
               title="Order"
               currentQuantity="32,350"
@@ -185,7 +183,7 @@ function HomePageComponent() {
               colorPercent="#E94560"
             />
           </div>
-          <div className="col-span-2 grid grid-cols-4 gap-6">
+          <div className="col-span-12 grid grid-cols-12 gap-4">
             <CardStatistics
               title="Weekly Sales"
               currentQuantity="$10,240"
@@ -215,8 +213,8 @@ function HomePageComponent() {
               colorPercent="#E94560"
             />
           </div>
-          <div className="col-span-2 grid grid-cols-3 gap-6">
-            <div className="col-span-2 bg-white shadow-[0px_1px_3px_#03004717] rounded-lg">
+          <div className="col-span-12 grid grid-cols-12 gap-4">
+            <div className="md:col-span-8 col-span-12 bg-white shadow-[0px_1px_3px_#03004717] rounded-lg overflow-auto">
               <div className="flex items-center justify-between text-sm py-5 px-6">
                 <h5 className="text-base font-semibold">Recent Purchases</h5>
                 <button
@@ -228,7 +226,7 @@ function HomePageComponent() {
               </div>
               <Table meta={meta} col={columns} data={data} />
             </div>
-            <div className="col-span-1 bg-white shadow-[0px_1px_3px_#03004717] rounded-lg">
+            <div className="md:col-span-4 col-span-12 bg-white shadow-[0px_1px_3px_#03004717] rounded-lg overflow-auto">
               <div className="flex items-center justify-between text-sm py-5 px-6">
                 <h5 className="text-base font-semibold">Stock Out Products</h5>
                 <button

@@ -1,9 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const prettierOptions = JSON.parse(
-  fs.readFileSync(path.resolve(__dirname, '.prettierrc'), 'utf8'),
-);
+const prettierOptions = JSON.parse(fs.readFileSync(path.resolve(__dirname, '.prettierrc'), 'utf8'));
 
 module.exports = {
   extends: ['react-app', 'airbnb'],
@@ -33,12 +31,14 @@ module.exports = {
     'implicit-arrow-linebreak': 0,
     'object-curly-newline': 0,
     'default-param-last': 0,
+    'max-len': 0,
     'no-case-declarations': 0,
     'no-param-reassign': 0,
     'react/no-array-index-key': 0,
     'react/prop-types': 0,
     'react/no-children-prop': 0,
     'class-methods-use-this': 0,
+    'jsx-a11y/click-events-have-key-events': 0,
     'operator-linebreak': ['error', 'after'],
     'react-hooks/rules-of-hooks': 0,
     'react-hooks/exhaustive-deps': 0,
@@ -70,19 +70,6 @@ module.exports = {
         ignoreOnInitialization: false,
       },
     ],
-    'jsx-a11y/no-static-element-interactions': [
-      'error',
-      {
-        handlers: [
-          'onClick',
-          'onMouseDown',
-          'onMouseUp',
-          'onKeyPress',
-          'onKeyDown',
-          'onKeyUp',
-        ],
-        allowExpressionValues: true,
-      },
-    ],
+    'jsx-a11y/no-static-element-interactions': 0,
   },
 };

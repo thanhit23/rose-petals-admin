@@ -1,8 +1,4 @@
-import {
-  ADD_BRAND_REQUEST,
-  ADD_BRAND_SUCCESS,
-  ADD_BRAND_FAILED,
-} from './constants';
+import { ADD_BRAND_REQUEST, ADD_BRAND_SUCCESS, ADD_BRAND_FAILED } from './constants';
 
 export const addBrand = (data, file, callback) => ({
   type: ADD_BRAND_REQUEST,

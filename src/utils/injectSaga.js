@@ -25,9 +25,7 @@ export default ({ key, saga, mode }) =>
       static contextType = ReactReduxContext;
 
       // eslint-disable-next-line react/static-property-placement
-      static displayName = `withSaga(${
-        WrappedComponent.displayName || WrappedComponent.name || 'Component'
-      })`;
+      static displayName = `withSaga(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
 
       constructor(props, context) {
         super(props, context);

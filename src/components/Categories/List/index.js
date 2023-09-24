@@ -61,10 +61,7 @@ function ListCategoryComponent({ data, meta, getCategory, deleteCategory }) {
         } = props;
         return (
           <>
-            <button
-              type="button"
-              className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
-            >
+            <button type="button" className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full">
               <Link to={`/admin/category/edit/${id}`}>
                 <FontAwesomeIcon className="text-[#7D879C]" icon={faPen} />
               </Link>
@@ -85,25 +82,11 @@ function ListCategoryComponent({ data, meta, getCategory, deleteCategory }) {
     <>
       <Breadcrumb title="list_category" />
       <div className="flex justify-between">
-        <Search
-          message="category"
-          valueSearch={valueSearch}
-          handleKeywordSearch={handleGetCategories}
-        />
-        <ButtonRedirect
-          to="/admin/category"
-          title="add_category"
-          icon={faPlus}
-        />
+        <Search message="category" valueSearch={valueSearch} handleKeywordSearch={handleGetCategories} />
+        <ButtonRedirect to="/admin/category" title="add_category" icon={faPlus} />
       </div>
       <div className="flex flex-col shadow-lg bg-white rounded mt-4">
-        <Table
-          goToPage={handleGetCategories}
-          meta={meta}
-          col={columns}
-          data={data}
-          pagination
-        />
+        <Table goToPage={handleGetCategories} meta={meta} col={columns} data={data} pagination />
       </div>
     </>
   );

@@ -10,12 +10,7 @@ import { MALE, FEMALE } from './constants';
 import LabelWithFormatMessage from '../../LabelWithFormatMessage';
 import InputWithFormatMessage from '../../InputWithFormatMessage';
 import ErrorMessage from '../../ErrorMessage';
-import {
-  required,
-  email as emailValidation,
-  maxLength,
-  minLength,
-} from '../../../utils/validation';
+import { required, email as emailValidation, maxLength, minLength } from '../../../utils/validation';
 
 function EditUserComponent({ submit, users }) {
   const { gender, name, email, phoneNumber } = users;
@@ -34,11 +29,7 @@ function EditUserComponent({ submit, users }) {
     !isEmpty(users) && reset(defaultValues);
   }, [users]);
 
-  const {
-    name: nameError,
-    email: emailError,
-    phoneNumber: phoneNumberError,
-  } = errors;
+  const { name: nameError, email: emailError, phoneNumber: phoneNumberError } = errors;
 
   const onSubmit = data => {
     // eslint-disable-next-line no-shadow
@@ -48,10 +39,7 @@ function EditUserComponent({ submit, users }) {
 
   return (
     <>
-      <Breadcrumb
-        prevPage={{ path: '/admin/users', name: 'list_user' }}
-        title="edit_user"
-      />
+      <Breadcrumb prevPage={{ path: '/admin/users', name: 'list_user' }} title="edit_user" />
       <div>
         <form
           onSubmit={handleSubmit(data => onSubmit(data))}

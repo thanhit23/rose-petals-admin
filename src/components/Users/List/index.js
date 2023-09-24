@@ -73,18 +73,12 @@ function ListUserComponent({ data, meta, getUsers, handleDeleteUser }) {
         } = props;
         return (
           <>
-            <button
-              type="button"
-              className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
-            >
+            <button type="button" className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full">
               <Link to={`/admin/user/edit/${id}`}>
                 <FontAwesomeIcon className="text-[#7D879C]" icon={faPen} />
               </Link>
             </button>
-            <ConfirmModal
-              classNames="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
-              callback={() => handleDeleteUser(id)}
-            >
+            <ConfirmModal classNames="w-8 h-8 hover:bg-[#EBEFF4] rounded-full" callback={() => handleDeleteUser(id)}>
               <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
             </ConfirmModal>
           </>
@@ -105,22 +99,12 @@ function ListUserComponent({ data, meta, getUsers, handleDeleteUser }) {
     () => (
       <>
         <Breadcrumb title="list_user" />
-        <div className="flex justify-between">
-          <Search
-            message="user"
-            valueSearch={valueSearch}
-            handleKeywordSearch={handleGetUsers}
-          />
+        <div className="flex justify-between gap-1">
+          <Search message="user" valueSearch={valueSearch} handleKeywordSearch={handleGetUsers} />
           <ButtonRedirect to="/admin/user" title="add_user" icon={faPlus} />
         </div>
-        <div className="flex flex-col shadow-lg bg-white rounded mt-4">
-          <Table
-            goToPage={handleGetUsers}
-            meta={meta}
-            col={columns}
-            data={data}
-            pagination
-          />
+        <div className="flex flex-col shadow-lg bg-white rounded mt-4 overflow-auto">
+          <Table goToPage={handleGetUsers} meta={meta} col={columns} data={data} pagination />
         </div>
       </>
     ),

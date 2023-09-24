@@ -1,14 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import {
-  GET_ORDER_DETAIL_REQUEST,
-  GET_ORDER_REQUEST,
-  DELETE_ORDER_DETAIL_REQUEST,
-} from './constants';
-import {
-  getOrderDetail as getOrderDetailService,
-  getOrder as getOrderService,
-  deleteOrder,
-} from './service';
+import { GET_ORDER_DETAIL_REQUEST, GET_ORDER_REQUEST, DELETE_ORDER_DETAIL_REQUEST } from './constants';
+import { getOrderDetail as getOrderDetailService, getOrder as getOrderService, deleteOrder } from './service';
 import {
   getOrderDetailSuccess,
   getOrderDetailFailed,

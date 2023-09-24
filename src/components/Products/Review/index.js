@@ -10,12 +10,7 @@ import Breadcrumb from '../../Breadcrumb';
 import Table from '../../Table';
 import ConfirmModal from '../../ConfirmModal';
 
-function ProductReviewComponent({
-  meta,
-  data,
-  getProductReview,
-  handleDeleteProduct,
-}) {
+function ProductReviewComponent({ meta, data, getProductReview, handleDeleteProduct }) {
   const [valueSearch, setValueSearch] = useState();
 
   const handleGetProductReview = options => getProductReview(options);
@@ -50,11 +45,7 @@ function ProductReviewComponent({
         return (
           <div className="flex justify-center">
             <div className="flex border-[#ebeff3] border-[1px] border-solid">
-              <img
-                className="object-cover h-[40px] w-[40px] rounded"
-                src={thumbnail}
-                alt=""
-              />
+              <img className="object-cover h-[40px] w-[40px] rounded" src={thumbnail} alt="" />
             </div>
             <p className="flex place-items-center ml-2">{name}</p>
           </div>
@@ -97,13 +88,7 @@ function ProductReviewComponent({
           i < rating && starIcon.push(faStar);
           i >= rating && starIcon.push(faStarRegular);
         }
-        return starIcon.map((e, i) => (
-          <FontAwesomeIcon
-            key={i}
-            className="text-[#faaf00] text-sm"
-            icon={e}
-          />
-        ));
+        return starIcon.map((e, i) => <FontAwesomeIcon key={i} className="text-[#faaf00] text-sm" icon={e} />);
       },
     },
     {
@@ -144,20 +129,11 @@ function ProductReviewComponent({
       <>
         <Breadcrumb title="review_product" />
         <div className="flex justify-between">
-          <Search
-            message="product"
-            valueSearch={valueSearch}
-            handleKeywordSearch={handleGetProductReview}
-          />
+          <Search message="product" valueSearch={valueSearch} handleKeywordSearch={handleGetProductReview} />
         </div>
-        <div className="flex flex-col shadow-lg bg-white rounded mt-4">
-          <Table
-            goToPage={handleGetProductReview}
-            meta={meta}
-            col={columns}
-            data={data}
-            pagination
-          />
+        <div className="flex flex-col shadow-lg bg-white rounded mt-4 overflow-auto">
+          {/* eslint-disable-next-line max-len */}
+          <Table goToPage={handleGetProductReview} meta={meta} col={columns} data={data} pagination />
         </div>
       </>
     ),

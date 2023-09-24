@@ -1,14 +1,8 @@
 import produce from 'immer';
 
 import { GET_PRODUCTS_LIST_SUCCESS } from './constants';
-import {
-  GET_ALL_CATEGORY_SUCCESS,
-  GET_ALL_BRAND_SUCCESS,
-} from '../Add/constants';
-import {
-  RESET_PRODUCT_EDIT,
-  GET_DETAIL_PRODUCT_SUCCESS,
-} from '../Edit/constants';
+import { GET_ALL_CATEGORY_SUCCESS, GET_ALL_BRAND_SUCCESS } from '../Add/constants';
+import { RESET_PRODUCT_EDIT, GET_DETAIL_PRODUCT_SUCCESS } from '../Edit/constants';
 import { GET_PRODUCTS_REVIEW_LIST_SUCCESS } from '../Review/constants';
 
 const initialState = {

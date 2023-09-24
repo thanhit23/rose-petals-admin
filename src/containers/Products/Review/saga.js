@@ -1,14 +1,8 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 
-import {
-  DELETE_PRODUCTS_REVIEW_LIST_REQUEST,
-  GET_PRODUCTS_REVIEW_LIST_REQUEST,
-} from './constants';
+import { DELETE_PRODUCTS_REVIEW_LIST_REQUEST, GET_PRODUCTS_REVIEW_LIST_REQUEST } from './constants';
 import { getObjectAcceptArrayKey } from '../../../helpers';
-import {
-  getProductReview as getProductsService,
-  deleteProduct as deleteProductService,
-} from './service';
+import { getProductReview as getProductsService, deleteProduct as deleteProductService } from './service';
 import {
   getProductReviewSuccess,
   getProductReviewFailed,

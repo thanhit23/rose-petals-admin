@@ -12,11 +12,9 @@ const renderLogout = handleLogout => (
     aria-labelledby="dropdownDefault"
     className="dropdown-menu w-[120px] absolute bg-white right-[-5px] py-3 shadow-default rounded-[5px]"
   >
-    <li
-      className="cursor-pointer px-3 py-2 hover:bg-[#f1f1f1] transition"
-      onClick={handleLogout}
-      aria-hidden
-    >
+    {/* eslint-disable-next-line max-len */}
+    {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
+    <li className="cursor-pointer px-3 py-2 hover:bg-[#f1f1f1] transition" onClick={handleLogout}>
       <FormattedMessage {...messages.logout} />
     </li>
   </ul>
@@ -30,12 +28,12 @@ function HeaderComponent({ handleSidebar, handleLogout }) {
         <div className="px-4 sm:px-6">
           <div className="flex items-center justify-between py-4 md:justify-start md:space-x-10">
             <div className="flex justify-start lg:w-0 lg:flex-1">
-              <button type="button" onClick={handleSidebar}>
+              <button type="button" className="p-2" onClick={handleSidebar}>
                 <FontAwesomeIcon icon={faBars} />
               </button>
             </div>
-            <nav className="space-x-10 md:flex">
-              <Search className="w-[356px] outline-none py-2.5 px-8 rounded-lg bg-[#f7f9fc]" />
+            <nav className="space-x-10 flex">
+              <Search className="md:w-[356px] w-full outline-none py-2.5 px-8 rounded-lg bg-[#f7f9fc]" />
               <div className="relative">
                 <button type="button" onClick={() => setDropDown(!dropdown)}>
                   <img

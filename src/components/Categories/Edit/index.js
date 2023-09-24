@@ -21,10 +21,7 @@ function EditCategoryComponent({ onSubmit, data }) {
 
   return (
     <>
-      <Breadcrumb
-        prevPage={{ path: '/admin/categories', name: 'list_category' }}
-        title="edit_category"
-      />
+      <Breadcrumb prevPage={{ path: '/admin/categories', name: 'list_category' }} title="edit_category" />
       <div>
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-6">

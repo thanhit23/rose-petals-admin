@@ -1,15 +1,7 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 
-import {
-  getBrand as getBrandService,
-  deleteBrand as deleteBrandService,
-} from './service';
-import {
-  getBrandSuccess,
-  getBrandFailed,
-  deleteBrandSuccess,
-  deleteBrandFailed,
-} from './actions';
+import { getBrand as getBrandService, deleteBrand as deleteBrandService } from './service';
+import { getBrandSuccess, getBrandFailed, deleteBrandSuccess, deleteBrandFailed } from './actions';
 import { getObjectAcceptArrayKey } from '../../../helpers';
 import { GET_BRAND_LIST_REQUEST, DELETE_BRAND_REQUEST } from './constants';
 

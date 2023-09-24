@@ -10,12 +10,7 @@ import Table from '../../Table';
 import ButtonRedirect from '../../LinkWithFormatMessage';
 import ConfirmModal from '../../ConfirmModal';
 
-function ListProductComponent({
-  meta,
-  data,
-  getProducts,
-  handleDeleteProduct,
-}) {
+function ListProductComponent({ meta, data, getProducts, handleDeleteProduct }) {
   const [valueSearch, setValueSearch] = useState();
 
   const handleGetProducts = options => getProducts(options);
@@ -31,11 +26,7 @@ function ListProductComponent({
     return (
       <div className="flex justify-center">
         <div className="flex border-[#ebeff3] border-[1px] border-solid">
-          <img
-            className="object-cover h-[40px] w-[40px] rounded"
-            src={thumbnail}
-            alt=""
-          />
+          <img className="object-cover h-[40px] w-[40px] rounded" src={thumbnail} alt="" />
         </div>
       </div>
     );
@@ -142,26 +133,12 @@ function ListProductComponent({
     () => (
       <>
         <Breadcrumb title="list_product" />
-        <div className="flex justify-between">
-          <Search
-            message="product"
-            valueSearch={valueSearch}
-            handleKeywordSearch={handleGetProducts}
-          />
-          <ButtonRedirect
-            to="/admin/product"
-            title="add_product"
-            icon={faPlus}
-          />
+        <div className="flex justify-between gap-1">
+          <Search message="product" valueSearch={valueSearch} handleKeywordSearch={handleGetProducts} />
+          <ButtonRedirect to="/admin/product" title="add_product" icon={faPlus} />
         </div>
-        <div className="flex flex-col shadow-lg bg-white rounded mt-4">
-          <Table
-            goToPage={handleGetProducts}
-            meta={meta}
-            col={columns}
-            data={data}
-            pagination
-          />
+        <div className="flex flex-col shadow-lg bg-white rounded mt-4 overflow-auto">
+          <Table goToPage={handleGetProducts} meta={meta} col={columns} data={data} pagination />
         </div>
       </>
     ),

@@ -8,10 +8,7 @@ import AuthLayout from '../../../layouts/AuthLayout';
 import injectSaga from '../../../utils/injectSaga';
 import saga from './saga';
 import reducer from './reducers';
-import {
-  getCategories,
-  deleteCategory as deleteCategoryAction,
-} from './actions';
+import { getCategories, deleteCategory as deleteCategoryAction } from './actions';
 import { Url } from '../../../helpers';
 import injectReducer from '../../../utils/injectReducer';
 

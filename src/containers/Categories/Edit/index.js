@@ -6,22 +6,13 @@ import PropTypes from 'prop-types';
 
 import AuthLayout from '../../../layouts/AuthLayout';
 import EditCategoryComponent from '../../../components/Categories/Edit';
-import {
-  updateCategory as updateCategoryAction,
-  getCategory as getCategoryAction,
-  resetCategoryEdit,
-} from './actions';
+import { updateCategory as updateCategoryAction, getCategory as getCategoryAction, resetCategoryEdit } from './actions';
 import injectSaga from '../../../utils/injectSaga';
 import injectReducer from '../../../utils/injectReducer';
 import saga from './saga';
 import reducer from '../List/reducers';
 
-function EditCategory({
-  updateCategory,
-  edit: editCategory,
-  getCategory,
-  resetData,
-}) {
+function EditCategory({ updateCategory, edit: editCategory, getCategory, resetData }) {
   const { id: idEdit } = useParams();
 
   useEffect(() => {
@@ -35,9 +26,7 @@ function EditCategory({
 
   const handleUpdateUser = (id, data) => updateCategory(id, data, callback);
 
-  const renderEditCategory = editCategory && (
-    <EditCategoryComponent data={editCategory} submit={handleUpdateUser} />
-  );
+  const renderEditCategory = editCategory && <EditCategoryComponent data={editCategory} submit={handleUpdateUser} />;
 
   return <AuthLayout title="edit_category" children={renderEditCategory} />;
 }
