@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 function InputWithFormatMessage({ message, validate = {}, ...props }) {
   const intl = useIntl();
 
-  const placeholder = intl.formatMessage(message);
+  const placeholder = message && intl.formatMessage(message);
 
   return <input {...validate} {...props} placeholder={placeholder} />;
 }

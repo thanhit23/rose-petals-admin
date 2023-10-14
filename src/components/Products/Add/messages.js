@@ -20,6 +20,30 @@ export default defineMessages({
       id: `${scope}.label.images`,
       defaultMessage: 'Images',
     },
+    size: {
+      id: `${scope}.label.size`,
+      defaultMessage: 'Size',
+    },
+    small: {
+      id: `${scope}.label.small`,
+      defaultMessage: 'Small',
+    },
+    medium: {
+      id: `${scope}.label.medium`,
+      defaultMessage: 'Medium',
+    },
+    large: {
+      id: `${scope}.label.large`,
+      defaultMessage: 'Large',
+    },
+    rating: {
+      id: `${scope}.label.rating`,
+      defaultMessage: 'Rating',
+    },
+    quantity: {
+      id: `${scope}.label.quantity`,
+      defaultMessage: 'Quantity',
+    },
     category: {
       id: `${scope}.label.category`,
       defaultMessage: 'Category',
@@ -37,6 +61,14 @@ export default defineMessages({
     price: {
       id: `${scope}.placeholder.price`,
       defaultMessage: 'Price',
+    },
+    rating: {
+      id: `${scope}.placeholder.rating`,
+      defaultMessage: 'Rating',
+    },
+    quantity: {
+      id: `${scope}.placeholder.quantity`,
+      defaultMessage: 'Quantity',
     },
     description: {
       id: `${scope}.placeholder.description`,
