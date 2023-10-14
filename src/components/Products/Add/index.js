@@ -20,6 +20,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const [label, setLabel] = useState({
     name: false,
   });
@@ -28,26 +29,22 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
     if (!value) setLabel({ ...label, [name]: valueForFocusBlur });
   };
 
-  const { description, name, price, category, brand, images } = errors;
-
-  // eslint-disable-next-line no-shadow
-  const renderClsInput = (label, name) => {
+  const renderClsInput = (labelInput, nameInput) => {
     return [
       'h-[54px] outline-none appearance-none border border-[#e3e9ef] rounded w-full py-[16px] px-3 text-[14px] leading-tight',
-      { 'label-input-focus': label.name && !name },
-      { 'hover:border-[#111]': !label.name && !name },
-      { 'border-[#d1373a]': name },
+      { 'label-input-focus': labelInput.name && !nameInput },
+      { 'hover:border-[#111]': !labelInput.name && !nameInput },
+      { 'border-[#d1373a]': nameInput },
     ];
   };
 
-  // eslint-disable-next-line no-shadow
-  const renderClsLabel = (label, name) => {
+  const renderClsLabel = (labelInput, nameInput) => {
     return [
       'block text-[14px] text-black absolute label-input leading-[14px]',
-      { 'label__input label-input-focus': label.name },
-      { 'bg-white': !label.name },
-      { 'text-[#4d97fd]': label.name && !name },
-      { 'text-[#d1373a]': name },
+      { 'label__input label-input-focus': labelInput.name },
+      { 'bg-white': !labelInput.name },
+      { 'text-[#4d97fd]': labelInput.name && !nameInput },
+      { 'text-[#d1373a]': labelInput },
     ];
   };
 
@@ -80,12 +77,12 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
             <div className="relative wrapper-input">
               <LabelWithFormatMessage
                 message={messages.label.name}
-                className={cls(renderClsLabel(label, name))}
+                className={cls(renderClsLabel(label, errors.name))}
                 htmlFor="name"
                 requiredField
               />
               <InputWithFormatMessage
-                className={cls(renderClsInput(label, name))}
+                className={cls(renderClsInput(label, errors.name))}
                 id="name"
                 type="text"
                 name="name"
@@ -95,7 +92,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
                 validate={register('name', required(messages.message.required))}
               />
             </div>
-            <ErrorMessage name={name} />
+            <ErrorMessage name={errors?.name} />
           </div>
           <div className="mb-6">
             <LabelWithFormatMessage
@@ -111,7 +108,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
               message={messages.placeholder.price}
               validate={register('price', required(messages.message.required))}
             />
-            <ErrorMessage name={price} />
+            <ErrorMessage name={errors?.price} />
           </div>
           <div className="mb-6">
             <LabelWithFormatMessage
@@ -121,7 +118,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
               requiredField
             />
             {renderUploadComponent}
-            <ErrorMessage name={images} />
+            <ErrorMessage name={errors?.images} />
           </div>
           <div className="mb-6">
             <LabelWithFormatMessage
@@ -139,7 +136,77 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
                 validate={register('description', required(messages.message.required))}
               />
             </div>
-            <ErrorMessage name={description} />
+            <ErrorMessage name={errors?.description} />
+          </div>
+          <div className="mb-6">
+            <LabelWithFormatMessage
+              message={messages.label.size}
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="size"
+              requiredField
+            />
+            <div className="w-[100px] flex justify-between">
+              <LabelWithFormatMessage message={messages.label.small} htmlFor="small" />
+              <InputWithFormatMessage
+                type="checkbox"
+                name="small"
+                value="x"
+                validate={register('size', required(messages.message.required))}
+              />
+            </div>
+            <div className="w-[100px] flex justify-between">
+              <LabelWithFormatMessage message={messages.label.medium} htmlFor="medium" />
+              <InputWithFormatMessage
+                type="checkbox"
+                name="medium"
+                value="m"
+                validate={register('size', required(messages.message.required))}
+              />
+            </div>
+            <div className="w-[100px] flex justify-between">
+              <LabelWithFormatMessage message={messages.label.large} htmlFor="large" />
+              <InputWithFormatMessage
+                type="checkbox"
+                name="large"
+                value="l"
+                validate={register('size', required(messages.message.required))}
+              />
+            </div>
+            <ErrorMessage name={errors?.size} />
+          </div>
+          <div className="mb-6 grid grid-cols-2 gap-4">
+            <div className="flex flex-col">
+              <LabelWithFormatMessage
+                message={messages.label.rating}
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="rating"
+                requiredField
+              />
+              <InputWithFormatMessage
+                className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                id="rating"
+                type="number"
+                message={messages.placeholder.rating}
+                validate={register('rating', required(messages.message.required))}
+              />
+              <ErrorMessage name={errors?.rating} />
+            </div>
+            <div className="flex flex-col">
+              <LabelWithFormatMessage
+                message={messages.label.quantity}
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="quantity"
+                requiredField
+              />
+              <InputWithFormatMessage
+                className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                id="quantity"
+                type="number"
+                message={messages.placeholder.quantity}
+                validate={register('quantity', required(messages.message.required))}
+              />
+              <ErrorMessage name={errors?.quantity} />
+            </div>
           </div>
           <div className="mb-6 grid grid-cols-2 gap-4">
             <div className="flex flex-col">
@@ -162,18 +229,18 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
                   </option>
                 ))}
               </select>
-              <ErrorMessage name={category} />
+              <ErrorMessage name={errors?.category} />
             </div>
             <div className="flex flex-col">
               <LabelWithFormatMessage
                 message={messages.label.brand}
                 className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="category"
+                htmlFor="brand"
                 requiredField
               />
               <select
-                id="category"
-                name="category"
+                id="brand"
+                name="brand"
                 className="h-12 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
                 {...register('brand', required(messages.message.required))}
               >
@@ -184,7 +251,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
                   </option>
                 ))}
               </select>
-              <ErrorMessage name={brand} />
+              <ErrorMessage name={errors?.brand} />
             </div>
           </div>
           <div className="flex items-center justify-between">

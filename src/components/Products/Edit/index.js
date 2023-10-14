@@ -23,7 +23,16 @@ function EditProductComponent({ brands, categories, submit, product }) {
 
   const { id } = useParams();
 
-  const { _id, slug, createdAt, updatedAt, deletedAt, ...productData } = product;
+  const {
+    _id,
+    slug,
+    createdAt,
+    updatedAt,
+    deletedAt,
+    category: { id: categoryId } = {},
+    brand: { id: brandId } = {},
+    ...productData
+  } = product;
 
   const {
     register,
@@ -31,7 +40,7 @@ function EditProductComponent({ brands, categories, submit, product }) {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    defaultValues: productData,
+    defaultValues: { ...productData, category: categoryId, brand: brandId },
   });
 
   const { name, price, images: imagesError, description, category, brand } = errors;
