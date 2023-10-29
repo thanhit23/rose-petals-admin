@@ -1,5 +1,6 @@
 {
 	"Components.Header.logout": "Logout",
+	"Components.Header.setting": "Setting",
 	"Components.Helmet.user": "User",
 	"Components.Helmet.user.add": "Add user",
 	"Components.Helmet.user.edit": "Edit user",

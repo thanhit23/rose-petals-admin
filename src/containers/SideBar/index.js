@@ -19,7 +19,7 @@ function SideBar({ isSidebarOpen }) {
 
   const checkChildrenActive = active => active;
 
-  const urlAvatar = '';
+  const urlAvatar = 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png';
 
   const clx = ['w-5 h-5', { 'mr-3': isSidebarOpen }];
 
@@ -27,7 +27,9 @@ function SideBar({ isSidebarOpen }) {
 
   return (
     <div
-      className={classNames('fixed top-0 bottom-0 left-0 duration-300 w-[260px] flex', { 'w-[64px]': !isSidebarOpen })}
+      className={classNames('fixed top-0 bottom-0 left-0 duration-300 w-[260px] flex', {
+        'w-[64px]': !isSidebarOpen,
+      })}
     >
       <div className="w-full h-full shadow-md bg-[#2B3445] text-white">
         <div className={classNames('pt-4 pb-2', { 'px-[18px]': isSidebarOpen }, { 'px-3': !isSidebarOpen })}>

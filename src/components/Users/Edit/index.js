@@ -112,28 +112,28 @@ function EditUserComponent({ submit, users }) {
             />
             <div className="flex">
               <label className="flex items-center mr-2" htmlFor="female">
-                {gender && (
+                {users && (
                   <input
                     id="female"
                     className="mr-1"
                     name="gender"
                     type="radio"
                     value={FEMALE}
-                    defaultChecked={gender === FEMALE}
+                    defaultChecked={gender ? gender === FEMALE : false}
                     {...register('gender')}
                   />
                 )}
                 <FormattedMessage {...messages.gender.female} />
               </label>
               <label className="flex items-center" htmlFor="male">
-                {gender && (
+                {users && (
                   <input
                     id="male"
                     className="mr-1"
                     name="gender"
                     type="radio"
                     value={MALE}
-                    defaultChecked={gender === MALE}
+                    defaultChecked={gender ? gender === MALE : false}
                     {...register('gender')}
                   />
                 )}
