@@ -149,7 +149,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
               <LabelWithFormatMessage message={messages.label.small} htmlFor="small" />
               <InputWithFormatMessage
                 type="checkbox"
-                name="small"
+                name="size"
                 value="x"
                 validate={register('size', required(messages.message.required))}
               />
@@ -158,7 +158,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
               <LabelWithFormatMessage message={messages.label.medium} htmlFor="medium" />
               <InputWithFormatMessage
                 type="checkbox"
-                name="medium"
+                name="size"
                 value="m"
                 validate={register('size', required(messages.message.required))}
               />
@@ -167,7 +167,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
               <LabelWithFormatMessage message={messages.label.large} htmlFor="large" />
               <InputWithFormatMessage
                 type="checkbox"
-                name="large"
+                name="size"
                 value="l"
                 validate={register('size', required(messages.message.required))}
               />

@@ -1,7 +1,8 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 
-import { LOGOUT_REQUEST, STATUS_NO_CONTENT } from './constants';
-import { logout } from './service';
+import { LOGOUT_REQUEST, STATUS_NO_CONTENT, UPDATE_ACCOUNT } from './constants';
+import { logout, updateAccount } from './service';
 import { loggedOut } from './actions';
 
 function* handleLogout() {
@@ -13,7 +14,21 @@ function* handleLogout() {
   }
 }
 
+function* updateAccountSaga({ payload: { id, ...rest } }) {
+  const res = yield call(updateAccount, rest, id);
+  const {
+    data: { status, message },
+  } = res;
+
+  if (status) {
+    toast.success('Account updated successfully');
+  } else {
+    toast.error(message);
+  }
+}
+
 function* headerSaga() {
+  yield takeLatest(UPDATE_ACCOUNT, updateAccountSaga);
   yield takeLatest(LOGOUT_REQUEST, handleLogout);
 }
 

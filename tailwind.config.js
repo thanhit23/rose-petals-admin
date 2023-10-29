@@ -15,6 +15,7 @@ module.exports = {
       orange: '#ff7849',
       green: '#13ce66',
       gray: '#8492a6',
+      transparent: 'transparent',
       cancelled: '#e94560',
       pending: '#4e97fd',
       processing: '#ffcd4e',

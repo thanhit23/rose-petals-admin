@@ -92,9 +92,12 @@ function Navigated({
   const buttonRender = () => {
     if (!pathRedirect) {
       return (
-        <button className={classNames(cls)} type="button" onClick={() => setOpen(!openDropdown)}>
-          {renderElement}
-        </button>
+        <>
+          <button className={classNames(cls, 'item-sidebar')} type="button" onClick={() => setOpen(!openDropdown)}>
+            {renderElement}
+          </button>
+          <div className="menu-item-sidebar hidden">asdadasdasd</div>
+        </>
       );
     }
 

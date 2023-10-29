@@ -4,24 +4,52 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+
+import Modal from '../Modal';
 import Search from '../Search';
 import messages from './messages';
+import TabPanel from '../TabPanel';
+import TabInformation from './components/TabInformation';
+import ChangePassword from './components/ChangePassword';
 
-const renderLogout = handleLogout => (
+const renderLogout = (handleLogout, content) => (
   <ul
     aria-labelledby="dropdownDefault"
     className="dropdown-menu w-[120px] absolute bg-white right-[-5px] py-3 shadow-default rounded-[5px]"
   >
-    {/* eslint-disable-next-line max-len */}
-    {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
+    <Modal
+      title="Setting Account"
+      content={content}
+      trigger={props => (
+        <li className="cursor-pointer px-3 py-2 hover:bg-[#f1f1f1] transition" {...props}>
+          <FormattedMessage {...messages.setting} />
+        </li>
+      )}
+    />
     <li className="cursor-pointer px-3 py-2 hover:bg-[#f1f1f1] transition" onClick={handleLogout}>
       <FormattedMessage {...messages.logout} />
     </li>
   </ul>
 );
 
-function HeaderComponent({ handleSidebar, handleLogout }) {
+function HeaderComponent({ handleSidebar, handleLogout, onUpdate, auth }) {
   const [dropdown, setDropDown] = useState(false);
+
+  const tabs = [
+    {
+      title: 'Information',
+      value: 'infor',
+      component: <TabInformation auth={auth} onUpdate={onUpdate} />,
+    },
+    {
+      title: 'Change Password',
+      value: 'change_password',
+      component: <ChangePassword />,
+    },
+  ];
+
+  const content = <TabPanel current="infor" tabs={tabs} />;
+
   return (
     <header className="relative z-[90]">
       <div className="shadow-md absolute inset-x-0 top-0 bg-white">
@@ -42,7 +70,7 @@ function HeaderComponent({ handleSidebar, handleLogout }) {
                     className="w-[40px] account-img cursor-pointer"
                   />
                 </button>
-                {dropdown && renderLogout(handleLogout)}
+                {dropdown && renderLogout(handleLogout, content)}
               </div>
             </nav>
           </div>
