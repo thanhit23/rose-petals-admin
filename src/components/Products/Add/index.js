@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import cls from 'classnames';
 
+import { isEmpty } from 'lodash';
 import Breadcrumb from '../../Breadcrumb';
 import messages from './messages';
 import ErrorMessage from '../../ErrorMessage';
@@ -19,7 +20,9 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    mode: 'onChange',
+  });
 
   const [label, setLabel] = useState({
     name: false,
@@ -69,7 +72,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
       <div>
         <form
           onSubmit={handleSubmit(data => {
-            handleOnSubmit(data);
+            handleOnSubmit({ ...data, sold: 0, rating: 0, size: isEmpty(data.size) ? [] : data.size });
           })}
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         >
@@ -109,104 +112,6 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
               validate={register('price', required(messages.message.required))}
             />
             <ErrorMessage name={errors?.price} />
-          </div>
-          <div className="mb-6">
-            <LabelWithFormatMessage
-              message={messages.label.images}
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="images"
-              requiredField
-            />
-            {renderUploadComponent}
-            <ErrorMessage name={errors?.images} />
-          </div>
-          <div className="mb-6">
-            <LabelWithFormatMessage
-              message={messages.label.description}
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="description"
-              requiredField
-            />
-            <div className="shadow-md appearance-none py-[16px] px-3 border border-[#e2e8f0] mb-3">
-              <TextareaWithFormatMessage
-                className="rounded w-full text-[14px] text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="description"
-                rows={6}
-                message={messages.placeholder.description}
-                validate={register('description', required(messages.message.required))}
-              />
-            </div>
-            <ErrorMessage name={errors?.description} />
-          </div>
-          <div className="mb-6">
-            <LabelWithFormatMessage
-              message={messages.label.size}
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="size"
-              requiredField
-            />
-            <div className="w-[100px] flex justify-between">
-              <LabelWithFormatMessage message={messages.label.small} htmlFor="small" />
-              <InputWithFormatMessage
-                type="checkbox"
-                name="size"
-                value="x"
-                validate={register('size', required(messages.message.required))}
-              />
-            </div>
-            <div className="w-[100px] flex justify-between">
-              <LabelWithFormatMessage message={messages.label.medium} htmlFor="medium" />
-              <InputWithFormatMessage
-                type="checkbox"
-                name="size"
-                value="m"
-                validate={register('size', required(messages.message.required))}
-              />
-            </div>
-            <div className="w-[100px] flex justify-between">
-              <LabelWithFormatMessage message={messages.label.large} htmlFor="large" />
-              <InputWithFormatMessage
-                type="checkbox"
-                name="size"
-                value="l"
-                validate={register('size', required(messages.message.required))}
-              />
-            </div>
-            <ErrorMessage name={errors?.size} />
-          </div>
-          <div className="mb-6 grid grid-cols-2 gap-4">
-            <div className="flex flex-col">
-              <LabelWithFormatMessage
-                message={messages.label.rating}
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="rating"
-                requiredField
-              />
-              <InputWithFormatMessage
-                className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                id="rating"
-                type="number"
-                message={messages.placeholder.rating}
-                validate={register('rating', required(messages.message.required))}
-              />
-              <ErrorMessage name={errors?.rating} />
-            </div>
-            <div className="flex flex-col">
-              <LabelWithFormatMessage
-                message={messages.label.quantity}
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="quantity"
-                requiredField
-              />
-              <InputWithFormatMessage
-                className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                id="quantity"
-                type="number"
-                message={messages.placeholder.quantity}
-                validate={register('quantity', required(messages.message.required))}
-              />
-              <ErrorMessage name={errors?.quantity} />
-            </div>
           </div>
           <div className="mb-6 grid grid-cols-2 gap-4">
             <div className="flex flex-col">
@@ -252,6 +157,72 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
                 ))}
               </select>
               <ErrorMessage name={errors?.brand} />
+            </div>
+          </div>
+          <div className="mb-6">
+            <LabelWithFormatMessage
+              message={messages.label.images}
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="images"
+              requiredField
+            />
+            {renderUploadComponent}
+            <ErrorMessage name={errors?.images} />
+          </div>
+          <div className="mb-6 grid grid-cols-2 gap-4">
+            <div className="flex flex-col">
+              <LabelWithFormatMessage
+                message={messages.label.quantity}
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="quantity"
+                requiredField
+              />
+              <InputWithFormatMessage
+                className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                id="quantity"
+                type="number"
+                message={messages.placeholder.quantity}
+                validate={register('quantity', required(messages.message.required))}
+              />
+              <ErrorMessage name={errors?.quantity} />
+            </div>
+            <div className="mb-6">
+              <LabelWithFormatMessage
+                message={messages.label.size}
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="size"
+              />
+              <div className="w-[100px] flex justify-between">
+                <LabelWithFormatMessage message={messages.label.small} htmlFor="small" />
+                <InputWithFormatMessage type="checkbox" name="size" value="x" validate={register('size')} />
+              </div>
+              <div className="w-[100px] flex justify-between">
+                <LabelWithFormatMessage message={messages.label.medium} htmlFor="medium" />
+                <InputWithFormatMessage type="checkbox" name="size" value="m" validate={register('size')} />
+              </div>
+              <div className="w-[100px] flex justify-between">
+                <LabelWithFormatMessage message={messages.label.large} htmlFor="large" />
+                <InputWithFormatMessage type="checkbox" name="size" value="l" validate={register('size')} />
+              </div>
+            </div>
+            <div className="mb-6 col-span-2">
+              <LabelWithFormatMessage
+                message={messages.label.description}
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="description"
+                requiredField
+              />
+              <div className="shadow-md appearance-none py-[16px] px-3 border border-[#e2e8f0] mb-3">
+                <TextareaWithFormatMessage
+                  className="rounded w-full text-[14px] text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="description"
+                  rows={6}
+                  wrap="hard"
+                  message={messages.placeholder.description}
+                  validate={register('description', required(messages.message.required))}
+                />
+              </div>
+              <ErrorMessage name={errors?.description} />
             </div>
           </div>
           <div className="flex items-center justify-between">

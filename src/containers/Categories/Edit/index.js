@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { isEqual } from 'lodash';
 
 import AuthLayout from '../../../layouts/AuthLayout';
 import EditCategoryComponent from '../../../components/Categories/Edit';
@@ -12,13 +13,21 @@ import injectReducer from '../../../utils/injectReducer';
 import saga from './saga';
 import reducer from '../List/reducers';
 
-function EditCategory({ updateCategory, edit: editCategory, getCategory, resetData }) {
+function EditCategory({ updateCategory, edit: category, getCategory, resetData }) {
   const { id: idEdit } = useParams();
+
+  const [editCategory, setEditCategory] = useState(category);
 
   useEffect(() => {
     resetData();
     getCategory(idEdit);
   }, []);
+
+  useEffect(() => {
+    if (!isEqual(category, editCategory)) {
+      setEditCategory(category);
+    }
+  }, [category]);
 
   const redirect = useNavigate();
 
@@ -26,7 +35,7 @@ function EditCategory({ updateCategory, edit: editCategory, getCategory, resetDa
 
   const handleUpdateUser = (id, data) => updateCategory(id, data, callback);
 
-  const renderEditCategory = editCategory && <EditCategoryComponent data={editCategory} submit={handleUpdateUser} />;
+  const renderEditCategory = editCategory && <EditCategoryComponent data={editCategory} onSubmit={handleUpdateUser} />;
 
   return <AuthLayout title="edit_category" children={renderEditCategory} />;
 }
