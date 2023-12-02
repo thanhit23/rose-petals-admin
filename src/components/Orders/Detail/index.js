@@ -4,15 +4,14 @@ import { faChevronDown, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { FormattedMessage } from 'react-intl';
 import cls from 'classnames';
+import dayjs from 'dayjs';
 import Breadcrumb from '../../Breadcrumb';
 import messages from './messages';
 import { formatMoney } from '../../../helpers';
 import TextareaWithFormatMessage from '../../TextareaWithFormatMessage';
 import LabelWithFormatMessage from '../../LabelWithFormatMessage';
 import ConfirmModal from '../../ConfirmModal';
-import visa from '../../../resources/images/visa.png';
-import masterCard from '../../../resources/images/38fd98e55806c3b2e4535c4e4a6c4c08.png';
-import JapanCreditBureau from '../../../resources/images/a0a9062ebe19b45c1ae0506f16af5c16.png';
+import vnPay from '../../../resources/images/vnpay.png';
 
 function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
   const statusOrder = ['Cancelled', 'Pending', 'Processing', 'Delivered'];
@@ -23,9 +22,14 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
     ];
   };
 
-  const imgCreditDebit = [visa, masterCard, JapanCreditBureau];
+  const imgCreditDebit = [
+    {
+      name: 'VN_PAY',
+      image: vnPay,
+    },
+  ];
 
-  const { status, id, customerNote, address, amount } = order;
+  const { status, customerNote, address } = order;
 
   const renderProduct = () =>
     productOrder.map(({ _id, product: { thumbnail, name }, price, quantity }, i) => (
@@ -62,18 +66,6 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
       </div>
     ));
 
-  const renderShippingFee = () => {
-    let result = 0;
-    productOrder.map(({ shipingFee }) => (result += shipingFee));
-    return result;
-  };
-
-  const renderDiscountPercent = () => {
-    let result = 0;
-    productOrder.map(({ discountPercent, price }) => (result += (price * discountPercent) / 100));
-    return result;
-  };
-
   return (
     <>
       <Breadcrumb title="order_detail" />
@@ -84,13 +76,13 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
               <span className="text-[#7d879c] normal-case whitespace-normal mr-1">
                 <FormattedMessage {...messages.order_id} />:
               </span>
-              {id}
+              {productOrder.id}
             </p>
             <p className="m-0 text-sm">
               <span className="text-[#7d879c] normal-case whitespace-normal mr-1">
                 <FormattedMessage {...messages.placed_on} />:
               </span>
-              10 Nov, 2022
+              {dayjs(productOrder.updatedAt).format('YYYY-MM-DD')}
             </p>
           </div>
           <div className="flex flex-col my-6">
@@ -101,6 +93,7 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
               <select
                 className="hover:border-[#111] h-12 w-full outline-none appearance-none border border-[#e3e9ef] rounded p-3 text-[14px] leading-tight"
                 defaultChecked={status}
+                disabled
               >
                 {statusOrder.map((e, i) => (
                   <option key={i} value={i}>
@@ -163,7 +156,7 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
               <p className="text-[#7d879c] text-sm">
                 <FormattedMessage {...messages.subtotal} />:
               </p>
-              <h6 className="text-sm">{formatMoney(amount)} VNĐ</h6>
+              <h6 className="text-sm">{formatMoney(productOrder.subtotal || 0)} VNĐ</h6>
             </div>
             <div className="flex justify-between mb-3">
               <p className="text-[#7d879c] text-sm">
@@ -172,7 +165,7 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
               <div className="flex place-items-center">
                 <h6 className="text-sm mr-1">VNĐ</h6>
                 <div className="max-w-[60px] ml-2">
-                  <h6 className="text-sm">{productOrder.length && formatMoney(renderShippingFee())}</h6>
+                  <h6 className="text-sm">{formatMoney(productOrder.shipingFee || 0)}</h6>
                 </div>
               </div>
             </div>
@@ -182,9 +175,8 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
                 (%):
               </p>
               <div className="flex place-items-center">
-                <h6 className="text-sm mr-1">VNĐ</h6>
                 <div className="max-w-[60px] ml-2">
-                  <h6 className="text-sm">{productOrder.length && formatMoney(renderDiscountPercent())}</h6>
+                  <h6 className="text-sm">{formatMoney(productOrder.discountPercent || 0)}</h6>
                 </div>
               </div>
             </div>
@@ -195,10 +187,7 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
               </p>
               <div className="flex">
                 <div className="max-w-[60px] mr-2">
-                  <h6 className="text-sm">
-                    {/* eslint-disable-next-line max-len */}
-                    {productOrder.length && formatMoney(renderShippingFee() + amount - renderDiscountPercent())}
-                  </h6>
+                  <h6 className="text-sm">{formatMoney(productOrder.totalPrice)}</h6>
                 </div>
                 <h6 className="text-sm">VNĐ</h6>
               </div>
@@ -207,9 +196,15 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
               <FormattedMessage {...messages.paid_method} />
             </h6>
             <div className="flex flex-row">
-              {imgCreditDebit.map((e, i) => (
-                <div key={i} className="shadow-[#03004717_0px_1px_3px] bg-white rounded p-1 mr-2">
-                  <img src={e} alt="" />
+              {imgCreditDebit.map(({ name, image }, i) => (
+                <div
+                  key={i}
+                  className={cls(
+                    'shadow-[#03004717_0px_1px_3px] bg-white rounded p-1 mr-2 border border-solid',
+                    name === productOrder.methodPayment ? 'border-red' : 'border-transparent',
+                  )}
+                >
+                  <img src={image} alt="" className="w-[60px]" />
                 </div>
               ))}
             </div>

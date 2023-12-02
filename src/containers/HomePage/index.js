@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
 
 import saga from './saga';
-import { checkAuth } from './actions';
+import { checkAuth, getAnalytics as getAnalyticsAction } from './actions';
 import injectSaga from '../../utils/injectSaga';
 import Header from '../Header';
 import Dashboard from '../SideBar';
@@ -15,13 +15,16 @@ import HomePageComponent from '../../components/HomePage';
 import useResponsive from '../../hook/useResponsive';
 import ModalSidebar from '../../components/ModalSidebar';
 import { toggleSidebar as toggleSidebarAction } from '../Header/actions';
+import injectReducer from '../../utils/injectReducer';
+import reducer from './reducers';
 
-function HomePage({ isSidebarOpen, auth, checkAuthenticate }) {
+function HomePage({ isSidebarOpen, auth, checkAuthenticate, getAnalytics, analytics }) {
   const { isMobile } = useResponsive();
 
   useEffect(() => {
     checkAuthenticate();
     if (!auth) <Navigate to="/login" replace />;
+    getAnalytics();
   }, []);
 
   return (
@@ -45,7 +48,7 @@ function HomePage({ isSidebarOpen, auth, checkAuthenticate }) {
             )}
           >
             <Header />
-            <HomePageComponent />
+            <HomePageComponent analytics={analytics} />
           </div>
         </div>
       </section>
@@ -57,6 +60,7 @@ HomePage.prototype = {
   isSidebarOpen: PropTypes.bool,
   auth: PropTypes.object,
   checkAuth: PropTypes.func,
+  getAnalytics: PropTypes.func,
 };
 
 const mapStateToProps = state => {
@@ -65,8 +69,10 @@ const mapStateToProps = state => {
       auth,
       sidebar: { isSidebarOpen },
     },
+    home: { analytics },
   } = state;
   return {
+    analytics,
     auth,
     isSidebarOpen,
   };
@@ -75,11 +81,13 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     checkAuthenticate: bindActionCreators(checkAuth, dispatch),
+    getAnalytics: bindActionCreators(getAnalyticsAction, dispatch),
     isActiveItem: bindActionCreators(toggleSidebarAction, dispatch),
   };
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 const withSaga = injectSaga({ key: 'home', saga });
+const withReducer = injectReducer({ key: 'home', reducer });
 
-export default compose(withSaga, withConnect)(HomePage);
+export default compose(withSaga, withReducer, withConnect)(HomePage);
