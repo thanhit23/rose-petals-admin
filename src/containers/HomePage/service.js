@@ -1,3 +1,3 @@
 import Service from '../../service';
 
-export const isMe = () => Service.get('/admin/auth/me');
+export const getAnalytics = () => Service.get('/admin/analytics');

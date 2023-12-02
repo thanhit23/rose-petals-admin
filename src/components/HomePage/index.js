@@ -1,14 +1,13 @@
 import React, { useMemo } from 'react';
-import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
+import { faCaretUp } from '@fortawesome/free-solid-svg-icons';
 import { FormattedMessage } from 'react-intl';
 
-import CardStatistics from './CardStatistics';
 import Table from '../Table';
-import { Url } from '../../helpers';
+import { formatMoney, Url } from '../../helpers';
 import messages from '../Users/List/messages';
 import Card from './Card';
 
-function HomePageComponent() {
+function HomePageComponent({ analytics }) {
   const meta = {
     limit: 10,
     page: 1,
@@ -137,9 +136,9 @@ function HomePageComponent() {
           >
             <h5 className="mb-1 mt-0 text-base text-[#4E97FD]">Good Morning, Maruf!</h5>
             <p className="my-0 text-sm text-[#7D879C]">Here’s what happening with your store today!</p>
-            <h3 className="mt-[24px] mb-0 text-xl text-[#2B3445] font-semibold">15,350.25</h3>
-            <p className="my-0 text-sm text-[#7D879C]">Today’s Visit</p>
-            <h3 className="mt-[24px] mb-0 text-xl  text-[#2B3445] font-semibold">$10,360.66</h3>
+            <h3 className="mt-[24px] mb-0 text-xl  text-[#2B3445] font-semibold">
+              {`${formatMoney(analytics?.amountCurrentDate || 0)} VND`}
+            </h3>
             <p className="my-0 text-sm text-[#7D879C]">Today’s total sales</p>
             <div className="absolute bottom-0 right-[24px]">
               <img
@@ -152,65 +151,35 @@ function HomePageComponent() {
           <div className="md:col-span-6 col-span-12 grid grid-cols-2 gap-4">
             <Card
               title="Order"
-              currentQuantity="32,350"
-              quantityIncreased="9350"
+              currentQuantity={analytics?.orderMonth || 0}
+              quantityIncreased={analytics?.orderTotal || 0}
               iconCaret={faCaretUp}
-              numberPercent={25.25}
+              numberPercent={((analytics?.orderMonth || 0) / (analytics?.orderTotal || 0)) * 100}
               colorPercent="#4E97FD"
             />
             <Card
               title="Sold Items"
-              currentQuantity="2,360"
-              quantityIncreased="1350"
-              iconCaret={faCaretDown}
-              numberPercent={2.65}
-              colorPercent="#E94560"
+              currentQuantity={analytics?.soldMonth || 0}
+              quantityIncreased={analytics?.soldTotal || 0}
+              iconCaret={faCaretUp}
+              numberPercent={((analytics?.soldMonth || 0) / (analytics?.soldTotal || 0)) * 100}
+              colorPercent="#4E97FD"
             />
             <Card
-              title="Gross Sale"
-              currentQuantity="$12,460.25"
-              quantityIncreased="11350"
+              title="Total Order"
+              currentQuantity={`${formatMoney(analytics?.amountMonth || 0)} VND`}
+              quantityIncreased={`${formatMoney(analytics?.amountTotal || 0)} VND`}
               iconCaret={faCaretUp}
-              numberPercent={10.25}
-              colorPercent="#33d067"
+              numberPercent={((analytics?.amountMonth || 0) / (analytics?.amountTotal || 0)) * 100}
+              colorPercent="#4E97FD"
             />
             <Card
               title="Total Shipping Cost"
-              currentQuantity="$6,240"
-              quantityIncreased="4350"
-              iconCaret={faCaretDown}
-              numberPercent={13.15}
-              colorPercent="#E94560"
-            />
-          </div>
-          <div className="col-span-12 grid grid-cols-12 gap-4">
-            <CardStatistics
-              title="Weekly Sales"
-              currentQuantity="$10,240"
+              currentQuantity={`${formatMoney(analytics?.shippingMonth || 0)} VND`}
+              quantityIncreased={`${formatMoney(analytics?.shippingTotal || 0)} VND`}
               iconCaret={faCaretUp}
-              numberPercent={25.25}
+              numberPercent={((analytics?.shippingMonth || 0) / (analytics?.shippingTotal || 0)) * 100}
               colorPercent="#4E97FD"
-            />
-            <CardStatistics
-              title="Product Share"
-              currentQuantity="39.56%"
-              iconCaret={faCaretUp}
-              numberPercent={10.25}
-              colorPercent="#E94560"
-            />
-            <CardStatistics
-              title="Total Order"
-              currentQuantity="$12,260"
-              iconCaret={faCaretUp}
-              numberPercent={2.65}
-              colorPercent="#33d067"
-            />
-            <CardStatistics
-              title="Market Share"
-              currentQuantity="$14,260"
-              iconCaret={faCaretUp}
-              numberPercent={2.65}
-              colorPercent="#E94560"
             />
           </div>
           <div className="col-span-12 grid grid-cols-12 gap-4">
