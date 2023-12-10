@@ -38,11 +38,11 @@ function EditOrderComponent({ submit, order }) {
     <>
       <Breadcrumb prevPage={{ path: '/admin/orders', name: 'list_order' }} title="edit_order" />
       <div>
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form className="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md">
           <div className="mb-6">
             <LabelWithFormatMessage
               message={messages.label.address}
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block mb-2 text-sm font-bold text-gray-700"
               htmlFor="address"
               requiredField
             />
@@ -59,7 +59,7 @@ function EditOrderComponent({ submit, order }) {
           <div className="mb-6">
             <LabelWithFormatMessage
               message={messages.label.amount}
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block mb-2 text-sm font-bold text-gray-700"
               htmlFor="amount"
               requiredField
             />
@@ -76,7 +76,7 @@ function EditOrderComponent({ submit, order }) {
           <div className="mb-6">
             <LabelWithFormatMessage
               message={messages.label.quantity}
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block mb-2 text-sm font-bold text-gray-700"
               htmlFor="quantity"
               requiredField
             />
@@ -93,7 +93,7 @@ function EditOrderComponent({ submit, order }) {
           <div className="mb-6">
             <LabelWithFormatMessage
               message={messages.label.status}
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block mb-2 text-sm font-bold text-gray-700"
               htmlFor="status"
               requiredField
             />
@@ -101,7 +101,7 @@ function EditOrderComponent({ submit, order }) {
               id="status"
               name="status"
               className="h-12 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
-              defaultValue={status}
+              value={status}
               onChange={changeValueInput}
             >
               {ARRAY_STATUS.map((value, index) => (
