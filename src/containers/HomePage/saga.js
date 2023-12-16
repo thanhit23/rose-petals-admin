@@ -4,8 +4,8 @@ import { GET_ANALYTICS } from './constants';
 import { getAnalyticsSuccess } from './actions';
 import { getAnalytics as getAnalyticsService } from './service';
 
-function* getAnalytics() {
-  const res = yield call(getAnalyticsService);
+function* getAnalytics({ payload: { token } }) {
+  const res = yield call(getAnalyticsService, { token });
   const {
     data: { status, data, message },
   } = res;
