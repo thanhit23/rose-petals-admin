@@ -1,3 +1,6 @@
 import Service from '../../service';
 
-export const getAnalytics = () => Service.get('/admin/analytics');
+export const getAnalytics = ({ token }) => {
+  Service.setBearerToken(token);
+  return Service.get('/admin/analytics');
+};

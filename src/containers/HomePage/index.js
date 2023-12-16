@@ -21,10 +21,12 @@ import reducer from './reducers';
 function HomePage({ isSidebarOpen, auth, checkAuthenticate, getAnalytics, analytics }) {
   const { isMobile } = useResponsive();
 
+  const token = localStorage.getItem('token');
+
   useEffect(() => {
     checkAuthenticate();
     if (!auth) <Navigate to="/login" replace />;
-    getAnalytics();
+    if (auth && token) getAnalytics(token);
   }, []);
 
   return (

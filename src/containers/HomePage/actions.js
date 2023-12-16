@@ -11,8 +11,11 @@ export const setAuth = user => ({
   },
 });
 
-export const getAnalytics = () => ({
+export const getAnalytics = token => ({
   type: GET_ANALYTICS,
+  payload: {
+    token,
+  },
 });
 
 export const getAnalyticsSuccess = data => ({
