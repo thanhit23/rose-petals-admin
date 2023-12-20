@@ -42,7 +42,9 @@ function ProductsReview({ data, meta, getProductsReview, deleteProductsReview })
 
   const callback = () => setFilter({ ...filter, forkUpdate: '' });
 
-  const handleDeleteProduct = id => deleteProductsReview(id, callback);
+  const handleDeleteProduct = deleteProductData => {
+    deleteProductsReview(deleteProductData, callback);
+  };
 
   return (
     <AuthLayout title="list_product">

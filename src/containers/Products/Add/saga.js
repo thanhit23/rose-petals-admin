@@ -36,7 +36,7 @@ function* addProduct({ payload: { data, file, callback } }) {
   } = res;
 
   if (status) {
-    yield* handleAddProduct({ ...data, images: dataFile });
+    yield* handleAddProduct({ ...data, images: [dataFile[dataFile.length - 1]] });
     if (callback instanceof Function) callback();
   } else {
     yield put(addProductFailed(message));

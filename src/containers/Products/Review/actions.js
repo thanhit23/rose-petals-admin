@@ -25,9 +25,9 @@ export const getProductReviewFailed = message => ({
   payload: { message },
 });
 
-export const deleteProductReview = (id, callback) => ({
+export const deleteProductReview = (data, callback) => ({
   type: DELETE_PRODUCTS_REVIEW_LIST_REQUEST,
-  payload: { id, callback },
+  payload: { data, callback },
 });
 
 export const deleteProductReviewSuccess = () => ({
