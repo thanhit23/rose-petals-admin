@@ -17,13 +17,13 @@ export default defineMessages({
       defaultMessage: 'Email',
     },
     password: {
-      current: {
-        id: `${scope}.label.password.current`,
-        defaultMessage: 'Current Password',
-      },
-      new: {
-        id: `${scope}.label.password.new`,
+      newPassword: {
+        id: `${scope}.label.password.newPassword`,
         defaultMessage: 'New Password',
+      },
+      confirmPassword: {
+        id: `${scope}.label.password.confirmPassword`,
+        defaultMessage: 'Confirm Password',
       },
     },
     name: {
@@ -50,7 +50,31 @@ export default defineMessages({
   message: {
     required: {
       id: `${scope}.message.required`,
-      defaultMessage: 'Name is required',
+      defaultMessage: 'This field is required',
+    },
+    confirmPasswordRequired: {
+      id: `${scope}.message.confirmPasswordRequired`,
+      defaultMessage: 'Confirm password is required',
+    },
+    passwordContainNumber: {
+      id: `${scope}.message.passwordContainNumber`,
+      defaultMessage: 'Password must contain at least one number',
+    },
+    passwordRequired: {
+      id: `${scope}.message.passwordRequired`,
+      defaultMessage: 'Password is required',
+    },
+    confirmPasswordMustMatchPassword: {
+      id: `${scope}.message.confirmPasswordMustMatchPassword`,
+      defaultMessage: 'Confirm password must match password',
+    },
+    passwordMinLength: {
+      id: `${scope}.message.passwordMinLength`,
+      defaultMessage: 'Password must be at least 8 characters',
+    },
+    passwordMaxLength: {
+      id: `${scope}.message.passwordMaxLength`,
+      defaultMessage: 'Please enter up to 16 characters',
     },
   },
   btn: {

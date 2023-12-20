@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import propTypes from 'prop-types';
 
-import { toggleSidebar, logout, updateAccount } from './actions';
+import { toggleSidebar, logout, updateAccount, changePassword } from './actions';
 import injectSaga from '../../utils/injectSaga';
 import saga from './saga';
 import HeaderComponent from '../../components/Header';
 
-function Header({ handleToggleSidebar, handleUserLogout, handleUpdateAccount, auth }) {
+function Header({ handleToggleSidebar, handleUserLogout, handleUpdateAccount, handleChangePassword, auth }) {
   const handleSidebar = () => handleToggleSidebar();
 
   const handleLogout = () => handleUserLogout();
@@ -17,6 +17,7 @@ function Header({ handleToggleSidebar, handleUserLogout, handleUpdateAccount, au
     <HeaderComponent
       auth={auth}
       onUpdate={handleUpdateAccount}
+      onChangePassword={handleChangePassword}
       handleSidebar={handleSidebar}
       handleLogout={handleLogout}
     />
@@ -41,6 +42,7 @@ const mapDispatchToProps = dispatch => {
   return {
     handleToggleSidebar: bindActionCreators(toggleSidebar, dispatch),
     handleUpdateAccount: bindActionCreators(updateAccount, dispatch),
+    handleChangePassword: bindActionCreators(changePassword, dispatch),
     handleUserLogout: bindActionCreators(logout, dispatch),
   };
 };
