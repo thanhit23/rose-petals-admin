@@ -43,19 +43,19 @@ function EditUserComponent({ submit, users }) {
       <div>
         <form
           onSubmit={handleSubmit(data => onSubmit(data))}
-          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+          className="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md"
         >
           <div className="mb-6">
             <LabelWithFormatMessage
               message={messages.label.name}
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="username"
+              className="block mb-2 text-sm font-bold text-gray-700"
+              htmlFor="name"
               requiredField
             />
             <InputWithFormatMessage
               message={messages.placeholder.name}
               className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="username"
+              id="name"
               name="name"
               type="text"
               validate={register('name', required(messages.message.required))}
@@ -65,7 +65,7 @@ function EditUserComponent({ submit, users }) {
           <div className="mb-6">
             <LabelWithFormatMessage
               message={messages.label.email}
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block mb-2 text-sm font-bold text-gray-700"
               htmlFor="email"
               requiredField
             />
@@ -85,7 +85,7 @@ function EditUserComponent({ submit, users }) {
           <div className="mb-6">
             <LabelWithFormatMessage
               message={messages.label.phone_number}
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block mb-2 text-sm font-bold text-gray-700"
               htmlFor="phoneNumber"
               requiredField
             />
@@ -106,7 +106,7 @@ function EditUserComponent({ submit, users }) {
           <div className="mb-6">
             <LabelWithFormatMessage
               message={messages.label.gender}
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block mb-2 text-sm font-bold text-gray-700"
               htmlFor="gender"
               requiredField
             />
