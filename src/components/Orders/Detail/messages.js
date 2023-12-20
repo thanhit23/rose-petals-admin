@@ -69,4 +69,8 @@ export default defineMessages({
     id: `${scope}.paid_method`,
     defaultMessage: 'Paid by Credit/Debit Card',
   },
+  unPaid: {
+    id: `${scope}.unPaid`,
+    defaultMessage: 'This person has not paid for this order',
+  },
 });
