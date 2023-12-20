@@ -47,7 +47,7 @@ function ListBrandsComponent({ data, meta, getBrands, handleDeleteBrand }) {
       },
     } = props;
 
-    return <img className="object-cover h-[40px] w-[40px] rounded m-auto" src={logo} alt="" />;
+    return <img className="object-contain h-[60px] w-[60px] rounded m-auto" src={logo} alt="" />;
   };
 
   const [searchParams] = useSearchParams();
@@ -96,7 +96,7 @@ function ListBrandsComponent({ data, meta, getBrands, handleDeleteBrand }) {
           <Search message="brand" valueSearch={valueSearch} handleKeywordSearch={handleGetBrands} />
           <ButtonRedirect to="/admin/brand" title="add_brand" icon={faPlus} />
         </div>
-        <div className="flex flex-col shadow-lg bg-white rounded mt-4">
+        <div className="flex flex-col mt-4 bg-white rounded shadow-lg">
           <Table goToPage={handleGetBrands} meta={meta} col={columns} data={data} pagination />
         </div>
       </>

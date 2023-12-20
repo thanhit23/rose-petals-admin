@@ -12,7 +12,7 @@ function* addBrand({ payload: { data, file, callback } }) {
     } = res;
 
     if (status) {
-      Object.assign(data, { logo: dataFile[0] });
+      Object.assign(data, { logo: dataFile[dataFile.length - 1] });
     } else {
       yield put(addBrandFailed(message));
     }
