@@ -1,5 +1,5 @@
 import { FormattedMessage } from 'react-intl';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -19,14 +19,18 @@ function EditCategoryComponent({ onSubmit, data }) {
     setCategoryEdit({ name: value });
   };
 
+  useEffect(() => {
+    setCategoryEdit(data);
+  }, [data]);
+
   return (
     <>
       <Breadcrumb prevPage={{ path: '/admin/categories', name: 'list_category' }} title="edit_category" />
       <div>
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form className="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md">
           <div className="mb-6">
             <LabelWithFormatMessage
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block mb-2 text-sm font-bold text-gray-700"
               message={messages.label.name}
               htmlFor="name"
               requiredField
@@ -44,7 +48,7 @@ function EditCategoryComponent({ onSubmit, data }) {
             <button
               className="bg-[#007bff] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button"
-              onClick={() => onSubmit(id, categoryEdit)}
+              onClick={() => onSubmit(id, { name: categoryName })}
             >
               <FormattedMessage {...messages.btn.submit} />
             </button>

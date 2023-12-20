@@ -26,7 +26,7 @@ function EditCategory({ updateCategory, edit: editCategory, getCategory, resetDa
 
   const handleUpdateUser = (id, data) => updateCategory(id, data, callback);
 
-  const renderEditCategory = editCategory && <EditCategoryComponent data={editCategory} submit={handleUpdateUser} />;
+  const renderEditCategory = editCategory && <EditCategoryComponent data={editCategory} onSubmit={handleUpdateUser} />;
 
   return <AuthLayout title="edit_category" children={renderEditCategory} />;
 }
