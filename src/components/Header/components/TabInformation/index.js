@@ -6,6 +6,7 @@ import messages from '../../messages';
 import InputWithFormatMessage from '../../../InputWithFormatMessage';
 import { required } from '../../../../utils/validation';
 import ErrorMessage from '../../../ErrorMessage';
+import { BASE_URL } from '../../../../service/constants';
 
 function TabInformation({ auth, onUpdate }) {
   const {
@@ -16,16 +17,20 @@ function TabInformation({ auth, onUpdate }) {
     defaultValues: auth,
   });
 
-  const onSubmit = data => onUpdate({ id: auth.id, ...data });
+  const callback = () => window.location.reload();
+
+  const onSubmit = ({ avatar, ...data }) => onUpdate({ id: auth.id, ...data, callback });
+
+  const defaultAvatar = 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png';
 
   return (
     <div>
       <div className="grid grid-cols-7 gap-4">
-        <div className="col-span-3 flex flex-col items-center gap-5 justify-center">
+        <div className="flex flex-col items-center justify-center col-span-3 gap-5">
           <img
-            src="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png"
+            src={auth.avatar ? `${BASE_URL}/file${auth.avatar}` : defaultAvatar}
             className="rounded-full w-[80px] h-[80px] object-cover"
-            alt="asdasdasd"
+            alt="Avatar"
           />
           <p>{auth?.name}</p>
           <p>Email: {auth?.email}</p>
@@ -34,7 +39,7 @@ function TabInformation({ auth, onUpdate }) {
           <form onSubmit={handleSubmit(data => onSubmit(data))}>
             <div className="mb-6">
               <LabelWithFormatMessage
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block mb-2 text-sm font-bold text-gray-700"
                 message={messages.label.email}
                 htmlFor="name"
                 requiredField
@@ -49,7 +54,7 @@ function TabInformation({ auth, onUpdate }) {
             </div>
             <div className="mb-6">
               <LabelWithFormatMessage
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block mb-2 text-sm font-bold text-gray-700"
                 message={messages.label.name}
                 htmlFor="name"
                 requiredField
@@ -58,7 +63,6 @@ function TabInformation({ auth, onUpdate }) {
                 className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                 id="name"
                 type="text"
-                defaultValue="Nguyễn Duy Thành"
                 message={messages.placeholder.name}
                 validate={register('name', required(messages.message.required))}
               />
