@@ -50,7 +50,7 @@ function HomePage({ isSidebarOpen, auth, checkAuthenticate, getAnalytics, analyt
             )}
           >
             <Header />
-            <HomePageComponent analytics={analytics} />
+            <HomePageComponent analytics={analytics} auth={auth} />
           </div>
         </div>
       </section>

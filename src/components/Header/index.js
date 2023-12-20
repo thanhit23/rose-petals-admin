@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import Modal from '../Modal';
-import Search from '../Search';
 import messages from './messages';
 import TabPanel from '../TabPanel';
 import TabInformation from './components/TabInformation';
@@ -52,7 +51,7 @@ function HeaderComponent({ handleSidebar, handleLogout, onUpdate, auth }) {
 
   return (
     <header className="relative z-[90]">
-      <div className="shadow-md absolute inset-x-0 top-0 bg-white">
+      <div className="absolute inset-x-0 top-0 bg-white shadow-md">
         <div className="px-4 sm:px-6">
           <div className="flex items-center justify-between py-4 md:justify-start md:space-x-10">
             <div className="flex justify-start lg:w-0 lg:flex-1">
@@ -60,8 +59,7 @@ function HeaderComponent({ handleSidebar, handleLogout, onUpdate, auth }) {
                 <FontAwesomeIcon icon={faBars} />
               </button>
             </div>
-            <nav className="space-x-10 flex">
-              <Search className="md:w-[356px] w-full outline-none py-2.5 px-8 rounded-lg bg-[#f7f9fc]" />
+            <nav className="flex space-x-10">
               <div className="relative">
                 <button type="button" onClick={() => setDropDown(!dropdown)}>
                   <img

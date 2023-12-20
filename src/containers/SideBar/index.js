@@ -6,6 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { faUserGroup, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { bindActionCreators, compose } from 'redux';
 
+import { Link } from 'react-router-dom';
 import Navigated from '../../components/Navigated';
 import { toggleSidebar as toggleSidebarAction } from '../Header/actions';
 import messages from './messages';
@@ -13,8 +14,9 @@ import { ReactComponent as Product } from '../../resources/images/products.svg';
 import { ReactComponent as Dashboard } from '../../resources/images/dashboard.svg';
 import { ReactComponent as Order } from '../../resources/images/order.svg';
 import useResponsive from '../../hook/useResponsive';
+import { BASE_URL } from '../../service/constants';
 
-function SideBar({ isSidebarOpen }) {
+function SideBar({ isSidebarOpen, auth }) {
   const { isMobile } = useResponsive();
 
   const checkChildrenActive = active => active;
@@ -33,20 +35,24 @@ function SideBar({ isSidebarOpen }) {
     >
       <div className="w-full h-full shadow-md bg-[#2B3445] text-white">
         <div className={classNames('pt-4 pb-2', { 'px-[18px]': isSidebarOpen }, { 'px-3': !isSidebarOpen })}>
-          <a href="#">
+          <Link to="/">
             <div className="flex items-center">
               <div className="shrink-0">
-                <img src={urlAvatar} className="rounded-full w-10 h-10 object-cover" alt="Avatar" />
+                <img
+                  src={auth.avatar ? `${BASE_URL}/file${auth.avatar}` : urlAvatar}
+                  className="object-cover w-10 h-10 rounded-full"
+                  alt="Avatar"
+                />
               </div>
               {isSidebarOpen && (
-                <div className="grow ml-3">
-                  <p className="text-sm font-semibold text-blue-600">Nguyễn Duy Thành</p>
+                <div className="ml-3 grow">
+                  <p className="text-sm font-semibold text-blue-600">{auth.name}</p>
                 </div>
               )}
             </div>
-          </a>
+          </Link>
         </div>
-        <ul className="relative px-3 mt-8 overflow-scroll max-h-[calc(100vh-70px)]">
+        <ul className="relative px-3 mt-8 overflow-scroll max-h-[calc(100vh-70px)] menu-sidebar">
           <Navigated
             isSidebarOpen={isSidebarOpen}
             pathRedirect="/"
@@ -127,10 +133,12 @@ SideBar.prototype = {
 const mapStateToProps = state => {
   const {
     global: {
+      auth,
       sidebar: { isSidebarOpen },
     },
   } = state;
   return {
+    auth,
     isSidebarOpen,
   };
 };

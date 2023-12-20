@@ -14,13 +14,14 @@ function* handleLogout() {
   }
 }
 
-function* updateAccountSaga({ payload: { id, ...rest } }) {
+function* updateAccountSaga({ payload: { id, callback, ...rest } }) {
   const res = yield call(updateAccount, rest, id);
   const {
     data: { status, message },
   } = res;
 
   if (status) {
+    if (callback instanceof Function) callback();
     toast.success('Account updated successfully');
   } else {
     toast.error(message);
