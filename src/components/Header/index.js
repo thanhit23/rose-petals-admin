@@ -31,7 +31,7 @@ const renderLogout = (handleLogout, content) => (
   </ul>
 );
 
-function HeaderComponent({ handleSidebar, handleLogout, onUpdate, auth }) {
+function HeaderComponent({ handleSidebar, handleLogout, onUpdate, onChangePassword, auth }) {
   const [dropdown, setDropDown] = useState(false);
 
   const tabs = [
@@ -43,7 +43,7 @@ function HeaderComponent({ handleSidebar, handleLogout, onUpdate, auth }) {
     {
       title: 'Change Password',
       value: 'change_password',
-      component: <ChangePassword />,
+      component: <ChangePassword onChangePassword={onChangePassword} />,
     },
   ];
 
