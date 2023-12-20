@@ -6,7 +6,7 @@ export default defineMessages({
   label: {
     name: {
       id: `${scope}.label.name`,
-      defaultMessage: 'Username',
+      defaultMessage: 'Full Name',
     },
     phone_number: {
       id: `${scope}.label.phoneNumber`,
@@ -28,7 +28,7 @@ export default defineMessages({
   placeholder: {
     name: {
       id: `${scope}.placeholder.name`,
-      defaultMessage: 'Username',
+      defaultMessage: 'Full Name',
     },
     phone_number: {
       id: `${scope}.placeholder.phoneNumber`,
