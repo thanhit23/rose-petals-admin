@@ -171,43 +171,22 @@ function EditProductComponent({ brands, categories, submit, product }) {
               message={messages.label.size}
               className="block mb-2 text-sm font-bold text-gray-700"
               htmlFor="size"
-              requiredField
             />
             <div className="w-[100px] flex justify-between">
               <LabelWithFormatMessage message={messages.label.small} htmlFor="small" />
-              <InputWithFormatMessage
-                type="checkbox"
-                name="size"
-                value="S"
-                validate={register('size', required(messages.message.required))}
-              />
+              <InputWithFormatMessage type="checkbox" name="size" value="S" validate={register('size')} />
             </div>
             <div className="w-[100px] flex justify-between">
               <LabelWithFormatMessage message={messages.label.medium} htmlFor="medium" />
-              <InputWithFormatMessage
-                type="checkbox"
-                name="size"
-                value="M"
-                validate={register('size', required(messages.message.required))}
-              />
+              <InputWithFormatMessage type="checkbox" name="size" value="M" validate={register('size')} />
             </div>
             <div className="w-[100px] flex justify-between">
               <LabelWithFormatMessage message={messages.label.large} htmlFor="large" />
-              <InputWithFormatMessage
-                type="checkbox"
-                name="size"
-                value="L"
-                validate={register('size', required(messages.message.required))}
-              />
+              <InputWithFormatMessage type="checkbox" name="size" value="L" validate={register('size')} />
             </div>
             <div className="w-[100px] flex justify-between">
               <LabelWithFormatMessage message={messages.label.sizeXl} htmlFor="large" />
-              <InputWithFormatMessage
-                type="checkbox"
-                name="size"
-                value="XL"
-                validate={register('size', required(messages.message.required))}
-              />
+              <InputWithFormatMessage type="checkbox" name="size" value="XL" validate={register('size')} />
             </div>
             <ErrorMessage name={size} />
           </div>
