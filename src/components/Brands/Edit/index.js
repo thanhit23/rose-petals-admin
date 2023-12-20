@@ -41,7 +41,7 @@ function EditBrandComponent({ onSubmit, data: dataBrand }) {
 
   const handleOnSubmit = data => {
     const { _id, slug, createdAt, updatedAt, ...dataUpdate } = data;
-    onSubmit(id, { ...dataUpdate, logo: images.toString() }, file);
+    onSubmit(id, { ...dataUpdate, logo: images[images - 1] }, file);
   };
 
   const handleUploadImage = ({ target: { files } }) => setFile(files);
@@ -80,11 +80,11 @@ function EditBrandComponent({ onSubmit, data: dataBrand }) {
       <div>
         <form
           onSubmit={handleSubmit(data => handleOnSubmit(data))}
-          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+          className="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md"
         >
           <div className="mb-6">
             <LabelWithFormatMessage
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block mb-2 text-sm font-bold text-gray-700"
               message={messages.label.name}
               htmlFor="name"
               requiredField
@@ -101,7 +101,7 @@ function EditBrandComponent({ onSubmit, data: dataBrand }) {
           <div className="mb-6">
             <LabelWithFormatMessage
               message={messages.label.images}
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block mb-2 text-sm font-bold text-gray-700"
               htmlFor="images"
               requiredField
             />

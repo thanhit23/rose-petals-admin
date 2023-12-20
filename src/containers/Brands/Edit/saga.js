@@ -12,7 +12,7 @@ function* updateBrand({ payload: { id, data, file, callback } }) {
     } = res;
 
     if (status) {
-      Object.assign(data, { logo: dataFile.toString() });
+      Object.assign(data, { logo: dataFile[dataFile.length - 1] });
     } else {
       yield put(updateBrandFailed(message));
     }
