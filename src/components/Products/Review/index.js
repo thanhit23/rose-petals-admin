@@ -13,7 +13,7 @@ import ConfirmModal from '../../ConfirmModal';
 function ProductReviewComponent({ meta, data, getProductReview, handleDeleteProduct }) {
   const [valueSearch, setValueSearch] = useState();
 
-  const handleGetProductReview = options => getProductReview(options);
+  const handleGetProductReview = ({ name: content, ...options }) => getProductReview({ content, ...options });
 
   const columns = useMemo(() => [
     {
@@ -44,10 +44,10 @@ function ProductReviewComponent({ meta, data, getProductReview, handleDeleteProd
         } = props;
         return (
           <div className="flex justify-center">
-            <div className="flex border-[#ebeff3] border-[1px] border-solid">
-              <img className="object-cover h-[40px] w-[40px] rounded" src={thumbnail} alt="" />
+            <div className="flex flex-shrink-0 items-center border-[#ebeff3] border-[1px] border-solid">
+              <img className="object-cover h-[70px] w-[70px] rounded" src={thumbnail} alt="" />
             </div>
-            <p className="flex place-items-center ml-2">{name}</p>
+            <p className="flex ml-2 place-items-center">{name}</p>
           </div>
         );
       },
@@ -98,7 +98,10 @@ function ProductReviewComponent({ meta, data, getProductReview, handleDeleteProd
         const {
           cell: {
             row: {
-              original: { _id },
+              original: {
+                _id: commentId,
+                product: { _id: productId },
+              },
             },
           },
         } = props;
@@ -106,7 +109,7 @@ function ProductReviewComponent({ meta, data, getProductReview, handleDeleteProd
           <div className="flex justify-center">
             <ConfirmModal
               classNames="w-8 h-8 hover:bg-[#EBEFF4] rounded-full"
-              callback={() => handleDeleteProduct(_id)}
+              callback={() => handleDeleteProduct({ commentId, productId })}
             >
               <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
             </ConfirmModal>
@@ -131,7 +134,7 @@ function ProductReviewComponent({ meta, data, getProductReview, handleDeleteProd
         <div className="flex justify-between">
           <Search message="product" valueSearch={valueSearch} handleKeywordSearch={handleGetProductReview} />
         </div>
-        <div className="flex flex-col shadow-lg bg-white rounded mt-4 overflow-auto">
+        <div className="flex flex-col mt-4 overflow-auto bg-white rounded shadow-lg">
           {/* eslint-disable-next-line max-len */}
           <Table goToPage={handleGetProductReview} meta={meta} col={columns} data={data} pagination />
         </div>

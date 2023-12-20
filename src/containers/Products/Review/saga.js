@@ -11,7 +11,7 @@ import {
 } from './actions';
 
 function* getProductReview({ payload: { options } }) {
-  const queryAccept = ['name', 'page'];
+  const queryAccept = ['content', 'page'];
 
   const option = getObjectAcceptArrayKey(queryAccept, { page: 1, ...options });
 
@@ -27,16 +27,16 @@ function* getProductReview({ payload: { options } }) {
   }
 }
 
-function* deleteProductReview({ payload: { id, callback } }) {
-  const res = yield call(deleteProductService, id);
+function* deleteProductReview({ payload: { data, callback } }) {
+  const res = yield call(deleteProductService, data);
 
-  const { status, data } = res;
+  const { status, data: dataResponse } = res;
 
   if (status) {
     yield put(deleteProductReviewSuccess());
     if (callback instanceof Function) callback();
   } else {
-    const { message } = data;
+    const { message } = dataResponse;
     yield put(deleteProductReviewFailed(message));
   }
 }

@@ -31,7 +31,7 @@ function* updateProduct({ payload: { id, data, file, callback } }) {
 
     if (status) {
       const { images } = data;
-      Object.assign(data, { images: [...images, ...dataFile] });
+      Object.assign(data, { images: [...images, dataFile[dataFile.length - 1]] });
     } else {
       yield put(updateProductFailed(message));
     }

@@ -15,22 +15,23 @@ import TextareaWithFormatMessage from '../../TextareaWithFormatMessage';
 import ErrorMessage from '../../ErrorMessage';
 import UploadFileComponent from '../../UploadFile';
 import { required } from '../../../utils/validation';
+import { BASE_URL } from '../../../service/constants';
 
 function EditProductComponent({ brands, categories, submit, product }) {
   const [file, setFile] = useState('');
 
   const [images, setImages] = useState([]);
 
-  const { id } = useParams();
+  const { id: productId } = useParams();
 
   const {
-    _id,
+    id,
     slug,
     createdAt,
     updatedAt,
     deletedAt,
-    category: { id: categoryId } = {},
-    brand: { id: brandId } = {},
+    category: categoryId = '',
+    brand: brandId = '',
     ...productData
   } = product;
 
@@ -43,7 +44,7 @@ function EditProductComponent({ brands, categories, submit, product }) {
     defaultValues: { ...productData, category: categoryId, brand: brandId },
   });
 
-  const { name, price, images: imagesError, description, category, brand } = errors;
+  const { name, price, images: imagesError, description, category, brand, size } = errors;
 
   useEffect(() => {
     !isEmpty(product) && reset(productData);
@@ -52,14 +53,14 @@ function EditProductComponent({ brands, categories, submit, product }) {
   }, [product]);
 
   const onSubmit = data => {
-    const arrImages = images.map(({ path }) => path);
-    submit(id, { ...data, images: arrImages }, file);
+    const arrImages = images.map(imgUrl => imgUrl);
+    submit(productId, { ...data, images: arrImages }, file);
   };
 
   const handleUploadImage = ({ target: { files } }) => setFile(files);
 
   const handleRemoveFile = url => {
-    const arrFile = images.filter(({ fullUrl }) => fullUrl !== url);
+    const arrFile = images.filter(imgUrl => imgUrl !== url);
     setImages(arrFile);
   };
 
@@ -80,12 +81,12 @@ function EditProductComponent({ brands, categories, submit, product }) {
       <div>
         <form
           onSubmit={handleSubmit(data => onSubmit(data))}
-          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+          className="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md"
         >
           <div className="mb-6">
             <LabelWithFormatMessage
               message={messages.label.name}
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block mb-2 text-sm font-bold text-gray-700"
               htmlFor="username"
               requiredField
             />
@@ -102,7 +103,7 @@ function EditProductComponent({ brands, categories, submit, product }) {
           <div className="mb-6">
             <LabelWithFormatMessage
               message={messages.label.price}
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block mb-2 text-sm font-bold text-gray-700"
               htmlFor="price"
               requiredField
             />
@@ -119,20 +120,26 @@ function EditProductComponent({ brands, categories, submit, product }) {
           <div className="mb-6">
             <LabelWithFormatMessage
               message={messages.label.images}
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block mb-2 text-sm font-bold text-gray-700"
               htmlFor="images"
               requiredField
             />
             {renderUploadComponent}
             <ErrorMessage name={imagesError} />
             <div className="flex flex-wrap mt-4">
-              {images.map(({ fullUrl }, i) => (
+              {images.map((url, i) => (
                 <div key={i} className="relative mr-5">
-                  <img loading="lazy" className="w-[60px]" decoding="async" src={fullUrl} alt={`product-${i}`} />
+                  <img
+                    loading="lazy"
+                    className="w-[60px]"
+                    decoding="async"
+                    src={`${BASE_URL}/file${url}`}
+                    alt={`product-${i}`}
+                  />
                   <button
                     type="button"
                     className="absolute top-[-15px] right-[-15px] flex w-[35px] h-[35px] bg-[#efefef] items-center justify-center rounded-full"
-                    onClick={() => handleRemoveFile(fullUrl)}
+                    onClick={() => handleRemoveFile(url)}
                   >
                     <FontAwesomeIcon icon={faXmark} />
                   </button>
@@ -143,7 +150,7 @@ function EditProductComponent({ brands, categories, submit, product }) {
           <div className="mb-6">
             <LabelWithFormatMessage
               message={messages.label.description}
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block mb-2 text-sm font-bold text-gray-700"
               htmlFor="email"
               requiredField
             />
@@ -159,17 +166,81 @@ function EditProductComponent({ brands, categories, submit, product }) {
               <ErrorMessage name={description} />
             </div>
           </div>
-          <div className="mb-6 grid grid-cols-2 gap-4">
+          <div className="mb-6">
+            <LabelWithFormatMessage
+              message={messages.label.size}
+              className="block mb-2 text-sm font-bold text-gray-700"
+              htmlFor="size"
+              requiredField
+            />
+            <div className="w-[100px] flex justify-between">
+              <LabelWithFormatMessage message={messages.label.small} htmlFor="small" />
+              <InputWithFormatMessage
+                type="checkbox"
+                name="size"
+                value="S"
+                validate={register('size', required(messages.message.required))}
+              />
+            </div>
+            <div className="w-[100px] flex justify-between">
+              <LabelWithFormatMessage message={messages.label.medium} htmlFor="medium" />
+              <InputWithFormatMessage
+                type="checkbox"
+                name="size"
+                value="M"
+                validate={register('size', required(messages.message.required))}
+              />
+            </div>
+            <div className="w-[100px] flex justify-between">
+              <LabelWithFormatMessage message={messages.label.large} htmlFor="large" />
+              <InputWithFormatMessage
+                type="checkbox"
+                name="size"
+                value="L"
+                validate={register('size', required(messages.message.required))}
+              />
+            </div>
+            <div className="w-[100px] flex justify-between">
+              <LabelWithFormatMessage message={messages.label.sizeXl} htmlFor="large" />
+              <InputWithFormatMessage
+                type="checkbox"
+                name="size"
+                value="XL"
+                validate={register('size', required(messages.message.required))}
+              />
+            </div>
+            <ErrorMessage name={size} />
+          </div>
+          <div className="mb-6">
+            <div className="flex flex-col">
+              <LabelWithFormatMessage
+                message={messages.label.quantity}
+                className="block mb-2 text-sm font-bold text-gray-700"
+                htmlFor="quantity"
+                requiredField
+              />
+              <InputWithFormatMessage
+                className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                id="quantity"
+                type="number"
+                message={messages.placeholder.quantity}
+                validate={register('quantity', required(messages.message.required))}
+              />
+              <ErrorMessage name={errors?.quantity} />
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4 mb-6">
             <div className="flex flex-col">
               <LabelWithFormatMessage
                 message={messages.label.brand}
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block mb-2 text-sm font-bold text-gray-700"
                 htmlFor="brand"
                 requiredField
               />
               <select
                 id="brand"
                 name="brand"
+                value={brandId}
                 className="h-12 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
                 {...register('brand', required(messages.message.required))}
               >
@@ -186,13 +257,14 @@ function EditProductComponent({ brands, categories, submit, product }) {
             <div className="flex flex-col">
               <LabelWithFormatMessage
                 message={messages.label.category}
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block mb-2 text-sm font-bold text-gray-700"
                 htmlFor="category"
                 requiredField
               />
               <select
                 id="category"
                 name="category"
+                value={categoryId}
                 className="h-12 pl-2 shadow-md border border-[#e2e8f0] rounded text-[14px] text-gray-700 mb-3"
                 {...register('category', required(messages.message.required))}
               >

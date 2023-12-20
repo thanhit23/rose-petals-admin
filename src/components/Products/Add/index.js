@@ -50,7 +50,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
 
   const handleUploadImage = ({ target: { files } }) => setFile(files);
 
-  const handleOnSubmit = data => onSubmit(data, file);
+  const handleOnSubmit = data => onSubmit({ sold: 0, rating: 0, ...data }, file);
 
   const renderUploadComponent = useMemo(
     () => (
@@ -71,7 +71,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
           onSubmit={handleSubmit(data => {
             handleOnSubmit(data);
           })}
-          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+          className="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md"
         >
           <div className="mb-6">
             <div className="relative wrapper-input">
@@ -97,7 +97,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
           <div className="mb-6">
             <LabelWithFormatMessage
               message={messages.label.price}
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block mb-2 text-sm font-bold text-gray-700"
               htmlFor="price"
               requiredField
             />
@@ -113,7 +113,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
           <div className="mb-6">
             <LabelWithFormatMessage
               message={messages.label.images}
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block mb-2 text-sm font-bold text-gray-700"
               htmlFor="images"
               requiredField
             />
@@ -123,7 +123,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
           <div className="mb-6">
             <LabelWithFormatMessage
               message={messages.label.description}
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block mb-2 text-sm font-bold text-gray-700"
               htmlFor="description"
               requiredField
             />
@@ -141,7 +141,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
           <div className="mb-6">
             <LabelWithFormatMessage
               message={messages.label.size}
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block mb-2 text-sm font-bold text-gray-700"
               htmlFor="size"
               requiredField
             />
@@ -150,7 +150,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
               <InputWithFormatMessage
                 type="checkbox"
                 name="size"
-                value="x"
+                value="S"
                 validate={register('size', required(messages.message.required))}
               />
             </div>
@@ -159,7 +159,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
               <InputWithFormatMessage
                 type="checkbox"
                 name="size"
-                value="m"
+                value="M"
                 validate={register('size', required(messages.message.required))}
               />
             </div>
@@ -168,33 +168,26 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
               <InputWithFormatMessage
                 type="checkbox"
                 name="size"
-                value="l"
+                value="L"
+                validate={register('size', required(messages.message.required))}
+              />
+            </div>
+            <div className="w-[100px] flex justify-between">
+              <LabelWithFormatMessage message={messages.label.sizeXl} htmlFor="large" />
+              <InputWithFormatMessage
+                type="checkbox"
+                name="size"
+                value="XL"
                 validate={register('size', required(messages.message.required))}
               />
             </div>
             <ErrorMessage name={errors?.size} />
           </div>
-          <div className="mb-6 grid grid-cols-2 gap-4">
-            <div className="flex flex-col">
-              <LabelWithFormatMessage
-                message={messages.label.rating}
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="rating"
-                requiredField
-              />
-              <InputWithFormatMessage
-                className="h-[54px] shadow-md appearance-none border border-[#e2e8f0] rounded w-full py-[16px] px-3 text-[14px] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                id="rating"
-                type="number"
-                message={messages.placeholder.rating}
-                validate={register('rating', required(messages.message.required))}
-              />
-              <ErrorMessage name={errors?.rating} />
-            </div>
+          <div className="mb-6">
             <div className="flex flex-col">
               <LabelWithFormatMessage
                 message={messages.label.quantity}
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block mb-2 text-sm font-bold text-gray-700"
                 htmlFor="quantity"
                 requiredField
               />
@@ -208,11 +201,11 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
               <ErrorMessage name={errors?.quantity} />
             </div>
           </div>
-          <div className="mb-6 grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4 mb-6">
             <div className="flex flex-col">
               <LabelWithFormatMessage
                 message={messages.label.category}
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block mb-2 text-sm font-bold text-gray-700"
                 htmlFor="category"
                 requiredField
               />
@@ -234,7 +227,7 @@ function AddProductComponent({ onSubmit, listCategory = [], listBrand = [] }) {
             <div className="flex flex-col">
               <LabelWithFormatMessage
                 message={messages.label.brand}
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block mb-2 text-sm font-bold text-gray-700"
                 htmlFor="brand"
                 requiredField
               />

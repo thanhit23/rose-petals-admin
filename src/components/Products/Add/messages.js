@@ -36,6 +36,10 @@ export default defineMessages({
       id: `${scope}.label.large`,
       defaultMessage: 'Large',
     },
+    sizeXl: {
+      id: `${scope}.label.sizeXl`,
+      defaultMessage: 'XL',
+    },
     rating: {
       id: `${scope}.label.rating`,
       defaultMessage: 'Rating',
