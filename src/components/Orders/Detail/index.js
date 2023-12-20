@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -214,22 +215,33 @@ function OrderDetailComponent({ order, productOrder, deleteProductOrder }) {
                 <h6 className="text-sm">VNĐ</h6>
               </div>
             </div>
-            <h6 className="text-sm mb-3 text-[#2b3445] font-light">
-              <FormattedMessage {...messages.paid_method} />
-            </h6>
-            <div className="flex flex-row">
-              {imgCreditDebit.map(({ name, image }, i) => (
-                <div
-                  key={i}
-                  className={cls(
-                    'shadow-[#03004717_0px_1px_3px] bg-white rounded p-1 mr-2 border border-solid',
-                    name === checkMethodPayment(productOrder.methodPayment) ? 'border-[#ff0000]' : 'border-transparent',
-                  )}
-                >
-                  <img src={image} alt="" className="w-[60px]" />
+            {!!+productOrder.methodPayment && (
+              <>
+                <h6 className="text-sm mb-3 text-[#2b3445] font-light">
+                  <FormattedMessage {...messages.paid_method} />
+                </h6>
+                <div className="flex flex-row">
+                  {imgCreditDebit.map(({ name, image }, i) => (
+                    <div
+                      key={i}
+                      className={cls(
+                        'shadow-[#03004717_0px_1px_3px] bg-white rounded p-1 mr-2 border border-solid',
+                        name === checkMethodPayment(productOrder.methodPayment)
+                          ? 'border-[#ff0000]'
+                          : 'border-transparent',
+                      )}
+                    >
+                      <img src={image} alt="" className="w-[60px]" />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </>
+            )}
+            {!+productOrder.methodPayment && (
+              <h6 className="text-sm mt-5 font-medium text-[#f44336]">
+                <FormattedMessage {...messages.unPaid} />
+              </h6>
+            )}
           </div>
         </div>
       </div>

@@ -94,7 +94,7 @@ function ListOrderComponent({ data, meta, getOrders, handleDeleteOrder }) {
           },
         } = props;
         return (
-          <>
+          <div className="flex">
             <button type="button" className="w-8 h-8 hover:bg-[#EBEFF4] rounded-full">
               <Link to={`/admin/order/${_id}/detail/${_id}`}>
                 <FontAwesomeIcon className="text-[#7D879C]" icon={faEye} />
@@ -108,7 +108,7 @@ function ListOrderComponent({ data, meta, getOrders, handleDeleteOrder }) {
             <ConfirmModal classNames="w-8 h-8 hover:bg-[#EBEFF4] rounded-full" callback={() => handleDeleteOrder(_id)}>
               <FontAwesomeIcon className="text-[#7D879C]" icon={faTrash} />
             </ConfirmModal>
-          </>
+          </div>
         );
       },
     },
@@ -129,7 +129,7 @@ function ListOrderComponent({ data, meta, getOrders, handleDeleteOrder }) {
         <div className="flex justify-between">
           <Search message="order" valueSearch={valueSearch} handleKeywordSearch={handleGetOrders} />
         </div>
-        <div className="flex flex-col shadow-lg bg-white rounded mt-4 overflow-auto">
+        <div className="flex flex-col mt-4 overflow-auto bg-white rounded shadow-lg">
           <Table goToPage={handleGetOrders} meta={meta} col={columns} data={data} pagination />
         </div>
       </>
